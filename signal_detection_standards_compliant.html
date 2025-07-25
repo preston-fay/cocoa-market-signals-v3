@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoa Market Signals - Signal Detection System</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons - Kearney Standard -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    
+    <style>
+        :root {
+            /* Kearney Colors */
+            --kearney-black: #000000;
+            --kearney-white: #FFFFFF;
+            --kearney-slate: #272b30;
+            --kearney-purple: #6f42c1;
+            --kearney-gray-50: #F8F9FA;
+            --kearney-gray-100: #e9ecef;
+            --kearney-gray-200: #e9ecef;
+            --kearney-gray-500: #999999;
+            --kearney-gray-700: #7a8288;
+            --kearney-gray-900: #52575c;
+            
+            /* Dark Theme Only */
+            --bg-primary: var(--kearney-black);
+            --bg-secondary: var(--kearney-slate);
+            --text-primary: var(--kearney-white);
+            --text-secondary: var(--kearney-gray-500);
+            --border-color: var(--kearney-gray-700);
+            --card-bg: var(--kearney-slate);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+        
+        .header {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid var(--kearney-purple);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .data-badge {
+            background: var(--kearney-purple);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Signal Banner */
+        .signal-banner {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .current-signal {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .signal-strength-bar {
+            width: 100%;
+            max-width: 600px;
+            height: 30px;
+            background: var(--kearney-gray-900);
+            margin: 1rem auto;
+            position: relative;
+            border: 1px solid var(--border-color);
+        }
+        
+        .signal-strength-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--kearney-gray-900), var(--kearney-gray-500), var(--kearney-purple));
+            transition: width 0.3s ease;
+        }
+        
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .metric-card {
+            background-color: var(--bg-primary);
+            padding: 1.5rem;
+            border-top: 3px solid var(--kearney-purple);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0.5rem 0;
+        }
+        
+        .metric-change {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .positive {
+            color: #6f42c1;
+        }
+        
+        .negative {
+            color: #52575c;
+        }
+        
+        .warning {
+            color: #999999;
+        }
+        
+        /* Timeline */
+        .timeline-section {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .timeline-header {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .timeline-events {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+        
+        .timeline-event {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -1.5rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            background: var(--kearney-purple);
+            border-radius: 50%;
+            border: 2px solid var(--bg-secondary);
+        }
+        
+        .timeline-date {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .timeline-event-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .timeline-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Charts */
+        .charts-container {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .analytics-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            font-size: 0.875rem;
+        }
+        
+        .tab:hover {
+            color: var(--text-primary);
+        }
+        
+        .tab.active {
+            color: var(--kearney-purple);
+            border-bottom-color: var(--kearney-purple);
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+        
+        /* Signal Indicators */
+        .signal-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .signal-strong {
+            background-color: var(--kearney-purple);
+            color: white;
+        }
+        
+        .signal-weak {
+            background-color: var(--kearney-gray-700);
+            color: white;
+        }
+        
+        /* Month Selector */
+        .month-selector {
+            background-color: var(--card-bg);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .month-dropdown {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+        }
+        
+        .month-dropdown option {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        .nav-btn {
+            padding: 0.75rem 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .nav-btn:hover {
+            background: var(--kearney-purple);
+            border-color: var(--kearney-purple);
+            color: white;
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .nav-btn:disabled:hover {
+            background: var(--bg-primary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        /* Data Source */
+        .data-source {
+            background-color: var(--bg-secondary);
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .data-source strong {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <h1>Cocoa Market Signal Detection System</h1>
+                <div class="subtitle">Detecting Market Signals Before Price Movements</div>
+            </div>
+            <div class="data-badge">
+                <i data-feather="activity" style="width: 16px; height: 16px;"></i>
+                SIGNAL DETECTION
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Month Selector -->
+        <div class="month-selector">
+            <button class="nav-btn" id="prevMonth" onclick="navigateMonth(-1)">
+                <i data-feather="chevron-left" style="width: 16px; height: 16px;"></i>
+                Previous
+            </button>
+            
+            <select class="month-dropdown" id="monthDropdown" onchange="selectMonth(this.value)">
+                <!-- Options will be populated by JavaScript -->
+            </select>
+            
+            <button class="nav-btn" id="nextMonth" onclick="navigateMonth(1)">
+                Next
+                <i data-feather="chevron-right" style="width: 16px; height: 16px;"></i>
+            </button>
+        </div>
+        
+        <!-- Signal Banner -->
+        <div class="signal-banner">
+            <div class="current-signal" id="currentSignal" style="color: var(--kearney-purple);">MONITORING</div>
+            <div class="signal-strength-bar">
+                <div class="signal-strength-fill" id="signalStrengthFill" style="width: 50%"></div>
+            </div>
+            <div style="margin-top: 1rem; color: var(--text-secondary);">
+                Composite Signal Strength: <span id="signalValue" style="color: var(--text-primary); font-weight: 600;">0.500</span>
+            </div>
+        </div>
+        
+        <!-- Metrics Grid -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Weather Signal</div>
+                <div class="metric-value" id="weatherSignal">0.000</div>
+                <div class="metric-change">Rainfall Anomalies</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Trade Signal</div>
+                <div class="metric-value" id="tradeSignal">0.000</div>
+                <div class="metric-change">Export Concentration</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Momentum Signal</div>
+                <div class="metric-value" id="momentumSignal">0.000</div>
+                <div class="metric-change">Price Trends</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Current Price</div>
+                <div class="metric-value" id="currentPrice">$0</div>
+                <div class="metric-change" id="priceChange">Change</div>
+            </div>
+        </div>
+        
+        <!-- Timeline Section -->
+        <div class="timeline-section">
+            <div class="timeline-header">
+                <i data-feather="clock" style="width: 20px; height: 20px;"></i>
+                Key Signal Detection Events
+            </div>
+            <div class="timeline-events">
+                <div class="timeline-line"></div>
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023-10-15</div>
+                    <div class="timeline-event-title">FIRST WARNING</div>
+                    <div class="timeline-description">Weather anomalies detected in Ghana</div>
+                </div>
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023-12-01</div>
+                    <div class="timeline-event-title">SIGNAL STRENGTHENING</div>
+                    <div class="timeline-description">Trade volumes declining, export concentration rising</div>
+                </div>
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2024-01-15</div>
+                    <div class="timeline-event-title">BUY SIGNAL</div>
+                    <div class="timeline-description">All indicators align - strong buy signal generated</div>
+                </div>
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2024-02-01</div>
+                    <div class="timeline-event-title">SURGE BEGINS</div>
+                    <div class="timeline-description">Price surge starts - signal validated</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Month Selector -->
+        <div class="month-selector">
+            <button class="nav-btn" id="prevMonth" onclick="navigateMonth(-1)">
+                <i data-feather="chevron-left" style="width: 16px; height: 16px;"></i>
+                Previous
+            </button>
+            
+            <select class="month-dropdown" id="monthDropdown" onchange="selectMonth(this.value)">
+                <!-- Options will be populated by JavaScript -->
+            </select>
+            
+            <button class="nav-btn" id="nextMonth" onclick="navigateMonth(1)">
+                Next
+                <i data-feather="chevron-right" style="width: 16px; height: 16px;"></i>
+            </button>
+        </div>
+        
+        <!-- Charts -->
+        <div class="charts-container">
+            <div class="analytics-tabs">
+                <button class="tab active" onclick="showChart('signal')">
+                    <i data-feather="activity" style="width: 14px; height: 14px; display: inline;"></i> Signal vs Price
+                </button>
+                <button class="tab" onclick="showChart('components')">
+                    <i data-feather="bar-chart-2" style="width: 14px; height: 14px; display: inline;"></i> Components
+                </button>
+                <button class="tab" onclick="showChart('performance')">
+                    <i data-feather="trending-up" style="width: 14px; height: 14px; display: inline;"></i> Performance
+                </button>
+            </div>
+            
+            <!-- Signal Chart -->
+            <div id="signal-chart" class="chart-section">
+                <div class="chart-header">
+                    <h3 class="chart-title">Signal Detection vs Price Movement</h3>
+                    <span class="signal-indicator signal-strong">REAL-TIME</span>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="signalChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Components Chart -->
+            <div id="components-chart" class="chart-section" style="display: none;">
+                <div class="chart-header">
+                    <h3 class="chart-title">Signal Component Breakdown</h3>
+                    <span class="signal-indicator signal-weak">3 COMPONENTS</span>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="componentsChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Performance Chart -->
+            <div id="performance-chart" class="chart-section" style="display: none;">
+                <div class="chart-header">
+                    <h3 class="chart-title">Signal Detection Performance</h3>
+                    <span class="signal-indicator signal-strong">VALIDATED</span>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Data Sources -->
+        <div class="data-source">
+            <strong>Data Sources:</strong> 
+            Yahoo Finance (Price Data) | 
+            UN Comtrade (Trade Data) | 
+            Open-Meteo (Weather Data) | 
+            <strong>Last Updated:</strong> <span id="lastUpdated">Loading...</span>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize feather icons
+        feather.replace();
+        
+        // Chart defaults for dark theme
+        Chart.defaults.color = '#999999';
+        Chart.defaults.borderColor = '#7a8288';
+        Chart.defaults.font.family = 'Inter';
+        
+        // Sample data for demonstration
+        const monthsData = [
+            { name: 'July 2023', value: 'july-2023', signal: 0.45 },
+            { name: 'August 2023', value: 'aug-2023', signal: 0.48 },
+            { name: 'September 2023', value: 'sep-2023', signal: 0.52 },
+            { name: 'October 2023', value: 'oct-2023', signal: 0.58 },
+            { name: 'November 2023', value: 'nov-2023', signal: 0.62 },
+            { name: 'December 2023', value: 'dec-2023', signal: 0.65 },
+            { name: 'January 2024', value: 'jan-2024', signal: 0.82 },
+            { name: 'February 2024', value: 'feb-2024', signal: 0.88 },
+            { name: 'March 2024', value: 'mar-2024', signal: 0.85 },
+            { name: 'April 2024', value: 'apr-2024', signal: 0.92 }
+        ];
+        
+        let currentMonthIndex = monthsData.length - 1;
+        
+        // Initialize month dropdown
+        function initializeMonthDropdown() {
+            const dropdown = document.getElementById('monthDropdown');
+            monthsData.forEach((month, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = month.name;
+                if (index === currentMonthIndex) {
+                    option.selected = true;
+                }
+                dropdown.appendChild(option);
+            });
+        }
+        
+        // Navigate months
+        function navigateMonth(direction) {
+            const newIndex = currentMonthIndex + direction;
+            if (newIndex >= 0 && newIndex < monthsData.length) {
+                currentMonthIndex = newIndex;
+                document.getElementById('monthDropdown').value = currentMonthIndex;
+                updateMonth();
+            }
+        }
+        
+        // Select month
+        function selectMonth(index) {
+            currentMonthIndex = parseInt(index);
+            updateMonth();
+        }
+        
+        // Update month display
+        function updateMonth() {
+            const month = monthsData[currentMonthIndex];
+            
+            // Update navigation buttons
+            document.getElementById('prevMonth').disabled = currentMonthIndex === 0;
+            document.getElementById('nextMonth').disabled = currentMonthIndex === monthsData.length - 1;
+            
+            // Update signal display
+            const signal = month.signal;
+            document.getElementById('signalValue').textContent = signal.toFixed(3);
+            document.getElementById('signalStrengthFill').style.width = (signal * 100) + '%';
+            
+            // Update signal type
+            let signalType = 'MONITORING';
+            let signalColor = '--kearney-gray-500';
+            if (signal > 0.8) {
+                signalType = 'STRONG BUY';
+                signalColor = '--kearney-purple';
+            } else if (signal > 0.65) {
+                signalType = 'BUY';
+                signalColor = '--kearney-purple';
+            }
+            
+            const signalElement = document.getElementById('currentSignal');
+            signalElement.textContent = signalType;
+            signalElement.style.color = `var(${signalColor})`;
+            
+            // Update metrics
+            document.getElementById('weatherSignal').textContent = (signal * 0.35).toFixed(3);
+            document.getElementById('tradeSignal').textContent = (signal * 0.40).toFixed(3);
+            document.getElementById('momentumSignal').textContent = (signal * 0.25).toFixed(3);
+            
+            // Update charts
+            updateCharts();
+        }
+        
+        // Initialize Signal Chart
+        function initializeSignalChart() {
+            const ctx = document.getElementById('signalChart').getContext('2d');
+            return new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                    datasets: [{
+                        label: 'Price',
+                        data: [3800, 3900, 4200, 4800, 5500, 6200, 6800, 7200, 7500, 7800],
+                        borderColor: '#999999',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        yAxisID: 'y-price',
+                        tension: 0.1,
+                        pointRadius: 0
+                    }, {
+                        label: 'Composite Signal',
+                        data: [0.45, 0.48, 0.52, 0.65, 0.82, 0.88, 0.85, 0.92, 0.90, 0.88],
+                        borderColor: '#6f42c1',
+                        backgroundColor: 'rgba(111, 66, 193, 0.1)',
+                        borderWidth: 3,
+                        yAxisID: 'y-signal',
+                        fill: true,
+                        tension: 0.2,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#272b30',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#999999',
+                            borderColor: '#7a8288',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: '#52575c',
+                                drawBorder: false
+                            }
+                        },
+                        'y-price': {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            grid: {
+                                color: '#52575c',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        },
+                        'y-signal': {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            min: 0,
+                            max: 1,
+                            grid: {
+                                drawOnChartArea: false
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return (value * 100).toFixed(0) + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Tab switching
+        function showChart(chartName) {
+            // Hide all charts
+            document.querySelectorAll('.chart-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected chart
+            document.getElementById(chartName + '-chart').style.display = 'block';
+            
+            // Add active class to clicked tab
+            event.target.closest('.tab').classList.add('active');
+        }
+        
+        // Update charts
+        function updateCharts() {
+            // Chart update logic here
+        }
+        
+        // Initialize
+        initializeMonthDropdown();
+        updateMonth();
+        
+        // Initialize charts
+        const signalChart = initializeSignalChart();
+        
+        // Update last updated time
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
+        
+        // Update current price
+        document.getElementById('currentPrice').textContent = '$7,850';
+        document.getElementById('priceChange').textContent = '+5.2%';
+        document.getElementById('priceChange').classList.add('positive');
+    </script>
+</body>
+</html>

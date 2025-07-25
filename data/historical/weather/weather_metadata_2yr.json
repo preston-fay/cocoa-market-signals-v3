@@ -1,0 +1,23 @@
+{
+  "source": "Open-Meteo Historical Weather API",
+  "locations": [
+    "yamoussoukro",
+    "kumasi",
+    "san_pedro",
+    "takoradi"
+  ],
+  "period": "2yr",
+  "date_range": {
+    "start": "2023-07-25",
+    "end": "2025-07-24"
+  },
+  "total_records": 2924,
+  "metrics": [
+    "temperature (min/max/mean)",
+    "precipitation",
+    "humidity",
+    "soil moisture",
+    "calculated risk indicators"
+  ],
+  "last_updated": "2025-07-24T13:52:48.764091"
+}

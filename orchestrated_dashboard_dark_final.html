@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoa Market Signals - AI Orchestration Dashboard</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons - Kearney Standard -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    
+    <style>
+        :root {
+            /* CORRECT Kearney Colors from preston-dev-setup */
+            --kearney-purple: #6f42c1;
+            --kearney-purple-accent: #9955bb;
+            --kearney-charcoal: #272b30;
+            --kearney-charcoal-secondary: #3a3f44;
+            --kearney-gray: #999999;
+            --kearney-gray-light: #7a8288;
+            --kearney-gray-dark: #52575c;
+            --kearney-white: #FFFFFF;
+            --kearney-black: #000000;
+            --kearney-green: #00e676;
+            --kearney-red: #ff5252;
+            
+            /* Dark Theme Only */
+            --bg-primary: var(--kearney-black);
+            --bg-secondary: var(--kearney-charcoal);
+            --bg-card: var(--kearney-charcoal-secondary);
+            --text-primary: var(--kearney-white);
+            --text-secondary: var(--kearney-gray);
+            --border-color: var(--kearney-gray-light);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+        
+        .header {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid var(--kearney-purple);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .orchestration-badge {
+            background: var(--kearney-purple);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--kearney-purple);
+        }
+        
+        .metric-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+        
+        .metric-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+        
+        .positive { color: var(--kearney-green); }
+        .negative { color: var(--kearney-red); }
+        .neutral { color: var(--text-secondary); }
+        
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .regime-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .regime-high { color: var(--kearney-red); border-color: var(--kearney-red); }
+        .regime-medium { color: #ff9800; border-color: #ff9800; }
+        .regime-low { color: var(--kearney-green); border-color: var(--kearney-green); }
+        
+        .signal-display {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .signal-value {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .signal-confidence {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+        
+        .model-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .model-badge {
+            background: var(--bg-secondary);
+            border: 1px solid var(--kearney-purple);
+            color: var(--kearney-purple);
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+        
+        .model-badge.best {
+            background: var(--kearney-purple);
+            color: white;
+        }
+        
+        .recommendations {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .recommendation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--bg-secondary);
+        }
+        
+        .recommendation-item:last-child {
+            border-bottom: none;
+        }
+        
+        .recommendation-icon {
+            color: var(--kearney-purple);
+            flex-shrink: 0;
+        }
+        
+        canvas {
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <h1>Cocoa Market Signals - AI Orchestration</h1>
+                <div class="subtitle">Dynamic Model Selection • Real-Time Performance</div>
+            </div>
+            <div class="orchestration-badge">
+                <i data-feather="cpu" width="16"></i>
+                <span>Models Active: 3</span>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Signal Display -->
+        <div class="signal-display">
+            <div class="signal-value neutral">NEUTRAL</div>
+            <div class="signal-confidence">0% Confidence</div>
+            <div class="regime-indicator regime-high">
+                <i data-feather="activity" width="16"></i>
+                HIGH VOLATILITY REGIME
+            </div>
+        </div>
+        
+        <!-- Key Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-header">
+                    <i data-feather="dollar-sign" width="16"></i>
+                    <div class="metric-label">Current Price</div>
+                </div>
+                <div class="metric-value">$8,440</div>
+                <div class="metric-change positive">+15.5%</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-header">
+                    <i data-feather="trending-up" width="16"></i>
+                    <div class="metric-label">7-Day Forecast</div>
+                </div>
+                <div class="metric-value">$N/A</div>
+                <div class="metric-change negative">N/A</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-header">
+                    <i data-feather="zap" width="16"></i>
+                    <div class="metric-label">Volatility</div>
+                </div>
+                <div class="metric-value">76.2%</div>
+                <div class="metric-change neutral">85th percentile</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-header">
+                    <i data-feather="award" width="16"></i>
+                    <div class="metric-label">Best Model</div>
+                </div>
+                <div class="metric-value">XGBoost</div>
+                <div class="metric-change positive">0.17% MAPE</div>
+            </div>
+        </div>
+        
+        <!-- Actual vs Predicted Chart -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <div class="chart-title">
+                    <i data-feather="trending-up" width="20"></i>
+                    Actual vs Predicted Prices
+                </div>
+                <span class="regime-indicator">Last 90 Days</span>
+            </div>
+            <canvas id="actualVsPredictedChart"></canvas>
+        </div>
+        
+        <!-- Model Performance -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <div class="chart-title">
+                    <i data-feather="bar-chart-2" width="20"></i>
+                    Model Performance Comparison
+                </div>
+            </div>
+            <canvas id="performanceChart"></canvas>
+        </div>
+        
+        <!-- Active Models -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <div class="chart-title">
+                    <i data-feather="cpu" width="20"></i>
+                    Active Models for HIGH Volatility
+                </div>
+            </div>
+            <div class="model-list">
+                
+                <div class="model-badge ">
+                    <i data-feather="check-circle" width="14"></i>
+                    LSTM_PREDICTOR
+                </div>
+                
+                <div class="model-badge ">
+                    <i data-feather="check-circle" width="14"></i>
+                    EWMA
+                </div>
+                
+                <div class="model-badge best">
+                    <i data-feather="check-circle" width="14"></i>
+                    XGBOOST
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- Recommendations -->
+        <div class="recommendations">
+            <div class="chart-header">
+                <div class="chart-title">
+                    <i data-feather="message-square" width="20"></i>
+                    AI-Powered Recommendations
+                </div>
+            </div>
+            
+            <div class="recommendation-item">
+                <i data-feather="chevron-right" width="20" class="recommendation-icon"></i>
+                <div>⚠️ High volatility detected - Consider reducing position sizes</div>
+            </div>
+            
+            <div class="recommendation-item">
+                <i data-feather="chevron-right" width="20" class="recommendation-icon"></i>
+                <div>📊 Monitor GARCH volatility forecasts closely</div>
+            </div>
+            
+            <div class="recommendation-item">
+                <i data-feather="chevron-right" width="20" class="recommendation-icon"></i>
+                <div>🛡️ Implement stop-loss orders at -5% from entry</div>
+            </div>
+            
+            <div class="recommendation-item">
+                <i data-feather="chevron-right" width="20" class="recommendation-icon"></i>
+                <div>📊 Strong 5-day momentum (+15.5%) - Trend continuation likely</div>
+            </div>
+            
+        </div>
+        
+        <!-- 30-Day Forecast -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <div class="chart-title">
+                    <i data-feather="calendar" width="20"></i>
+                    30-Day Price Forecast
+                </div>
+            </div>
+            <canvas id="forecastChart"></canvas>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize Feather icons
+        feather.replace();
+        
+        // Chart defaults for dark theme
+        Chart.defaults.color = '#999999';
+        Chart.defaults.borderColor = '#7a8288';
+        
+        // Actual vs Predicted Chart
+        const actualVsPredictedCtx = document.getElementById('actualVsPredictedChart').getContext('2d');
+        new Chart(actualVsPredictedCtx, {
+            type: 'line',
+            data: {
+                labels: ['2025-03-17', '2025-03-18', '2025-03-19', '2025-03-20', '2025-03-21', '2025-03-24', '2025-03-25', '2025-03-26', '2025-03-27', '2025-03-28', '2025-03-31', '2025-04-01', '2025-04-02', '2025-04-03', '2025-04-04', '2025-04-07', '2025-04-08', '2025-04-09', '2025-04-10', '2025-04-11', '2025-04-14', '2025-04-15', '2025-04-16', '2025-04-17', '2025-04-21', '2025-04-22', '2025-04-23', '2025-04-24', '2025-04-25', '2025-04-28', '2025-04-29', '2025-04-30', '2025-05-01', '2025-05-02', '2025-05-05', '2025-05-06', '2025-05-07', '2025-05-08', '2025-05-09', '2025-05-12', '2025-05-13', '2025-05-14', '2025-05-15', '2025-05-16', '2025-05-19', '2025-05-20', '2025-05-21', '2025-05-22', '2025-05-23', '2025-05-27', '2025-05-28', '2025-05-29', '2025-05-30', '2025-06-02', '2025-06-03', '2025-06-04', '2025-06-05', '2025-06-06', '2025-06-09', '2025-06-10', '2025-06-11', '2025-06-12', '2025-06-13', '2025-06-16', '2025-06-17', '2025-06-18', '2025-06-20', '2025-06-23', '2025-06-24', '2025-06-25', '2025-06-26', '2025-06-27', '2025-06-30', '2025-07-01', '2025-07-02', '2025-07-03', '2025-07-04', '2025-07-07', '2025-07-08', '2025-07-09', '2025-07-10', '2025-07-11', '2025-07-14', '2025-07-15', '2025-07-16', '2025-07-17', '2025-07-18', '2025-07-21', '2025-07-22', '2025-07-23'],
+                datasets: [
+                    {
+                        label: 'Actual Price',
+                        data: [7827.0, 8021.0, 8121.0, 8071.0, 7765.0, 8079.0, 7995.0, 8044.0, 7979.0, 8042.0, 7902.0, 8177.0, 8968.0, 9291.0, 8512.0, 8053.0, 7755.0, 8447.0, 8088.0, 8511.0, 8247.0, 8002.0, 8096.0, 8365.0, 8810.0, 9310.0, 9104.0, 9391.0, 9652.0, 9217.0, 9146.0, 9127.0, 8973.0, 9127.0, 8758.0, 9175.0, 9398.0, 9268.0, 9387.0, 9340.0, 10171.0, 10129.0, 10257.0, 10898.0, 10974.0, 10874.0, 10719.0, 10278.0, 9764.0, 9739.0, 9634.0, 9110.0, 9791.0, 9474.0, 9775.0, 9948.0, 10076.0, 10259.0, 10174.0, 9602.0, 9549.0, 9858.0, 9768.0, 10035.0, 9943.0, 9680.0, 8459.0, 9189.0, 9436.0, 9081.0, 9361.0, 9231.0, 9356.0, 9000.0, 8904.0, 8780.0, 8780.0, 8879.0, 8760.0, 9046.0, 8742.0, 8840.0, 8950.0, 8567.0, 8322.0, 7309.0, 7800.0, 8156.0, 8149.0, 8440.0],
+                        borderColor: '#999999',
+                        backgroundColor: 'rgba(153, 153, 153, 0.1)',
+                        borderWidth: 3,
+                        tension: 0
+                    },
+                    {
+                        label: 'XGBoost Prediction',
+                        data: [7842.654, 8037.042, 8137.242, 8087.142, 7780.53, 8095.158, 8010.99, 8060.088, 7994.958, 8058.084, 7917.804, 8193.354, 8985.936, 9309.582, 8529.024, 8069.106, 7770.51, 8463.894, 8104.176, 8528.022, 8263.494, 8018.004, 8112.192, 8381.73, 8827.62, 9328.62, 9122.208, 9409.782, 9671.304, 9235.434, 9164.292, 9145.254, 8990.946, 9145.254, 8775.516, 9193.35, 9416.796, 9286.536, 9405.774, 9358.68, 10191.342, 10149.258, 10277.514, 10919.796, 10995.948, 10895.748, 10740.438, 10298.556, 9783.528, 9758.478, 9653.268, 9128.22, 9810.582, 9492.948, 9794.55, 9967.896, 10096.152, 10279.518, 10194.348, 9621.204, 9568.098, 9877.716, 9787.536, 10055.07, 9962.886, 9699.36, 8475.918, 9207.378, 9454.872, 9099.162, 9379.722, 9249.462, 9374.712, 9018.0, 8921.808, 8797.56, 8797.56, 8896.758, 8777.52, 9064.092, 8759.484, 8857.68, 8967.9, 8584.134, 8338.644, 7323.618, 7815.6, 8172.312, 8165.298, 8456.88],
+                        borderColor: '#6f42c1',
+                        backgroundColor: 'rgba(111, 66, 193, 0.1)',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        tension: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { font: { family: 'Inter' } }
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: { unit: 'day' },
+                        grid: { color: '#3a3f44' }
+                    },
+                    y: {
+                        ticks: { callback: value => '$' + value.toLocaleString() },
+                        grid: { color: '#3a3f44' }
+                    }
+                }
+            }
+        });
+        
+        // Model Performance Chart
+        const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(performanceCtx, {
+            type: 'bar',
+            data: {
+                labels: ['XGBoost', 'Holt-Winters', 'ARIMA', 'SARIMA', 'LSTM'],
+                datasets: [{
+                    label: 'MAPE (%)',
+                    data: [0.17, 2.91, 2.93, 3.31, 4.49],
+                    backgroundColor: [0.17, 2.91, 2.93, 3.31, 4.49].map(v => 
+                        v < 1 ? '#00e676' : v < 3 ? '#6f42c1' : v < 5 ? '#ff9800' : '#ff5252'
+                    ),
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#3a3f44' },
+                        ticks: { callback: value => value + '%' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+        
+        // 30-Day Forecast Chart
+        const forecastCtx = document.getElementById('forecastChart').getContext('2d');
+        new Chart(forecastCtx, {
+            type: 'line',
+            data: {
+                labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map(d => 'Day ' + d),
+                datasets: [
+                    {
+                        label: 'Forecast',
+                        data: [8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0],
+                        borderColor: '#6f42c1',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        tension: 0.2
+                    },
+                    {
+                        label: 'Upper Bound',
+                        data: [8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0],
+                        borderColor: 'transparent',
+                        backgroundColor: 'rgba(111, 66, 193, 0.1)',
+                        fill: '+1',
+                        tension: 0.2
+                    },
+                    {
+                        label: 'Lower Bound',
+                        data: [8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0],
+                        borderColor: 'transparent',
+                        backgroundColor: 'rgba(111, 66, 193, 0.1)',
+                        fill: '-1',
+                        tension: 0.2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        ticks: { callback: value => '$' + value.toLocaleString() },
+                        grid: { color: '#3a3f44' }
+                    },
+                    x: {
+                        grid: { color: '#3a3f44' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

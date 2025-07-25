@@ -1,0 +1,41 @@
+{
+  "test_date": "2025-07-24T19:18:05.286829",
+  "data_validation": {
+    "total_days": 503,
+    "date_range": "2023-07-25 to 2025-07-23",
+    "real_export_concentration": {
+      "mean": 0.5287915332253867,
+      "std": 0.011590911734374152,
+      "min": 0.5081773494631852,
+      "max": 0.5537804595335953
+    }
+  },
+  "models_tested": [
+    "arima",
+    "stl",
+    "sarima",
+    "holt_winters",
+    "garch",
+    "ewma",
+    "xgboost",
+    "lstm_autoencoder",
+    "lstm_predictor",
+    "cusum",
+    "modified_zscore",
+    "lof",
+    "ensemble"
+  ],
+  "surge_detection": {
+    "actual_surge": "139.7%",
+    "detection_summary": [
+      "\u2717 CUSUM: No detection",
+      "\u2717 Z-score: No detection",
+      "\u2713 LOF: Detected 2 anomalies",
+      "\u2717 LSTM: No detection"
+    ]
+  },
+  "current_regime": {
+    "volatility": 76.21288082765295,
+    "percentile": 50.0
+  }
+}

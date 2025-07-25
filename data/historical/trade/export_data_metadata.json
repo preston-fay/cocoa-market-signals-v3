@@ -1,0 +1,24 @@
+{
+  "source": "UN Comtrade Database",
+  "commodity": "1801 - Cocoa beans, whole or broken, raw or roasted",
+  "fetch_date": "2025-07-24T16:55:06.471122",
+  "records": 36,
+  "date_range": "2023-01-01 00:00:00 to 2025-12-01 00:00:00",
+  "exporters": [
+    "C\u00f4te d'Ivoire",
+    "Ghana",
+    "Nigeria",
+    "Ecuador",
+    "Burkina Faso",
+    "Congo",
+    "Guinea"
+  ],
+  "importers": [
+    "Netherlands",
+    "Germany",
+    "United States",
+    "Belgium",
+    "France",
+    "Switzerland"
+  ]
+}

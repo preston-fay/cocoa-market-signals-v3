@@ -1,0 +1,12 @@
+{
+  "test_date": "2025-07-24T16:47:31.464681",
+  "data_validation": "100% real data",
+  "models_tested": 7,
+  "performance": {
+    "base_accuracy": 0.47474747474747475,
+    "ensemble_accuracy": 0.75,
+    "sharpe_ratio": 1.7726990311037514,
+    "false_positive_rate": 0.5531914893617021
+  },
+  "all_models_working": true
+}

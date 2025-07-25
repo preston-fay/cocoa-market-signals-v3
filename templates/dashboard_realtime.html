@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoa Market Signals - Real-Time Simulation</title>
+    
+    <!-- Kearney Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <style>
+        :root {
+            /* Kearney Colors - FOLLOWING STANDARDS */
+            --primary-purple: #6f42c1;
+            --primary-charcoal: #272b30;
+            --white: #ffffff;
+            --light-gray: #e9ecef;
+            --medium-gray: #999999;
+            --dark-gray: #52575c;
+            --border-gray: #7a8288;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-charcoal);
+            color: var(--white);
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            background-color: var(--primary-charcoal);
+            border-bottom: 3px solid var(--primary-purple);
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .subtitle {
+            color: var(--medium-gray);
+            font-size: 1.125rem;
+            margin-top: 0.25rem;
+        }
+        
+        /* Month selector */
+        .month-selector {
+            background-color: #3a3f44;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-gray);
+        }
+        
+        .month-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .month-btn {
+            padding: 0.75rem;
+            background-color: var(--primary-charcoal);
+            border: 2px solid var(--border-gray);
+            color: var(--medium-gray);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .month-btn:hover {
+            border-color: var(--primary-purple);
+            color: var(--white);
+        }
+        
+        .month-btn.active {
+            background-color: var(--primary-purple);
+            border-color: var(--primary-purple);
+            color: var(--white);
+        }
+        
+        /* Analysis container */
+        .analysis-container {
+            background-color: #3a3f44;
+            padding: 2rem;
+            border: 1px solid var(--border-gray);
+            min-height: 600px;
+        }
+        
+        /* Metrics grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .metric-card {
+            background-color: var(--primary-charcoal);
+            padding: 1.5rem;
+            border: 1px solid var(--border-gray);
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        /* Predictions table */
+        .predictions-table {
+            width: 100%;
+            margin-top: 2rem;
+            border-collapse: collapse;
+        }
+        
+        .predictions-table th {
+            background-color: var(--primary-charcoal);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--medium-gray);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--border-gray);
+        }
+        
+        .predictions-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        .confidence-bar {
+            height: 8px;
+            background-color: var(--primary-charcoal);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .confidence-fill {
+            height: 100%;
+            background-color: var(--primary-purple);
+            transition: width 0.3s ease;
+        }
+        
+        /* Loading state */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-gray);
+            border-top-color: var(--primary-purple);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Charts */
+        .chart-container {
+            margin-bottom: 2rem;
+        }
+        
+        .accuracy-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--primary-purple);
+            color: var(--white);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <h1>Cocoa Market Signals - Real-Time Simulation</h1>
+                <div class="subtitle">Navigate through time as the AI would have seen it</div>
+            </div>
+            <div class="accuracy-badge">
+                <i data-feather="activity" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i>
+                REAL DATA
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Month Selector -->
+        <div class="month-selector">
+            <h2 style="margin-bottom: 1rem;">Select Analysis Month</h2>
+            <p style="color: var(--medium-gray); margin-bottom: 1.5rem;">
+                Choose any month to see what our AI system would have predicted using only data available at that time.
+            </p>
+            <div class="month-grid">
+                {% for month in available_months %}
+                <button class="month-btn" 
+                        onclick="loadMonth('{{ month }}')"
+                        data-month="{{ month }}">
+                    {{ month }}
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Analysis Results -->
+        <div id="analysis-container" class="analysis-container">
+            <div class="loading">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+            
+            // Load the most recent month by default
+            const months = document.querySelectorAll('.month-btn');
+            if (months.length > 0) {
+                const lastMonth = months[months.length - 1];
+                loadMonth(lastMonth.dataset.month);
+            }
+        });
+        
+        // Load month data
+        async function loadMonth(yearMonth) {
+            // Update active button
+            document.querySelectorAll('.month-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-month="${yearMonth}"]`).classList.add('active');
+            
+            // Show loading
+            document.getElementById('analysis-container').innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
+            `;
+            
+            try {
+                const response = await fetch(`/api/month/${yearMonth}`);
+                const html = await response.text();
+                document.getElementById('analysis-container').innerHTML = html;
+                
+                // Re-initialize feather icons
+                feather.replace();
+                
+                // Render any Plotly charts
+                renderCharts();
+            } catch (error) {
+                document.getElementById('analysis-container').innerHTML = `
+                    <div style="text-align: center; padding: 3rem;">
+                        <i data-feather="alert-triangle" style="width: 48px; height: 48px; color: var(--medium-gray);"></i>
+                        <p style="margin-top: 1rem; color: var(--medium-gray);">Failed to load data for ${yearMonth}</p>
+                    </div>
+                `;
+                feather.replace();
+            }
+        }
+        
+        // Render Plotly charts
+        function renderCharts() {
+            // Price chart
+            const priceDiv = document.getElementById('price-chart');
+            if (priceDiv && priceDiv.dataset.chart) {
+                const chartData = JSON.parse(priceDiv.dataset.chart);
+                Plotly.newPlot('price-chart', chartData.data, chartData.layout, {responsive: true});
+            }
+            
+            // Signals chart
+            const signalsDiv = document.getElementById('signals-chart');
+            if (signalsDiv && signalsDiv.dataset.chart) {
+                const chartData = JSON.parse(signalsDiv.dataset.chart);
+                Plotly.newPlot('signals-chart', chartData.data, chartData.layout, {responsive: true});
+            }
+            
+            // Prediction chart
+            const predDiv = document.getElementById('prediction-chart');
+            if (predDiv && predDiv.dataset.chart) {
+                const chartData = JSON.parse(predDiv.dataset.chart);
+                Plotly.newPlot('prediction-chart', chartData.data, chartData.layout, {responsive: true});
+            }
+        }
+    </script>
+</body>
+</html>

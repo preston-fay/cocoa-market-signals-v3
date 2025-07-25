@@ -1,0 +1,14 @@
+{
+  "test_date": "2025-07-24T16:57:37.185845",
+  "data_validation": {
+    "100_percent_real_data": true,
+    "includes_real_comtrade_data": true,
+    "export_concentration_mean": 0.5287915332253867,
+    "export_concentration_std": 0.011590911734374152,
+    "no_fake_data": true
+  },
+  "performance": {
+    "signal_accuracy": 0.5353535353535354,
+    "sharpe_ratio": 1.0427641359433832
+  }
+}

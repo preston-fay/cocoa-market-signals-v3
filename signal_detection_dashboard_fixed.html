@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoa Market Signals - Signal Detection System</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    
+    <style>
+        :root {
+            --kearney-purple: #6f42c1;
+            --kearney-charcoal: #272b30;
+            --kearney-charcoal-secondary: #3a3f44;
+            --kearney-gray: #999999;
+            --kearney-gray-light: #7a8288;
+            --kearney-white: #FFFFFF;
+            --kearney-black: #000000;
+            --kearney-green: #00e676;
+            --kearney-red: #ff5252;
+            --signal-strong-buy: #00e676;
+            --signal-buy: #4caf50;
+            --signal-monitor: #ff9800;
+            --signal-sell: #f44336;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--kearney-white);
+            background: var(--kearney-black);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--kearney-charcoal);
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid var(--kearney-purple);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .subtitle {
+            color: var(--kearney-gray);
+            font-size: 1.125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Signal Status Banner */
+        .signal-banner {
+            background: var(--kearney-charcoal-secondary);
+            border: 2px solid var(--kearney-purple);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .current-signal {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .signal-strength-bar {
+            width: 100%;
+            max-width: 600px;
+            height: 30px;
+            background: var(--kearney-charcoal);
+            margin: 1rem auto;
+            position: relative;
+            border: 1px solid var(--kearney-gray-light);
+        }
+        
+        .signal-strength-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--signal-sell), var(--signal-monitor), var(--signal-buy), var(--signal-strong-buy));
+            transition: width 0.3s ease;
+        }
+        
+        .signal-labels {
+            display: flex;
+            justify-content: space-between;
+            max-width: 600px;
+            margin: 0.5rem auto;
+            font-size: 0.75rem;
+            color: var(--kearney-gray);
+        }
+        
+        /* Timeline */
+        .timeline {
+            background: var(--kearney-charcoal-secondary);
+            border: 1px solid var(--kearney-gray-light);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--kearney-white);
+        }
+        
+        .timeline-events {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--kearney-gray-light);
+        }
+        
+        .timeline-event {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -1.5rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            background: var(--kearney-purple);
+            border-radius: 50%;
+            border: 2px solid var(--kearney-charcoal-secondary);
+        }
+        
+        .timeline-date {
+            font-size: 0.875rem;
+            color: var(--kearney-gray);
+            margin-bottom: 0.25rem;
+        }
+        
+        .timeline-event-title {
+            font-weight: 600;
+            color: var(--kearney-white);
+            margin-bottom: 0.25rem;
+        }
+        
+        .timeline-description {
+            font-size: 0.875rem;
+            color: var(--kearney-gray-light);
+        }
+        
+        /* Month Navigation - IMPROVED */
+        .month-selector {
+            background: var(--kearney-charcoal-secondary);
+            border: 1px solid var(--kearney-gray-light);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .month-dropdown {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: var(--kearney-charcoal);
+            border: 1px solid var(--kearney-gray-light);
+            color: var(--kearney-white);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+        }
+        
+        .month-dropdown option {
+            background: var(--kearney-charcoal);
+            color: var(--kearney-white);
+        }
+        
+        .nav-btn {
+            padding: 0.75rem 1rem;
+            background: var(--kearney-charcoal);
+            border: 1px solid var(--kearney-gray-light);
+            color: var(--kearney-white);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-btn:hover {
+            background: var(--kearney-purple);
+            border-color: var(--kearney-purple);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .nav-btn:disabled:hover {
+            background: var(--kearney-charcoal);
+            border-color: var(--kearney-gray-light);
+        }
+        
+        /* Month Info */
+        .month-info {
+            background: var(--kearney-charcoal-secondary);
+            border: 1px solid var(--kearney-gray-light);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .month-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .month-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .month-signal-badge {
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+        
+        .month-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .metric {
+            padding: 1rem;
+            background: var(--kearney-charcoal);
+            border-left: 4px solid var(--kearney-purple);
+        }
+        
+        .metric-label {
+            color: var(--kearney-gray);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 0.25rem;
+        }
+        
+        .metric-value.positive {
+            color: var(--kearney-green);
+        }
+        
+        .metric-value.negative {
+            color: var(--kearney-red);
+        }
+        
+        /* Charts */
+        .chart-container {
+            background: var(--kearney-charcoal-secondary);
+            border: 1px solid var(--kearney-gray-light);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--kearney-white);
+        }
+        
+        canvas {
+            max-height: 400px;
+        }
+        
+        /* Signal Components */
+        .signal-components {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .component-card {
+            background: var(--kearney-charcoal-secondary);
+            border: 1px solid var(--kearney-gray-light);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .component-icon {
+            color: var(--kearney-purple);
+            margin-bottom: 0.5rem;
+        }
+        
+        .component-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--kearney-white);
+        }
+        
+        .component-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--kearney-white);
+        }
+        
+        .component-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--kearney-charcoal);
+            margin-top: 0.5rem;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .component-bar-fill {
+            height: 100%;
+            background: var(--kearney-purple);
+            transition: width 0.3s ease;
+        }
+        
+        /* Signal strength text */
+        .signal-value {
+            color: var(--kearney-white);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Cocoa Market Signal Detection System</h1>
+            <div class="subtitle">Detecting Market Signals Before Price Movements</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Current Signal Status -->
+        <div class="signal-banner" id="signalBanner">
+            <div class="current-signal" id="currentSignal">MONITORING</div>
+            <div class="signal-strength-bar">
+                <div class="signal-strength-fill" id="signalStrengthFill" style="width: 50%"></div>
+            </div>
+            <div class="signal-labels">
+                <span>STRONG SELL</span>
+                <span>SELL</span>
+                <span>MONITOR</span>
+                <span>BUY</span>
+                <span>STRONG BUY</span>
+            </div>
+            <p style="margin-top: 1rem; color: var(--kearney-white);">
+                Composite Signal Strength: <span id="signalValue" class="signal-value">0.50</span>
+            </p>
+        </div>
+        
+        <!-- Key Detection Timeline -->
+        <div class="timeline">
+            <div class="timeline-title">
+                <i data-feather="activity" width="20" style="vertical-align: middle"></i>
+                Key Signal Detection Events
+            </div>
+            <div class="timeline-events">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023-10-15</div>
+                    <div class="timeline-event-title">FIRST WARNING</div>
+                    <div class="timeline-description">Weather anomalies detected in Ghana</div>
+                </div>
+                
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023-12-01</div>
+                    <div class="timeline-event-title">SIGNAL STRENGTHENING</div>
+                    <div class="timeline-description">Trade volumes declining, export concentration rising</div>
+                </div>
+                
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2024-01-15</div>
+                    <div class="timeline-event-title">BUY SIGNAL</div>
+                    <div class="timeline-description">All indicators align - strong buy signal generated</div>
+                </div>
+                
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2024-02-01</div>
+                    <div class="timeline-event-title">SURGE BEGINS</div>
+                    <div class="timeline-description">Price surge starts - signal validated</div>
+                </div>
+                
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2024-04-15</div>
+                    <div class="timeline-event-title">PEAK SIGNAL</div>
+                    <div class="timeline-description">Maximum signal strength during peak volatility</div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- Month Navigation - IMPROVED DROPDOWN -->
+        <div class="month-selector">
+            <button class="nav-btn" id="prevMonth" onclick="navigateMonth(-1)">
+                <i data-feather="chevron-left" width="20"></i>
+                Previous
+            </button>
+            
+            <select class="month-dropdown" id="monthDropdown" onchange="selectMonth(this.value)">
+                <!-- Dynamically populated -->
+            </select>
+            
+            <button class="nav-btn" id="nextMonth" onclick="navigateMonth(1)">
+                Next
+                <i data-feather="chevron-right" width="20"></i>
+            </button>
+        </div>
+        
+        <!-- Current Month Info -->
+        <div class="month-info" id="monthInfo">
+            <!-- Dynamically populated -->
+        </div>
+        
+        <!-- Signal Components -->
+        <div class="signal-components" id="signalComponents">
+            <div class="component-card">
+                <i data-feather="cloud-rain" width="32" class="component-icon"></i>
+                <div class="component-name">Weather Signal</div>
+                <div class="component-value" id="weatherSignal">0.00</div>
+                <div class="component-bar">
+                    <div class="component-bar-fill" id="weatherBar" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="component-card">
+                <i data-feather="truck" width="32" class="component-icon"></i>
+                <div class="component-name">Trade Signal</div>
+                <div class="component-value" id="tradeSignal">0.00</div>
+                <div class="component-bar">
+                    <div class="component-bar-fill" id="tradeBar" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="component-card">
+                <i data-feather="trending-up" width="32" class="component-icon"></i>
+                <div class="component-name">Momentum Signal</div>
+                <div class="component-value" id="momentumSignal">0.00</div>
+                <div class="component-bar">
+                    <div class="component-bar-fill" id="momentumBar" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Signal vs Price Chart -->
+        <div class="chart-container">
+            <div class="chart-title">Signal Detection vs Price Movement</div>
+            <canvas id="signalChart"></canvas>
+        </div>
+        
+        <!-- Component Breakdown Chart -->
+        <div class="chart-container">
+            <div class="chart-title">Signal Component Breakdown</div>
+            <canvas id="componentChart"></canvas>
+        </div>
+    </div>
+    
+    <script>
+        // Data
+        const monthsData = [{"month": "2023-07", "month_name": "July 2023", "data": {"dates": ["2023-07-25", "2023-07-26", "2023-07-27", "2023-07-28"], "prices": [3470.0, 3552.0, 3529.0, 3525.0], "composite_signal": [0.5, 0.5, 0.5, 0.5], "weather_signal": [NaN, NaN, NaN, NaN], "trade_signal": [0.26269820577812963, 0.26269820577812963, 0.26269820577812963, 0.26269820577812963], "momentum_signal": [NaN, NaN, NaN, NaN]}, "metrics": {"avg_signal": 0.5, "max_signal": 0.5, "signal_type": "MONITOR DOWN", "signal_color": "#ff5722", "price_change": 1.585014409221902, "avg_price": 3519.0, "weather_anomaly": 0.11964285714285718, "export_conc": 0.5126982057781296}, "events": []}, {"month": "2023-08", "month_name": "August 2023", "data": {"dates": ["2023-08-01", "2023-08-02", "2023-08-03", "2023-08-04", "2023-08-07", "2023-08-08", "2023-08-09", "2023-08-10", "2023-08-11", "2023-08-14", "2023-08-15", "2023-08-16", "2023-08-17", "2023-08-18", "2023-08-21", "2023-08-22", "2023-08-23", "2023-08-24", "2023-08-25", "2023-08-28", "2023-08-29", "2023-08-30"], "prices": [3543.0, 3562.0, 3491.0, 3510.0, 3476.0, 3333.0, 3319.0, 3282.0, 3297.0, 3321.0, 3340.0, 3372.0, 3413.0, 3366.0, 3355.0, 3329.0, 3323.0, 3363.0, 3430.0, 3442.0, 3555.0, 3606.0], "composite_signal": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5], "weather_signal": [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN], "trade_signal": [0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737, 0.2671005117573737], "momentum_signal": [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]}, "metrics": {"avg_signal": 0.5, "max_signal": 0.5, "signal_type": "MONITOR DOWN", "signal_color": "#ff5722", "price_change": 1.7781541066892466, "avg_price": 3410.3636363636365, "weather_anomaly": 0.5068181818181817, "export_conc": 0.5171005117573736}, "events": []}, {"month": "2023-09", "month_name": "September 2023", "data": {"dates": ["2023-09-01", "2023-09-05", "2023-09-06", "2023-09-07", "2023-09-08", "2023-09-11", "2023-09-12", "2023-09-13", "2023-09-14", "2023-09-15", "2023-09-18", "2023-09-19", "2023-09-20", "2023-09-21", "2023-09-22", "2023-09-25", "2023-09-26", "2023-09-27", "2023-09-28", "2023-09-29"], "prices": [3574.0, 3560.0, 3577.0, 3573.0, 3609.0, 3611.0, 3772.0, 3849.0, 3853.0, 3757.0, 3621.0, 3642.0, 3570.0, 3595.0, 3582.0, 3496.0, 3500.0, 3416.0, 3459.0, 3418.0], "composite_signal": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.234392711662182, 0.23868258479105436, 0.24705754620084677, 0.25523912653612163, 0.2589118366017746, 0.25704677955800803, 0.24821110643627559, 0.2404718536464185, 0.2291581032640539], "weather_signal": [NaN, 0.014376190476190478, 0.014533333333333336, 0.014638095238095242, 0.014938095238095243, 0.01480476190476191, 0.014857142857142862, 0.016900000000000005, 0.01719047619047619, 0.017804761904761907, 0.0194952380952381, 0.019704761904761905, 0.019790476190476195, 0.018342857142857143, 0.019380952380952384, 0.01924285714285715, 0.019423809523809524, 0.019109523809523812, 0.019171428571428572, 0.015747619047619045], "trade_signal": [0.2941944721642501, 0.14189190565265464, 0.13728494421796145, 0.13267798278326823, 0.12807102134857506, 0.12346405991388183, 0.11885709847918863, 0.11692197635113397, 0.11498685422307932, 0.11305173209502467, 0.11111660996697001, 0.10918148783891536, 0.10724636571086071, 0.10531124358280605, 0.10337612145475142, 0.10144099932669676, 0.09950587719864211, 0.09757075507058746, 0.0956356329425328, 0.09370051081447814], "momentum_signal": [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, 0.7352937994397968, 0.7554294873601737, 0.7940521950708974, 0.8284213784835509, 0.8464017474843835, 0.8417843813808714, 0.809977884298829, 0.7820304018776214, 0.7446649290863838]}, "metrics": {"avg_signal": 0.38545858243483677, "max_signal": 0.5, "signal_type": "MONITOR DOWN", "signal_color": "#ff5722", "price_change": -4.364857302742026, "avg_price": 3601.7, "weather_anomaly": 0.6096428571428573, "export_conc": 0.5441944721642501}, "events": []}, {"month": "2023-10", "month_name": "October 2023", "data": {"dates": ["2023-10-02", "2023-10-03", "2023-10-04", "2023-10-05", "2023-10-06", "2023-10-09", "2023-10-10", "2023-10-11", "2023-10-12", "2023-10-13", "2023-10-16", "2023-10-17", "2023-10-18", "2023-10-19", "2023-10-20", "2023-10-23", "2023-10-24", "2023-10-25", "2023-10-26", "2023-10-27", "2023-10-30"], "prices": [3502.0, 3428.0, 3431.0, 3400.0, 3453.0, 3435.0, 3474.0, 3432.0, 3490.0, 3499.0, 3591.0, 3635.0, 3639.0, 3648.0, 3694.0, 3759.0, 3729.0, 3735.0, 3810.0, 3852.0, 3826.0], "composite_signal": [0.22633790347528115, 0.22944771501226074, 0.2307254673656094, 0.229985078139057, 0.2286521747201385, 0.22820081504286777, 0.2294249971597631, 0.2290502868206511, 0.22880028408777733, 0.2315205865127386, 0.2347831977745829, 0.24221534798255415, 0.24778386682003295, 0.25453144431363534, 0.2611821233924704, 0.2738550199475502, 0.2787214758134182, 0.28593432107161837, 0.2954939245902405, 0.3092426386728185, 0.3223917188737695], "weather_signal": [0.01552857142857143, 0.015504761904761905, 0.015414285714285719, 0.01652857142857143, 0.017614285714285714, 0.01916666666666667, 0.0204, 0.021619047619047618, 0.023414285714285717, 0.02372857142857143, 0.025376190476190476, 0.026452380952380953, 0.026709523809523808, 0.026361904761904763, 0.026104761904761905, 0.027790476190476195, 0.028680952380952383, 0.027104761904761913, 0.026509523809523813, 0.026142857142857145, 0.024785714285714286], "trade_signal": [0.08409789401542904, 0.10001746623101591, 0.11593703844660277, 0.13185661066218968, 0.14777618287777652, 0.16369575509336343, 0.17961532730895027, 0.19553489952453715, 0.21145447174012402, 0.22737404395571092, 0.2452287382993525, 0.26308343264299394, 0.2809381269866355, 0.29879282133027707, 0.3166475156739186, 0.33450221001756014, 0.3523569043612016, 0.3702115987048432, 0.38806629304848467, 0.4059209873921261, 0.4237756817357676], "momentum_signal": [0.7490549834764382, 0.7360562474127508, 0.7158226079478731, 0.6858297354967244, 0.6535068062761116, 0.6240567186887562, 0.601755464944732, 0.5730786413766783, 0.5440939815669109, 0.5290638757218169, 0.5112401431527009, 0.5108945663680929, 0.5042411307681816, 0.5031505964594314, 0.5015458018249451, 0.5213098770954379, 0.5109615229424169, 0.5134520596920576, 0.5239562961500531, 0.5508969748638721, 0.57682578471785]}, "metrics": {"avg_signal": 0.25229906607565883, "max_signal": 0.3223917188737695, "signal_type": "SELL", "signal_color": "#f44336", "price_change": 9.25185608223872, "avg_price": 3593.4285714285716, "weather_anomaly": 1.198299319727891, "export_conc": 0.5186722831496142}, "events": [{"date": "2023-10-15", "type": "FIRST WARNING", "description": "Weather anomalies detected in Ghana", "signal_strength": 0.58}]}, {"month": "2023-11", "month_name": "November 2023", "data": {"dates": ["2023-11-01", "2023-11-02", "2023-11-03", "2023-11-06", "2023-11-07", "2023-11-08", "2023-11-09", "2023-11-10", "2023-11-13", "2023-11-14", "2023-11-15", "2023-11-16", "2023-11-17", "2023-11-20", "2023-11-21", "2023-11-22", "2023-11-24", "2023-11-27", "2023-11-28", "2023-11-29"], "prices": [3794.0, 3865.0, 3898.0, 3914.0, 3883.0, 3916.0, 3949.0, 3991.0, 4051.0, 3946.0, 3939.0, 4004.0, 4083.0, 4034.0, 4227.0, 4173.0, 4219.0, 4260.0, 4370.0, 4438.0], "composite_signal": [0.3422523281643097, 0.3487845216940707, 0.35610585198929373, 0.3656246030302378, 0.3803161480424356, 0.40200599472528825, 0.4208047749163868, 0.4364058105541625, 0.4287735995781336, 0.4212113886021047, 0.4138125109594092, 0.4060652999833803, 0.39810308900735153, 0.39026087803132264, 0.3825453337219604, 0.3748064560792649, 0.36658257843656933, 0.3588870341272071, 0.35080315648451155, 0.343014278841816], "weather_signal": [0.02462857142857143, 0.024842857142857146, 0.023542857142857147, 0.023552380952380957, 0.02325238095238096, 0.02324761904761905, 0.023257142857142855, 0.023366666666666664, 0.022842857142857137, 0.022519047619047616, 0.022661904761904755, 0.021809523809523813, 0.02034285714285714, 0.01921904761904762, 0.01845714285714286, 0.017628571428571427, 0.015414285714285712, 0.014709523809523808, 0.012895238095238095, 0.011923809523809524], "trade_signal": [0.45094119139375427, 0.4501736916306569, 0.44940619186755953, 0.4486386921044623, 0.44787119234136485, 0.4471036925782676, 0.4463361928151703, 0.44556869305207286, 0.426946498945334, 0.40832430483859516, 0.3897021107318563, 0.37107991662511747, 0.3524577225183788, 0.33383552841163994, 0.31521333430490106, 0.2965911401981622, 0.2779689460914233, 0.25934675198468443, 0.24072455787794556, 0.22210236377120668], "momentum_signal": [0.6130234064272321, 0.6400801801672317, 0.6724135009690796, 0.7117031714204781, 0.7721173510902252, 0.8601114041092581, 0.9365211911612745, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, "metrics": {"avg_signal": 0.38435828184846077, "max_signal": 0.4364058105541625, "signal_type": "MONITOR DOWN", "signal_color": "#ff5722", "price_change": 16.974169741697416, "avg_price": 4047.7, "weather_anomaly": -0.23535714285714276, "export_conc": 0.5287505982270565}, "events": []}, {"month": "2023-12", "month_name": "December 2023", "data": {"dates": ["2023-12-01", "2023-12-04", "2023-12-05", "2023-12-06", "2023-12-07", "2023-12-08", "2023-12-11", "2023-12-12", "2023-12-13", "2023-12-14", "2023-12-15", "2023-12-18", "2023-12-19", "2023-12-20", "2023-12-21", "2023-12-22", "2023-12-26", "2023-12-27", "2023-12-28", "2023-12-29"], "prices": [4398.0, 4271.0, 4206.0, 4241.0, 4340.0, 4381.0, 4351.0, 4375.0, 4395.0, 4267.0, 4244.0, 4271.0, 4289.0, 4309.0, 4288.0, 4311.0, 4283.0, 4280.0, 4256.0, 4196.0], "composite_signal": [0.33534461299587615, 0.32844122917956875, 0.32101284536326136, 0.31355446154695393, 0.3064510777306465, 0.29946769391433914, 0.2925093100980317, 0.2854109262817243, 0.27860754246541697, 0.2792130362918051, 0.27976686345152657, 0.28036235727791475, 0.2810045177709696, 0.28169167826402436, 0.2824088387570792, 0.2830993325834673, 0.2836798264098555, 0.28318253744363975, 0.2747096243657645, 0.2678735915610012], "weather_signal": [0.011752380952380952, 0.01188095238095238, 0.010509523809523809, 0.009052380952380952, 0.008609523809523808, 0.008509523809523807, 0.00848095238095238, 0.008052380952380951, 0.008466666666666666, 0.008766666666666666, 0.008919047619047618, 0.00919047619047619, 0.009595238095238094, 0.01012857142857143, 0.010747619047619048, 0.01129047619047619, 0.01151904761904762, 0.011623809523809526, 0.01200952380952381, 0.012271428571428574], "trade_signal": [0.20307819915635694, 0.18570723961558847, 0.16833628007482, 0.15096532053405148, 0.13359436099328295, 0.11622340145251446, 0.09885244191174597, 0.08148148237097752, 0.06411052283020903, 0.06536175739617942, 0.06661299196214979, 0.06786422652812017, 0.06911546109409054, 0.07036669566006093, 0.0716179302260313, 0.07286916479200169, 0.07412039935797207, 0.07537163392394244, 0.07662286848991283, 0.0778741030558832], "momentum_signal": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9958622021629177, 0.9594285745458642, 0.9297158013545916]}, "metrics": {"avg_signal": 0.2918895951876433, "max_signal": 0.33534461299587615, "signal_type": "SELL", "signal_color": "#f44336", "price_change": -4.59299681673488, "avg_price": 4297.6, "weather_anomaly": -0.6832142857142858, "export_conc": 0.5457195872597144}, "events": [{"date": "2023-12-01", "type": "SIGNAL STRENGTHENING", "description": "Trade volumes declining, export concentration rising", "signal_strength": 0.65}]}, {"month": "2024-01", "month_name": "January 2024", "data": {"dates": ["2024-01-02", "2024-01-03", "2024-01-04", "2024-01-05", "2024-01-08", "2024-01-09", "2024-01-10", "2024-01-11", "2024-01-12", "2024-01-16", "2024-01-17", "2024-01-18", "2024-01-19", "2024-01-22", "2024-01-23", "2024-01-24", "2024-01-25", "2024-01-26", "2024-01-29", "2024-01-30"], "prices": [4275.0, 4238.0, 4260.0, 4204.0, 4094.0, 4162.0, 4206.0, 4274.0, 4323.0, 4429.0, 4448.0, 4458.0, 4583.0, 4565.0, 4634.0, 4785.0, 4625.0, 4672.0, 4732.0, 4805.0], "composite_signal": [0.25945273928193835, 0.2542081424677445, 0.25100625808325217, 0.2385355298974342, 0.2261778119454282, 0.2150384727285145, 0.20632143484556906, 0.198575662959789, 0.18746790039008648, 0.18004207430979705, 0.17452377131547428, 0.17670899602135742, 0.182261139571627, 0.19393014504847794, 0.206300176267039, 0.2211068999143301, 0.23201571345884736, 0.24463330938364214, 0.2588980226571479, 0.27734597920258847], "weather_signal": [0.012023809523809523, 0.012204761904761907, 0.011814285714285715, 0.01185714285714286, 0.011785714285714281, 0.012071428571428571, 0.012371428571428573, 0.012823809523809524, 0.012947619047619048, 0.013252380952380953, 0.013576190476190474, 0.01371904761904762, 0.013557142857142856, 0.013647619047619049, 0.014014285714285712, 0.014538095238095239, 0.014666666666666663, 0.014604761904761905, 0.0147, 0.014685714285714288], "trade_signal": [0.06653151112691752, 0.07130162789890344, 0.07607174467088937, 0.08084186144287529, 0.08561197821486122, 0.09038209498684713, 0.09515221175883305, 0.09992232853081898, 0.1046924453028049, 0.10946256207479083, 0.11298144428080638, 0.11650032648682193, 0.12001920869283748, 0.12353809089885302, 0.12705697310486858, 0.13057585531088411, 0.13409473751689965, 0.1376136197229152, 0.14113250192893073, 0.14465138413494627], "momentum_signal": [0.9145272059913521, 0.8856632985660656, 0.8657702408595855, 0.8081951412811363, 0.7512320826379348, 0.6986425389351026, 0.6557222005681433, 0.6164735928565124, 0.5642370224091914, 0.5264748645861895, 0.49831810774594026, 0.501228795039848, 0.5180338243779681, 0.5589529680890802, 0.6022895481003663, 0.6551528978265725, 0.6929779404750167, 0.7379047793112375, 0.7892000875423023, 0.8573817021944398]}, "metrics": {"avg_signal": 0.21922750898750426, "max_signal": 0.27734597920258847, "signal_type": "SELL", "signal_color": "#f44336", "price_change": 12.397660818713451, "avg_price": 4438.6, "weather_anomaly": -0.5846428571428571, "export_conc": 0.5296068785587627}, "events": [{"date": "2024-01-15", "type": "BUY SIGNAL", "description": "All indicators align - strong buy signal generated", "signal_strength": 0.82}]}, {"month": "2024-02", "month_name": "February 2024", "data": {"dates": ["2024-02-01", "2024-02-02", "2024-02-05", "2024-02-06", "2024-02-07", "2024-02-08", "2024-02-09", "2024-02-12", "2024-02-13", "2024-02-14", "2024-02-15", "2024-02-16", "2024-02-20", "2024-02-21", "2024-02-22", "2024-02-23", "2024-02-26", "2024-02-27", "2024-02-28"], "prices": [4956.0, 5009.0, 5189.0, 5220.0, 5410.0, 5805.0, 5888.0, 5860.0, 6001.0, 5949.0, 5961.0, 5706.0, 5999.0, 6198.0, 6169.0, 6562.0, 6884.0, 6755.0, 6380.0], "composite_signal": [0.30966815622993266, 0.31928850916516016, 0.3234172620530355, 0.3275510149409109, 0.33168143449545284, 0.33584518738332825, 0.34005560693787024, 0.3440843598257456, 0.3481831127136209, 0.35105931271909, 0.3539071793912258, 0.3568067127300283, 0.3596712460688307, 0.36251077940763315, 0.3651369794131023, 0.3679465127519047, 0.3705777127573739, 0.37337891276284296, 0.3760184461016455], "weather_signal": [0.014023809523809525, 0.014042857142857143, 0.01401904761904762, 0.014009523809523814, 0.013990476190476189, 0.014066666666666665, 0.014276190476190475, 0.013966666666666667, 0.013857142857142856, 0.014276190476190474, 0.014614285714285712, 0.015100000000000002, 0.015485714285714287, 0.015799999999999998, 0.015504761904761903, 0.015733333333333335, 0.015452380952380954, 0.01565714285714286, 0.015399999999999999], "trade_signal": [0.15059105735987874, 0.16093377291290042, 0.1712764884659221, 0.1816192040189438, 0.1919619195719655, 0.2023046351249872, 0.21264735067800888, 0.22299006623103057, 0.23333278178405223, 0.2401566151310584, 0.2469804484780645, 0.25380428182507064, 0.26062811517207685, 0.26745194851908294, 0.2742757818660891, 0.2810996152130952, 0.2879234485601013, 0.2947472819071075, 0.3015711152541136], "momentum_signal": [0.9780935998105913, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, "metrics": {"avg_signal": 0.34825202304467023, "max_signal": 0.3760184461016455, "signal_type": "SELL", "signal_color": "#f44336", "price_change": 28.732849071832124, "avg_price": 5889.526315789473, "weather_anomaly": -0.4515037593984962, "export_conc": 0.5216849540246578}, "events": [{"date": "2024-02-01", "type": "SURGE BEGINS", "description": "Price surge starts - signal validated", "signal_strength": 0.88}]}, {"month": "2024-03", "month_name": "March 2024", "data": {"dates": ["2024-03-01", "2024-03-04", "2024-03-05", "2024-03-06", "2024-03-07", "2024-03-08", "2024-03-11", "2024-03-12", "2024-03-13", "2024-03-14", "2024-03-15", "2024-03-18", "2024-03-19", "2024-03-20", "2024-03-21", "2024-03-22", "2024-03-25", "2024-03-26", "2024-03-27", "2024-03-28"], "prices": [6826.0, 7057.0, 6970.0, 7170.0, 7054.0, 6997.0, 7329.0, 8048.0, 8034.0, 7405.0, 8018.0, 8172.0, 8027.0, 8324.0, 8559.0, 8939.0, 9649.0, 9622.0, 9843.0, 9766.0], "composite_signal": [0.3794063078917015, 0.37812461937000164, 0.3768595975149684, 0.37545624232660185, 0.37433122047156864, 0.37306286528320215, 0.3717695100948356, 0.37036282157313577, 0.3689444663847692, 0.3677727778630694, 0.36389322266923374, 0.3600753341420647, 0.35615244561489573, 0.3524878904210601, 0.3484000018938911, 0.34426044670005546, 0.3400675581728865, 0.3362330029790509, 0.3323201144518819, 0.32826055925804626], "weather_signal": [0.01572857142857143, 0.015633333333333336, 0.01558571428571429, 0.015142857142857147, 0.015495238095238097, 0.01543809523809524, 0.015309523809523811, 0.01485714285714286, 0.01437142857142857, 0.014590476190476192, 0.014871428571428574, 0.015328571428571431, 0.015485714285714287, 0.01638095238095238, 0.016066666666666667, 0.015604761904761906, 0.014990476190476191, 0.0154, 0.015585714285714284, 0.015352380952380956], "trade_signal": [0.30975326972925366, 0.3066323817583373, 0.303511493787421, 0.3003906058165046, 0.2972697178455883, 0.294148829874672, 0.29102794190375564, 0.2879070539328394, 0.284786165961923, 0.28166527799100677, 0.27172055667308426, 0.2617758353551618, 0.25183111403723935, 0.2418863927193169, 0.23194167140139443, 0.22199695008347198, 0.21205222876554955, 0.20210750744762718, 0.19216278612970475, 0.1822180648117823], "momentum_signal": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, "metrics": {"avg_signal": 0.35991205025384604, "max_signal": 0.3794063078917015, "signal_type": "MONITOR DOWN", "signal_color": "#ff5722", "price_change": 43.07061236448872, "avg_price": 8090.45, "weather_anomaly": 0.19535714285714287, "export_conc": 0.5261641631237081}, "events": []}, {"month": "2024-04", "month_name": "April 2024", "data": {"dates": ["2024-04-01", "2024-04-02", "2024-04-03", "2024-04-04", "2024-04-05", "2024-04-08", "2024-04-09", "2024-04-10", "2024-04-11", "2024-04-12", "2024-04-15", "2024-04-16", "2024-04-17", "2024-04-18", "2024-04-19", "2024-04-22", "2024-04-23", "2024-04-24", "2024-04-25", "2024-04-26", "2024-04-29"], "prices": [10120.0, 9949.0, 9524.0, 9462.0, 9795.0, 9895.0, 10204.0, 10411.0, 10373.0, 10987.0, 11001.0, 10243.0, 10340.0, 11311.0, 11878.0, 11166.0, 10584.0, 11043.0, 10988.0, 10729.0, 9983.0], "composite_signal": [0.32979771571949645, 0.3290870509302938, 0.32839305280775777, 0.3278157213518884, 0.327233389896019, 0.3265060584401497, 0.32589206031761364, 0.32528306219507763, 0.32529739740587493, 0.32477339928333887, 0.32789562302130515, 0.3313961800926048, 0.33481507049723774, 0.3383656275685374, 0.34163951797317027, 0.3449450750444699, 0.34868229878243623, 0.35226118918706917, 0.35584341292503546, 0.3591156366630017, 0.3624211937343014], "weather_signal": [0.014966666666666666, 0.01448571428571429, 0.014052380952380952, 0.013952380952380956, 0.013838095238095243, 0.013309523809523816, 0.013104761904761907, 0.012914285714285718, 0.01450476190476191, 0.014557142857142862, 0.013661904761904764, 0.013847619047619048, 0.0138, 0.01412857142857143, 0.013666666666666667, 0.013295238095238096, 0.01415714285714286, 0.014566666666666667, 0.014985714285714285, 0.014519047619047615, 0.014147619047619044], "trade_signal": [0.18639845596540788, 0.18504262732573448, 0.18368679868606108, 0.18233097004638768, 0.18097514140671425, 0.17961931276704085, 0.17826348412736742, 0.17690765548769402, 0.1755518268480206, 0.1741959982083472, 0.18278489088659625, 0.1913737835648453, 0.19996267624309436, 0.20855156892134338, 0.2171404615995924, 0.22572935427784147, 0.23431824695609052, 0.24290713963433958, 0.2514960323125886, 0.2600849249908377, 0.2686738176690867], "momentum_signal": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, "metrics": {"avg_signal": 0.33654570161127045, "max_signal": 0.3624211937343014, "signal_type": "SELL", "signal_color": "#f44336", "price_change": -1.3537549407114624, "avg_price": 10475.52380952381, "weather_anomaly": -0.012925170068027196, "export_conc": 0.531700382917007}, "events": [{"date": "2024-04-15", "type": "PEAK SIGNAL", "description": "Maximum signal strength during peak volatility", "signal_strength": 0.92}]}, {"month": "2024-05", "month_name": "May 2024", "data": {"dates": ["2024-05-01", "2024-05-02", "2024-05-03", "2024-05-06", "2024-05-07", "2024-05-08", "2024-05-09", "2024-05-10", "2024-05-13", "2024-05-14", "2024-05-15", "2024-05-16", "2024-05-17", "2024-05-20", "2024-05-21", "2024-05-22", "2024-05-23", "2024-05-24", "2024-05-28", "2024-05-29", "2024-05-30"], "prices": [9183.0, 8483.0, 8505.0, 8571.0, 9593.0, 9617.0, 9678.0, 9874.0, 8149.0, 8751.0, 9066.0, 7393.0, 7348.0, 7216.0, 7394.0, 7536.0, 8109.0, 8294.0, 8780.0, 9309.0, 9257.0], "composite_signal": [0.3578748229999187, 0.35686460105469175, 0.35653104577613143, 0.3561274904975712, 0.3556539352190109, 0.35494871327378397, 0.3543251579952237, 0.3023944998956511, 0.24387416709352155, 0.19506590699789195, 0.16715892075701105, 0.1341707846030905, 0.09978764860922244, 0.08154859528417069, 0.07767614960097746, 0.07415203725111758, 0.06961459156792434, 0.06571381255139777, 0.061881366868204536, 0.0578939211850113, 0.05379147550181807], "weather_signal": [0.013676190476190475, 0.012252380952380949, 0.012761904761904763, 0.013071428571428574, 0.013180952380952382, 0.012628571428571428, 0.012309523809523808, 0.01230952380952381, 0.01347142857142857, 0.014004761904761904, 0.014157142857142858, 0.0161, 0.01610952380952381, 0.016366666666666668, 0.016580952380952384, 0.017790476190476193, 0.016104761904761906, 0.01623809523809524, 0.016566666666666667, 0.016452380952380954, 0.01600952380952381], "trade_signal": [0.25772039083313003, 0.25644066930339604, 0.25516094777366194, 0.25388122624392795, 0.25260150471419396, 0.2513217831844599, 0.25004206165472587, 0.24876234012499185, 0.23889372591700875, 0.2290251117090257, 0.2191564975010426, 0.2092878832930595, 0.19941926908507646, 0.18955065487709336, 0.1796820406691103, 0.16981342646112724, 0.15994481225314416, 0.1500761980451611, 0.140207583837178, 0.13033896962919492, 0.12047035542121183], "momentum_signal": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.7943249220492841, 0.5744067069068722, 0.39421678259046, 0.298165287026376, 0.17928252514346676, 0.0575264305674341, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "metrics": {"avg_signal": 0.19890712593254006, "max_signal": 0.3578748229999187, "signal_type": "STRONG SELL", "signal_color": "#d32f2f", "price_change": 0.8058368724817598, "avg_price": 8576.47619047619, "weather_anomaly": 0.4585034013605443, "export_conc": 0.5134377849325352}, "events": []}, {"month": "2024-06", "month_name": "June 2024", "data": {"dates": ["2024-06-03", "2024-06-04", "2024-06-05", "2024-06-06", "2024-06-07", "2024-06-10", "2024-06-11", "2024-06-12", "2024-06-13", "2024-06-14", "2024-06-17", "2024-06-18", "2024-06-20", "2024-06-21", "2024-06-24", "2024-06-25", "2024-06-26", "2024-06-27", "2024-06-28"], "prices": [9775.0, 9557.0, 9408.0, 9872.0, 9933.0, 9687.0, 9910.0, 10539.0, 10810.0, 10294.0, 9659.0, 9938.0, 9598.0, 8995.0, 7978.0, 7967.0, 7797.0, 7397.0, 7729.0], "composite_signal": [0.06375241816102806, 0.06132040332967395, 0.0588250551649865, 0.056259707000299065, 0.053819358835611626, 0.05149234400425753, 0.04902699583957009, 0.049293131948805, 0.08578615778578508, 0.136472000794651, 0.17681262743724502, 0.21618007449897578, 0.23224454591279875, 0.23954533815388554, 0.2311288155857621, 0.22119922227800023, 0.21855593817456187, 0.19573233380934613, 0.15658826957188654], "weather_signal": [0.01668095238095238, 0.01677142857142857, 0.01668095238095238, 0.016390476190476188, 0.016457142857142854, 0.016847619047619045, 0.016842857142857142, 0.01695238095238095, 0.016295238095238095, 0.018109523809523808, 0.01743809523809524, 0.01725238095238095, 0.019042857142857143, 0.02089047619047619, 0.021047619047619048, 0.022728571428571428, 0.023752380952380952, 0.02387142857142857, 0.02373809523809524], "trade_signal": [0.1447852120692368, 0.13862600832418487, 0.1324668045791329, 0.126307600834081, 0.12014839708902905, 0.11398919334397714, 0.10782998959892523, 0.10167078585387329, 0.10538019631680445, 0.1090896067797356, 0.11279901724266675, 0.11650842770559791, 0.12021783816852906, 0.12392724863146021, 0.12763665909439137, 0.13134606955732253, 0.1350554800202537, 0.13876489048318483, 0.14247430094611596], "momentum_signal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01076593709568939, 0.15172298370291987, 0.3459912989976937, 0.5023587488273799, 0.6541534803336131, 0.7099696425815485, 0.7306510881385392, 0.6908299411253555, 0.6428231778202849, 0.6248816513325082, 0.5274855104642887, 0.36516086344042736]}, "metrics": {"avg_signal": 0.1344228809624805, "max_signal": 0.23954533815388554, "signal_type": "STRONG SELL", "signal_color": "#d32f2f", "price_change": -20.9309462915601, "avg_price": 9307.526315789473, "weather_anomaly": 1.1379699248120303, "export_conc": 0.5537804595335952}, "events": []}, {"month": "2024-07", "month_name": "July 2024", "data": {"dates": ["2024-07-01", "2024-07-02", "2024-07-03", "2024-07-05", "2024-07-08", "2024-07-09", "2024-07-10", "2024-07-11", "2024-07-12", "2024-07-15", "2024-07-16", "2024-07-17", "2024-07-18", "2024-07-19", "2024-07-22", "2024-07-23", "2024-07-24", "2024-07-25", "2024-07-26", "2024-07-29", "2024-07-30"], "prices": [7352.0, 7773.0, 7811.0, 7721.0, 7693.0, 8023.0, 8197.0, 8441.0, 8523.0, 8463.0, 8320.0, 7763.0, 8068.0, 7689.0, 8398.0, 8286.0, 8227.0, 7805.0, 8038.0, 7716.0, 8136.0], "composite_signal": [0.11745330646370403, 0.11101972452379566, 0.10463577213279647, 0.1134592557102536, 0.12720190182402688, 0.1514137345622904, 0.17750235729436714, 0.1817143206798642, 0.1937328361752398, 0.20489098430655941, 0.19491281416363043, 0.1638374622580741, 0.13581199190303098, 0.10908099654265448, 0.09375904224251333, 0.0954924490575999, 0.09721418920601982, 0.09917926268777309, 0.10098433616952636, 0.10262274298461294, 0.10383281646636619], "weather_signal": [0.021252380952380953, 0.021285714285714286, 0.02117142857142857, 0.02138571428571429, 0.020723809523809523, 0.021566666666666665, 0.021919047619047616, 0.022928571428571427, 0.022776190476190474, 0.023233333333333328, 0.022052380952380952, 0.022285714285714284, 0.022157142857142854, 0.021685714285714287, 0.021695238095238097, 0.021500000000000005, 0.021271428571428573, 0.021738095238095237, 0.02174761904761905, 0.021280952380952383, 0.01959047619047619], "trade_signal": [0.115259262448941, 0.12347302328292199, 0.13168678411690296, 0.13990054495088394, 0.1481143057848649, 0.15632806661884588, 0.16454182745282686, 0.17275558828680782, 0.1809693491207888, 0.18918310995476975, 0.1973968707887507, 0.2019012211598005, 0.2064055715308503, 0.21090992190190014, 0.21541427227294996, 0.21991862264399972, 0.22442297301504954, 0.2289273233860994, 0.2334316737571492, 0.23793602412819898, 0.2424403744992488], "momentum_signal": [0.2556450726031772, 0.21672206084250747, 0.17820423394414114, 0.20005615091960005, 0.2428113847069904, 0.3253366983256748, 0.4160558385862789, 0.4183483414605643, 0.45349371944103034, 0.4843442946319394, 0.4329429300591872, 0.3011078951766156, 0.1819790531627634, 0.06850811112757767, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "metrics": {"avg_signal": 0.13236915701689045, "max_signal": 0.20489098430655941, "signal_type": "STRONG SELL", "signal_color": "#d32f2f", "price_change": 10.663764961915124, "avg_price": 8021.0952380952385, "weather_anomaly": 0.0006802721088435482, "export_conc": 0.5183516602024394}, "events": []}, {"month": "2024-08", "month_name": "August 2024", "data": {"dates": ["2024-08-01", "2024-08-02", "2024-08-05", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-12", "2024-08-13", "2024-08-14", "2024-08-15", "2024-08-16", "2024-08-19", "2024-08-20", "2024-08-21", "2024-08-22", "2024-08-23", "2024-08-26", "2024-08-27", "2024-08-28", "2024-08-29", "2024-08-30"], "prices": [7562.0, 7520.0, 7901.0, 8223.0, 8586.0, 8178.0, 9098.0, 8731.0, 8862.0, 8833.0, 8485.0, 8637.0, 9173.0, 9486.0, 9582.0, 9689.0, 9821.0, 9880.0, 9785.0, 9730.0, 9600.0, 9666.0], "composite_signal": [0.10149663103764596, 0.10074009642287415, 0.10011522847476902, 0.0999886938599972, 0.09936049257855872, 0.09861062463045359, 0.11739248776443435, 0.16912487928602232, 0.21990614256538776, 0.2553730677068783, 0.29426948599313874, 0.3342788262809121, 0.3394461815849513, 0.33754124015509296, 0.33539129872523454, 0.3330346906287095, 0.3317680825321844, 0.330193141102326, 0.328436533005801, 0.32645325824260923, 0.3246433168127508, 0.32271504204955914], "weather_signal": [0.0197, 0.017842857142857146, 0.016361904761904765, 0.016304761904761905, 0.01481428571428571, 0.012976190476190474, 0.012680952380952381, 0.01227142857142857, 0.014590476190476194, 0.014733333333333334, 0.015114285714285716, 0.015185714285714285, 0.014661904761904763, 0.014671428571428573, 0.013980952380952382, 0.012700000000000003, 0.014533333333333334, 0.015485714285714287, 0.01591904761904762, 0.015704761904761902, 0.015985714285714284, 0.015928571428571424], "trade_signal": [0.23650407759411488, 0.23623774105718537, 0.23597140452025583, 0.23570506798332633, 0.23543873144639682, 0.23517239490946729, 0.23490605837253778, 0.23463972183560827, 0.22986903492762895, 0.22509834801964962, 0.22032766111167032, 0.21555697420369097, 0.21078628729571164, 0.20601560038773237, 0.20124491347975304, 0.1964742265717737, 0.19170353966379436, 0.1869328527558151, 0.18216216584783576, 0.17739147893985643, 0.17262079203187713, 0.1678501051238978], "momentum_signal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.07596692432834361, 0.2838959622071161, 0.49140744771067807, 0.640708247329407, 0.8033936861938823, 0.9709641463977428, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, "metrics": {"avg_signal": 0.24092179279274054, "max_signal": 0.3394461815849513, "signal_type": "SELL", "signal_color": "#f44336", "price_change": 27.82332716212642, "avg_price": 8955.818181818182, "weather_anomaly": 0.21233766233766238, "export_conc": 0.5081773494631853}, "events": []}, {"month": "2024-09", "month_name": "September 2024", "data": {"dates": ["2024-09-03", "2024-09-04", "2024-09-05", "2024-09-06", "2024-09-09", "2024-09-10", "2024-09-11", "2024-09-12", "2024-09-13", "2024-09-16", "2024-09-17", "2024-09-18", "2024-09-19", "2024-09-20", "2024-09-23", "2024-09-24", "2024-09-25", "2024-09-26", "2024-09-27"], "prices": [9663.0, 9282.0, 9539.0, 9459.0, 9839.0, 9654.0, 10115.0, 9968.0, 10079.0, 7767.0, 7620.0, 7814.0, 7750.0, 7658.0, 7786.0, 7867.0, 7955.0, 8122.0, 8281.0], "composite_signal": [0.32413176207182237, 0.3217396764678953, 0.3193909241973016, 0.3170305052600412, 0.3146834196561141, 0.312351334052187, 0.31039924844826, 0.3079738295109996, 0.30746501867026427, 0.3071062078295289, 0.30656239698879356, 0.3062135861480582, 0.3055381086406562, 0.3049442977999209, 0.26704759840057024, 0.22292326952672037, 0.1794444143549811, 0.1404713309850611, 0.0956578267354854], "weather_signal": [0.016233333333333332, 0.016266666666666665, 0.016423809523809525, 0.016547619047619047, 0.016709523809523813, 0.016914285714285715, 0.018204761904761904, 0.01814285714285714, 0.018104761904761905, 0.018495238095238092, 0.01835714285714286, 0.018776190476190478, 0.01826190476190476, 0.017980952380952382, 0.01773809523809524, 0.01812857142857143, 0.018742857142857144, 0.02035238095238095, 0.02119047619047619], "trade_signal": [0.1711252385128893, 0.16511585783640498, 0.1591064771599206, 0.15309709648343628, 0.14708771580695193, 0.14107833513046758, 0.1350689544539833, 0.12905957377749896, 0.12782088000899394, 0.12658218624048892, 0.1253434924719839, 0.12410479870347889, 0.12286610493497388, 0.12162741116646886, 0.12038871739796385, 0.11915002362945883, 0.11791132986095382, 0.11667263609244882, 0.1154339423239438], "momentum_signal": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.8507351124322055, 0.6756730402997474, 0.5028795296423983, 0.34671577285899285, 0.16827033255696483]}, "metrics": {"avg_signal": 0.27742498714445585, "max_signal": 0.32413176207182237, "signal_type": "SELL", "signal_color": "#f44336", "price_change": -14.301976611818276, "avg_price": 8748.315789473685, "weather_anomaly": 0.36691729323308264, "export_conc": 0.517461863528661}, "events": []}, {"month": "2024-10", "month_name": "October 2024", "data": {"dates": ["2024-10-01", "2024-10-02", "2024-10-03", "2024-10-04", "2024-10-07", "2024-10-08", "2024-10-09", "2024-10-10", "2024-10-11", "2024-10-14", "2024-10-15", "2024-10-16", "2024-10-17", "2024-10-18", "2024-10-21", "2024-10-22", "2024-10-23", "2024-10-24", "2024-10-25", "2024-10-28", "2024-10-29", "2024-10-30"], "prices": [7039.0, 7064.0, 7030.0, 7069.0, 6908.0, 7050.0, 7351.0, 7529.0, 7739.0, 7615.0, 7942.0, 7765.0, 7771.0, 7450.0, 7394.0, 7140.0, 7001.0, 6756.0, 6770.0, 6917.0, 7267.0, 7391.0], "composite_signal": [0.05980995093460084, 0.06186571966933805, 0.06391330619689838, 0.06639589272445871, 0.06782681258535239, 0.06968439911291271, 0.0716386523071397, 0.07395623883470004, 0.0760121586955937, 0.07806641188982069, 0.08057280925811638, 0.08335587329307871, 0.08604060399470773, 0.08861533469633673, 0.09116673206463241, 0.0937264627662614, 0.09618452680122376, 0.09875925750285275, 0.10129398820448177, 0.10395871890611078, 0.10670678294107312, 0.10921484697603545], "weather_signal": [0.02211428571428571, 0.022257142857142854, 0.022133333333333328, 0.023252380952380945, 0.021366666666666662, 0.0207, 0.02030952380952381, 0.020957142857142855, 0.02085714285714286, 0.02075238095238095, 0.02052380952380952, 0.021085714285714284, 0.021366666666666662, 0.021333333333333333, 0.02123333333333333, 0.021157142857142854, 0.020790476190476186, 0.020757142857142856, 0.020609523809523807, 0.02083333333333333, 0.021295238095238093, 0.02107142857142857], "trade_signal": [0.12996199952111098, 0.13518929917334513, 0.14041659882557928, 0.14564389847781345, 0.15087119813004762, 0.15609849778228177, 0.16132579743451592, 0.1665530970867501, 0.17178039673898426, 0.1770076963912184, 0.1834736898119576, 0.18993968323269678, 0.19640567665343595, 0.20287167007417514, 0.20933766349491434, 0.2158036569156535, 0.2222696503363927, 0.22873564375713187, 0.23520163717787107, 0.24166763059861027, 0.24813362401934946, 0.25459961744008863], "momentum_signal": [0.00034060450462579384, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "metrics": {"avg_signal": 0.08312570365253301, "max_signal": 0.10921484697603545, "signal_type": "STRONG SELL", "signal_color": "#d32f2f", "price_change": 5.000710328171616, "avg_price": 7270.818181818182, "weather_anomaly": 0.8383116883116885, "export_conc": 0.5280013148420989}, "events": []}, {"month": "2024-11", "month_name": "November 2024", "data": {"dates": ["2024-11-01", "2024-11-04", "2024-11-05", "2024-11-06", "2024-11-07", "2024-11-08", "2024-11-11", "2024-11-12", "2024-11-13", "2024-11-14", "2024-11-15", "2024-11-18", "2024-11-19", "2024-11-20", "2024-11-21", "2024-11-22", "2024-11-25", "2024-11-26", "2024-11-27", "2024-11-29"], "prices": [7341.0, 7328.0, 7251.0, 6924.0, 7360.0, 7117.0, 7298.0, 7867.0, 8163.0, 8686.0, 8607.0, 8404.0, 8574.0, 8340.0, 8449.0, 8897.0, 8863.0, 9033.0, 8844.0, 9220.0], "composite_signal": [0.12218117372981506, 0.12552597637596621, 0.128787445688784, 0.13123558166826846, 0.13469245642894379, 0.1610185481124062, 0.17131284762879584, 0.1921123951404525, 0.2187946982672483, 0.2558363490061845, 0.2885886239170077, 0.3238683673989346, 0.3613557701318204, 0.3946188265517101, 0.3951972318295656, 0.3959989704407544, 0.3968723757186099, 0.397657447663132, 0.39819585294098747, 0.3988309248855096], "weather_signal": [0.020999999999999998, 0.021080952380952377, 0.02092380952380952, 0.01844285714285714, 0.016638095238095237, 0.015328571428571424, 0.01579047619047619, 0.014576190476190475, 0.01382857142857143, 0.014276190476190475, 0.013280952380952378, 0.01364285714285714, 0.013495238095238093, 0.01365238095238095, 0.013219047619047616, 0.013423809523809522, 0.013833333333333331, 0.013990476190476189, 0.01344285714285714, 0.013171428571428572], "trade_signal": [0.28707793432453765, 0.2953691076065822, 0.3036602808886267, 0.31195145417067116, 0.32024262745271564, 0.32853380073476013, 0.33682497401680467, 0.33865015387811, 0.34047533373941535, 0.34230051360072067, 0.344125693462026, 0.34595087332333135, 0.34777605318463667, 0.349601233045942, 0.35142641290724735, 0.35325159276855267, 0.355076772629858, 0.3569019524911633, 0.35872713235246867, 0.36055231221377393], "momentum_signal": [0.0, 0.0, 0.0, 0.0, 0.003088288458096833, 0.09696011127400858, 0.12422476542162914, 0.2062026676901674, 0.31105825908592855, 0.45567790759691834, 0.5851600527954559, 0.7228520722784082, 0.8700880620985296, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, "metrics": {"avg_signal": 0.26963409317624487, "max_signal": 0.3988309248855096, "signal_type": "SELL", "signal_color": "#f44336", "price_change": 25.595967851791308, "avg_price": 8128.3, "weather_anomaly": -0.4050000000000001, "export_conc": 0.5457224650237644}, "events": []}, {"month": "2024-12", "month_name": "December 2024", "data": {"dates": ["2024-12-02", "2024-12-03", "2024-12-04", "2024-12-05", "2024-12-06", "2024-12-09", "2024-12-10", "2024-12-11", "2024-12-12", "2024-12-13", "2024-12-16", "2024-12-17", "2024-12-18", "2024-12-19", "2024-12-20", "2024-12-23", "2024-12-24", "2024-12-26", "2024-12-27", "2024-12-30"], "prices": [9197.0, 8833.0, 9196.0, 9648.0, 9767.0, 9977.0, 10387.0, 10458.0, 10702.0, 11181.0, 11821.0, 11765.0, 12565.0, 12107.0, 11954.0, 11746.0, 11852.0, 11027.0, 10124.0, 11507.0], "composite_signal": [0.39614551006530957, 0.3959941305080008, 0.39577108428402535, 0.3952630380600499, 0.3951599918360744, 0.39504027894543237, 0.3948005660547903, 0.39450751983081483, 0.3942678069401727, 0.3942214273828639, 0.3934816425476997, 0.39267685771253547, 0.3917920728773713, 0.39083562137554034, 0.3901108365403761, 0.3893893850385452, 0.3884179335367143, 0.3875114820348834, 0.38663003053305245, 0.38569857903122157], "weather_signal": [0.01317142857142857, 0.013314285714285713, 0.013252380952380951, 0.012376190476190476, 0.012657142857142853, 0.012890476190476188, 0.012780952380952379, 0.012519047619047617, 0.012409523809523806, 0.012852380952380954, 0.013399999999999999, 0.013761904761904762, 0.013895238095238094, 0.013823809523809525, 0.014414285714285715, 0.015014285714285716, 0.0149, 0.014971428571428571, 0.015114285714285716, 0.015114285714285716], "trade_signal": [0.3538387751632739, 0.35333532627000197, 0.35283187737673005, 0.35232842848345813, 0.35182497959018616, 0.35132153069691424, 0.3508180818036423, 0.3503146329103704, 0.34981118401709843, 0.34930773512382657, 0.3469791063692493, 0.34465047761467205, 0.34232184886009476, 0.3399932201055175, 0.33766459135094024, 0.33533596259636295, 0.3330073338417857, 0.3306787050872084, 0.3283500763326312, 0.3260214475780539], "momentum_signal": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, "metrics": {"avg_signal": 0.3923857897567737, "max_signal": 0.39614551006530957, "signal_type": "MONITOR DOWN", "signal_color": "#ff5722", "price_change": 25.11688594106774, "avg_price": 10790.7, "weather_anomaly": -0.7635714285714286, "export_conc": 0.5395123768665362}, "events": []}, {"month": "2025-01", "month_name": "January 2025", "data": {"dates": ["2025-01-02", "2025-01-03", "2025-01-06", "2025-01-07", "2025-01-08", "2025-01-09", "2025-01-10", "2025-01-13", "2025-01-14", "2025-01-15", "2025-01-16", "2025-01-17", "2025-01-21", "2025-01-22", "2025-01-23", "2025-01-24", "2025-01-27", "2025-01-28", "2025-01-29", "2025-01-30"], "prices": [11137.0, 11238.0, 11377.0, 11210.0, 10453.0, 10927.0, 10570.0, 10928.0, 10951.0, 10821.0, 10502.0, 11173.0, 11559.0, 11675.0, 11552.0, 11593.0, 11372.0, 11374.0, 11745.0, 11207.0], "composite_signal": [0.380406044370726, 0.37992588301964936, 0.3795323883352394, 0.3791822269841627, 0.3786003989664194, 0.3780069042820094, 0.3775284095975995, 0.37711824824652285, 0.37661142022877947, 0.3770793770462004, 0.37753566719695464, 0.3782152906810423, 0.3788215808317965, 0.3793595376492175, 0.37982582779997176, 0.38016045128405934, 0.3806350747681469, 0.3811663649189012, 0.38164098840298877, 0.38215727855374304], "weather_signal": [0.015290476190476193, 0.015142857142857145, 0.015242857142857143, 0.015466666666666667, 0.015028571428571426, 0.014557142857142857, 0.014414285714285713, 0.014466666666666668, 0.014242857142857142, 0.014142857142857145, 0.014009523809523812, 0.014514285714285716, 0.014809523809523807, 0.01490952380952381, 0.014804761904761902, 0.014323809523809523, 0.014242857142857139, 0.014323809523809523, 0.014242857142857139, 0.014280952380952379], "trade_signal": [0.3126359442601483, 0.31156470754912335, 0.31049347083809836, 0.3094222341270734, 0.3083509974160485, 0.3072797607050235, 0.3062085239939986, 0.3051372872829737, 0.3040660505719487, 0.30532344261550104, 0.30658083465905334, 0.3078382267026057, 0.309095618746158, 0.31035301078971034, 0.31161040283326263, 0.312867794876815, 0.3141251869203673, 0.3153825789639196, 0.316639971007472, 0.3178973630510243], "momentum_signal": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, "metrics": {"avg_signal": 0.3791754681582066, "max_signal": 0.38215727855374304, "signal_type": "MONITOR DOWN", "signal_color": "#ff5722", "price_change": 0.6285355122564426, "avg_price": 11168.2, "weather_anomaly": -0.6267857142857143, "export_conc": 0.5295267390142329}, "events": []}, {"month": "2025-02", "month_name": "February 2025", "data": {"dates": ["2025-02-03", "2025-02-04", "2025-02-05", "2025-02-06", "2025-02-07", "2025-02-10", "2025-02-11", "2025-02-12", "2025-02-13", "2025-02-14", "2025-02-18", "2025-02-19", "2025-02-20", "2025-02-21", "2025-02-24", "2025-02-25", "2025-02-26", "2025-02-27"], "prices": [11002.0, 10913.0, 10514.0, 10094.0, 10018.0, 9714.0, 10131.0, 10006.0, 10381.0, 10159.0, 10301.0, 10218.0, 10075.0, 8934.0, 8352.0, 8675.0, 9100.0, 9130.0], "composite_signal": [0.3308102167392353, 0.2931971239083638, 0.2531406111685474, 0.21517077627998205, 0.18075655234078392, 0.15437481707364717, 0.145979082177856, 0.12337608997556185, 0.12261792697743787, 0.12137847382855962, 0.12032068734634803, 0.1190312341974698, 0.1178834477152582, 0.11684399456637996, 0.11585954141750171, 0.11479508826862346, 0.11370230178641189, 0.11270618197086696], "weather_signal": [0.014038095238095237, 0.014204761904761904, 0.01421904761904762, 0.014014285714285717, 0.014090476190476191, 0.014123809523809525, 0.013985714285714285, 0.013623809523809528, 0.013128571428571432, 0.012695238095238098, 0.012780952380952379, 0.012204761904761906, 0.012033333333333335, 0.012171428571428573, 0.012466666666666666, 0.012533333333333332, 0.012519047619047619, 0.012780952380952379], "trade_signal": [0.3067539107394076, 0.30529183657743103, 0.3038297624154544, 0.30236768825347776, 0.3009056140915012, 0.29944353992952455, 0.2979814657675479, 0.2965193916055713, 0.29505731744359465, 0.2923378512380657, 0.28961838503253673, 0.2868989188270078, 0.2841794526214788, 0.2814599864159499, 0.27874052021042095, 0.27602105400489196, 0.27330158779936303, 0.27058212159383405], "momentum_signal": [0.8127812764405556, 0.6644348904428987, 0.506528158142796, 0.3572748039143637, 0.22185056015006704, 0.11861627107401608, 0.08756598348334727, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "metrics": {"avg_signal": 0.1595524526521575, "max_signal": 0.3308102167392353, "signal_type": "STRONG SELL", "signal_color": "#d32f2f", "price_change": -17.01508816578804, "avg_price": 9873.166666666666, "weather_anomaly": -0.5714285714285716, "export_conc": 0.5185879688210405}, "events": []}, {"month": "2025-03", "month_name": "March 2025", "data": {"dates": ["2025-03-03", "2025-03-04", "2025-03-05", "2025-03-06", "2025-03-07", "2025-03-10", "2025-03-11", "2025-03-12", "2025-03-13", "2025-03-14", "2025-03-17", "2025-03-18", "2025-03-19", "2025-03-20", "2025-03-21", "2025-03-24", "2025-03-25", "2025-03-26", "2025-03-27", "2025-03-28"], "prices": [8082.0, 8225.0, 7915.0, 8036.0, 8141.0, 8279.0, 8151.0, 8204.0, 8031.0, 7728.0, 7827.0, 8021.0, 8121.0, 8071.0, 7765.0, 8079.0, 7995.0, 8044.0, 7979.0, 8042.0], "composite_signal": [0.11371099576053373, 0.11273396262405151, 0.11188359615423597, 0.11105656301775374, 0.11016619654793816, 0.10942916341145593, 0.10859046360830703, 0.10760343047182482, 0.1066813973353426, 0.1058476975321937, 0.10512066439571147, 0.10533141774144082, 0.10553717108717017, 0.10570125776623286, 0.10593867777862889, 0.10619943112435826, 0.10637685113675427, 0.10660093781581695, 0.10688835782821295, 0.10725744450727566], "weather_signal": [0.012709523809523808, 0.012266666666666664, 0.012185714285714286, 0.012171428571428571, 0.011976190476190475, 0.01221904761904762, 0.012171428571428573, 0.011700000000000004, 0.011414285714285712, 0.01138095238095238, 0.011652380952380952, 0.011495238095238093, 0.011323809523809524, 0.011033333333333332, 0.010952380952380951, 0.010938095238095236, 0.010685714285714284, 0.010566666666666663, 0.01062857142857143, 0.010923809523809525], "trade_signal": [0.273156656068001, 0.27110157322679546, 0.2690464903855899, 0.26699140754438433, 0.26493632470317874, 0.26288124186197315, 0.26082615902076756, 0.258771076179562, 0.2567159933383565, 0.2546609104971509, 0.2526058276559453, 0.2532702110202687, 0.2539345943845921, 0.2545989777489155, 0.2552633611132389, 0.2559277444775623, 0.2565921278418857, 0.257256511206209, 0.25792089457053236, 0.2585852779348558], "momentum_signal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "metrics": {"avg_signal": 0.10793278388226198, "max_signal": 0.11371099576053373, "signal_type": "STRONG SELL", "signal_color": "#d32f2f", "price_change": -0.4949269982677555, "avg_price": 8036.8, "weather_anomaly": -0.3221428571428572, "export_conc": 0.5259370523419418}, "events": []}, {"month": "2025-04", "month_name": "April 2025", "data": {"dates": ["2025-04-01", "2025-04-02", "2025-04-03", "2025-04-04", "2025-04-07", "2025-04-08", "2025-04-09", "2025-04-10", "2025-04-11", "2025-04-14", "2025-04-15", "2025-04-16", "2025-04-17", "2025-04-21", "2025-04-22", "2025-04-23", "2025-04-24", "2025-04-25", "2025-04-28", "2025-04-29"], "prices": [8177.0, 8968.0, 9291.0, 8512.0, 8053.0, 7755.0, 8447.0, 8088.0, 8511.0, 8247.0, 8002.0, 8096.0, 8365.0, 8810.0, 9310.0, 9104.0, 9391.0, 9652.0, 9217.0, 9146.0], "composite_signal": [0.11624088490533396, 0.11960591700185025, 0.12311428243169983, 0.12658598119488276, 0.13000101329139901, 0.1333643787212486, 0.1365627441510982, 0.13980610958094775, 0.14296447501079737, 0.16907743495798522, 0.19461018597127952, 0.21581793678102326, 0.23362852516369415, 0.2530176269635633, 0.27619504197252365, 0.307375576066885, 0.3375886582781477, 0.38027611659202687, 0.41426348731132284, 0.4274032079361199], "weather_signal": [0.01075714285714286, 0.010819047619047622, 0.011290476190476191, 0.011657142857142857, 0.011861904761904761, 0.011919047619047617, 0.011504761904761901, 0.01121904761904762, 0.010690476190476193, 0.011042857142857142, 0.011242857142857141, 0.011185714285714285, 0.010866666666666665, 0.011252380952380951, 0.011419047619047617, 0.012080952380952381, 0.012309523809523808, 0.01263333333333333, 0.012204761904761906, 0.012361904761904761], "trade_signal": [0.2811897122633349, 0.2895481258379589, 0.2979065394125829, 0.3062649529872069, 0.3146233665618309, 0.32298178013645484, 0.3313401937110788, 0.3396986072857027, 0.34805702086032675, 0.3557510510706273, 0.36344508128092784, 0.37113911149122847, 0.37883314170152904, 0.3865271719118296, 0.3942212021221302, 0.4019152323324307, 0.40960926254273133, 0.41730329275303196, 0.42499732296333254, 0.43269135317363305], "momentum_signal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0916480581189371, 0.18118861383563356, 0.2537891687381275, 0.31316774059899677, 0.3778736994619925, 0.4580395778280195, 0.5695245992023175, 0.6777464797108873, 0.8357325312965896, 0.9599715658372926, 1.0]}, "metrics": {"avg_signal": 0.21887497921419147, "max_signal": 0.4274032079361199, "signal_type": "SELL", "signal_color": "#f44336", "price_change": 11.85031185031185, "avg_price": 8657.1, "weather_anomaly": -0.12142857142857141, "export_conc": 0.5395186897314735}, "events": []}, {"month": "2025-05", "month_name": "May 2025", "data": {"dates": ["2025-05-01", "2025-05-02", "2025-05-05", "2025-05-06", "2025-05-07", "2025-05-08", "2025-05-09", "2025-05-12", "2025-05-13", "2025-05-14", "2025-05-15", "2025-05-16", "2025-05-19", "2025-05-20", "2025-05-21", "2025-05-22", "2025-05-23", "2025-05-27", "2025-05-28", "2025-05-29", "2025-05-30"], "prices": [8973.0, 9127.0, 8758.0, 9175.0, 9398.0, 9268.0, 9387.0, 9340.0, 10171.0, 10129.0, 10257.0, 10898.0, 10974.0, 10874.0, 10719.0, 10278.0, 9764.0, 9739.0, 9634.0, 9110.0, 9791.0], "composite_signal": [0.4294714990271401, 0.4281266356657536, 0.42683343897103365, 0.4255902422763138, 0.4243003789149273, 0.42308884888687404, 0.4218039855254875, 0.4205774554974342, 0.41933925880271433, 0.41497678335720756, 0.4106593079117007, 0.4061018324661939, 0.40185269035402044, 0.39742688157518036, 0.39406273946300685, 0.3897452640175001, 0.3862061219053266, 0.3819153131264865, 0.3777995043476464, 0.3739220289021396, 0.36976455345663284], "weather_signal": [0.01351904761904762, 0.013223809523809527, 0.013076190476190477, 0.013071428571428572, 0.012933333333333331, 0.013019047619047618, 0.012895238095238095, 0.012938095238095238, 0.012947619047619048, 0.012823809523809522, 0.012828571428571427, 0.012147619047619044, 0.012347619047619045, 0.01204285714285714, 0.01477142857142857, 0.014776190476190476, 0.017004761904761908, 0.017085714285714287, 0.017666666666666667, 0.01892857142857143, 0.019390476190476194], "trade_signal": [0.4368495809011836, 0.4337457558310506, 0.4306419307609175, 0.4275381056907845, 0.42443428062065147, 0.42133045555051835, 0.4182266304803853, 0.4151228054102522, 0.41201898034011913, 0.40122112505968555, 0.3904232697792518, 0.37962541449881804, 0.3688275592183844, 0.3580297039379508, 0.34723184865751716, 0.3364339933770835, 0.3256361380966499, 0.31483828281621623, 0.30404042753578264, 0.293242572255349, 0.28244471697491536], "momentum_signal": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, "metrics": {"avg_signal": 0.4058840364024153, "max_signal": 0.4294714990271401, "signal_type": "MONITOR DOWN", "signal_color": "#ff5722", "price_change": 9.116237601693971, "avg_price": 9798.285714285714, "weather_anomaly": 0.8564625850340135, "export_conc": 0.5390867123188569}, "events": []}, {"month": "2025-06", "month_name": "June 2025", "data": {"dates": ["2025-06-02", "2025-06-03", "2025-06-04", "2025-06-05", "2025-06-06", "2025-06-09", "2025-06-10", "2025-06-11", "2025-06-12", "2025-06-13", "2025-06-16", "2025-06-17", "2025-06-18", "2025-06-20", "2025-06-23", "2025-06-24", "2025-06-25", "2025-06-26", "2025-06-27"], "prices": [9474.0, 9775.0, 9948.0, 10076.0, 10259.0, 10174.0, 9602.0, 9549.0, 9858.0, 9768.0, 10035.0, 9943.0, 9680.0, 8459.0, 9189.0, 9436.0, 9081.0, 9361.0, 9231.0], "composite_signal": [0.3578124921586012, 0.35204063011091075, 0.34643376806322024, 0.3406969060155298, 0.335001710634506, 0.3292148485868155, 0.3241196532057917, 0.31892839687039876, 0.30624319952709933, 0.28927837323793637, 0.28393759088242243, 0.2860011514936486, 0.2829908158811422, 0.2558162877669665, 0.2417361251611616, 0.23432564641979764, 0.2243386555768699, 0.2079999566388379, 0.18558035737961592], "weather_signal": [0.02001904761904762, 0.01987142857142857, 0.020195238095238092, 0.020147619047619046, 0.020219047619047616, 0.020028571428571427, 0.02181428571428571, 0.02419047619047619, 0.02513809523809523, 0.023799999999999995, 0.024361904761904758, 0.025057142857142854, 0.025276190476190473, 0.025452380952380952, 0.025280952380952383, 0.025561904761904758, 0.02585238095238095, 0.027352380952380947, 0.027566666666666663], "trade_signal": [0.2520145637298363, 0.2377140752772768, 0.22341358682471732, 0.2091130983721578, 0.19481260991959828, 0.1805121214670388, 0.16621163301447928, 0.15191114456191976, 0.13761065610936024, 0.13410802293723434, 0.13060538976510844, 0.12710275659298256, 0.12360012342085668, 0.12009749024873077, 0.11659485707660489, 0.113092223904479, 0.1095895907323531, 0.10608695756022721, 0.10258432438810133], "momentum_signal": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9987890895158567, 0.9696024150000876, 0.9092206562521705, 0.8926750732388494, 0.9055601954258221, 0.8988163993845316, 0.7954758333365636, 0.7449993959887452, 0.7205683607653575, 0.6858179438023814, 0.6239673611256548, 0.5395931771641682]}, "metrics": {"avg_signal": 0.2896050824005933, "max_signal": 0.3578124921586012, "signal_type": "SELL", "signal_color": "#f44336", "price_change": -2.5649145028499047, "avg_price": 9626.21052631579, "weather_anomaly": 1.1387218045112784, "export_conc": 0.522957047526337}, "events": []}, {"month": "2025-07", "month_name": "July 2025", "data": {"dates": ["2025-07-01", "2025-07-02", "2025-07-03", "2025-07-04", "2025-07-07", "2025-07-08", "2025-07-09", "2025-07-10", "2025-07-11", "2025-07-14", "2025-07-15", "2025-07-16", "2025-07-17", "2025-07-18", "2025-07-21", "2025-07-22", "2025-07-23"], "prices": [9000.0, 8904.0, 8780.0, 8780.0, 8879.0, 8760.0, 9046.0, 8742.0, 8840.0, 8950.0, 8567.0, 8322.0, 7309.0, 7800.0, 8156.0, 8149.0, 8440.0], "composite_signal": [0.13443440872801993, 0.09365292553104271, 0.06238505390598263, 0.05401224098442055, 0.053870657310170836, 0.05285907363592113, 0.05271082329500475, 0.0522909062874217, 0.051684322613172004, 0.05135440560558896, 0.05246387520018961, 0.05358001146145692, 0.054612814389390904, 0.05559728398399155, 0.05671842024525887, 0.05780955650652618, 0.5], "weather_signal": [0.027985714285714284, 0.027766666666666665, 0.027471428571428574, 0.02471428571428572, 0.024919047619047622, 0.022638095238095245, 0.02282380952380952, 0.02223333333333333, 0.021109523809523814, 0.020776190476190476, 0.020552380952380954, 0.02034761904761905, 0.019904761904761904, 0.019323809523809524, 0.019133333333333332, 0.018857142857142854, NaN], "trade_signal": [0.11500498001792415, 0.11447185416563321, 0.11393872831334227, 0.11340560246105134, 0.1128724766087604, 0.11233935075646946, 0.11180622490417853, 0.11127309905188759, 0.11073997319959666, 0.11020684734730572, 0.11317635466714067, 0.11614586198697563, 0.11911536930681059, 0.12208487662664555, 0.1250543839464805, 0.12802389126631544, 0.13099339858615042], "momentum_signal": [0.314549666883401, 0.15258340212582433, 0.02877825032258287, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "metrics": {"avg_signal": 0.08764922233432702, "max_signal": 0.5, "signal_type": "STRONG SELL", "signal_color": "#d32f2f", "price_change": -6.222222222222222, "avg_price": 8554.35294117647, "weather_anomaly": -0.33348214285714284, "export_conc": 0.5394134621805767}, "events": []}];
+        let currentMonthIndex = monthsData.length - 1;
+        let signalChart = null;
+        let componentChart = null;
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+            initializeMonthDropdown();
+            showMonth(currentMonthIndex);
+        });
+        
+        function initializeMonthDropdown() {
+            const dropdown = document.getElementById('monthDropdown');
+            
+            monthsData.forEach((month, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = month.month_name;
+                
+                // Add signal type to option text
+                option.textContent += ` - ${month.metrics.signal_type}`;
+                
+                if (index === currentMonthIndex) {
+                    option.selected = true;
+                }
+                
+                dropdown.appendChild(option);
+            });
+        }
+        
+        function selectMonth(index) {
+            currentMonthIndex = parseInt(index);
+            showMonth(currentMonthIndex);
+        }
+        
+        function navigateMonth(direction) {
+            const newIndex = currentMonthIndex + direction;
+            if (newIndex >= 0 && newIndex < monthsData.length) {
+                currentMonthIndex = newIndex;
+                document.getElementById('monthDropdown').value = currentMonthIndex;
+                showMonth(currentMonthIndex);
+            }
+        }
+        
+        function showMonth(index) {
+            const month = monthsData[index];
+            
+            // Update navigation buttons
+            document.getElementById('prevMonth').disabled = index === 0;
+            document.getElementById('nextMonth').disabled = index === monthsData.length - 1;
+            
+            // Update signal banner
+            const signal = month.metrics.avg_signal;
+            document.getElementById('currentSignal').textContent = month.metrics.signal_type;
+            document.getElementById('currentSignal').style.color = month.metrics.signal_color;
+            document.getElementById('signalStrengthFill').style.width = (signal * 100) + '%';
+            document.getElementById('signalValue').textContent = signal.toFixed(3);
+            
+            // Update month info
+            const info = document.getElementById('monthInfo');
+            info.innerHTML = `
+                <div class="month-header">
+                    <div class="month-title">${month.month_name}</div>
+                    <div class="month-signal-badge" style="background: ${month.metrics.signal_color}; color: white;">
+                        ${month.metrics.signal_type}
+                    </div>
+                </div>
+                <div class="month-metrics">
+                    <div class="metric">
+                        <div class="metric-label">Average Price</div>
+                        <div class="metric-value">$${month.metrics.avg_price.toFixed(0).toLocaleString()}</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Price Change</div>
+                        <div class="metric-value ${month.metrics.price_change > 0 ? 'positive' : 'negative'}">
+                            ${month.metrics.price_change > 0 ? '+' : ''}${month.metrics.price_change.toFixed(1)}%
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Signal Strength</div>
+                        <div class="metric-value">${month.metrics.avg_signal.toFixed(3)}</div>
+                    </div>
+                </div>
+                ${month.events.length > 0 ? `
+                    <div style="margin-top: 1rem; padding: 1rem; background: var(--kearney-purple); border-radius: 4px;">
+                        <strong>🚨 Event:</strong> ${month.events[0].type} - ${month.events[0].description}
+                    </div>
+                ` : ''}
+            `;
+            
+            // Update signal components (use last values of month)
+            const lastIdx = month.data.dates.length - 1;
+            const weatherVal = month.data.weather_signal[lastIdx] || 0;
+            const tradeVal = month.data.trade_signal[lastIdx] || 0;
+            const momentumVal = month.data.momentum_signal[lastIdx] || 0;
+            
+            document.getElementById('weatherSignal').textContent = weatherVal.toFixed(3);
+            document.getElementById('weatherBar').style.width = (weatherVal * 100) + '%';
+            document.getElementById('tradeSignal').textContent = tradeVal.toFixed(3);
+            document.getElementById('tradeBar').style.width = (tradeVal * 100) + '%';
+            document.getElementById('momentumSignal').textContent = momentumVal.toFixed(3);
+            document.getElementById('momentumBar').style.width = (momentumVal * 100) + '%';
+            
+            // Update charts
+            updateSignalChart(month);
+            updateComponentChart(month);
+        }
+        
+        function updateSignalChart(month) {
+            const ctx = document.getElementById('signalChart').getContext('2d');
+            
+            if (signalChart) signalChart.destroy();
+            
+            signalChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: month.data.dates,
+                    datasets: [
+                        {
+                            label: 'Price',
+                            data: month.data.prices,
+                            borderColor: '#999999',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            yAxisID: 'y-price',
+                            tension: 0
+                        },
+                        {
+                            label: 'Composite Signal',
+                            data: month.data.composite_signal,
+                            borderColor: '#00e676',
+                            backgroundColor: 'rgba(0, 230, 118, 0.1)',
+                            borderWidth: 3,
+                            yAxisID: 'y-signal',
+                            fill: true,
+                            tension: 0.2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { color: '#999999' }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel: function(context) {
+                                    if (context.datasetIndex === 1) {
+                                        const signal = context.parsed.y;
+                                        if (signal > 0.8) return 'STRONG BUY SIGNAL';
+                                        if (signal > 0.65) return 'BUY SIGNAL';
+                                        if (signal > 0.5) return 'MONITORING UP';
+                                        if (signal > 0.35) return 'MONITORING DOWN';
+                                        if (signal > 0.2) return 'SELL SIGNAL';
+                                        return 'STRONG SELL SIGNAL';
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: { unit: 'day' },
+                            grid: { color: '#3a3f44' },
+                            ticks: { color: '#999999' }
+                        },
+                        'y-price': {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            grid: { color: '#3a3f44' },
+                            ticks: {
+                                color: '#999999',
+                                callback: value => '$' + value.toLocaleString()
+                            }
+                        },
+                        'y-signal': {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            min: 0,
+                            max: 1,
+                            grid: { drawOnChartArea: false },
+                            ticks: {
+                                color: '#00e676',
+                                callback: value => (value * 100).toFixed(0) + '%'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateComponentChart(month) {
+            const ctx = document.getElementById('componentChart').getContext('2d');
+            
+            if (componentChart) componentChart.destroy();
+            
+            componentChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: month.data.dates,
+                    datasets: [
+                        {
+                            label: 'Weather Signal',
+                            data: month.data.weather_signal,
+                            borderColor: '#00bcd4',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            tension: 0.2
+                        },
+                        {
+                            label: 'Trade Signal',
+                            data: month.data.trade_signal,
+                            borderColor: '#ff9800',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            tension: 0.2
+                        },
+                        {
+                            label: 'Momentum Signal',
+                            data: month.data.momentum_signal,
+                            borderColor: '#4caf50',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            tension: 0.2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { color: '#999999' }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: { unit: 'day' },
+                            grid: { color: '#3a3f44' },
+                            ticks: { color: '#999999' }
+                        },
+                        y: {
+                            min: 0,
+                            max: 1,
+                            grid: { color: '#3a3f44' },
+                            ticks: {
+                                color: '#999999',
+                                callback: value => (value * 100).toFixed(0) + '%'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

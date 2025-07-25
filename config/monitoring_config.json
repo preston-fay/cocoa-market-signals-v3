@@ -1,0 +1,148 @@
+{
+  "monitoring_period": {
+    "historical_lookback_years": 2,
+    "real_time_monitoring": true,
+    "update_frequency": "daily",
+    "data_granularity": "1D",
+    "extended_analysis_periods": [7, 30, 90, 180, 365]
+  },
+  
+  "data_requirements": {
+    "price_data": {
+      "sources": ["futures", "spot", "icco_reports"],
+      "frequency": "daily",
+      "minimum_history": "2 years",
+      "required_metrics": ["open", "high", "low", "close", "volume"]
+    },
+    "weather_data": {
+      "sources": ["noaa", "chirps", "local_stations"],
+      "frequency": "daily",
+      "locations": ["yamoussoukro", "kumasi", "san_pedro", "takoradi"],
+      "metrics": ["temperature", "rainfall", "humidity", "soil_moisture"]
+    },
+    "market_data": {
+      "export_volumes": "monthly",
+      "inventory_levels": "weekly",
+      "shipping_rates": "weekly",
+      "currency_rates": "daily"
+    }
+  },
+  
+  "models_to_run": {
+    "statistical": {
+      "granger_causality": {
+        "lags": [1, 7, 14, 30],
+        "variables": ["weather", "exports", "currency", "shipping"]
+      },
+      "time_series_decomposition": {
+        "methods": ["stl", "x13", "seasonal_decompose"],
+        "frequencies": ["daily", "weekly", "monthly"]
+      },
+      "regime_detection": {
+        "methods": ["markov_switching", "change_point"],
+        "min_regime_length": 30
+      }
+    },
+    "machine_learning": {
+      "random_forest": {
+        "features": ["price_lags", "weather", "seasonality", "market_indicators"],
+        "prediction_horizons": [1, 7, 30],
+        "hyperparameter_tuning": true
+      },
+      "isolation_forest": {
+        "contamination": 0.05,
+        "features": ["price", "volume", "volatility", "weather_anomalies"]
+      },
+      "lstm": {
+        "sequence_length": 60,
+        "features": ["price", "volume", "technical_indicators"],
+        "prediction_horizons": [1, 7, 30]
+      }
+    },
+    "ensemble": {
+      "voting_classifier": {
+        "models": ["rf", "xgboost", "lstm"],
+        "voting": "soft"
+      },
+      "stacking": {
+        "base_models": ["rf", "gbm", "svm"],
+        "meta_model": "logistic_regression"
+      }
+    }
+  },
+  
+  "signal_generation": {
+    "thresholds": {
+      "strong_buy": {
+        "composite_score": 0.8,
+        "min_models_agree": 4,
+        "confidence": 0.75
+      },
+      "buy": {
+        "composite_score": 0.6,
+        "min_models_agree": 3,
+        "confidence": 0.6
+      },
+      "hold": {
+        "composite_score": [0.4, 0.6],
+        "min_models_agree": 2,
+        "confidence": 0.5
+      },
+      "sell": {
+        "composite_score": 0.4,
+        "min_models_agree": 3,
+        "confidence": 0.6
+      }
+    },
+    "risk_management": {
+      "position_sizing": "kelly_criterion",
+      "stop_loss": 0.05,
+      "take_profit": 0.15,
+      "max_exposure": 0.25
+    }
+  },
+  
+  "backtesting": {
+    "periods": [
+      {
+        "name": "2023_surge",
+        "start": "2023-10-01",
+        "end": "2024-01-31",
+        "description": "October 2023 price surge period"
+      },
+      {
+        "name": "full_2023",
+        "start": "2023-01-01",
+        "end": "2023-12-31",
+        "description": "Complete 2023 year"
+      },
+      {
+        "name": "two_year",
+        "start": "2022-01-01",
+        "end": "2023-12-31",
+        "description": "Two year comprehensive test"
+      }
+    ],
+    "metrics": ["total_return", "sharpe_ratio", "max_drawdown", "win_rate", "profit_factor"],
+    "transaction_costs": 0.002,
+    "slippage": 0.001
+  },
+  
+  "alerts": {
+    "price_alerts": {
+      "surge_threshold": 0.05,
+      "crash_threshold": -0.05,
+      "volatility_spike": 2.0
+    },
+    "model_alerts": {
+      "anomaly_detection": true,
+      "regime_change": true,
+      "signal_strength_change": 0.2
+    },
+    "data_quality_alerts": {
+      "missing_data_threshold": 0.1,
+      "stale_data_hours": 24,
+      "validation_failure": true
+    }
+  }
+}

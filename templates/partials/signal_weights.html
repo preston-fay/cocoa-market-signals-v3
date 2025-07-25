@@ -1,0 +1,64 @@
+<div class="consensus-proof-section">
+    <h3 style="margin-bottom: 1.5rem; color: var(--text-primary);">Signal Component Weights</h3>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+        <!-- Weights Chart -->
+        <div>
+            <h4 style="margin-bottom: 1rem; color: var(--text-primary); text-align: center;">Signal Weight Distribution</h4>
+            <div id="weights-chart-container" style="height: 400px; background-color: var(--card-bg);  padding: 1rem;"></div>
+        </div>
+        
+        <!-- Weights Details -->
+        <div style="padding: 1.5rem; background-color: var(--bg-primary);  border: 1px solid var(--border-color);">
+            <h4 style="margin-bottom: 1rem; color: var(--text-primary);">Ensemble Model Weights</h4>
+            
+            <div style="margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="font-weight: 500;">Weather Signal:</span>
+                    <span style="color: #6f42c1; font-weight: 600;">{{ signal_weights.weather * 100 }}%</span>
+                </div>
+                <div style="background-color: var(--border-color); height: 8px; ">
+                    <div style="background-color: #6f42c1; height: 8px;  width: {{ signal_weights.weather * 100 }}%;"></div>
+                </div>
+                <p style="font-size: 0.875rem; color: var(--text-primary); margin-top: 0.25rem;">Longest lead time for anomaly detection</p>
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="font-weight: 500;">Trade Signal:</span>
+                    <span style="color: #FFFFFF; font-weight: 600;">{{ signal_weights.trade * 100 }}%</span>
+                </div>
+                <div style="background-color: var(--border-color); height: 8px; ">
+                    <div style="background-color: #FFFFFF; height: 8px;  width: {{ signal_weights.trade * 100 }}%;"></div>
+                </div>
+                <p style="font-size: 0.875rem; color: var(--text-primary); margin-top: 0.25rem;">Most reliable signal for trend confirmation</p>
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="font-weight: 500;">News Signal:</span>
+                    <span style="color: #999999; font-weight: 600;">{{ signal_weights.news * 100 }}%</span>
+                </div>
+                <div style="background-color: var(--border-color); height: 8px; ">
+                    <div style="background-color: #999999; height: 8px;  width: {{ signal_weights.news * 100 }}%;"></div>
+                </div>
+                <p style="font-size: 0.875rem; color: var(--text-primary); margin-top: 0.25rem;">Confirms and amplifies other signals</p>
+            </div>
+            
+            <div style="margin-top: 1.5rem; padding: 1rem; background-color: var(--card-bg); border-left: 4px solid var(--kearney-purple); ">
+                <p style="font-size: 0.875rem; color: var(--text-primary); margin: 0;">
+                    <strong>Ensemble Strategy:</strong> Weather signals provide early warning, trade signals confirm trends, and news signals validate the emerging narrative.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Render weights chart
+    const weightsData = {{ weights_chart | safe }};
+    Plotly.newPlot('weights-chart-container', weightsData.data, weightsData.layout, {
+        displayModeBar: false,
+        responsive: true
+    });
+</script>

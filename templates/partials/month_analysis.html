@@ -1,0 +1,112 @@
+<!-- Month Analysis Partial Template -->
+<div style="margin-bottom: 2rem;">
+    <h2 style="margin-bottom: 0.5rem;">Analysis for {{ analysis_date }}</h2>
+    <p style="color: var(--medium-gray);">Using only data available up to {{ selected_month }}</p>
+</div>
+
+<!-- Key Metrics -->
+<div class="metrics-grid">
+    <div class="metric-card">
+        <div class="metric-label">Current Price</div>
+        <div class="metric-value">{{ metrics.current_price }}</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-label">1-Month Change</div>
+        <div class="metric-value">{{ metrics.price_change_1m }}</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-label">Volatility (Ann.)</div>
+        <div class="metric-value">{{ metrics.volatility }}</div>
+    </div>
+    <div class="metric-card">
+        <div class="metric-label">Signal Strength</div>
+        <div class="metric-value">{{ metrics.signal_strength }}</div>
+    </div>
+</div>
+
+<!-- Charts -->
+<div class="chart-container">
+    <h3 style="margin-bottom: 1rem;">Historical Price Data</h3>
+    <div id="price-chart" data-chart="{{ price_chart }}" style="height: 400px;"></div>
+</div>
+
+<div class="chart-container">
+    <h3 style="margin-bottom: 1rem;">Signal Components</h3>
+    <div id="signals-chart" data-chart="{{ signals_chart }}" style="height: 600px;"></div>
+</div>
+
+{% if prediction_chart %}
+<div class="chart-container">
+    <h3 style="margin-bottom: 1rem;">Forward Predictions</h3>
+    <div id="prediction-chart" data-chart="{{ prediction_chart }}" style="height: 400px;"></div>
+</div>
+
+<!-- Predictions Table -->
+{% if predictions %}
+<h3 style="margin-bottom: 1rem;">Prediction Details</h3>
+<table class="predictions-table">
+    <thead>
+        <tr>
+            <th>Time Horizon</th>
+            <th>Predicted Price</th>
+            <th>Confidence Range</th>
+            <th>Expected Accuracy</th>
+            {% if actual_outcomes %}
+            <th>Actual Outcome</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for window, pred in predictions.items() %}
+        <tr>
+            <td>{{ window.replace('_', ' ').title() }}</td>
+            <td>${{ "%.0f"|format(pred.predicted_price) }}/MT</td>
+            <td>${{ "%.0f"|format(pred.confidence_lower) }} - ${{ "%.0f"|format(pred.confidence_upper) }}</td>
+            <td>
+                {% if backtest_accuracy[window] %}
+                <div>
+                    <div style="margin-bottom: 0.25rem;">{{ "%.1f"|format(backtest_accuracy[window].mape) }}% MAPE</div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: {{ backtest_accuracy[window].directional }}%;"></div>
+                    </div>
+                    <small style="color: var(--medium-gray);">{{ "%.0f"|format(backtest_accuracy[window].directional) }}% directional accuracy</small>
+                </div>
+                {% else %}
+                <span style="color: var(--medium-gray);">No data</span>
+                {% endif %}
+            </td>
+            {% if actual_outcomes %}
+            <td>
+                {% if window in actual_outcomes %}
+                <div>
+                    <strong>${{ "%.0f"|format(actual_outcomes[window].actual_price) }}/MT</strong><br>
+                    <small style="color: var(--medium-gray);">
+                        {{ actual_outcomes[window].actual_date.strftime('%Y-%m-%d') }}
+                    </small>
+                </div>
+                {% else %}
+                <span style="color: var(--medium-gray);">Future date</span>
+                {% endif %}
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% else %}
+<div style="text-align: center; padding: 3rem; color: var(--medium-gray);">
+    <i data-feather="alert-circle" style="width: 48px; height: 48px;"></i>
+    <p style="margin-top: 1rem;">Insufficient data for predictions at this date.</p>
+</div>
+{% endif %}
+
+<!-- Data Status -->
+<div style="margin-top: 3rem; padding: 1.5rem; background-color: var(--primary-charcoal); border: 1px solid var(--border-gray);">
+    <h4 style="margin-bottom: 1rem;">Data Status</h4>
+    <p style="color: var(--medium-gray); font-size: 0.875rem;">
+        <strong>{{ metrics.data_points }}</strong> data points available up to this date<br>
+        Analysis uses only information that would have been available in real-time<br>
+        No future data leakage - following time-aware backtesting principles
+    </p>
+</div>

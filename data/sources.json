@@ -1,0 +1,121 @@
+{
+  "data_sources": {
+    "prices": {
+      "icco": {
+        "name": "International Cocoa Organization",
+        "type": "historical",
+        "frequency": "daily",
+        "url": "https://www.icco.org/statistics/",
+        "authentication": "none",
+        "data_range": "2023-10-01 to 2024-01-31",
+        "verified": true,
+        "notes": "Official cocoa prices, Oct 2023 surge documented"
+      }
+    },
+    "trade": {
+      "un_comtrade": {
+        "name": "UN Comtrade Database",
+        "type": "api",
+        "frequency": "monthly",
+        "url": "https://comtrade.un.org/api",
+        "authentication": "api_key",
+        "data_range": "2020-01-01 to present",
+        "verified": true,
+        "notes": "International trade statistics for cocoa"
+      }
+    },
+    "weather": {
+      "yamoussoukro_station": {
+        "name": "Yamoussoukro Weather Station",
+        "type": "historical",
+        "frequency": "daily",
+        "location": "Côte d'Ivoire",
+        "coordinates": {"lat": 6.8276, "lon": -5.2893},
+        "data_range": "2023-01-01 to 2024-01-31",
+        "verified": true,
+        "notes": "Primary cocoa region weather data"
+      },
+      "kumasi_station": {
+        "name": "Kumasi Weather Station",
+        "type": "historical",
+        "frequency": "daily",
+        "location": "Ghana",
+        "coordinates": {"lat": 6.6666, "lon": -1.6163},
+        "data_range": "2023-01-01 to 2024-01-31",
+        "verified": true,
+        "notes": "Secondary cocoa region weather data"
+      }
+    },
+    "shipping": {
+      "container_rates": {
+        "name": "Container Shipping Rates",
+        "type": "historical",
+        "frequency": "weekly",
+        "routes": ["West Africa to Europe", "West Africa to North America"],
+        "data_range": "2023-01-01 to 2024-01-31",
+        "verified": true,
+        "notes": "Actual container shipping costs"
+      },
+      "bulk_rates": {
+        "name": "Bulk Shipping Rates",
+        "type": "historical",
+        "frequency": "weekly",
+        "routes": ["West Africa to Europe", "West Africa to North America"],
+        "data_range": "2023-01-01 to 2024-01-31",
+        "verified": true,
+        "notes": "Actual bulk shipping costs for cocoa"
+      }
+    },
+    "economics": {
+      "inflation": {
+        "name": "Country Inflation Data",
+        "type": "api",
+        "frequency": "monthly",
+        "countries": ["Côte d'Ivoire", "Ghana", "Nigeria", "Cameroon"],
+        "source": "World Bank API",
+        "verified": true,
+        "notes": "Official inflation rates from World Bank"
+      },
+      "currency": {
+        "name": "Exchange Rates",
+        "type": "api",
+        "frequency": "daily",
+        "pairs": ["XOF/USD", "GHS/USD", "NGN/USD"],
+        "source": "ECB/Central Banks",
+        "verified": true,
+        "notes": "Official exchange rates"
+      }
+    },
+    "news": {
+      "gdelt": {
+        "name": "GDELT Project",
+        "type": "api",
+        "frequency": "real-time",
+        "url": "https://api.gdeltproject.org",
+        "authentication": "none",
+        "verified": true,
+        "notes": "Global news monitoring for cocoa-related events"
+      }
+    }
+  },
+  "validation_rules": {
+    "reject_if": [
+      "source_not_verified",
+      "data_gap_exceeds_7_days",
+      "statistical_anomaly_detected",
+      "source_url_invalid"
+    ],
+    "warn_if": [
+      "data_older_than_24_hours",
+      "single_source_only",
+      "manual_entry_required"
+    ]
+  },
+  "audit_requirements": {
+    "log_all": true,
+    "timestamp_format": "ISO8601",
+    "include_source": true,
+    "include_retrieval_method": true,
+    "include_validation_status": true
+  }
+}

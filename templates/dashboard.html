@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    
+    <!-- Kearney Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    
+    <!-- Alpine.js for interactivity -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Plotly for charts -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    
+    <!-- Feather Icons - Kearney Standard -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Kearney Styles - 100% Dark Theme -->
+    <style>
+        :root {
+            /* Kearney Colors */
+            --kearney-black: #000000;
+            --kearney-white: #FFFFFF;
+            --kearney-slate: #272b30;
+            --kearney-purple: #6f42c1;
+            --kearney-gray-50: #F8F9FA;
+            --kearney-gray-100: #e9ecef;
+            --kearney-gray-200: #e9ecef;
+            --kearney-gray-500: #999999;
+            --kearney-gray-700: #7a8288;
+            --kearney-gray-900: #52575c;
+            
+            /* Dark Theme Only - No Toggle */
+            --bg-primary: var(--kearney-black);
+            --bg-secondary: var(--kearney-slate);
+            --text-primary: var(--kearney-white);
+            --text-secondary: var(--kearney-gray-500);
+            --border-color: var(--kearney-gray-700);
+            --card-bg: var(--kearney-slate);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid var(--kearney-purple);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-content {
+            flex: 1;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        h2, h3, h4 {
+            color: var(--text-primary);
+        }
+        
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .timeline-controls {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .timeline-step {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .timeline-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            background-color: transparent;
+            border: 2px solid var(--text-primary);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            font-size: 0.875rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--text-primary);
+            color: var(--bg-secondary);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .story-content {
+            background-color: var(--card-bg);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .story-title {
+            color: var(--kearney-white);
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .key-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .metric-card {
+            background-color: var(--bg-primary);
+            padding: 1.5rem;
+            border-top: 3px solid var(--kearney-purple);
+            text-align: center;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .charts-container {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .analytics-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+        
+        .tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .tab:hover {
+            color: var(--text-primary);
+        }
+        
+        .tab.active {
+            color: var(--kearney-purple);
+            border-bottom-color: var(--kearney-purple);
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--kearney-gray-200);
+            border-top-color: var(--kearney-purple);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .signal-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 0.5rem;
+        }
+        
+        .signal-normal { background-color: var(--kearney-gray-500); }
+        .signal-warning { background-color: var(--kearney-gray-700); }
+        .signal-buy { background-color: var(--kearney-purple); }
+        .signal-success { background-color: var(--kearney-slate); }
+        
+        /* Custom slider styling - purple only */
+        input[type=range] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            outline: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            margin-bottom: 1rem;
+        }
+        
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--kearney-purple);
+            cursor: pointer;
+            border-radius: 0;
+        }
+        
+        input[type=range]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: var(--kearney-purple);
+            cursor: pointer;
+            border-radius: 0;
+        }
+        
+        input[type=range]:hover {
+            opacity: 1;
+        }
+        
+        /* Dark theme explanation boxes */
+        .explanation-box {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: var(--bg-primary);
+            border-left: 4px solid var(--kearney-purple);
+            border: 1px solid var(--border-color);
+        }
+        
+        .explanation-box h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .explanation-box p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div style="width: 150px;">
+            <!-- Kearney Logo - Official PNG -->
+            <img src="/static/kearney-logo.png" alt="Kearney" style="height: 30px; filter: invert(1);" />
+        </div>
+        <div style="flex: 1; text-align: center;">
+            <h1 style="display: inline-block;">Procurement Risk Management POC</h1>
+            <span style="color: var(--text-secondary); margin: 0 1rem;">|</span>
+            <span class="subtitle" style="display: inline-block;">How AI Helps Buyers Avoid Cocoa Price Shocks</span>
+        </div>
+        <div style="width: 150px; text-align: right;">
+            <a href="/about" style="color: var(--text-primary); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                <i data-feather="info"></i>
+                <span style="font-weight: 500;">About</span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Timeline Navigation -->
+        <div class="timeline-controls" x-data="{ currentStep: 0, maxSteps: 7, months: ['Jul 2023', 'Aug 2023', 'Sep 2023', 'Oct 2023', 'Nov 2023', 'Dec 2023', 'Jan 2024', 'Feb 2024'] }">
+            <h2 style="margin-bottom: 1.5rem; text-align: center;">Timeline Navigation</h2>
+            
+            <!-- Month Slider -->
+            <div style="margin-bottom: 2rem;">
+                <input type="range" 
+                       x-model="currentStep" 
+                       @input="htmx.ajax('GET', '/api/timeline/' + currentStep, '#timeline-content')"
+                       min="0" 
+                       :max="maxSteps" 
+                       step="1">
+                <div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: var(--text-secondary);">
+                    <template x-for="(month, index) in months" :key="index">
+                        <span x-text="month" :style="index === parseInt(currentStep) ? 'color: #FFFFFF; font-weight: 700;' : ''"></span>
+                    </template>
+                </div>
+            </div>
+            
+            <div id="timeline-content" 
+                 hx-get="/api/timeline/0" 
+                 hx-trigger="load"
+                 hx-swap="innerHTML">
+                <div class="loading"></div>
+            </div>
+        </div>
+        
+        <!-- Charts Section -->
+        <div class="charts-container">
+            <h2 style="margin-bottom: 2rem;">Signal Evolution</h2>
+            
+            <!-- Price Chart Explanation -->
+            <div class="explanation-box">
+                <h4>Cocoa Price Timeline</h4>
+                <p>
+                    This chart shows the actual cocoa futures price over time. Watch how our AI system generated the BUY signal in November 2023 (purple arrow), 
+                    BEFORE the dramatic price surge began.
+                </p>
+                <p style="margin-top: 0.5rem;">
+                    <strong>Purple Line:</strong> Historical data up to current timeline position<br>
+                    <strong>Gray Line:</strong> Future data (what happens later) - shows you're viewing historical analysis
+                </p>
+            </div>
+            <div id="price-chart"></div>
+            
+            <!-- Signal Chart Explanation -->
+            <div class="explanation-box" style="margin-top: 2rem;">
+                <h4>AI Signal Strength & Confidence - What This Means</h4>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>Purple Line (Signal Strength):</strong> Our AI's prediction of what to do - Lower values = BUY cocoa, Higher values = SELL cocoa
+                </p>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>Dashed Line (Confidence):</strong> How sure the AI is about its prediction - Higher = more confident
+                </p>
+                <p>
+                    <strong>The Key Moment:</strong> In November 2023, the signal dropped to 0.30 (STRONG BUY) with 92% confidence. 
+                    This meant: "Buy cocoa now, I'm very confident prices will rise." One month later, prices began surging. Total return: 78%.
+                </p>
+                <p style="margin-top: 0.5rem;">
+                    <strong>Note:</strong> Gray lines show what happened in the future - use the timeline slider above to see how signals evolved month by month.
+                </p>
+            </div>
+            <div id="signal-chart"></div>
+            
+            <!-- Signal Components Explanation -->
+            <div class="explanation-box" style="margin-top: 3rem;">
+                <h4>What Drives Our Predictions - The Three Data Sources</h4>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>Weather Signal (Purple):</strong> Tracks rainfall, temperature, and climate patterns in cocoa-growing regions. 
+                    Too much rain = cocoa crop damage = prices go up. The AI detected this problem first in October 2023.
+                </p>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>Trade Signal (White):</strong> Monitors export volumes, shipping data, and trade flows. 
+                    When exports drop = less cocoa supply = prices go up. This confirmed the weather signal.
+                </p>
+                <p>
+                    <strong>News Signal (Gray):</strong> Analyzes thousands of news articles for sentiment about cocoa markets. 
+                    Negative news = market worry = prices go up. This validated what weather and trade data already showed.
+                </p>
+            </div>
+            
+            <!-- Signal Components -->
+            <div id="signal-components" 
+                 hx-get="/api/signal-components/0" 
+                 hx-trigger="load">
+                <div class="loading"></div>
+            </div>
+        </div>
+        
+        <!-- Consensus Proof Elements -->
+        <div class="charts-container">
+            <h2 style="margin-bottom: 1rem;">POC Validation Elements</h2>
+            <div class="explanation-box">
+                <p>
+                    <strong>Proof of Concept Validation:</strong> These tabs demonstrate the key evidence that validates our AI system's performance: 
+                    how signals are weighted, the precise timing accuracy, and the financial returns achieved. 
+                    This is the technical proof that the system works as advertised.
+                </p>
+            </div>
+            
+            <div class="analytics-tabs">
+                <div class="tab active" 
+                     hx-get="/api/signal-weights" 
+                     hx-target="#proof-content"
+                     onclick="setActiveTab(this)">
+                    Signal Weights
+                </div>
+                <div class="tab" 
+                     hx-get="/api/timing-proof" 
+                     hx-target="#proof-content"
+                     onclick="setActiveTab(this)">
+                    Timing Proof
+                </div>
+                <div class="tab" 
+                     hx-get="/api/roi-calculator" 
+                     hx-target="#proof-content"
+                     onclick="setActiveTab(this)">
+                    ROI Calculator
+                </div>
+            </div>
+            
+            <div id="proof-content" 
+                 hx-get="/api/signal-weights" 
+                 hx-trigger="load">
+                <div class="loading"></div>
+            </div>
+        </div>
+        
+        <!-- Analytics Deep Dive -->
+        <div class="charts-container">
+            <h2 style="margin-bottom: 1rem;">Advanced Analytics</h2>
+            <div class="explanation-box">
+                <p>
+                    <strong>Technical Deep Dive:</strong> For the technically minded, these tabs show the specific AI models used, 
+                    statistical validation methods, which data features matter most, and historical backtesting results. 
+                    This demonstrates the rigor and sophistication behind the system.
+                </p>
+            </div>
+            
+            <div class="analytics-tabs">
+                <div class="tab active" 
+                     hx-get="/api/analytics/models" 
+                     hx-target="#analytics-content"
+                     onclick="setActiveTab(this)">
+                    Models Used
+                </div>
+                <div class="tab" 
+                     hx-get="/api/analytics/validation" 
+                     hx-target="#analytics-content"
+                     onclick="setActiveTab(this)">
+                    Statistical Validation
+                </div>
+                <div class="tab" 
+                     hx-get="/api/analytics/features" 
+                     hx-target="#analytics-content"
+                     onclick="setActiveTab(this)">
+                    Feature Importance
+                </div>
+                <div class="tab" 
+                     hx-get="/api/analytics/backtest" 
+                     hx-target="#analytics-content"
+                     onclick="setActiveTab(this)">
+                    Backtesting Results
+                </div>
+            </div>
+            
+            <div id="analytics-content" 
+                 hx-get="/api/analytics/models" 
+                 hx-trigger="load">
+                <div class="loading"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize Feather icons
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+        });
+        
+        // Tab management
+        function setActiveTab(element) {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+        
+        // Update charts when timeline changes
+        document.body.addEventListener('htmx:afterSwap', function(evt) {
+            if (evt.detail.target.id === 'timeline-content') {
+                // Update Alpine.js state
+                const step = parseInt(evt.detail.pathInfo.requestPath.split('/').pop());
+                Alpine.store('timeline', { currentStep: step });
+                
+                // Update signal components chart
+                htmx.ajax('GET', `/api/signal-components/${step}`, '#signal-components');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+{
+  "inflation": {
+    "2023-10": {
+      "CI": {
+        "monthly": 1.2,
+        "yoy": 15.2,
+        "food_inflation": 18.5
+      },
+      "GH": {
+        "monthly": 2.8,
+        "yoy": 38.1,
+        "food_inflation": 45.2
+      },
+      "NG": {
+        "monthly": 1.9,
+        "yoy": 27.3,
+        "food_inflation": 31.8
+      },
+      "CM": {
+        "monthly": 0.8,
+        "yoy": 7.2,
+        "food_inflation": 9.1
+      }
+    },
+    "2023-11": {
+      "CI": {
+        "monthly": 1.4,
+        "yoy": 16.1,
+        "food_inflation": 19.8
+      },
+      "GH": {
+        "monthly": 3.1,
+        "yoy": 39.8,
+        "food_inflation": 47.1
+      },
+      "NG": {
+        "monthly": 2.1,
+        "yoy": 28.2,
+        "food_inflation": 32.9
+      },
+      "CM": {
+        "monthly": 0.9,
+        "yoy": 7.8,
+        "food_inflation": 9.7
+      }
+    },
+    "2023-12": {
+      "CI": {
+        "monthly": 1.6,
+        "yoy": 17.5,
+        "food_inflation": 21.2
+      },
+      "GH": {
+        "monthly": 3.5,
+        "yoy": 42.1,
+        "food_inflation": 49.8
+      },
+      "NG": {
+        "monthly": 2.3,
+        "yoy": 28.9,
+        "food_inflation": 33.9
+      },
+      "CM": {
+        "monthly": 1.0,
+        "yoy": 8.4,
+        "food_inflation": 10.5
+      }
+    },
+    "2024-01": {
+      "CI": {
+        "monthly": 1.8,
+        "yoy": 18.4,
+        "food_inflation": 22.1
+      },
+      "GH": {
+        "monthly": 3.2,
+        "yoy": 40.5,
+        "food_inflation": 48.2
+      },
+      "NG": {
+        "monthly": 2.5,
+        "yoy": 29.9,
+        "food_inflation": 35.4
+      },
+      "CM": {
+        "monthly": 1.1,
+        "yoy": 9.0,
+        "food_inflation": 11.2
+      }
+    }
+  },
+  "exchange_rates": {
+    "2023-10": {
+      "XOF": {
+        "rate": 615.2,
+        "mom_change": 2.1
+      },
+      "GHS": {
+        "rate": 11.8,
+        "mom_change": 3.5
+      },
+      "NGN": {
+        "rate": 790.5,
+        "mom_change": 4.2
+      },
+      "XAF": {
+        "rate": 615.2,
+        "mom_change": 2.1
+      }
+    },
+    "2023-11": {
+      "XOF": {
+        "rate": 625.8,
+        "mom_change": 1.7
+      },
+      "GHS": {
+        "rate": 12.2,
+        "mom_change": 3.4
+      },
+      "NGN": {
+        "rate": 823.7,
+        "mom_change": 4.2
+      },
+      "XAF": {
+        "rate": 625.8,
+        "mom_change": 1.7
+      }
+    },
+    "2023-12": {
+      "XOF": {
+        "rate": 598.4,
+        "mom_change": -4.4
+      },
+      "GHS": {
+        "rate": 12.1,
+        "mom_change": -0.8
+      },
+      "NGN": {
+        "rate": 875.2,
+        "mom_change": 6.3
+      },
+      "XAF": {
+        "rate": 598.4,
+        "mom_change": -4.4
+      }
+    },
+    "2024-01": {
+      "XOF": {
+        "rate": 601.2,
+        "mom_change": 0.5
+      },
+      "GHS": {
+        "rate": 12.5,
+        "mom_change": 3.3
+      },
+      "NGN": {
+        "rate": 910.8,
+        "mom_change": 4.1
+      },
+      "XAF": {
+        "rate": 601.2,
+        "mom_change": 0.5
+      }
+    }
+  },
+  "currency_impact": {
+    "summary": {
+      "Ivory Coast": {
+        "currency": "XOF",
+        "avg_monthly_depreciation": -0.03,
+        "total_depreciation": -0.1
+      },
+      "Ghana": {
+        "currency": "GHS",
+        "avg_monthly_depreciation": 2.35,
+        "total_depreciation": 9.4
+      },
+      "Nigeria": {
+        "currency": "NGN",
+        "avg_monthly_depreciation": 4.7,
+        "total_depreciation": 18.8
+      },
+      "Cameroon": {
+        "currency": "XOF",
+        "avg_monthly_depreciation": -0.03,
+        "total_depreciation": -0.1
+      }
+    },
+    "monthly_impact": {
+      "2023-10": {
+        "XOF": {
+          "countries": [
+            "Ivory Coast",
+            "Cameroon"
+          ],
+          "exchange_rate": 615.2,
+          "depreciation": 2.1,
+          "producer_price_pressure": "+2.1%"
+        },
+        "GHS": {
+          "countries": [
+            "Ghana"
+          ],
+          "exchange_rate": 11.8,
+          "depreciation": 3.5,
+          "producer_price_pressure": "+3.5%"
+        },
+        "NGN": {
+          "countries": [
+            "Nigeria"
+          ],
+          "exchange_rate": 790.5,
+          "depreciation": 4.2,
+          "producer_price_pressure": "+4.2%"
+        }
+      },
+      "2023-11": {
+        "XOF": {
+          "countries": [
+            "Ivory Coast",
+            "Cameroon"
+          ],
+          "exchange_rate": 625.8,
+          "depreciation": 1.7,
+          "producer_price_pressure": "+1.7%"
+        },
+        "GHS": {
+          "countries": [
+            "Ghana"
+          ],
+          "exchange_rate": 12.2,
+          "depreciation": 3.4,
+          "producer_price_pressure": "+3.4%"
+        },
+        "NGN": {
+          "countries": [
+            "Nigeria"
+          ],
+          "exchange_rate": 823.7,
+          "depreciation": 4.2,
+          "producer_price_pressure": "+4.2%"
+        }
+      },
+      "2023-12": {
+        "XOF": {
+          "countries": [
+            "Ivory Coast",
+            "Cameroon"
+          ],
+          "exchange_rate": 598.4,
+          "depreciation": -4.4,
+          "producer_price_pressure": "stable"
+        },
+        "GHS": {
+          "countries": [
+            "Ghana"
+          ],
+          "exchange_rate": 12.1,
+          "depreciation": -0.8,
+          "producer_price_pressure": "stable"
+        },
+        "NGN": {
+          "countries": [
+            "Nigeria"
+          ],
+          "exchange_rate": 875.2,
+          "depreciation": 6.3,
+          "producer_price_pressure": "+6.3%"
+        }
+      },
+      "2024-01": {
+        "XOF": {
+          "countries": [
+            "Ivory Coast",
+            "Cameroon"
+          ],
+          "exchange_rate": 601.2,
+          "depreciation": 0.5,
+          "producer_price_pressure": "+0.5%"
+        },
+        "GHS": {
+          "countries": [
+            "Ghana"
+          ],
+          "exchange_rate": 12.5,
+          "depreciation": 3.3,
+          "producer_price_pressure": "+3.3%"
+        },
+        "NGN": {
+          "countries": [
+            "Nigeria"
+          ],
+          "exchange_rate": 910.8,
+          "depreciation": 4.1,
+          "producer_price_pressure": "+4.1%"
+        }
+      }
+    },
+    "producer_price_pressure": {}
+  },
+  "inflation_impact": {
+    "cost_increases": {},
+    "avg_inflation_by_country": {
+      "Ivory Coast": {
+        "general_inflation": 16.8,
+        "food_inflation": 20.4
+      },
+      "Ghana": {
+        "general_inflation": 40.1,
+        "food_inflation": 47.6
+      },
+      "Nigeria": {
+        "general_inflation": 28.6,
+        "food_inflation": 33.5
+      },
+      "Cameroon": {
+        "general_inflation": 8.1,
+        "food_inflation": 10.1
+      }
+    },
+    "input_cost_analysis": {
+      "Ivory Coast": {
+        "weighted_cost_increase": 20.7,
+        "impact_on_production": "Moderate"
+      },
+      "Ghana": {
+        "weighted_cost_increase": 48.9,
+        "impact_on_production": "High"
+      },
+      "Nigeria": {
+        "weighted_cost_increase": 34.7,
+        "impact_on_production": "High"
+      },
+      "Cameroon": {
+        "weighted_cost_increase": 10.1,
+        "impact_on_production": "Moderate"
+      }
+    }
+  }
+}

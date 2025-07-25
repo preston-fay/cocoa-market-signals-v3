@@ -1,0 +1,55 @@
+<!-- Performance Tab -->
+<div class="performance-content">
+    <h3 style="margin-bottom: 1.5rem;">Model Performance Analysis</h3>
+    
+    <div id="performance-chart-container" style="margin-bottom: 2rem;"></div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 2rem;">
+        <div class="metric-card">
+            <div class="metric-label">Signal Accuracy</div>
+            <div class="metric-value warning">{{ "%.1f"|format(model_results.performance.signal_accuracy * 100) }}%</div>
+            <div class="metric-change">Barely better than random</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">Sharpe Ratio</div>
+            <div class="metric-value">{{ "%.2f"|format(model_results.performance.sharpe_ratio) }}</div>
+            <div class="metric-change">Risk-adjusted returns</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">Max Drawdown</div>
+            <div class="metric-value negative">{{ "%.1f"|format(model_results.risk_metrics.max_drawdown * 100) }}%</div>
+            <div class="metric-change">Worst case loss</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">Lead Time</div>
+            <div class="metric-value positive">1-2 months</div>
+            <div class="metric-change">Advance warning period</div>
+        </div>
+    </div>
+    
+    <div class="explanation-box" style="margin-top: 2rem;">
+        <h4>Performance Summary</h4>
+        <p>Our models are currently underperforming with only 53.5% accuracy. This is barely better than a coin flip (50%).</p>
+        <p style="margin-top: 0.5rem;"><strong>Why is performance low?</strong></p>
+        <ul style="margin-left: 1.5rem;">
+            <li>Limited historical data (only 2 years)</li>
+            <li>Missing key features (COT data, options flow)</li>
+            <li>Basic models not tuned for time series</li>
+            <li>No ensemble or advanced ML methods</li>
+        </ul>
+        <p style="margin-top: 0.5rem;">See the <strong>Improvements</strong> tab for our roadmap to 70% accuracy.</p>
+    </div>
+</div>
+
+<script>
+    // Parse and render performance chart
+    const performanceChart = {{ performance_chart|safe }};
+    
+    Plotly.newPlot('performance-chart-container', performanceChart.data, performanceChart.layout, {
+        displayModeBar: false,
+        responsive: true
+    });
+</script>

@@ -1,0 +1,81 @@
+<div>
+    <h3 style="margin-bottom: 1rem;">Signal Component Analysis</h3>
+    <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: var(--bg-primary); border-left: 4px solid #6f42c1; border: 1px solid var(--border-color);">
+        <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">How to Read These Charts:</h4>
+        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+            <strong>Signal Values:</strong> 0.0 = Strong Buy Signal, 0.5 = Neutral, 1.0 = Strong Sell Signal
+        </p>
+        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+            <strong>Purple Zone (0.0-0.35):</strong> BUY - Strong positive signals detected
+        </p>
+        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+            <strong>Gray Zone (0.35-0.65):</strong> MONITOR - Mixed or neutral signals
+        </p>
+        <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">
+            <strong>Light Zone (0.65-1.0):</strong> AVOID - Negative signals, potential price drops
+        </p>
+    </div>
+    <div id="components-chart-container" style="height: 600px;"></div>
+    
+    <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+        <div style="text-align: center; padding: 1rem; background-color: var(--bg-primary); border: 1px solid var(--border-color);">
+            <div style="display: inline-block; width: 12px; height: 12px; background-color: #6f42c1; margin-right: 0.5rem;"></div>
+            <span style="font-weight: 500;">Weather Signal</span>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem;">Lower values = Higher risk</p>
+        </div>
+        
+        <div style="text-align: center; padding: 1rem; background-color: var(--bg-primary); border: 1px solid var(--border-color);">
+            <div style="display: inline-block; width: 12px; height: 12px; background-color: #FFFFFF; margin-right: 0.5rem;"></div>
+            <span style="font-weight: 500;">Trade Signal</span>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem;">Tracks export volumes</p>
+        </div>
+        
+        <div style="text-align: center; padding: 1rem; background-color: var(--bg-primary); border: 1px solid var(--border-color);">
+            <div style="display: inline-block; width: 12px; height: 12px; background-color: #999999; margin-right: 0.5rem;"></div>
+            <span style="font-weight: 500;">News Signal</span>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem;">Sentiment analysis</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Render components chart with proper JSON handling
+    const componentsData = {{ components_chart | safe }};
+    
+    // Always apply dark theme styling
+    componentsData.layout.plot_bgcolor = '#272b30';
+    componentsData.layout.paper_bgcolor = '#272b30';
+    componentsData.layout.font = { family: "Inter, sans-serif", color: '#FFFFFF' };
+    
+    // Update all axis colors
+    if (componentsData.layout.xaxis) componentsData.layout.xaxis.linecolor = '#7a8288';
+    if (componentsData.layout.yaxis) componentsData.layout.yaxis.linecolor = '#7a8288';
+    if (componentsData.layout.xaxis2) componentsData.layout.xaxis2.linecolor = '#7a8288';
+    if (componentsData.layout.yaxis2) componentsData.layout.yaxis2.linecolor = '#7a8288';
+    if (componentsData.layout.xaxis3) componentsData.layout.xaxis3.linecolor = '#7a8288';
+    if (componentsData.layout.yaxis3) componentsData.layout.yaxis3.linecolor = '#7a8288';
+    
+    // Update annotations color
+    if (componentsData.layout.annotations) {
+        componentsData.layout.annotations.forEach(ann => {
+            ann.font = ann.font || {};
+            ann.font.color = '#FFFFFF';
+        });
+    }
+    
+    // Change the trade current line color from slate (#272b30) to white for visibility
+    componentsData.data.forEach(trace => {
+        if (trace.name === 'Trade (current)' && trace.line && trace.line.color === '#272b30') {
+            trace.line.color = '#FFFFFF';
+            trace.marker.color = '#FFFFFF';
+        }
+    });
+    
+    // Ensure container exists before plotting
+    setTimeout(() => {
+        const container = document.getElementById('components-chart-container');
+        if (container) {
+            Plotly.newPlot('components-chart-container', componentsData.data, componentsData.layout);
+        }
+    }, 100);
+</script>

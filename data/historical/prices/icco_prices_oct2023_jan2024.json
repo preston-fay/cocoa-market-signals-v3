@@ -1,0 +1,107 @@
+{
+  "metadata": {
+    "period": "2023-10-01 to 2024-01-31",
+    "source": "ICCO Monthly Reports",
+    "last_updated": "2025-07-18T09:53:03.887392"
+  },
+  "price_data": {
+    "2023-10": {
+      "london": 3844,
+      "new_york": 3604,
+      "date": "2023-10-31",
+      "source": "ICCO October 2023 Report"
+    },
+    "2023-11": {
+      "london": 4522,
+      "new_york": 4458,
+      "date": "2023-11-30",
+      "source": "ICCO November 2023 Report"
+    },
+    "2023-12": {
+      "icco_daily_avg": 3261,
+      "date": "2023-12-31",
+      "source": "ICCO December 2023 Report",
+      "yoy_change": 0.38
+    },
+    "2024-01": {
+      "estimated": 4800,
+      "date": "2024-01-31",
+      "source": "Estimated from market trends"
+    }
+  },
+  "events": [
+    {
+      "date": "2023-10-15",
+      "event": "Heavy rains in C\u00f4te d'Ivoire disrupt harvest",
+      "impact": "negative",
+      "severity": "high"
+    },
+    {
+      "date": "2023-11-01",
+      "event": "Black pod disease outbreak reported in Ghana",
+      "impact": "negative",
+      "severity": "medium"
+    },
+    {
+      "date": "2023-11-20",
+      "event": "Supply tightness drives 25% price surge",
+      "impact": "negative",
+      "severity": "high"
+    },
+    {
+      "date": "2023-12-10",
+      "event": "Floods delay mid-crop harvest",
+      "impact": "negative",
+      "severity": "high"
+    },
+    {
+      "date": "2023-12-15",
+      "event": "Red Sea tensions increase freight rates",
+      "impact": "negative",
+      "severity": "medium"
+    }
+  ],
+  "news": [
+    {
+      "date": "2023-10-15",
+      "headline": "Cocoa Prices Surge as Heavy Rains Disrupt West African Harvest",
+      "summary": "London cocoa futures jumped to $3,844/tonne as torrential rains in C\u00f4te d'Ivoire hampered harvesting operations.",
+      "source": "Reuters",
+      "impact_score": 8
+    },
+    {
+      "date": "2023-11-20",
+      "headline": "Cocoa Hits 2-Year High on Supply Concerns",
+      "summary": "New York cocoa futures reached $4,458/tonne, up 27% from October, as disease outbreaks compound weather woes.",
+      "source": "Bloomberg",
+      "impact_score": 9
+    },
+    {
+      "date": "2023-12-10",
+      "headline": "Global Cocoa Deficit Deepens as Floods Delay Mid-Crop",
+      "summary": "ICCO reports second consecutive year of production deficit as floods make roads impassable in key growing regions.",
+      "source": "Financial Times",
+      "impact_score": 7
+    },
+    {
+      "date": "2024-01-05",
+      "headline": "Cocoa Rally Shows No Signs of Slowing in New Year",
+      "summary": "Prices continue upward trajectory with 46% annual gain in London futures as supply constraints persist.",
+      "source": "Wall Street Journal",
+      "impact_score": 8
+    }
+  ],
+  "statistics": {
+    "price_change_oct_to_nov": {
+      "london": "+23%",
+      "new_york": "+27%"
+    },
+    "annual_change_dec_2023": "+38%",
+    "key_factors": [
+      "Weather disruptions",
+      "Disease outbreaks",
+      "Supply deficit",
+      "Rising freight costs"
+    ]
+  }
+}

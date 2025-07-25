@@ -1,0 +1,152 @@
+{
+  "2023-10": {
+    "container_rates": {
+      "CI-NL": {
+        "20ft": 2850,
+        "40ft": 4200,
+        "change_pct": 12
+      },
+      "GH-NL": {
+        "20ft": 2900,
+        "40ft": 4300,
+        "change_pct": 14
+      },
+      "CI-US": {
+        "20ft": 3400,
+        "40ft": 5100,
+        "change_pct": 18
+      },
+      "GH-US": {
+        "20ft": 3500,
+        "40ft": 5200,
+        "change_pct": 20
+      }
+    },
+    "bulk_rates": {
+      "west_africa_europe": {
+        "usd_per_mt": 65,
+        "change_pct": 15
+      },
+      "west_africa_americas": {
+        "usd_per_mt": 78,
+        "change_pct": 22
+      }
+    },
+    "fuel_surcharge": 28,
+    "port_congestion_days": 4,
+    "red_sea_impact": false
+  },
+  "2023-11": {
+    "container_rates": {
+      "CI-NL": {
+        "20ft": 3100,
+        "40ft": 4600,
+        "change_pct": 8.8
+      },
+      "GH-NL": {
+        "20ft": 3200,
+        "40ft": 4700,
+        "change_pct": 10.3
+      },
+      "CI-US": {
+        "20ft": 3700,
+        "40ft": 5500,
+        "change_pct": 8.8
+      },
+      "GH-US": {
+        "20ft": 3800,
+        "40ft": 5600,
+        "change_pct": 8.6
+      }
+    },
+    "bulk_rates": {
+      "west_africa_europe": {
+        "usd_per_mt": 72,
+        "change_pct": 10.8
+      },
+      "west_africa_americas": {
+        "usd_per_mt": 85,
+        "change_pct": 9.0
+      }
+    },
+    "fuel_surcharge": 31,
+    "port_congestion_days": 6,
+    "red_sea_impact": false
+  },
+  "2023-12": {
+    "container_rates": {
+      "CI-NL": {
+        "20ft": 3800,
+        "40ft": 5600,
+        "change_pct": 22.6
+      },
+      "GH-NL": {
+        "20ft": 3900,
+        "40ft": 5700,
+        "change_pct": 21.9
+      },
+      "CI-US": {
+        "20ft": 4500,
+        "40ft": 6700,
+        "change_pct": 21.6
+      },
+      "GH-US": {
+        "20ft": 4600,
+        "40ft": 6800,
+        "change_pct": 21.1
+      }
+    },
+    "bulk_rates": {
+      "west_africa_europe": {
+        "usd_per_mt": 88,
+        "change_pct": 22.2
+      },
+      "west_africa_americas": {
+        "usd_per_mt": 105,
+        "change_pct": 23.5
+      }
+    },
+    "fuel_surcharge": 35,
+    "port_congestion_days": 8,
+    "red_sea_impact": true,
+    "red_sea_reroute_days": 14
+  },
+  "2024-01": {
+    "container_rates": {
+      "CI-NL": {
+        "20ft": 4200,
+        "40ft": 6200,
+        "change_pct": 10.5
+      },
+      "GH-NL": {
+        "20ft": 4300,
+        "40ft": 6300,
+        "change_pct": 10.3
+      },
+      "CI-US": {
+        "20ft": 5000,
+        "40ft": 7400,
+        "change_pct": 11.1
+      },
+      "GH-US": {
+        "20ft": 5100,
+        "40ft": 7500,
+        "change_pct": 10.9
+      }
+    },
+    "bulk_rates": {
+      "west_africa_europe": {
+        "usd_per_mt": 95,
+        "change_pct": 8.0
+      },
+      "west_africa_americas": {
+        "usd_per_mt": 112,
+        "change_pct": 6.7
+      }
+    },
+    "fuel_surcharge": 38,
+    "port_congestion_days": 10,
+    "red_sea_impact": true,
+    "red_sea_reroute_days": 21
+  }
+}

@@ -1,0 +1,58 @@
+<div style="padding: 2rem;">
+    <h3 style="color: var(--kearney-purple); margin-bottom: 2rem;">What Drives Our Predictions?</h3>
+    
+    <div id="feature-importance-chart" style="height: 400px;">
+    </div>
+    
+    <div style="margin-top: 3rem;">
+        <h4 style="margin-bottom: 1.5rem;">Feature Analysis</h4>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+            <div style="padding: 1.5rem; background-color: var(--card-bg); border: 1px solid var(--border-color); ">
+                <h5 style="color: var(--kearney-purple); margin-bottom: 0.5rem;">Weather Anomaly (28%)</h5>
+                <p style="font-size: 0.875rem;">Provides earliest warning signals with 2-3 month lead time. Rainfall and temperature deviations directly impact crop yields.</p>
+            </div>
+            
+            <div style="padding: 1.5rem; background-color: var(--card-bg); border: 1px solid var(--border-color); ">
+                <h5 style="color: var(--kearney-purple); margin-bottom: 0.5rem;">Trade Volume Change (24%)</h5>
+                <p style="font-size: 0.875rem;">Confirms physical market disruptions. Export volume drops signal immediate supply constraints.</p>
+            </div>
+            
+            <div style="padding: 1.5rem; background-color: var(--card-bg); border: 1px solid var(--border-color); ">
+                <h5 style="color: var(--kearney-purple); margin-bottom: 0.5rem;">Export Concentration (18%)</h5>
+                <p style="font-size: 0.875rem;">Risk indicator when exports concentrate to few destinations, signaling supply chain stress.</p>
+            </div>
+            
+            <div style="padding: 1.5rem; background-color: var(--card-bg); border: 1px solid var(--border-color); ">
+                <h5 style="color: var(--kearney-purple); margin-bottom: 0.5rem;">News Sentiment (15%)</h5>
+                <p style="font-size: 0.875rem;">Validates other signals and captures market psychology. Negative sentiment accelerates price movements.</p>
+            </div>
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 1.5rem; border: 2px solid var(--kearney-purple); ">
+            <p style="margin: 0;"><strong>Key Insight:</strong> Weather anomalies and trade volume changes together account for over 50% of predictive power, providing 2-3 months advance warning before price movements become apparent to traditional market analysis.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Render feature importance chart
+    try {
+        const featureData = {{ feature_chart | safe }};
+        // Force dark theme
+        featureData.layout.plot_bgcolor = '#272b30';
+        featureData.layout.paper_bgcolor = '#272b30';
+        featureData.layout.font = { family: "Inter, sans-serif", color: '#FFFFFF' };
+        if (featureData.layout.xaxis) {
+            featureData.layout.xaxis.linecolor = '#7a8288';
+            featureData.layout.xaxis.gridcolor = '#3a3f44';
+        }
+        if (featureData.layout.yaxis) {
+            featureData.layout.yaxis.linecolor = '#7a8288';
+            featureData.layout.yaxis.gridcolor = '#3a3f44';
+        }
+        Plotly.newPlot('feature-importance-chart', featureData.data, featureData.layout);
+    } catch (error) {
+        console.error('Error rendering feature chart:', error);
+    }
+</script>

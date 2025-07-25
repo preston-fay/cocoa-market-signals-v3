@@ -1,0 +1,46 @@
+<div class="timeline-step">
+    <h3 class="story-title">{{ story.title }}</h3>
+    <p style="color: var(--text-secondary); margin-bottom: 1rem;">{{ story.date }}</p>
+    <p style="font-size: 1.125rem; margin-bottom: 2rem;">{{ story.description }}</p>
+    
+    <div class="key-metrics">
+        {% for key, value in story.key_metrics.items() %}
+        <div class="metric-card">
+            <p class="metric-label">{{ key }}</p>
+            <p class="metric-value">
+                {% if story.signal_status %}
+                <span class="signal-indicator signal-{{ story.signal_status }}"></span>
+                {% endif %}
+                {{ value }}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Update charts -->
+<script>
+    // Render price chart with dark theme
+    const priceData = {{ price_chart | safe }};
+    // Ensure dark theme
+    priceData.layout.plot_bgcolor = '#272b30';
+    priceData.layout.paper_bgcolor = '#272b30';
+    priceData.layout.font = { family: "Inter, sans-serif", color: '#FFFFFF' };
+    Plotly.newPlot('price-chart', priceData.data, priceData.layout);
+    
+    // Render signal chart with dark theme
+    const signalData = {{ signal_chart | safe }};
+    // Ensure dark theme
+    signalData.layout.plot_bgcolor = '#272b30';
+    signalData.layout.paper_bgcolor = '#272b30';
+    signalData.layout.font = { family: "Inter, sans-serif", color: '#FFFFFF' };
+    Plotly.newPlot('signal-chart', signalData.data, signalData.layout);
+    
+    // Update Alpine state
+    if (typeof Alpine !== 'undefined') {
+        Alpine.store('timeline', { 
+            currentStep: {{ step }},
+            maxSteps: {{ max_steps }}
+        });
+    }
+</script>

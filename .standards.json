@@ -1,0 +1,36 @@
+{
+  "project": "cocoa-market-signals-v3",
+  "standards_version": "1.0",
+  "enforced_standards": {
+    "colors": {
+      "source": "preston-dev-setup/kearney_design_system.py",
+      "primary_purple": "#6f42c1",
+      "primary_charcoal": "#272b30",
+      "allowed_grays": [
+        "#999999",
+        "#7a8288",
+        "#52575c",
+        "#e9ecef"
+      ]
+    },
+    "development": {
+      "source": "preston-dev-setup/DEVELOPMENT_STANDARDS.md",
+      "no_bare_except": true,
+      "use_logging": true,
+      "type_hints": true
+    },
+    "data_science": {
+      "source": "preston-dev-setup/DATA_SCIENCE_STANDARDS.md",
+      "reproducibility": true,
+      "random_seeds": true,
+      "time_series_split": true
+    },
+    "data_integrity": {
+      "no_fake_data": true,
+      "real_data_only": true,
+      "data_validation": true
+    }
+  },
+  "validation_schedule": "pre-commit",
+  "last_validated": null
+}

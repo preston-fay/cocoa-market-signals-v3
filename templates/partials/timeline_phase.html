@@ -1,0 +1,125 @@
+<!-- Timeline Phase Content -->
+<div class="phase-content">
+    <!-- Phase Header -->
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <h3 style="color: var(--kearney-purple); font-size: 1.5rem; margin-bottom: 0.5rem;">
+            {{ phase.title }}
+        </h3>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+            {{ phase.date_range }}
+        </p>
+        <p style="font-size: 1.125rem; margin-bottom: 1.5rem;">
+            {{ phase.description }}
+        </p>
+    </div>
+    
+    <!-- Key Metrics -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-label">Current Price</div>
+            <div class="metric-value">{{ metrics.current_price }}</div>
+            <div class="metric-change">{{ metrics.price_change_1m }}</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">Model Confidence</div>
+            <div class="metric-value {% if phase.confidence < 0.7 %}warning{% else %}positive{% endif %}">
+                {{ "%.0f"|format(phase.confidence * 100) }}%
+            </div>
+            <div class="metric-change">AI Certainty Level</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">Rainfall Anomaly</div>
+            <div class="metric-value">{{ metrics.avg_rainfall_anomaly }}</div>
+            <div class="metric-change">Average Deviation</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-label">Export Concentration</div>
+            <div class="metric-value">{{ metrics.export_concentration }}</div>
+            <div class="metric-change">UN Comtrade Data</div>
+        </div>
+    </div>
+    
+    <!-- Key Points -->
+    <div style="margin: 2rem 0;">
+        <h4 style="margin-bottom: 1rem;">Key Developments</h4>
+        <div style="border-left: 4px solid var(--kearney-purple); padding-left: 1.5rem;">
+            <ul style="list-style: none; padding: 0;">
+                {% for point in phase.key_points %}
+                <li style="margin-bottom: 0.75rem; color: var(--text-secondary);">
+                    <i data-feather="check" style="width: 16px; height: 16px; display: inline; color: var(--kearney-purple);"></i>
+                    {{ point }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Price Chart -->
+    <div class="explanation-box">
+        <h4>Price Evolution</h4>
+        <p>This chart shows cocoa futures prices up to {{ phase.date_range }}. Watch for the AI-generated buy signal.</p>
+    </div>
+    <div id="price-chart-container" style="margin-bottom: 2rem;"></div>
+    
+    <!-- Signal Chart -->
+    <div class="explanation-box">
+        <h4>AI Signal Strength</h4>
+        <p>
+            <strong>Signal Value:</strong> 0 = Strong Buy, 0.5 = Neutral, 1 = Strong Sell<br>
+            <strong>Current Status:</strong> 
+            {% if phase.signal_status == 'buy' %}
+                <span style="color: #6f42c1;">BUY SIGNAL ACTIVE</span>
+            {% elif phase.signal_status == 'warning' %}
+                <span style="color: #999999;">WARNING - Monitoring Closely</span>
+            {% elif phase.signal_status == 'validated' %}
+                <span style="color: #6f42c1;">SIGNAL VALIDATED - Price Surge Confirmed</span>
+            {% else %}
+                <span>Normal Market Conditions</span>
+            {% endif %}
+        </p>
+    </div>
+    <div id="signal-chart-container" style="margin-bottom: 2rem;"></div>
+    
+    <!-- Component Signals -->
+    <div class="explanation-box">
+        <h4>Signal Components</h4>
+        <p>Breaking down the three key data sources that drive our predictions:</p>
+        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+            <li><strong>Weather:</strong> Rainfall and temperature anomalies in cocoa regions</li>
+            <li><strong>Trade:</strong> Export volumes and concentration from UN Comtrade</li>
+            <li><strong>Market:</strong> Price momentum and volatility indicators</li>
+        </ul>
+    </div>
+    <div id="components-chart-container"></div>
+</div>
+
+<script>
+    // Parse and render charts
+    const priceChart = {{ price_chart|safe }};
+    const signalChart = {{ signal_chart|safe }};
+    const componentsChart = {{ components_chart|safe }};
+    
+    // Render Price Chart
+    Plotly.newPlot('price-chart-container', priceChart.data, priceChart.layout, {
+        displayModeBar: false,
+        responsive: true
+    });
+    
+    // Render Signal Chart
+    Plotly.newPlot('signal-chart-container', signalChart.data, signalChart.layout, {
+        displayModeBar: false,
+        responsive: true
+    });
+    
+    // Render Components Chart
+    Plotly.newPlot('components-chart-container', componentsChart.data, componentsChart.layout, {
+        displayModeBar: false,
+        responsive: true
+    });
+    
+    // Replace feather icons
+    feather.replace();
+</script>

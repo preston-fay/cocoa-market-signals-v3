@@ -1,0 +1,12 @@
+{
+  "total_days": 503,
+  "date_range": "2023-07-25 00:00:00-04:00 to 2025-07-23 00:00:00-04:00",
+  "current_price": 8440.0,
+  "price_change_30d": -11.613781547806056,
+  "avg_export_concentration": 0.5287915332253867,
+  "data_sources": {
+    "prices": "Yahoo Finance (CC=F)",
+    "weather": "Open-Meteo API",
+    "trade": "UN Comtrade Database"
+  }
+}

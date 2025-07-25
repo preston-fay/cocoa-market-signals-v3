@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoa Market Signals - Orchestrated Predictions</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons - Kearney Standard -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    
+    <style>
+        :root {
+            /* Kearney Colors - FROM dashboard_dark.html */
+            --kearney-black: #000000;
+            --kearney-white: #FFFFFF;
+            --kearney-slate: #272b30;
+            --kearney-purple: #6f42c1;
+            --kearney-gray-50: #F8F9FA;
+            --kearney-gray-100: #e9ecef;
+            --kearney-gray-200: #e9ecef;
+            --kearney-gray-500: #999999;
+            --kearney-gray-700: #7a8288;
+            --kearney-gray-900: #52575c;
+            
+            /* Dark Theme Only */
+            --bg-primary: var(--kearney-black);
+            --bg-secondary: var(--kearney-slate);
+            --text-primary: var(--kearney-white);
+            --text-secondary: var(--kearney-gray-500);
+            --border-color: var(--kearney-gray-700);
+            --card-bg: var(--kearney-slate);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+        
+        .header {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid var(--kearney-purple);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .data-badge {
+            background: var(--kearney-purple);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Month Navigation - AT THE TOP */
+        .month-nav {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--kearney-gray-500) var(--bg-secondary);
+        }
+        
+        .month-nav::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .month-nav::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        
+        .month-nav::-webkit-scrollbar-thumb {
+            background: var(--kearney-gray-500);
+            border-radius: 4px;
+        }
+        
+        .month-btn {
+            flex-shrink: 0;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .month-btn:hover {
+            background: var(--kearney-purple);
+            border-color: var(--kearney-purple);
+            color: white;
+        }
+        
+        .month-btn.active {
+            background: var(--kearney-purple);
+            border-color: var(--kearney-purple);
+            color: white;
+        }
+        
+        .month-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            margin-top: 0.25rem;
+            opacity: 0.8;
+        }
+        
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .metric-card {
+            background-color: var(--bg-primary);
+            padding: 1.5rem;
+            border-top: 3px solid var(--kearney-purple);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0.5rem 0;
+        }
+        
+        .metric-change {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .positive {
+            color: #6f42c1;
+        }
+        
+        .negative {
+            color: #52575c;
+        }
+        
+        /* Charts */
+        .charts-container {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+        
+        /* Performance Alert */
+        .performance-alert {
+            background-color: rgba(111, 66, 193, 0.1);
+            border: 1px solid var(--kearney-purple);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+        
+        .performance-alert h3 {
+            color: var(--kearney-purple);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .performance-alert p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+        
+        /* Data Source */
+        .data-source {
+            background-color: var(--bg-secondary);
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .data-source strong {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <h1>Cocoa Market Signals - AI Orchestration</h1>
+                <div class="subtitle">Orchestrated Model Predictions</div>
+            </div>
+            <div class="data-badge">
+                <i data-feather="cpu" style="width: 16px; height: 16px;"></i>
+                ORCHESTRATED
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Month Navigation -->
+        <div class="month-nav" id="monthNav">
+            <!-- Populated by JavaScript -->
+        </div>
+        
+        <!-- Performance Alert if no predictions -->
+        <div class="performance-alert" id="alertBox" style="display: none;">
+            <h3><i data-feather="alert-triangle" style="width: 16px; height: 16px; display: inline;"></i> Model Status</h3>
+            <p id="alertMessage">Loading predictions...</p>
+        </div>
+        
+        <!-- Metrics Grid -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Average Price</div>
+                <div class="metric-value" id="avgPrice">$0</div>
+                <div class="metric-change" id="monthName">-</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Price Change</div>
+                <div class="metric-value" id="priceChange">0%</div>
+                <div class="metric-change">Month over Month</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Model Accuracy</div>
+                <div class="metric-value" id="modelAccuracy">-</div>
+                <div class="metric-change">MAPE</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Volatility</div>
+                <div class="metric-value" id="volatility">0%</div>
+                <div class="metric-change">Annualized</div>
+            </div>
+        </div>
+        
+        <!-- Main Chart -->
+        <div class="charts-container">
+            <div class="chart-header">
+                <h3 class="chart-title">Actual vs Orchestrated Prediction</h3>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="mainChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Data Sources -->
+        <div class="data-source">
+            <strong>Data Sources:</strong> 
+            Yahoo Finance (Actual Prices) | 
+            Orchestrated Model Selection (Dynamic) | 
+            <strong>Last Updated:</strong> 2025-07-24 22:10
+        </div>
+    </div>
+    
+    <script>
+        // Initialize feather icons
+        feather.replace();
+        
+        // Chart defaults for dark theme
+        Chart.defaults.color = '#999999';
+        Chart.defaults.borderColor = '#7a8288';
+        Chart.defaults.font.family = 'Inter';
+        
+        // Data
+        const monthsData = [{"month": "2023-07", "month_name": "July 2023", "dates": ["2023-07-25", "2023-07-26", "2023-07-27", "2023-07-28"], "actual_prices": [3470.0, 3552.0, 3529.0, 3525.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 3519.0, "max_price": 3552.0, "min_price": 3470.0, "price_change": 1.585014409221902, "volatility": 25.499977451133965, "mape": null}}, {"month": "2023-08", "month_name": "August 2023", "dates": ["2023-08-01", "2023-08-02", "2023-08-03", "2023-08-04", "2023-08-07", "2023-08-08", "2023-08-09", "2023-08-10", "2023-08-11", "2023-08-14", "2023-08-15", "2023-08-16", "2023-08-17", "2023-08-18", "2023-08-21", "2023-08-22", "2023-08-23", "2023-08-24", "2023-08-25", "2023-08-28", "2023-08-29", "2023-08-30"], "actual_prices": [3543.0, 3562.0, 3491.0, 3510.0, 3476.0, 3333.0, 3319.0, 3282.0, 3297.0, 3321.0, 3340.0, 3372.0, 3413.0, 3366.0, 3355.0, 3329.0, 3323.0, 3363.0, 3430.0, 3442.0, 3555.0, 3606.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 3410.3636363636365, "max_price": 3606.0, "min_price": 3282.0, "price_change": 1.7781541066892466, "volatility": 24.624024651255937, "mape": null}}, {"month": "2023-09", "month_name": "September 2023", "dates": ["2023-09-01", "2023-09-05", "2023-09-06", "2023-09-07", "2023-09-08", "2023-09-11", "2023-09-12", "2023-09-13", "2023-09-14", "2023-09-15", "2023-09-18", "2023-09-19", "2023-09-20", "2023-09-21", "2023-09-22", "2023-09-25", "2023-09-26", "2023-09-27", "2023-09-28", "2023-09-29"], "actual_prices": [3574.0, 3560.0, 3577.0, 3573.0, 3609.0, 3611.0, 3772.0, 3849.0, 3853.0, 3757.0, 3621.0, 3642.0, 3570.0, 3595.0, 3582.0, 3496.0, 3500.0, 3416.0, 3459.0, 3418.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 3601.7, "max_price": 3853.0, "min_price": 3416.0, "price_change": -4.364857302742026, "volatility": 29.762202346456064, "mape": null}}, {"month": "2023-10", "month_name": "October 2023", "dates": ["2023-10-02", "2023-10-03", "2023-10-04", "2023-10-05", "2023-10-06", "2023-10-09", "2023-10-10", "2023-10-11", "2023-10-12", "2023-10-13", "2023-10-16", "2023-10-17", "2023-10-18", "2023-10-19", "2023-10-20", "2023-10-23", "2023-10-24", "2023-10-25", "2023-10-26", "2023-10-27", "2023-10-30"], "actual_prices": [3502.0, 3428.0, 3431.0, 3400.0, 3453.0, 3435.0, 3474.0, 3432.0, 3490.0, 3499.0, 3591.0, 3635.0, 3639.0, 3648.0, 3694.0, 3759.0, 3729.0, 3735.0, 3810.0, 3852.0, 3826.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 3593.4285714285716, "max_price": 3852.0, "min_price": 3400.0, "price_change": 9.25185608223872, "volatility": 19.65994629382147, "mape": null}}, {"month": "2023-11", "month_name": "November 2023", "dates": ["2023-11-01", "2023-11-02", "2023-11-03", "2023-11-06", "2023-11-07", "2023-11-08", "2023-11-09", "2023-11-10", "2023-11-13", "2023-11-14", "2023-11-15", "2023-11-16", "2023-11-17", "2023-11-20", "2023-11-21", "2023-11-22", "2023-11-24", "2023-11-27", "2023-11-28", "2023-11-29"], "actual_prices": [3794.0, 3865.0, 3898.0, 3914.0, 3883.0, 3916.0, 3949.0, 3991.0, 4051.0, 3946.0, 3939.0, 4004.0, 4083.0, 4034.0, 4227.0, 4173.0, 4219.0, 4260.0, 4370.0, 4438.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 4047.7, "max_price": 4438.0, "min_price": 3794.0, "price_change": 16.974169741697416, "volatility": 25.64966248752073, "mape": null}}, {"month": "2023-12", "month_name": "December 2023", "dates": ["2023-12-01", "2023-12-04", "2023-12-05", "2023-12-06", "2023-12-07", "2023-12-08", "2023-12-11", "2023-12-12", "2023-12-13", "2023-12-14", "2023-12-15", "2023-12-18", "2023-12-19", "2023-12-20", "2023-12-21", "2023-12-22", "2023-12-26", "2023-12-27", "2023-12-28", "2023-12-29"], "actual_prices": [4398.0, 4271.0, 4206.0, 4241.0, 4340.0, 4381.0, 4351.0, 4375.0, 4395.0, 4267.0, 4244.0, 4271.0, 4289.0, 4309.0, 4288.0, 4311.0, 4283.0, 4280.0, 4256.0, 4196.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 4297.6, "max_price": 4398.0, "min_price": 4196.0, "price_change": -4.59299681673488, "volatility": 20.63387703309342, "mape": null}}, {"month": "2024-01", "month_name": "January 2024", "dates": ["2024-01-02", "2024-01-03", "2024-01-04", "2024-01-05", "2024-01-08", "2024-01-09", "2024-01-10", "2024-01-11", "2024-01-12", "2024-01-16", "2024-01-17", "2024-01-18", "2024-01-19", "2024-01-22", "2024-01-23", "2024-01-24", "2024-01-25", "2024-01-26", "2024-01-29", "2024-01-30"], "actual_prices": [4275.0, 4238.0, 4260.0, 4204.0, 4094.0, 4162.0, 4206.0, 4274.0, 4323.0, 4429.0, 4448.0, 4458.0, 4583.0, 4565.0, 4634.0, 4785.0, 4625.0, 4672.0, 4732.0, 4805.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 4438.6, "max_price": 4805.0, "min_price": 4094.0, "price_change": 12.397660818713451, "volatility": 27.301190386721753, "mape": null}}, {"month": "2024-02", "month_name": "February 2024", "dates": ["2024-02-01", "2024-02-02", "2024-02-05", "2024-02-06", "2024-02-07", "2024-02-08", "2024-02-09", "2024-02-12", "2024-02-13", "2024-02-14", "2024-02-15", "2024-02-16", "2024-02-20", "2024-02-21", "2024-02-22", "2024-02-23", "2024-02-26", "2024-02-27", "2024-02-28"], "actual_prices": [4956.0, 5009.0, 5189.0, 5220.0, 5410.0, 5805.0, 5888.0, 5860.0, 6001.0, 5949.0, 5961.0, 5706.0, 5999.0, 6198.0, 6169.0, 6562.0, 6884.0, 6755.0, 6380.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 5889.526315789473, "max_price": 6884.0, "min_price": 4956.0, "price_change": 28.732849071832124, "volatility": 55.235987726679966, "mape": null}}, {"month": "2024-03", "month_name": "March 2024", "dates": ["2024-03-01", "2024-03-04", "2024-03-05", "2024-03-06", "2024-03-07", "2024-03-08", "2024-03-11", "2024-03-12", "2024-03-13", "2024-03-14", "2024-03-15", "2024-03-18", "2024-03-19", "2024-03-20", "2024-03-21", "2024-03-22", "2024-03-25", "2024-03-26", "2024-03-27", "2024-03-28"], "actual_prices": [6826.0, 7057.0, 6970.0, 7170.0, 7054.0, 6997.0, 7329.0, 8048.0, 8034.0, 7405.0, 8018.0, 8172.0, 8027.0, 8324.0, 8559.0, 8939.0, 9649.0, 9622.0, 9843.0, 9766.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 8090.45, "max_price": 9843.0, "min_price": 6826.0, "price_change": 43.07061236448872, "volatility": 66.46037356245122, "mape": null}}, {"month": "2024-04", "month_name": "April 2024", "dates": ["2024-04-01", "2024-04-02", "2024-04-03", "2024-04-04", "2024-04-05", "2024-04-08", "2024-04-09", "2024-04-10", "2024-04-11", "2024-04-12", "2024-04-15", "2024-04-16", "2024-04-17", "2024-04-18", "2024-04-19", "2024-04-22", "2024-04-23", "2024-04-24", "2024-04-25", "2024-04-26", "2024-04-29"], "actual_prices": [10120.0, 9949.0, 9524.0, 9462.0, 9795.0, 9895.0, 10204.0, 10411.0, 10373.0, 10987.0, 11001.0, 10243.0, 10340.0, 11311.0, 11878.0, 11166.0, 10584.0, 11043.0, 10988.0, 10729.0, 9983.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 10475.52380952381, "max_price": 11878.0, "min_price": 9462.0, "price_change": -1.3537549407114624, "volatility": 71.15501130008323, "mape": null}}, {"month": "2024-05", "month_name": "May 2024", "dates": ["2024-05-01", "2024-05-02", "2024-05-03", "2024-05-06", "2024-05-07", "2024-05-08", "2024-05-09", "2024-05-10", "2024-05-13", "2024-05-14", "2024-05-15", "2024-05-16", "2024-05-17", "2024-05-20", "2024-05-21", "2024-05-22", "2024-05-23", "2024-05-24", "2024-05-28", "2024-05-29", "2024-05-30"], "actual_prices": [9183.0, 8483.0, 8505.0, 8571.0, 9593.0, 9617.0, 9678.0, 9874.0, 8149.0, 8751.0, 9066.0, 7393.0, 7348.0, 7216.0, 7394.0, 7536.0, 8109.0, 8294.0, 8780.0, 9309.0, 9257.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 8576.47619047619, "max_price": 9874.0, "min_price": 7216.0, "price_change": 0.8058368724817598, "volatility": 118.79484529897815, "mape": null}}, {"month": "2024-06", "month_name": "June 2024", "dates": ["2024-06-03", "2024-06-04", "2024-06-05", "2024-06-06", "2024-06-07", "2024-06-10", "2024-06-11", "2024-06-12", "2024-06-13", "2024-06-14", "2024-06-17", "2024-06-18", "2024-06-20", "2024-06-21", "2024-06-24", "2024-06-25", "2024-06-26", "2024-06-27", "2024-06-28"], "actual_prices": [9775.0, 9557.0, 9408.0, 9872.0, 9933.0, 9687.0, 9910.0, 10539.0, 10810.0, 10294.0, 9659.0, 9938.0, 9598.0, 8995.0, 7978.0, 7967.0, 7797.0, 7397.0, 7729.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 9307.526315789473, "max_price": 10810.0, "min_price": 7397.0, "price_change": -20.9309462915601, "volatility": 73.46093705572038, "mape": null}}, {"month": "2024-07", "month_name": "July 2024", "dates": ["2024-07-01", "2024-07-02", "2024-07-03", "2024-07-05", "2024-07-08", "2024-07-09", "2024-07-10", "2024-07-11", "2024-07-12", "2024-07-15", "2024-07-16", "2024-07-17", "2024-07-18", "2024-07-19", "2024-07-22", "2024-07-23", "2024-07-24", "2024-07-25", "2024-07-26", "2024-07-29", "2024-07-30"], "actual_prices": [7352.0, 7773.0, 7811.0, 7721.0, 7693.0, 8023.0, 8197.0, 8441.0, 8523.0, 8463.0, 8320.0, 7763.0, 8068.0, 7689.0, 8398.0, 8286.0, 8227.0, 7805.0, 8038.0, 7716.0, 8136.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 8021.0952380952385, "max_price": 8523.0, "min_price": 7352.0, "price_change": 10.663764961915124, "volatility": 64.57677530147433, "mape": null}}, {"month": "2024-08", "month_name": "August 2024", "dates": ["2024-08-01", "2024-08-02", "2024-08-05", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-12", "2024-08-13", "2024-08-14", "2024-08-15", "2024-08-16", "2024-08-19", "2024-08-20", "2024-08-21", "2024-08-22", "2024-08-23", "2024-08-26", "2024-08-27", "2024-08-28", "2024-08-29", "2024-08-30"], "actual_prices": [7562.0, 7520.0, 7901.0, 8223.0, 8586.0, 8178.0, 9098.0, 8731.0, 8862.0, 8833.0, 8485.0, 8637.0, 9173.0, 9486.0, 9582.0, 9689.0, 9821.0, 9880.0, 9785.0, 9730.0, 9600.0, 9666.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 8955.818181818182, "max_price": 9880.0, "min_price": 7520.0, "price_change": 27.82332716212642, "volatility": 58.80596768955547, "mape": null}}, {"month": "2024-09", "month_name": "September 2024", "dates": ["2024-09-03", "2024-09-04", "2024-09-05", "2024-09-06", "2024-09-09", "2024-09-10", "2024-09-11", "2024-09-12", "2024-09-13", "2024-09-16", "2024-09-17", "2024-09-18", "2024-09-19", "2024-09-20", "2024-09-23", "2024-09-24", "2024-09-25", "2024-09-26", "2024-09-27"], "actual_prices": [9663.0, 9282.0, 9539.0, 9459.0, 9839.0, 9654.0, 10115.0, 9968.0, 10079.0, 7767.0, 7620.0, 7814.0, 7750.0, 7658.0, 7786.0, 7867.0, 7955.0, 8122.0, 8281.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 8748.315789473685, "max_price": 10115.0, "min_price": 7620.0, "price_change": -14.301976611818276, "volatility": 95.37532330066459, "mape": null}}, {"month": "2024-10", "month_name": "October 2024", "dates": ["2024-10-01", "2024-10-02", "2024-10-03", "2024-10-04", "2024-10-07", "2024-10-08", "2024-10-09", "2024-10-10", "2024-10-11", "2024-10-14", "2024-10-15", "2024-10-16", "2024-10-17", "2024-10-18", "2024-10-21", "2024-10-22", "2024-10-23", "2024-10-24", "2024-10-25", "2024-10-28", "2024-10-29", "2024-10-30"], "actual_prices": [7039.0, 7064.0, 7030.0, 7069.0, 6908.0, 7050.0, 7351.0, 7529.0, 7739.0, 7615.0, 7942.0, 7765.0, 7771.0, 7450.0, 7394.0, 7140.0, 7001.0, 6756.0, 6770.0, 6917.0, 7267.0, 7391.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 7270.818181818182, "max_price": 7942.0, "min_price": 6756.0, "price_change": 5.000710328171616, "volatility": 42.76850747141043, "mape": null}}, {"month": "2024-11", "month_name": "November 2024", "dates": ["2024-11-01", "2024-11-04", "2024-11-05", "2024-11-06", "2024-11-07", "2024-11-08", "2024-11-11", "2024-11-12", "2024-11-13", "2024-11-14", "2024-11-15", "2024-11-18", "2024-11-19", "2024-11-20", "2024-11-21", "2024-11-22", "2024-11-25", "2024-11-26", "2024-11-27", "2024-11-29"], "actual_prices": [7341.0, 7328.0, 7251.0, 6924.0, 7360.0, 7117.0, 7298.0, 7867.0, 8163.0, 8686.0, 8607.0, 8404.0, 8574.0, 8340.0, 8449.0, 8897.0, 8863.0, 9033.0, 8844.0, 9220.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 8128.3, "max_price": 9220.0, "min_price": 6924.0, "price_change": 25.595967851791308, "volatility": 57.71826646720809, "mape": null}}, {"month": "2024-12", "month_name": "December 2024", "dates": ["2024-12-02", "2024-12-03", "2024-12-04", "2024-12-05", "2024-12-06", "2024-12-09", "2024-12-10", "2024-12-11", "2024-12-12", "2024-12-13", "2024-12-16", "2024-12-17", "2024-12-18", "2024-12-19", "2024-12-20", "2024-12-23", "2024-12-24", "2024-12-26", "2024-12-27", "2024-12-30"], "actual_prices": [9197.0, 8833.0, 9196.0, 9648.0, 9767.0, 9977.0, 10387.0, 10458.0, 10702.0, 11181.0, 11821.0, 11765.0, 12565.0, 12107.0, 11954.0, 11746.0, 11852.0, 11027.0, 10124.0, 11507.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 10790.7, "max_price": 12565.0, "min_price": 8833.0, "price_change": 25.11688594106774, "volatility": 81.3944887560031, "mape": null}}, {"month": "2025-01", "month_name": "January 2025", "dates": ["2025-01-02", "2025-01-03", "2025-01-06", "2025-01-07", "2025-01-08", "2025-01-09", "2025-01-10", "2025-01-13", "2025-01-14", "2025-01-15", "2025-01-16", "2025-01-17", "2025-01-21", "2025-01-22", "2025-01-23", "2025-01-24", "2025-01-27", "2025-01-28", "2025-01-29", "2025-01-30"], "actual_prices": [11137.0, 11238.0, 11377.0, 11210.0, 10453.0, 10927.0, 10570.0, 10928.0, 10951.0, 10821.0, 10502.0, 11173.0, 11559.0, 11675.0, 11552.0, 11593.0, 11372.0, 11374.0, 11745.0, 11207.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 11168.2, "max_price": 11745.0, "min_price": 10453.0, "price_change": 0.6285355122564426, "volatility": 51.992123556768554, "mape": null}}, {"month": "2025-02", "month_name": "February 2025", "dates": ["2025-02-03", "2025-02-04", "2025-02-05", "2025-02-06", "2025-02-07", "2025-02-10", "2025-02-11", "2025-02-12", "2025-02-13", "2025-02-14", "2025-02-18", "2025-02-19", "2025-02-20", "2025-02-21", "2025-02-24", "2025-02-25", "2025-02-26", "2025-02-27"], "actual_prices": [11002.0, 10913.0, 10514.0, 10094.0, 10018.0, 9714.0, 10131.0, 10006.0, 10381.0, 10159.0, 10301.0, 10218.0, 10075.0, 8934.0, 8352.0, 8675.0, 9100.0, 9130.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 9873.166666666666, "max_price": 11002.0, "min_price": 8352.0, "price_change": -17.01508816578804, "volatility": 65.85843061279272, "mape": null}}, {"month": "2025-03", "month_name": "March 2025", "dates": ["2025-03-03", "2025-03-04", "2025-03-05", "2025-03-06", "2025-03-07", "2025-03-10", "2025-03-11", "2025-03-12", "2025-03-13", "2025-03-14", "2025-03-17", "2025-03-18", "2025-03-19", "2025-03-20", "2025-03-21", "2025-03-24", "2025-03-25", "2025-03-26", "2025-03-27", "2025-03-28"], "actual_prices": [8082.0, 8225.0, 7915.0, 8036.0, 8141.0, 8279.0, 8151.0, 8204.0, 8031.0, 7728.0, 7827.0, 8021.0, 8121.0, 8071.0, 7765.0, 8079.0, 7995.0, 8044.0, 7979.0, 8042.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 8036.8, "max_price": 8279.0, "min_price": 7728.0, "price_change": -0.4949269982677555, "volatility": 35.28398723255158, "mape": null}}, {"month": "2025-04", "month_name": "April 2025", "dates": ["2025-04-01", "2025-04-02", "2025-04-03", "2025-04-04", "2025-04-07", "2025-04-08", "2025-04-09", "2025-04-10", "2025-04-11", "2025-04-14", "2025-04-15", "2025-04-16", "2025-04-17", "2025-04-21", "2025-04-22", "2025-04-23", "2025-04-24", "2025-04-25", "2025-04-28", "2025-04-29"], "actual_prices": [8177.0, 8968.0, 9291.0, 8512.0, 8053.0, 7755.0, 8447.0, 8088.0, 8511.0, 8247.0, 8002.0, 8096.0, 8365.0, 8810.0, 9310.0, 9104.0, 9391.0, 9652.0, 9217.0, 9146.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 8657.1, "max_price": 9652.0, "min_price": 7755.0, "price_change": 11.85031185031185, "volatility": 81.10145047672196, "mape": null}}, {"month": "2025-05", "month_name": "May 2025", "dates": ["2025-05-01", "2025-05-02", "2025-05-05", "2025-05-06", "2025-05-07", "2025-05-08", "2025-05-09", "2025-05-12", "2025-05-13", "2025-05-14", "2025-05-15", "2025-05-16", "2025-05-19", "2025-05-20", "2025-05-21", "2025-05-22", "2025-05-23", "2025-05-27", "2025-05-28", "2025-05-29", "2025-05-30"], "actual_prices": [8973.0, 9127.0, 8758.0, 9175.0, 9398.0, 9268.0, 9387.0, 9340.0, 10171.0, 10129.0, 10257.0, 10898.0, 10974.0, 10874.0, 10719.0, 10278.0, 9764.0, 9739.0, 9634.0, 9110.0, 9791.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 9798.285714285714, "max_price": 10974.0, "min_price": 8758.0, "price_change": 9.116237601693971, "volatility": 62.913466923423776, "mape": null}}, {"month": "2025-06", "month_name": "June 2025", "dates": ["2025-06-02", "2025-06-03", "2025-06-04", "2025-06-05", "2025-06-06", "2025-06-09", "2025-06-10", "2025-06-11", "2025-06-12", "2025-06-13", "2025-06-16", "2025-06-17", "2025-06-18", "2025-06-20", "2025-06-23", "2025-06-24", "2025-06-25", "2025-06-26", "2025-06-27"], "actual_prices": [9474.0, 9775.0, 9948.0, 10076.0, 10259.0, 10174.0, 9602.0, 9549.0, 9858.0, 9768.0, 10035.0, 9943.0, 9680.0, 8459.0, 9189.0, 9436.0, 9081.0, 9361.0, 9231.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 9626.21052631579, "max_price": 10259.0, "min_price": 8459.0, "price_change": -2.5649145028499047, "volatility": 71.38335834017637, "mape": null}}, {"month": "2025-07", "month_name": "July 2025", "dates": ["2025-07-01", "2025-07-02", "2025-07-03", "2025-07-04", "2025-07-07", "2025-07-08", "2025-07-09", "2025-07-10", "2025-07-11", "2025-07-14", "2025-07-15", "2025-07-16", "2025-07-17", "2025-07-18", "2025-07-21", "2025-07-22", "2025-07-23"], "actual_prices": [9000.0, 8904.0, 8780.0, 8780.0, 8879.0, 8760.0, 9046.0, 8742.0, 8840.0, 8950.0, 8567.0, 8322.0, 7309.0, 7800.0, 8156.0, 8149.0, 8440.0], "orchestrated_predictions": [], "prediction_dates": [], "metrics": {"avg_price": 8554.35294117647, "max_price": 9046.0, "min_price": 7309.0, "price_change": -6.222222222222222, "volatility": 68.92217167607282, "mape": null}}];
+        
+        let currentMonthIndex = monthsData.length - 1;
+        let mainChart = null;
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMonthNav();
+            showMonth(currentMonthIndex);
+        });
+        
+        function initializeMonthNav() {
+            const nav = document.getElementById('monthNav');
+            
+            monthsData.forEach((month, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'month-btn';
+                btn.innerHTML = month.month_name;
+                btn.onclick = () => showMonth(index);
+                
+                if (index === currentMonthIndex) {
+                    btn.classList.add('active');
+                }
+                
+                nav.appendChild(btn);
+            });
+        }
+        
+        function showMonth(index) {
+            currentMonthIndex = index;
+            const month = monthsData[index];
+            
+            // Update active button
+            document.querySelectorAll('.month-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+            
+            // Update metrics
+            document.getElementById('avgPrice').textContent = '$' + month.metrics.avg_price.toFixed(0).toLocaleString();
+            document.getElementById('monthName').textContent = month.month_name;
+            
+            const priceChangeEl = document.getElementById('priceChange');
+            priceChangeEl.textContent = (month.metrics.price_change >= 0 ? '+' : '') + month.metrics.price_change.toFixed(1) + '%';
+            priceChangeEl.className = 'metric-value ' + (month.metrics.price_change >= 0 ? 'positive' : 'negative');
+            
+            if (month.metrics.mape !== null) {
+                document.getElementById('modelAccuracy').textContent = month.metrics.mape.toFixed(2) + '%';
+            } else {
+                document.getElementById('modelAccuracy').textContent = 'N/A';
+            }
+            
+            document.getElementById('volatility').textContent = month.metrics.volatility.toFixed(1) + '%';
+            
+            // Check if we have predictions
+            if (month.orchestrated_predictions.length === 0) {
+                document.getElementById('alertBox').style.display = 'block';
+                document.getElementById('alertMessage').textContent = 
+                    'No orchestrated predictions available for this period. Models may need retraining.';
+            } else {
+                document.getElementById('alertBox').style.display = 'none';
+            }
+            
+            // Update chart
+            updateChart(month);
+        }
+        
+        function updateChart(month) {
+            if (mainChart) mainChart.destroy();
+            
+            const ctx = document.getElementById('mainChart').getContext('2d');
+            
+            // Datasets
+            const datasets = [];
+            
+            // Actual prices
+            datasets.push({
+                label: 'Actual Price',
+                data: month.dates.map((date, i) => ({
+                    x: date,
+                    y: month.actual_prices[i]
+                })),
+                borderColor: '#999999',
+                backgroundColor: 'transparent',
+                borderWidth: 3,
+                tension: 0.1,
+                pointRadius: 0
+            });
+            
+            // Orchestrated predictions
+            if (month.orchestrated_predictions.length > 0) {
+                datasets.push({
+                    label: 'Orchestrated Prediction',
+                    data: month.prediction_dates.map((date, i) => ({
+                        x: date,
+                        y: month.orchestrated_predictions[i]
+                    })),
+                    borderColor: '#6f42c1',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    tension: 0.1,
+                    pointRadius: 0
+                });
+            }
+            
+            mainChart = new Chart(ctx, {
+                type: 'line',
+                data: { datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                color: '#999999'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#272b30',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#999999',
+                            borderColor: '#7a8288',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': $';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y.toFixed(0).toLocaleString();
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                parser: 'yyyy-MM-dd',
+                                displayFormats: {
+                                    day: 'MMM dd'
+                                }
+                            },
+                            grid: {
+                                color: '#52575c',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                maxTicksLimit: 8,
+                                color: '#999999'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: '#52575c',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                },
+                                color: '#999999'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

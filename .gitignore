@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.env
+.venv
+
+# Data
+data/cache/
+data/real-time/*.json
+data/validated/*.json
+*.csv
+*.xlsx
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# API Keys
+config/credentials.json
+config/api_keys.json
+
+# Temporary
+*.tmp
+*.bak
+temp/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Reports
+reports/*.pdf
+reports/*.html
+
+# Node modules (for dashboard)
+node_modules/
+package-lock.json

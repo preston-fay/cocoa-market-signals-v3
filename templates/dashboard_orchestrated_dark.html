@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoa Market Signals - AI Orchestration Dashboard</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons - Kearney Standard -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    
+    <style>
+        :root {
+            /* CORRECT Kearney Colors from preston-dev-setup */
+            --kearney-purple: #6f42c1;
+            --kearney-purple-accent: #9955bb;
+            --kearney-charcoal: #272b30;
+            --kearney-charcoal-secondary: #3a3f44;
+            --kearney-gray: #999999;
+            --kearney-gray-light: #7a8288;
+            --kearney-gray-dark: #52575c;
+            --kearney-white: #FFFFFF;
+            --kearney-black: #000000;
+            --kearney-green: #00e676;
+            --kearney-red: #ff5252;
+            
+            /* Dark Theme Only */
+            --bg-primary: var(--kearney-black);
+            --bg-secondary: var(--kearney-charcoal);
+            --bg-card: var(--kearney-charcoal-secondary);
+            --text-primary: var(--kearney-white);
+            --text-secondary: var(--kearney-gray);
+            --border-color: var(--kearney-gray-light);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+        
+        .header {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid var(--kearney-purple);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .orchestration-badge {
+            background: var(--kearney-purple);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--kearney-purple);
+        }
+        
+        .metric-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+        
+        .metric-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+        
+        .positive { color: var(--kearney-green); }
+        .negative { color: var(--kearney-red); }
+        .neutral { color: var(--text-secondary); }
+        
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .regime-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .regime-high { color: var(--kearney-red); border-color: var(--kearney-red); }
+        .regime-medium { color: #ff9800; border-color: #ff9800; }
+        .regime-low { color: var(--kearney-green); border-color: var(--kearney-green); }
+        
+        .signal-display {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .signal-value {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .signal-confidence {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+        
+        .model-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .model-badge {
+            background: var(--bg-secondary);
+            border: 1px solid var(--kearney-purple);
+            color: var(--kearney-purple);
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+        
+        .model-badge.best {
+            background: var(--kearney-purple);
+            color: white;
+        }
+        
+        .recommendations {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .recommendation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--bg-secondary);
+        }
+        
+        .recommendation-item:last-child {
+            border-bottom: none;
+        }
+        
+        .recommendation-icon {
+            color: var(--kearney-purple);
+            flex-shrink: 0;
+        }
+        
+        canvas {
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <h1>Cocoa Market Signals - AI Orchestration</h1>
+                <div class="subtitle">Dynamic Model Selection • Real-Time Performance</div>
+            </div>
+            <div class="orchestration-badge">
+                <i data-feather="cpu" width="16"></i>
+                <span>Models Active: {{ active_model_count }}</span>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Signal Display -->
+        <div class="signal-display">
+            <div class="signal-value {{ signal_class }}">{{ signal_direction }}</div>
+            <div class="signal-confidence">{{ signal_strength }}% Confidence</div>
+            <div class="regime-indicator {{ regime_class }}">
+                <i data-feather="activity" width="16"></i>
+                {{ regime_display }} VOLATILITY REGIME
+            </div>
+        </div>
+        
+        <!-- Key Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-header">
+                    <i data-feather="dollar-sign" width="16"></i>
+                    <div class="metric-label">Current Price</div>
+                </div>
+                <div class="metric-value">${{ current_price }}</div>
+                <div class="metric-change {{ momentum_class }}">{{ momentum_5d }}</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-header">
+                    <i data-feather="trending-up" width="16"></i>
+                    <div class="metric-label">7-Day Forecast</div>
+                </div>
+                <div class="metric-value">${{ forecast_price }}</div>
+                <div class="metric-change {{ forecast_class }}">{{ forecast_change }}</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-header">
+                    <i data-feather="zap" width="16"></i>
+                    <div class="metric-label">Volatility</div>
+                </div>
+                <div class="metric-value">{{ volatility }}%</div>
+                <div class="metric-change neutral">{{ volatility_percentile }}th percentile</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-header">
+                    <i data-feather="award" width="16"></i>
+                    <div class="metric-label">Best Model</div>
+                </div>
+                <div class="metric-value">XGBoost</div>
+                <div class="metric-change positive">0.17% MAPE</div>
+            </div>
+        </div>
+        
+        <!-- Actual vs Predicted Chart -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <div class="chart-title">
+                    <i data-feather="trending-up" width="20"></i>
+                    Actual vs Predicted Prices
+                </div>
+                <span class="regime-indicator">Last 90 Days</span>
+            </div>
+            <canvas id="actualVsPredictedChart"></canvas>
+        </div>
+        
+        <!-- Model Performance -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <div class="chart-title">
+                    <i data-feather="bar-chart-2" width="20"></i>
+                    Model Performance Comparison
+                </div>
+            </div>
+            <canvas id="performanceChart"></canvas>
+        </div>
+        
+        <!-- Active Models -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <div class="chart-title">
+                    <i data-feather="cpu" width="20"></i>
+                    Active Models for {{ regime_display }} Volatility
+                </div>
+            </div>
+            <div class="model-list">
+                {% for model in active_models %}
+                <div class="model-badge {% if model.is_best %}best{% endif %}">
+                    <i data-feather="check-circle" width="14"></i>
+                    {{ model.name }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Recommendations -->
+        <div class="recommendations">
+            <div class="chart-header">
+                <div class="chart-title">
+                    <i data-feather="message-square" width="20"></i>
+                    AI-Powered Recommendations
+                </div>
+            </div>
+            {% for rec in recommendations %}
+            <div class="recommendation-item">
+                <i data-feather="chevron-right" width="20" class="recommendation-icon"></i>
+                <div>{{ rec }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- 30-Day Forecast -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <div class="chart-title">
+                    <i data-feather="calendar" width="20"></i>
+                    30-Day Price Forecast
+                </div>
+            </div>
+            <canvas id="forecastChart"></canvas>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize Feather icons
+        feather.replace();
+        
+        // Chart defaults for dark theme
+        Chart.defaults.color = '#999999';
+        Chart.defaults.borderColor = '#7a8288';
+        
+        // Actual vs Predicted Chart
+        const actualVsPredictedCtx = document.getElementById('actualVsPredictedChart').getContext('2d');
+        new Chart(actualVsPredictedCtx, {
+            type: 'line',
+            data: {
+                labels: {{ actual_dates | safe }},
+                datasets: [
+                    {
+                        label: 'Actual Price',
+                        data: {{ actual_prices | safe }},
+                        borderColor: '#999999',
+                        backgroundColor: 'rgba(153, 153, 153, 0.1)',
+                        borderWidth: 3,
+                        tension: 0
+                    },
+                    {
+                        label: 'XGBoost Prediction',
+                        data: {{ predicted_prices | safe }},
+                        borderColor: '#6f42c1',
+                        backgroundColor: 'rgba(111, 66, 193, 0.1)',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        tension: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { font: { family: 'Inter' } }
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: { unit: 'day' },
+                        grid: { color: '#3a3f44' }
+                    },
+                    y: {
+                        ticks: { callback: value => '$' + value.toLocaleString() },
+                        grid: { color: '#3a3f44' }
+                    }
+                }
+            }
+        });
+        
+        // Model Performance Chart
+        const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(performanceCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ model_names | safe }},
+                datasets: [{
+                    label: 'MAPE (%)',
+                    data: {{ model_mapes | safe }},
+                    backgroundColor: {{ model_mapes | safe }}.map(v => 
+                        v < 1 ? '#00e676' : v < 3 ? '#6f42c1' : v < 5 ? '#ff9800' : '#ff5252'
+                    ),
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#3a3f44' },
+                        ticks: { callback: value => value + '%' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+        
+        // 30-Day Forecast Chart
+        const forecastCtx = document.getElementById('forecastChart').getContext('2d');
+        new Chart(forecastCtx, {
+            type: 'line',
+            data: {
+                labels: {{ forecast_days | safe }}.map(d => 'Day ' + d),
+                datasets: [
+                    {
+                        label: 'Forecast',
+                        data: {{ forecast_values | safe }},
+                        borderColor: '#6f42c1',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        tension: 0.2
+                    },
+                    {
+                        label: 'Upper Bound',
+                        data: {{ forecast_upper | safe }},
+                        borderColor: 'transparent',
+                        backgroundColor: 'rgba(111, 66, 193, 0.1)',
+                        fill: '+1',
+                        tension: 0.2
+                    },
+                    {
+                        label: 'Lower Bound',
+                        data: {{ forecast_lower | safe }},
+                        borderColor: 'transparent',
+                        backgroundColor: 'rgba(111, 66, 193, 0.1)',
+                        fill: '-1',
+                        tension: 0.2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        ticks: { callback: value => '$' + value.toLocaleString() },
+                        grid: { color: '#3a3f44' }
+                    },
+                    x: {
+                        grid: { color: '#3a3f44' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

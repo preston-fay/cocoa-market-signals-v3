@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoa Market Signals - Real Data Dashboard</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons - Kearney Standard -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    
+    <style>
+        :root {
+            /* Kearney Colors */
+            --kearney-black: #000000;
+            --kearney-white: #FFFFFF;
+            --kearney-slate: #272b30;
+            --kearney-purple: #6f42c1;
+            --kearney-gray-50: #F8F9FA;
+            --kearney-gray-100: #e9ecef;
+            --kearney-gray-200: #e9ecef;
+            --kearney-gray-500: #999999;
+            --kearney-gray-700: #7a8288;
+            --kearney-gray-900: #52575c;
+            
+            /* Dark Theme Only */
+            --bg-primary: var(--kearney-black);
+            --bg-secondary: var(--kearney-slate);
+            --text-primary: var(--kearney-white);
+            --text-secondary: var(--kearney-gray-500);
+            --border-color: var(--kearney-gray-700);
+            --card-bg: var(--kearney-slate);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+        
+        .header {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid var(--kearney-purple);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .data-badge {
+            background: var(--kearney-purple);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .metric-card {
+            background-color: var(--bg-primary);
+            padding: 1.5rem;
+            border-top: 3px solid var(--kearney-purple);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0.5rem 0;
+        }
+        
+        .metric-change {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .positive {
+            color: #6f42c1;
+        }
+        
+        .negative {
+            color: #52575c;
+        }
+        
+        .warning {
+            color: #999999;
+        }
+        
+        /* Charts */
+        .charts-container {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .analytics-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            font-size: 0.875rem;
+        }
+        
+        .tab:hover {
+            color: var(--text-primary);
+        }
+        
+        .tab.active {
+            color: var(--kearney-purple);
+            border-bottom-color: var(--kearney-purple);
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 300px; /* Fixed height for charts */
+        }
+        
+        /* Signal Indicators */
+        .signal-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .signal-strong {
+            background-color: var(--kearney-purple);
+            color: white;
+        }
+        
+        .signal-weak {
+            background-color: var(--kearney-gray-700);
+            color: white;
+        }
+        
+        /* Data Source */
+        .data-source {
+            background-color: var(--bg-secondary);
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .data-source strong {
+            color: var(--text-primary);
+        }
+        
+        /* Performance Alert */
+        .performance-alert {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid #52575c;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+        
+        .performance-alert h3 {
+            color: #52575c;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .performance-alert p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <h1>Cocoa Market Signals Dashboard</h1>
+                <div class="subtitle">100% Real Data Analysis</div>
+            </div>
+            <div class="data-badge">
+                <i data-feather="check-circle" style="width: 16px; height: 16px;"></i>
+                VERIFIED REAL DATA
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Performance Alert -->
+        <div class="performance-alert">
+            <h3><i data-feather="alert-triangle" style="width: 16px; height: 16px; display: inline;"></i> Model Performance Warning</h3>
+            <p>Current signal accuracy is only {{ performance.signal_accuracy }} - barely better than random chance (50%). 
+            This indicates our current features may not be sufficiently predictive for reliable trading signals.</p>
+        </div>
+        
+        <!-- Metrics Grid -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Current Price</div>
+                <div class="metric-value">{{ metrics.current_price }}</div>
+                <div class="metric-change positive">{{ metrics.price_change_1m }}</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Signal Accuracy</div>
+                <div class="metric-value warning">{{ performance.signal_accuracy }}</div>
+                <div class="metric-change negative">Needs Improvement</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Sharpe Ratio</div>
+                <div class="metric-value">{{ performance.sharpe_ratio }}</div>
+                <div class="metric-change">Risk-Adjusted Returns</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Export Concentration</div>
+                <div class="metric-value">{{ metrics.export_concentration }}</div>
+                <div class="metric-change">Real UN Comtrade</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Volatility</div>
+                <div class="metric-value">{{ metrics.volatility }}</div>
+                <div class="metric-change negative">High Risk</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-label">Max Drawdown</div>
+                <div class="metric-value negative">-{{ metrics.max_drawdown }}</div>
+                <div class="metric-change">Historical Max Loss</div>
+            </div>
+        </div>
+        
+        <!-- Charts -->
+        <div class="charts-container">
+            <div class="analytics-tabs">
+                <button class="tab active" onclick="showChart('price')">
+                    <i data-feather="trending-up" style="width: 14px; height: 14px; display: inline;"></i> Price
+                </button>
+                <button class="tab" onclick="showChart('weather')">
+                    <i data-feather="cloud" style="width: 14px; height: 14px; display: inline;"></i> Weather
+                </button>
+                <button class="tab" onclick="showChart('trade')">
+                    <i data-feather="package" style="width: 14px; height: 14px; display: inline;"></i> Trade
+                </button>
+                <button class="tab" onclick="showChart('performance')">
+                    <i data-feather="bar-chart-2" style="width: 14px; height: 14px; display: inline;"></i> Performance
+                </button>
+            </div>
+            
+            <!-- Price Chart -->
+            <div id="price-chart" class="chart-section">
+                <div class="chart-header">
+                    <h3 class="chart-title">Cocoa Futures Price (CC=F)</h3>
+                    <span class="signal-indicator signal-strong">LIVE DATA</span>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Weather Chart -->
+            <div id="weather-chart" class="chart-section" style="display: none;">
+                <div class="chart-header">
+                    <h3 class="chart-title">Weather Anomalies</h3>
+                    <span class="signal-indicator signal-weak">4 REGIONS</span>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="weatherChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Trade Chart -->
+            <div id="trade-chart" class="chart-section" style="display: none;">
+                <div class="chart-header">
+                    <h3 class="chart-title">Export Concentration</h3>
+                    <span class="signal-indicator signal-strong">UN COMTRADE</span>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="tradeChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Performance Chart -->
+            <div id="performance-chart" class="chart-section" style="display: none;">
+                <div class="chart-header">
+                    <h3 class="chart-title">Model Performance</h3>
+                    <span class="signal-indicator signal-weak">NEEDS WORK</span>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Data Sources -->
+        <div class="data-source">
+            <strong>Data Sources:</strong> 
+            Yahoo Finance ({{ price_data.dates.length }} days) | 
+            UN Comtrade (Real Export Data) | 
+            Open-Meteo (Weather Records) | 
+            <strong>Last Updated:</strong> {{ last_updated }}
+        </div>
+    </div>
+    
+    <script>
+        // Initialize feather icons
+        feather.replace();
+        
+        // Parse data
+        const priceData = {{ price_data|safe }};
+        const weatherData = {{ weather_data|safe }};
+        const exportData = {{ export_data|safe }};
+        
+        // Chart defaults for dark theme
+        Chart.defaults.color = '#999999';
+        Chart.defaults.borderColor = '#7a8288';
+        Chart.defaults.font.family = 'Inter';
+        
+        // Price Chart
+        const priceCtx = document.getElementById('priceChart').getContext('2d');
+        const priceChart = new Chart(priceCtx, {
+            type: 'line',
+            data: {
+                labels: priceData.dates,
+                datasets: [{
+                    label: 'Price',
+                    data: priceData.prices,
+                    borderColor: '#6f42c1',
+                    backgroundColor: 'rgba(155, 74, 227, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.1,
+                    pointRadius: 0,
+                    pointHoverRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#272b30',
+                        titleColor: '#FFFFFF',
+                        bodyColor: '#999999',
+                        borderColor: '#7a8288',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.y.toLocaleString();
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            parser: 'yyyy-MM-dd',
+                            displayFormats: {
+                                month: 'MMM yy'
+                            }
+                        },
+                        grid: {
+                            color: '#52575c',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 8
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '#52575c',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Weather Chart
+        const weatherCtx = document.getElementById('weatherChart').getContext('2d');
+        const weatherChart = new Chart(weatherCtx, {
+            type: 'line',
+            data: {
+                labels: weatherData.dates,
+                datasets: [{
+                    label: 'Rainfall Anomaly',
+                    data: weatherData.rainfall,
+                    borderColor: '#6f42c1',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    tension: 0.1,
+                    pointRadius: 0
+                }, {
+                    label: 'Temperature Anomaly',
+                    data: weatherData.temperature,
+                    borderColor: '#52575c',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    tension: 0.1,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#272b30',
+                        titleColor: '#FFFFFF',
+                        bodyColor: '#999999',
+                        borderColor: '#7a8288',
+                        borderWidth: 1
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            parser: 'yyyy-MM-dd',
+                            displayFormats: {
+                                month: 'MMM yy'
+                            }
+                        },
+                        grid: {
+                            color: '#52575c',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 8
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '#52575c',
+                            drawBorder: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Anomaly'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Trade Chart  
+        const tradeCtx = document.getElementById('tradeChart').getContext('2d');
+        const tradeChart = new Chart(tradeCtx, {
+            type: 'bar',
+            data: {
+                labels: exportData.dates,
+                datasets: [{
+                    label: 'Export Concentration',
+                    data: exportData.concentration,
+                    backgroundColor: 'rgba(155, 74, 227, 0.8)',
+                    borderColor: '#6f42c1',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#272b30',
+                        titleColor: '#FFFFFF',
+                        bodyColor: '#999999',
+                        borderColor: '#7a8288',
+                        borderWidth: 1
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '#52575c',
+                            drawBorder: false
+                        },
+                        min: 0.50,
+                        max: 0.56,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toFixed(3);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Performance Chart
+        const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+        const performanceChart = new Chart(performanceCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Accuracy', 'Sharpe', 'Precision', 'Recall', 'F1 Score', 'R²'],
+                datasets: [{
+                    label: 'Current Performance',
+                    data: [0.535, 0.69, 0.45, 0.48, 0.46, 0.3], // Real values
+                    backgroundColor: 'rgba(155, 74, 227, 0.2)',
+                    borderColor: '#6f42c1',
+                    borderWidth: 2
+                }, {
+                    label: 'Target Performance',
+                    data: [0.7, 1.0, 0.7, 0.7, 0.7, 0.6],
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    borderColor: '#6f42c1',
+                    borderWidth: 2,
+                    borderDash: [5, 5]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    }
+                },
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 1,
+                        grid: {
+                            color: '#52575c'
+                        },
+                        angleLines: {
+                            color: '#52575c'
+                        },
+                        pointLabels: {
+                            color: '#999999'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Tab switching
+        function showChart(chartName) {
+            // Hide all charts
+            document.querySelectorAll('.chart-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected chart
+            document.getElementById(chartName + '-chart').style.display = 'block';
+            
+            // Add active class to clicked tab
+            event.target.closest('.tab').classList.add('active');
+            
+            // Re-render charts to fix sizing
+            switch(chartName) {
+                case 'price': priceChart.resize(); break;
+                case 'weather': weatherChart.resize(); break;
+                case 'trade': tradeChart.resize(); break;
+                case 'performance': performanceChart.resize(); break;
+            }
+        }
+    </script>
+</body>
+</html>

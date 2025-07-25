@@ -1,0 +1,627 @@
+{
+  "metadata": {
+    "generated_at": "2025-07-24T17:43:52.353037",
+    "data_version": "unified_real_data_v1",
+    "model": "RandomForestRegressor",
+    "parameters": {
+      "n_estimators": 100,
+      "max_depth": 10,
+      "random_state": 42
+    }
+  },
+  "results": {
+    "1_week": {
+      "num_predictions": 14,
+      "mae": 591.1455866757072,
+      "rmse": 786.9314719411541,
+      "mape": 6.735666181525427,
+      "directional_accuracy": 0.6428571428571429,
+      "avg_error": 230.4416625641782,
+      "std_error": 780.8382548757261,
+      "predictions": [
+        {
+          "analysis_date": "2024-05-01 00:00:00",
+          "prediction_date": "2024-05-08 00:00:00",
+          "predicted_price": 10434.77,
+          "actual_price": 8571.0,
+          "error": 1863.7700000000004,
+          "pct_error": 21.74507058686268,
+          "abs_pct_error": 21.74507058686268
+        },
+        {
+          "analysis_date": "2024-06-01 00:00:00",
+          "prediction_date": "2024-06-08 00:00:00",
+          "predicted_price": 9240.61,
+          "actual_price": 9408.0,
+          "error": -167.38999999999942,
+          "pct_error": -1.7792304421768645,
+          "abs_pct_error": 1.7792304421768645
+        },
+        {
+          "analysis_date": "2024-07-01 00:00:00",
+          "prediction_date": "2024-07-08 00:00:00",
+          "predicted_price": 7658.004250000001,
+          "actual_price": 7721.0,
+          "error": -62.995749999999134,
+          "pct_error": -0.8159014376376004,
+          "abs_pct_error": 0.8159014376376004
+        },
+        {
+          "analysis_date": "2024-08-01 00:00:00",
+          "prediction_date": "2024-08-08 00:00:00",
+          "predicted_price": 7802.685134920635,
+          "actual_price": 7901.0,
+          "error": -98.31486507936461,
+          "pct_error": -1.2443344523397621,
+          "abs_pct_error": 1.2443344523397621
+        },
+        {
+          "analysis_date": "2024-09-01 00:00:00",
+          "prediction_date": "2024-09-08 00:00:00",
+          "predicted_price": 9650.19684992785,
+          "actual_price": 9539.0,
+          "error": 111.19684992785005,
+          "pct_error": 1.1657076205875883,
+          "abs_pct_error": 1.1657076205875883
+        },
+        {
+          "analysis_date": "2024-10-01 00:00:00",
+          "prediction_date": "2024-10-08 00:00:00",
+          "predicted_price": 7927.725908730158,
+          "actual_price": 6908.0,
+          "error": 1019.7259087301582,
+          "pct_error": 14.761521550812946,
+          "abs_pct_error": 14.761521550812946
+        },
+        {
+          "analysis_date": "2024-11-01 00:00:00",
+          "prediction_date": "2024-11-08 00:00:00",
+          "predicted_price": 7183.463333333332,
+          "actual_price": 7251.0,
+          "error": -67.53666666666777,
+          "pct_error": -0.9314117592975834,
+          "abs_pct_error": 0.9314117592975834
+        },
+        {
+          "analysis_date": "2024-12-01 00:00:00",
+          "prediction_date": "2024-12-08 00:00:00",
+          "predicted_price": 9080.977412698414,
+          "actual_price": 9648.0,
+          "error": -567.0225873015861,
+          "pct_error": -5.877099785464201,
+          "abs_pct_error": 5.877099785464201
+        },
+        {
+          "analysis_date": "2025-01-01 00:00:00",
+          "prediction_date": "2025-01-08 00:00:00",
+          "predicted_price": 10863.991666666665,
+          "actual_price": 11377.0,
+          "error": -513.008333333335,
+          "pct_error": -4.5091705487679965,
+          "abs_pct_error": 4.5091705487679965
+        },
+        {
+          "analysis_date": "2025-02-01 00:00:00",
+          "prediction_date": "2025-02-08 00:00:00",
+          "predicted_price": 11573.325,
+          "actual_price": 10514.0,
+          "error": 1059.3250000000007,
+          "pct_error": 10.075375689556788,
+          "abs_pct_error": 10.075375689556788
+        },
+        {
+          "analysis_date": "2025-03-01 00:00:00",
+          "prediction_date": "2025-03-08 00:00:00",
+          "predicted_price": 8973.760839105336,
+          "actual_price": 7915.0,
+          "error": 1058.7608391053363,
+          "pct_error": 13.376637259701027,
+          "abs_pct_error": 13.376637259701027
+        },
+        {
+          "analysis_date": "2025-04-01 00:00:00",
+          "prediction_date": "2025-04-08 00:00:00",
+          "predicted_price": 7923.923207774223,
+          "actual_price": 8053.0,
+          "error": -129.07679222577735,
+          "pct_error": -1.6028410806628257,
+          "abs_pct_error": 1.6028410806628257
+        },
+        {
+          "analysis_date": "2025-05-01 00:00:00",
+          "prediction_date": "2025-05-08 00:00:00",
+          "predicted_price": 9396.332146915853,
+          "actual_price": 8758.0,
+          "error": 638.3321469158527,
+          "pct_error": 7.288560709247005,
+          "abs_pct_error": 7.288560709247005
+        },
+        {
+          "analysis_date": "2025-06-01 00:00:00",
+          "prediction_date": "2025-06-08 00:00:00",
+          "predicted_price": 9156.417525826026,
+          "actual_price": 10076.0,
+          "error": -919.5824741739743,
+          "pct_error": -9.126463618241111,
+          "abs_pct_error": 9.126463618241111
+        }
+      ]
+    },
+    "1_month": {
+      "num_predictions": 14,
+      "mae": 1306.0424228305853,
+      "rmse": 1534.3800461555425,
+      "mape": 14.629306348860387,
+      "directional_accuracy": 0.6428571428571429,
+      "avg_error": 64.87023399274962,
+      "std_error": 1590.877737964127,
+      "predictions": [
+        {
+          "analysis_date": "2024-05-01 00:00:00",
+          "prediction_date": "2024-05-31 00:00:00",
+          "predicted_price": 10434.77,
+          "actual_price": 8780.0,
+          "error": 1654.7700000000004,
+          "pct_error": 18.847038724373583,
+          "abs_pct_error": 18.847038724373583
+        },
+        {
+          "analysis_date": "2024-06-01 00:00:00",
+          "prediction_date": "2024-07-01 00:00:00",
+          "predicted_price": 9240.61,
+          "actual_price": 7729.0,
+          "error": 1511.6100000000006,
+          "pct_error": 19.557640056928456,
+          "abs_pct_error": 19.557640056928456
+        },
+        {
+          "analysis_date": "2024-07-01 00:00:00",
+          "prediction_date": "2024-07-31 00:00:00",
+          "predicted_price": 7658.004250000001,
+          "actual_price": 7716.0,
+          "error": -57.995749999999134,
+          "pct_error": -0.7516297304302635,
+          "abs_pct_error": 0.7516297304302635
+        },
+        {
+          "analysis_date": "2024-08-01 00:00:00",
+          "prediction_date": "2024-08-31 00:00:00",
+          "predicted_price": 7802.685134920635,
+          "actual_price": 9730.0,
+          "error": -1927.3148650793646,
+          "pct_error": -19.80796366988042,
+          "abs_pct_error": 19.80796366988042
+        },
+        {
+          "analysis_date": "2024-09-01 00:00:00",
+          "prediction_date": "2024-10-01 00:00:00",
+          "predicted_price": 9650.19684992785,
+          "actual_price": 7722.0,
+          "error": 1928.19684992785,
+          "pct_error": 24.970174176739835,
+          "abs_pct_error": 24.970174176739835
+        },
+        {
+          "analysis_date": "2024-10-01 00:00:00",
+          "prediction_date": "2024-10-31 00:00:00",
+          "predicted_price": 7927.725908730158,
+          "actual_price": 6917.0,
+          "error": 1010.7259087301582,
+          "pct_error": 14.61220050209857,
+          "abs_pct_error": 14.61220050209857
+        },
+        {
+          "analysis_date": "2024-11-01 00:00:00",
+          "prediction_date": "2024-12-01 00:00:00",
+          "predicted_price": 7183.463333333332,
+          "actual_price": 9220.0,
+          "error": -2036.5366666666678,
+          "pct_error": -22.08825018076646,
+          "abs_pct_error": 22.08825018076646
+        },
+        {
+          "analysis_date": "2024-12-01 00:00:00",
+          "prediction_date": "2024-12-31 00:00:00",
+          "predicted_price": 9080.977412698414,
+          "actual_price": 11507.0,
+          "error": -2426.022587301586,
+          "pct_error": -21.083015445394857,
+          "abs_pct_error": 21.083015445394857
+        },
+        {
+          "analysis_date": "2025-01-01 00:00:00",
+          "prediction_date": "2025-01-31 00:00:00",
+          "predicted_price": 10863.991666666665,
+          "actual_price": 11374.0,
+          "error": -510.00833333333503,
+          "pct_error": -4.483983939980087,
+          "abs_pct_error": 4.483983939980087
+        },
+        {
+          "analysis_date": "2025-02-01 00:00:00",
+          "prediction_date": "2025-03-03 00:00:00",
+          "predicted_price": 11573.325,
+          "actual_price": 9014.0,
+          "error": 2559.3250000000007,
+          "pct_error": 28.39277790104283,
+          "abs_pct_error": 28.39277790104283
+        },
+        {
+          "analysis_date": "2025-03-01 00:00:00",
+          "prediction_date": "2025-03-31 00:00:00",
+          "predicted_price": 8973.760839105336,
+          "actual_price": 8042.0,
+          "error": 931.7608391053363,
+          "pct_error": 11.586183027920123,
+          "abs_pct_error": 11.586183027920123
+        },
+        {
+          "analysis_date": "2025-04-01 00:00:00",
+          "prediction_date": "2025-05-01 00:00:00",
+          "predicted_price": 7923.923207774223,
+          "actual_price": 9217.0,
+          "error": -1293.0767922257774,
+          "pct_error": -14.029258893628919,
+          "abs_pct_error": 14.029258893628919
+        },
+        {
+          "analysis_date": "2025-05-01 00:00:00",
+          "prediction_date": "2025-05-31 00:00:00",
+          "predicted_price": 9396.332146915853,
+          "actual_price": 9634.0,
+          "error": -237.66785308414728,
+          "pct_error": -2.466969618892955,
+          "abs_pct_error": 2.466969618892955
+        },
+        {
+          "analysis_date": "2025-06-01 00:00:00",
+          "prediction_date": "2025-07-01 00:00:00",
+          "predicted_price": 9156.417525826026,
+          "actual_price": 9356.0,
+          "error": -199.58247417397433,
+          "pct_error": -2.133203015968088,
+          "abs_pct_error": 2.133203015968088
+        }
+      ]
+    },
+    "2_months": {
+      "num_predictions": 13,
+      "mae": 1919.6681213037132,
+      "rmse": 2287.9831946867903,
+      "mape": 21.812873936761886,
+      "directional_accuracy": 0.07692307692307693,
+      "avg_error": 59.75121154403608,
+      "std_error": 2380.596206740139,
+      "predictions": [
+        {
+          "analysis_date": "2024-05-01 00:00:00",
+          "prediction_date": "2024-06-30 00:00:00",
+          "predicted_price": 10434.77,
+          "actual_price": 7397.0,
+          "error": 3037.7700000000004,
+          "pct_error": 41.06759497093417,
+          "abs_pct_error": 41.06759497093417
+        },
+        {
+          "analysis_date": "2024-06-01 00:00:00",
+          "prediction_date": "2024-07-31 00:00:00",
+          "predicted_price": 9240.61,
+          "actual_price": 7716.0,
+          "error": 1524.6100000000006,
+          "pct_error": 19.75907205806118,
+          "abs_pct_error": 19.75907205806118
+        },
+        {
+          "analysis_date": "2024-07-01 00:00:00",
+          "prediction_date": "2024-08-30 00:00:00",
+          "predicted_price": 7658.004250000001,
+          "actual_price": 9785.0,
+          "error": -2126.995749999999,
+          "pct_error": -21.737309657639234,
+          "abs_pct_error": 21.737309657639234
+        },
+        {
+          "analysis_date": "2024-08-01 00:00:00",
+          "prediction_date": "2024-09-30 00:00:00",
+          "predicted_price": 7802.685134920635,
+          "actual_price": 8281.0,
+          "error": -478.3148650793646,
+          "pct_error": -5.7760519874334575,
+          "abs_pct_error": 5.7760519874334575
+        },
+        {
+          "analysis_date": "2024-09-01 00:00:00",
+          "prediction_date": "2024-10-31 00:00:00",
+          "predicted_price": 9650.19684992785,
+          "actual_price": 6917.0,
+          "error": 2733.19684992785,
+          "pct_error": 39.51419473655993,
+          "abs_pct_error": 39.51419473655993
+        },
+        {
+          "analysis_date": "2024-10-01 00:00:00",
+          "prediction_date": "2024-11-30 00:00:00",
+          "predicted_price": 7927.725908730158,
+          "actual_price": 8844.0,
+          "error": -916.2740912698418,
+          "pct_error": -10.3604035647879,
+          "abs_pct_error": 10.3604035647879
+        },
+        {
+          "analysis_date": "2024-11-01 00:00:00",
+          "prediction_date": "2024-12-31 00:00:00",
+          "predicted_price": 7183.463333333332,
+          "actual_price": 11507.0,
+          "error": -4323.536666666668,
+          "pct_error": -37.57310043162134,
+          "abs_pct_error": 37.57310043162134
+        },
+        {
+          "analysis_date": "2024-12-01 00:00:00",
+          "prediction_date": "2025-01-30 00:00:00",
+          "predicted_price": 9080.977412698414,
+          "actual_price": 11372.0,
+          "error": -2291.022587301586,
+          "pct_error": -20.14617118626087,
+          "abs_pct_error": 20.14617118626087
+        },
+        {
+          "analysis_date": "2025-01-01 00:00:00",
+          "prediction_date": "2025-03-02 00:00:00",
+          "predicted_price": 10863.991666666665,
+          "actual_price": 9130.0,
+          "error": 1733.991666666665,
+          "pct_error": 18.992241694048904,
+          "abs_pct_error": 18.992241694048904
+        },
+        {
+          "analysis_date": "2025-02-01 00:00:00",
+          "prediction_date": "2025-04-02 00:00:00",
+          "predicted_price": 11573.325,
+          "actual_price": 7902.0,
+          "error": 3671.3250000000007,
+          "pct_error": 46.46070615034169,
+          "abs_pct_error": 46.46070615034169
+        },
+        {
+          "analysis_date": "2025-03-01 00:00:00",
+          "prediction_date": "2025-04-30 00:00:00",
+          "predicted_price": 8973.760839105336,
+          "actual_price": 9217.0,
+          "error": -243.23916089466366,
+          "pct_error": -2.639027458985176,
+          "abs_pct_error": 2.639027458985176
+        },
+        {
+          "analysis_date": "2025-04-01 00:00:00",
+          "prediction_date": "2025-05-31 00:00:00",
+          "predicted_price": 7923.923207774223,
+          "actual_price": 9634.0,
+          "error": -1710.0767922257774,
+          "pct_error": -17.750433799312614,
+          "abs_pct_error": 17.750433799312614
+        },
+        {
+          "analysis_date": "2025-05-01 00:00:00",
+          "prediction_date": "2025-06-30 00:00:00",
+          "predicted_price": 9396.332146915853,
+          "actual_price": 9231.0,
+          "error": 165.33214691585272,
+          "pct_error": 1.7910534819180233,
+          "abs_pct_error": 1.7910534819180233
+        }
+      ]
+    },
+    "3_months": {
+      "num_predictions": 12,
+      "mae": 1607.0419749894738,
+      "rmse": 2013.8048050490297,
+      "mape": 17.767314438941476,
+      "directional_accuracy": 0.4166666666666667,
+      "avg_error": 26.28613359638469,
+      "std_error": 2103.1713280020585,
+      "predictions": [
+        {
+          "analysis_date": "2024-05-01 00:00:00",
+          "prediction_date": "2024-07-30 00:00:00",
+          "predicted_price": 10434.77,
+          "actual_price": 7716.0,
+          "error": 2718.7700000000004,
+          "pct_error": 35.23548470710213,
+          "abs_pct_error": 35.23548470710213
+        },
+        {
+          "analysis_date": "2024-06-01 00:00:00",
+          "prediction_date": "2024-08-30 00:00:00",
+          "predicted_price": 9240.61,
+          "actual_price": 9785.0,
+          "error": -544.3899999999994,
+          "pct_error": -5.563515585079197,
+          "abs_pct_error": 5.563515585079197
+        },
+        {
+          "analysis_date": "2024-07-01 00:00:00",
+          "prediction_date": "2024-09-29 00:00:00",
+          "predicted_price": 7658.004250000001,
+          "actual_price": 8122.0,
+          "error": -463.99574999999913,
+          "pct_error": -5.712826274316661,
+          "abs_pct_error": 5.712826274316661
+        },
+        {
+          "analysis_date": "2024-08-01 00:00:00",
+          "prediction_date": "2024-10-30 00:00:00",
+          "predicted_price": 7802.685134920635,
+          "actual_price": 6917.0,
+          "error": 885.6851349206354,
+          "pct_error": 12.804469205155927,
+          "abs_pct_error": 12.804469205155927
+        },
+        {
+          "analysis_date": "2024-09-01 00:00:00",
+          "prediction_date": "2024-11-30 00:00:00",
+          "predicted_price": 9650.19684992785,
+          "actual_price": 8844.0,
+          "error": 806.19684992785,
+          "pct_error": 9.115749094616124,
+          "abs_pct_error": 9.115749094616124
+        },
+        {
+          "analysis_date": "2024-10-01 00:00:00",
+          "prediction_date": "2024-12-30 00:00:00",
+          "predicted_price": 7927.725908730158,
+          "actual_price": 10124.0,
+          "error": -2196.274091269842,
+          "pct_error": -21.693738554621117,
+          "abs_pct_error": 21.693738554621117
+        },
+        {
+          "analysis_date": "2024-11-01 00:00:00",
+          "prediction_date": "2025-01-30 00:00:00",
+          "predicted_price": 7183.463333333332,
+          "actual_price": 11372.0,
+          "error": -4188.536666666668,
+          "pct_error": -36.83201430413883,
+          "abs_pct_error": 36.83201430413883
+        },
+        {
+          "analysis_date": "2024-12-01 00:00:00",
+          "prediction_date": "2025-03-01 00:00:00",
+          "predicted_price": 9080.977412698414,
+          "actual_price": 9100.0,
+          "error": -19.0225873015861,
+          "pct_error": -0.20903942089655056,
+          "abs_pct_error": 0.20903942089655056
+        },
+        {
+          "analysis_date": "2025-01-01 00:00:00",
+          "prediction_date": "2025-04-01 00:00:00",
+          "predicted_price": 10863.991666666665,
+          "actual_price": 7902.0,
+          "error": 2961.991666666665,
+          "pct_error": 37.48407576141059,
+          "abs_pct_error": 37.48407576141059
+        },
+        {
+          "analysis_date": "2025-02-01 00:00:00",
+          "prediction_date": "2025-05-02 00:00:00",
+          "predicted_price": 11573.325,
+          "actual_price": 9146.0,
+          "error": 2427.3250000000007,
+          "pct_error": 26.539744150448293,
+          "abs_pct_error": 26.539744150448293
+        },
+        {
+          "analysis_date": "2025-03-01 00:00:00",
+          "prediction_date": "2025-05-30 00:00:00",
+          "predicted_price": 8973.760839105336,
+          "actual_price": 9739.0,
+          "error": -765.2391608946637,
+          "pct_error": -7.857471618181165,
+          "abs_pct_error": 7.857471618181165
+        },
+        {
+          "analysis_date": "2025-04-01 00:00:00",
+          "prediction_date": "2025-06-30 00:00:00",
+          "predicted_price": 7923.923207774223,
+          "actual_price": 9231.0,
+          "error": -1307.0767922257774,
+          "pct_error": -14.159644591331139,
+          "abs_pct_error": 14.159644591331139
+        }
+      ]
+    },
+    "6_months": {
+      "num_predictions": 9,
+      "mae": 1814.6347196568863,
+      "rmse": 2257.1327496681115,
+      "mape": 19.85844104090049,
+      "directional_accuracy": 0.4444444444444444,
+      "avg_error": -336.7306048581048,
+      "std_error": 2367.259669543722,
+      "predictions": [
+        {
+          "analysis_date": "2024-05-01 00:00:00",
+          "prediction_date": "2024-10-28 00:00:00",
+          "predicted_price": 10434.77,
+          "actual_price": 6770.0,
+          "error": 3664.7700000000004,
+          "pct_error": 54.13249630723782,
+          "abs_pct_error": 54.13249630723782
+        },
+        {
+          "analysis_date": "2024-06-01 00:00:00",
+          "prediction_date": "2024-11-28 00:00:00",
+          "predicted_price": 9240.61,
+          "actual_price": 8863.0,
+          "error": 377.6100000000006,
+          "pct_error": 4.260521268193621,
+          "abs_pct_error": 4.260521268193621
+        },
+        {
+          "analysis_date": "2024-07-01 00:00:00",
+          "prediction_date": "2024-12-28 00:00:00",
+          "predicted_price": 7658.004250000001,
+          "actual_price": 11027.0,
+          "error": -3368.995749999999,
+          "pct_error": -30.55224222363289,
+          "abs_pct_error": 30.55224222363289
+        },
+        {
+          "analysis_date": "2024-08-01 00:00:00",
+          "prediction_date": "2025-01-28 00:00:00",
+          "predicted_price": 7802.685134920635,
+          "actual_price": 11372.0,
+          "error": -3569.3148650793646,
+          "pct_error": -31.38687007632224,
+          "abs_pct_error": 31.38687007632224
+        },
+        {
+          "analysis_date": "2024-09-01 00:00:00",
+          "prediction_date": "2025-02-28 00:00:00",
+          "predicted_price": 9650.19684992785,
+          "actual_price": 8675.0,
+          "error": 975.19684992785,
+          "pct_error": 11.241462247006917,
+          "abs_pct_error": 11.241462247006917
+        },
+        {
+          "analysis_date": "2024-10-01 00:00:00",
+          "prediction_date": "2025-03-30 00:00:00",
+          "predicted_price": 7927.725908730158,
+          "actual_price": 7979.0,
+          "error": -51.27409126984185,
+          "pct_error": -0.6426129999980179,
+          "abs_pct_error": 0.6426129999980179
+        },
+        {
+          "analysis_date": "2024-11-01 00:00:00",
+          "prediction_date": "2025-04-30 00:00:00",
+          "predicted_price": 7183.463333333332,
+          "actual_price": 9217.0,
+          "error": -2033.5366666666678,
+          "pct_error": -22.062891034682302,
+          "abs_pct_error": 22.062891034682302
+        },
+        {
+          "analysis_date": "2024-12-01 00:00:00",
+          "prediction_date": "2025-05-30 00:00:00",
+          "predicted_price": 9080.977412698414,
+          "actual_price": 9739.0,
+          "error": -658.0225873015861,
+          "pct_error": -6.75657241299503,
+          "abs_pct_error": 6.75657241299503
+        },
+        {
+          "analysis_date": "2025-01-01 00:00:00",
+          "prediction_date": "2025-06-30 00:00:00",
+          "predicted_price": 10863.991666666665,
+          "actual_price": 9231.0,
+          "error": 1632.991666666665,
+          "pct_error": 17.690300798035587,
+          "abs_pct_error": 17.690300798035587
+        }
+      ]
+    }
+  }
+}

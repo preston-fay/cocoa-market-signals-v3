@@ -1,0 +1,60 @@
+<!-- Features Tab -->
+<div class="features-content">
+    <h3 style="margin-bottom: 1.5rem;">Feature Importance Analysis</h3>
+    
+    <div id="feature-chart-container" style="margin-bottom: 2rem;"></div>
+    
+    <div class="explanation-box">
+        <h4>Current Features Used</h4>
+        <p>Our models currently use these features to predict cocoa price movements:</p>
+        
+        <div style="margin-top: 1rem;">
+            <h5 style="color: var(--kearney-purple); margin-bottom: 0.5rem;">Weather Features (25% importance)</h5>
+            <ul style="margin-left: 1.5rem;">
+                <li><strong>Rainfall Anomaly:</strong> Deviation from 10-year average (mm)</li>
+                <li><strong>Temperature Anomaly:</strong> Deviation from normal (°C)</li>
+                <li><strong>Regional Coverage:</strong> 4 key growing regions in West Africa</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 1rem;">
+            <h5 style="color: var(--kearney-purple); margin-bottom: 0.5rem;">Trade Features (20% importance)</h5>
+            <ul style="margin-left: 1.5rem;">
+                <li><strong>Export Concentration:</strong> Top 5 exporters' market share (UN Comtrade)</li>
+                <li><strong>Trade Volume Change:</strong> Year-over-year export volume changes</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 1rem;">
+            <h5 style="color: var(--kearney-purple); margin-bottom: 0.5rem;">Price Features (22% importance)</h5>
+            <ul style="margin-left: 1.5rem;">
+                <li><strong>Price Momentum (20d):</strong> 20-day price change percentage</li>
+                <li><strong>Price Volatility (30d):</strong> 30-day rolling standard deviation</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="explanation-box" style="border-left-color: #999999;">
+        <h4>Missing Features We Need</h4>
+        <p>Adding these features could improve accuracy by 10-15%:</p>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+            <li><strong>COT Data:</strong> Commitment of Traders positioning</li>
+            <li><strong>Options Flow:</strong> Put/call ratios, implied volatility</li>
+            <li><strong>Shipping Data:</strong> Freight rates from West Africa</li>
+            <li><strong>Inventory Levels:</strong> Warehouse stocks at key ports</li>
+            <li><strong>Currency Movements:</strong> USD strength impacts commodity prices</li>
+            <li><strong>Interaction Terms:</strong> Weather × Trade combined effects</li>
+            <li><strong>Lagged Features:</strong> Previous 30/60/90 day values</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Parse and render feature chart
+    const featureChart = {{ feature_chart|safe }};
+    
+    Plotly.newPlot('feature-chart-container', featureChart.data, featureChart.layout, {
+        displayModeBar: false,
+        responsive: true
+    });
+</script>

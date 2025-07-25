@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoa Market Signals - Timeline Dashboard</title>
+    
+    <!-- Kearney Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    
+    <!-- Alpine.js for interactivity -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Plotly for charts -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    
+    <!-- Feather Icons - Kearney Standard -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Kearney Styles - 100% Dark Theme -->
+    <style>
+        :root {
+            /* Kearney Colors */
+            --kearney-black: #000000;
+            --kearney-white: #FFFFFF;
+            --kearney-charcoal-primary: #272b30;
+            --kearney-charcoal-secondary: #3a3f44;
+            --kearney-purple: #6f42c1;
+            --kearney-gray-50: #F8F9FA;
+            --kearney-gray-100: #f8f9fa;
+            --kearney-gray-200: #e9ecef;
+            --kearney-gray-500: #999999;
+            --kearney-gray-700: #52575c;
+            --kearney-gray-900: #272b30;
+            
+            /* Dark Theme Only */
+            --bg-primary: var(--kearney-black);
+            --bg-secondary: var(--kearney-charcoal-secondary);
+            --text-primary: var(--kearney-white);
+            --text-secondary: var(--kearney-gray-500);
+            --border-color: var(--kearney-gray-700);
+            --card-bg: var(--kearney-charcoal-secondary);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid var(--kearney-purple);
+            margin-bottom: 2rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        h2, h3, h4 {
+            color: var(--text-primary);
+        }
+        
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .data-badge {
+            background: var(--kearney-purple);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Timeline Controls */
+        .timeline-controls {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Custom slider styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            outline: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            margin-bottom: 1rem;
+        }
+        
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--kearney-purple);
+            cursor: pointer;
+            border-radius: 0;
+        }
+        
+        input[type=range]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: var(--kearney-purple);
+            cursor: pointer;
+            border-radius: 0;
+        }
+        
+        input[type=range]:hover {
+            opacity: 1;
+        }
+        
+        /* Phase navigation buttons */
+        .phase-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .phase-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            color: var(--text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            font-size: 0.875rem;
+        }
+        
+        .phase-btn:hover {
+            border-color: var(--kearney-purple);
+            color: var(--text-primary);
+        }
+        
+        .phase-btn.active {
+            background: var(--kearney-purple);
+            border-color: var(--kearney-purple);
+            color: white;
+        }
+        
+        /* Charts Container */
+        .charts-container {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Analytics Tabs */
+        .analytics-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .tab:hover {
+            color: var(--text-primary);
+        }
+        
+        .tab.active {
+            color: var(--kearney-purple);
+            border-bottom-color: var(--kearney-purple);
+        }
+        
+        /* Explanation boxes */
+        .explanation-box {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background-color: var(--bg-primary);
+            border-left: 4px solid var(--kearney-purple);
+            border: 1px solid var(--border-color);
+        }
+        
+        .explanation-box h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .explanation-box p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin: 0.5rem 0;
+        }
+        
+        .explanation-box strong {
+            color: var(--text-primary);
+        }
+        
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .metric-card {
+            background-color: var(--bg-primary);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0.5rem 0;
+        }
+        
+        .metric-change {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .positive { color: #6f42c1; }
+        .negative { color: #52575c; }
+        .warning { color: #999999; }
+        
+        /* Loading spinner */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--kearney-gray-200);
+            border-top-color: var(--kearney-purple);
+            animation: spin 1s ease-in-out infinite;
+            margin: 2rem auto;
+            display: block;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Performance Alert */
+        .performance-alert {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid #52575c;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+        
+        .performance-alert h3 {
+            color: #52575c;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .performance-alert p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <h1>Cocoa Market Signals Dashboard</h1>
+                <div class="subtitle">Timeline Analysis with 100% Real Data</div>
+            </div>
+            <div class="data-badge">
+                <i data-feather="check-circle" style="width: 16px; height: 16px;"></i>
+                VERIFIED REAL DATA
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Performance Alert -->
+        <div class="performance-alert">
+            <h3><i data-feather="alert-triangle" style="width: 16px; height: 16px;"></i> Model Performance Warning</h3>
+            <p>Current signal accuracy is only 53.5% - we need to implement the improvements suggested in the recommendations document.</p>
+        </div>
+        
+        <!-- Timeline Navigation -->
+        <div class="timeline-controls" x-data="{ currentPhase: 'phase_1' }">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Navigate Through Time</h2>
+            
+            <!-- Phase Buttons -->
+            <div class="phase-nav">
+                {% for phase_key, phase in phases.items() %}
+                <button class="phase-btn"
+                        :class="{ active: currentPhase === '{{ phase_key }}' }"
+                        @click="currentPhase = '{{ phase_key }}'; htmx.ajax('GET', '/api/timeline/{{ phase_key }}', '#timeline-content')">
+                    {{ phase.title }}
+                </button>
+                {% endfor %}
+            </div>
+            
+            <!-- Timeline Content -->
+            <div id="timeline-content" 
+                 hx-get="/api/timeline/phase_1" 
+                 hx-trigger="load"
+                 hx-swap="innerHTML">
+                <div class="loading"></div>
+            </div>
+        </div>
+        
+        <!-- Analytics Section -->
+        <div class="charts-container">
+            <h2 style="margin-bottom: 1.5rem;">Deep Dive Analytics</h2>
+            
+            <div class="analytics-tabs">
+                <button class="tab active" 
+                        onclick="loadAnalytics('models')"
+                        id="models-tab">
+                    <i data-feather="cpu" style="width: 14px; height: 14px;"></i>
+                    Models Tested
+                </button>
+                <button class="tab" 
+                        onclick="loadAnalytics('performance')"
+                        id="performance-tab">
+                    <i data-feather="bar-chart-2" style="width: 14px; height: 14px;"></i>
+                    Performance
+                </button>
+                <button class="tab" 
+                        onclick="loadAnalytics('features')"
+                        id="features-tab">
+                    <i data-feather="layers" style="width: 14px; height: 14px;"></i>
+                    Features
+                </button>
+                <button class="tab" 
+                        onclick="loadAnalytics('recommendations')"
+                        id="recommendations-tab">
+                    <i data-feather="trending-up" style="width: 14px; height: 14px;"></i>
+                    Improvements
+                </button>
+            </div>
+            
+            <div id="analytics-content"
+                 hx-get="/api/analytics/models"
+                 hx-trigger="load"
+                 hx-swap="innerHTML">
+                <div class="loading"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize feather icons
+        feather.replace();
+        
+        // Analytics tab switching
+        function loadAnalytics(tab) {
+            // Update active tab
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tab + '-tab').classList.add('active');
+            
+            // Load content
+            htmx.ajax('GET', '/api/analytics/' + tab, '#analytics-content');
+        }
+        
+        // Ensure icons are replaced after HTMX content loads
+        document.body.addEventListener('htmx:afterSwap', function(evt) {
+            feather.replace();
+        });
+    </script>
+</body>
+</html>

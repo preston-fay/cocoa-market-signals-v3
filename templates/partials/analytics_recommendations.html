@@ -1,0 +1,83 @@
+<!-- Recommendations Tab -->
+<div class="recommendations-content">
+    <h3 style="margin-bottom: 1.5rem;">How to Improve Signal Detection Performance</h3>
+    
+    <div class="performance-alert" style="margin-bottom: 2rem;">
+        <h3><i data-feather="target" style="width: 16px; height: 16px;"></i> Current vs Target Performance</h3>
+        <p><strong>Current Accuracy:</strong> 53.5% | <strong>Target:</strong> 65-70%</p>
+        <p><strong>Current Sharpe:</strong> 0.69 | <strong>Target:</strong> 1.2+</p>
+    </div>
+    
+    <!-- Immediate Actions -->
+    <div class="explanation-box" style="border-left-color: #6f42c1;">
+        <h4><i data-feather="zap" style="width: 16px; height: 16px; display: inline; color: #6f42c1;"></i> Immediate Actions (Week 1)</h4>
+        <ol style="margin-left: 1.5rem; margin-top: 0.5rem;">
+            <li><strong>Add Lagged Features:</strong> Include previous 30/60/90 day values</li>
+            <li><strong>Time-Aware Cross-Validation:</strong> Use proper time series splits</li>
+            <li><strong>Implement XGBoost:</strong> Better for non-linear patterns</li>
+            <li><strong>Feature Engineering:</strong> Create weather×trade interaction terms</li>
+        </ol>
+        <p style="margin-top: 1rem;"><strong>Expected Improvement:</strong> +5-7% accuracy</p>
+    </div>
+    
+    <!-- New Data Sources -->
+    <div class="explanation-box" style="border-left-color: #6f42c1;">
+        <h4><i data-feather="database" style="width: 16px; height: 16px; display: inline; color: #6f42c1;"></i> Additional Data Sources Needed</h4>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+            <li><strong>COT Reports:</strong> Track large trader positioning (weekly from CFTC)</li>
+            <li><strong>Options Data:</strong> Put/call ratios and implied volatility</li>
+            <li><strong>Shipping Rates:</strong> Baltic Dry Index for West Africa routes</li>
+            <li><strong>Currency Data:</strong> USD strength affects commodity prices</li>
+            <li><strong>Inventory Levels:</strong> ICE warehouse stocks data</li>
+        </ul>
+        <p style="margin-top: 1rem;"><strong>Expected Improvement:</strong> +8-10% accuracy</p>
+    </div>
+    
+    <!-- Advanced Models -->
+    <div class="explanation-box" style="border-left-color: #6f42c1;">
+        <h4><i data-feather="cpu" style="width: 16px; height: 16px; display: inline; color: #6f42c1;"></i> Advanced Model Architecture</h4>
+        <div style="margin-top: 0.5rem;">
+            <p><strong>1. LSTM Neural Network:</strong> Captures long-term dependencies in price patterns</p>
+            <p><strong>2. Prophet by Facebook:</strong> Designed for time series with seasonality</p>
+            <p><strong>3. Ensemble Approach:</strong> Weighted voting of multiple models</p>
+            <p><strong>4. Online Learning:</strong> Models that adapt to new patterns in real-time</p>
+        </div>
+        <p style="margin-top: 1rem;"><strong>Expected Improvement:</strong> +7-12% accuracy</p>
+    </div>
+    
+    <!-- Signal Logic -->
+    <div class="explanation-box">
+        <h4><i data-feather="git-merge" style="width: 16px; height: 16px; display: inline;"></i> Improved Signal Generation</h4>
+        <p><strong>Current:</strong> Simple threshold (signal < 0.35 = buy)</p>
+        <p><strong>Proposed:</strong> Multi-factor confirmation system</p>
+        <pre style="background: var(--bg-primary); padding: 1rem; margin-top: 0.5rem; font-size: 0.875rem; overflow-x: auto;">
+Required for BUY signal (3 of 4):
+✓ Price momentum > 2% monthly
+✓ Weather anomaly > 80th percentile  
+✓ Trade volume decline > 15%
+✓ Model ensemble confidence > 75%</pre>
+    </div>
+    
+    <!-- Implementation Timeline -->
+    <div class="explanation-box">
+        <h4><i data-feather="calendar" style="width: 16px; height: 16px; display: inline;"></i> Implementation Roadmap</h4>
+        <table style="width: 100%; margin-top: 0.5rem;">
+            <tr>
+                <td style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);"><strong>Week 1:</strong></td>
+                <td style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">Feature engineering + XGBoost</td>
+            </tr>
+            <tr>
+                <td style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);"><strong>Month 1:</strong></td>
+                <td style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">COT data + LSTM model</td>
+            </tr>
+            <tr>
+                <td style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);"><strong>Quarter 1:</strong></td>
+                <td style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">Full ensemble + online learning</td>
+            </tr>
+            <tr>
+                <td style="padding: 0.5rem;"><strong>Target:</strong></td>
+                <td style="padding: 0.5rem;"><span class="positive">70% accuracy, 1.2+ Sharpe</span></td>
+            </tr>
+        </table>
+    </div>
+</div>

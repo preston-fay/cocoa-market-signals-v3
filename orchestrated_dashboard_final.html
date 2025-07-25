@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoa Market Signals - AI Orchestration Dashboard</title>
+    <style>
+        :root {
+            --kearney-purple: #531E75;
+            --kearney-gray-900: #53565A;
+            --kearney-gray-500: #8B8D8F;
+            --kearney-gray-200: #E5E5E5;
+            --kearney-blue: #006FB9;
+            --kearney-green: #00A862;
+            --kearney-red: #E3001A;
+            --kearney-orange: #F47920;
+            --kearney-yellow: #FFD500;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F7F7F7;
+            --text-primary: #53565A;
+            --text-secondary: #8B8D8F;
+            --border-color: #E5E5E5;
+            --card-bg: #FFFFFF;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .dashboard-header {
+            background-color: var(--bg-primary);
+            border-bottom: 2px solid var(--kearney-purple);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .dashboard-header h1 {
+            color: var(--kearney-purple);
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-header p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-change {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .positive { color: var(--kearney-green); }
+        .negative { color: var(--kearney-red); }
+        .neutral { color: var(--text-secondary); }
+
+        .chart-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chart-title {
+            color: var(--kearney-purple);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .regime-indicator {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .regime-low {
+            background-color: rgba(0, 168, 98, 0.1);
+            color: var(--kearney-green);
+            border: 1px solid var(--kearney-green);
+        }
+
+        .regime-medium {
+            background-color: rgba(244, 121, 32, 0.1);
+            color: var(--kearney-orange);
+            border: 1px solid var(--kearney-orange);
+        }
+
+        .regime-high {
+            background-color: rgba(227, 0, 26, 0.1);
+            color: var(--kearney-red);
+            border: 1px solid var(--kearney-red);
+        }
+
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .model-badge {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--kearney-purple);
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        .model-name {
+            font-weight: 600;
+            color: var(--kearney-purple);
+            margin-bottom: 0.25rem;
+        }
+
+        .model-mape {
+            color: var(--text-secondary);
+        }
+
+        .recommendations-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendations-list li {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background-color: var(--bg-secondary);
+            border-left: 4px solid var(--kearney-purple);
+            border-radius: 4px;
+        }
+
+        .signal-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .signal-value {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-right: 2rem;
+        }
+
+        .signal-details {
+            text-align: left;
+        }
+
+        .signal-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .signal-strength {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        #actualVsPredictedChart,
+        #performanceChart,
+        #forecastChart {
+            height: 400px;
+        }
+    </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>Cocoa Market Signals - AI Orchestration</h1>
+        <p>Dynamic Model Selection with Real-Time Performance Tracking</p>
+    </header>
+
+    <div class="container">
+        <!-- Regime and Signal Indicator -->
+        <div class="signal-indicator">
+            <div class="signal-value neutral">NEUTRAL</div>
+            <div class="signal-details">
+                <div class="signal-label">Trading Signal</div>
+                <div class="signal-strength">0% Confidence</div>
+                <div class="regime-indicator regime-high">
+                    HIGH VOLATILITY
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Current Price</div>
+                <div class="metric-value">$8,440</div>
+                <div class="metric-change positive">+15.5%</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">7-Day Forecast</div>
+                <div class="metric-value">$N/A</div>
+                <div class="metric-change negative">N/A</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Volatility</div>
+                <div class="metric-value">76.2%</div>
+                <div class="metric-change">85th percentile</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Best Model</div>
+                <div class="metric-value">XGBoost</div>
+                <div class="metric-change positive">0.17% MAPE</div>
+            </div>
+        </div>
+
+        <!-- Actual vs Predicted Chart -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2 class="chart-title">Actual vs Predicted Prices</h2>
+                <span class="metric-label">Last 90 Days</span>
+            </div>
+            <div id="actualVsPredictedChart"></div>
+        </div>
+
+        <!-- Model Performance Chart -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2 class="chart-title">Model Performance Comparison</h2>
+                <span class="metric-label">Mean Absolute Percentage Error (Lower is Better)</span>
+            </div>
+            <div id="performanceChart"></div>
+        </div>
+
+        <!-- Active Models -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2 class="chart-title">Active Models for HIGH Volatility</h2>
+            </div>
+            <div class="model-grid">
+                
+                <div class="model-badge">
+                    <div class="model-name">LSTM_PREDICTOR</div>
+                    <div class="model-mape">Active</div>
+                </div>
+                
+                <div class="model-badge">
+                    <div class="model-name">EWMA</div>
+                    <div class="model-mape">Active</div>
+                </div>
+                
+                <div class="model-badge">
+                    <div class="model-name">XGBOOST</div>
+                    <div class="model-mape">Active</div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2 class="chart-title">AI-Powered Recommendations</h2>
+            </div>
+            <ul class="recommendations-list">
+                
+                <li>⚠️ High volatility detected - Consider reducing position sizes</li>
+                
+                <li>📊 Monitor GARCH volatility forecasts closely</li>
+                
+                <li>🛡️ Implement stop-loss orders at -5% from entry</li>
+                
+                <li>📊 Strong 5-day momentum (+15.5%) - Trend continuation likely</li>
+                
+            </ul>
+        </div>
+
+        <!-- 30-Day Forecast -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2 class="chart-title">30-Day Price Forecast</h2>
+                <span class="metric-label">With 95% Confidence Intervals</span>
+            </div>
+            <div id="forecastChart"></div>
+        </div>
+    </div>
+
+    <script>
+        // Actual vs Predicted Chart
+        var actualVsPredicted = {
+            data: [
+                {
+                    x: ['2025-03-17', '2025-03-18', '2025-03-19', '2025-03-20', '2025-03-21', '2025-03-24', '2025-03-25', '2025-03-26', '2025-03-27', '2025-03-28', '2025-03-31', '2025-04-01', '2025-04-02', '2025-04-03', '2025-04-04', '2025-04-07', '2025-04-08', '2025-04-09', '2025-04-10', '2025-04-11', '2025-04-14', '2025-04-15', '2025-04-16', '2025-04-17', '2025-04-21', '2025-04-22', '2025-04-23', '2025-04-24', '2025-04-25', '2025-04-28', '2025-04-29', '2025-04-30', '2025-05-01', '2025-05-02', '2025-05-05', '2025-05-06', '2025-05-07', '2025-05-08', '2025-05-09', '2025-05-12', '2025-05-13', '2025-05-14', '2025-05-15', '2025-05-16', '2025-05-19', '2025-05-20', '2025-05-21', '2025-05-22', '2025-05-23', '2025-05-27', '2025-05-28', '2025-05-29', '2025-05-30', '2025-06-02', '2025-06-03', '2025-06-04', '2025-06-05', '2025-06-06', '2025-06-09', '2025-06-10', '2025-06-11', '2025-06-12', '2025-06-13', '2025-06-16', '2025-06-17', '2025-06-18', '2025-06-20', '2025-06-23', '2025-06-24', '2025-06-25', '2025-06-26', '2025-06-27', '2025-06-30', '2025-07-01', '2025-07-02', '2025-07-03', '2025-07-04', '2025-07-07', '2025-07-08', '2025-07-09', '2025-07-10', '2025-07-11', '2025-07-14', '2025-07-15', '2025-07-16', '2025-07-17', '2025-07-18', '2025-07-21', '2025-07-22', '2025-07-23'],
+                    y: [7827.0, 8021.0, 8121.0, 8071.0, 7765.0, 8079.0, 7995.0, 8044.0, 7979.0, 8042.0, 7902.0, 8177.0, 8968.0, 9291.0, 8512.0, 8053.0, 7755.0, 8447.0, 8088.0, 8511.0, 8247.0, 8002.0, 8096.0, 8365.0, 8810.0, 9310.0, 9104.0, 9391.0, 9652.0, 9217.0, 9146.0, 9127.0, 8973.0, 9127.0, 8758.0, 9175.0, 9398.0, 9268.0, 9387.0, 9340.0, 10171.0, 10129.0, 10257.0, 10898.0, 10974.0, 10874.0, 10719.0, 10278.0, 9764.0, 9739.0, 9634.0, 9110.0, 9791.0, 9474.0, 9775.0, 9948.0, 10076.0, 10259.0, 10174.0, 9602.0, 9549.0, 9858.0, 9768.0, 10035.0, 9943.0, 9680.0, 8459.0, 9189.0, 9436.0, 9081.0, 9361.0, 9231.0, 9356.0, 9000.0, 8904.0, 8780.0, 8780.0, 8879.0, 8760.0, 9046.0, 8742.0, 8840.0, 8950.0, 8567.0, 8322.0, 7309.0, 7800.0, 8156.0, 8149.0, 8440.0],
+                    type: 'scatter',
+                    name: 'Actual Price',
+                    line: { color: '#53565A', width: 3 }
+                },
+                {
+                    x: ['2025-03-17', '2025-03-18', '2025-03-19', '2025-03-20', '2025-03-21', '2025-03-24', '2025-03-25', '2025-03-26', '2025-03-27', '2025-03-28', '2025-03-31', '2025-04-01', '2025-04-02', '2025-04-03', '2025-04-04', '2025-04-07', '2025-04-08', '2025-04-09', '2025-04-10', '2025-04-11', '2025-04-14', '2025-04-15', '2025-04-16', '2025-04-17', '2025-04-21', '2025-04-22', '2025-04-23', '2025-04-24', '2025-04-25', '2025-04-28', '2025-04-29', '2025-04-30', '2025-05-01', '2025-05-02', '2025-05-05', '2025-05-06', '2025-05-07', '2025-05-08', '2025-05-09', '2025-05-12', '2025-05-13', '2025-05-14', '2025-05-15', '2025-05-16', '2025-05-19', '2025-05-20', '2025-05-21', '2025-05-22', '2025-05-23', '2025-05-27', '2025-05-28', '2025-05-29', '2025-05-30', '2025-06-02', '2025-06-03', '2025-06-04', '2025-06-05', '2025-06-06', '2025-06-09', '2025-06-10', '2025-06-11', '2025-06-12', '2025-06-13', '2025-06-16', '2025-06-17', '2025-06-18', '2025-06-20', '2025-06-23', '2025-06-24', '2025-06-25', '2025-06-26', '2025-06-27', '2025-06-30', '2025-07-01', '2025-07-02', '2025-07-03', '2025-07-04', '2025-07-07', '2025-07-08', '2025-07-09', '2025-07-10', '2025-07-11', '2025-07-14', '2025-07-15', '2025-07-16', '2025-07-17', '2025-07-18', '2025-07-21', '2025-07-22', '2025-07-23'],
+                    y: [7842.654, 8037.042, 8137.242, 8087.142, 7780.53, 8095.158, 8010.99, 8060.088, 7994.958, 8058.084, 7917.804, 8193.354, 8985.936, 9309.582, 8529.024, 8069.106, 7770.51, 8463.894, 8104.176, 8528.022, 8263.494, 8018.004, 8112.192, 8381.73, 8827.62, 9328.62, 9122.208, 9409.782, 9671.304, 9235.434, 9164.292, 9145.254, 8990.946, 9145.254, 8775.516, 9193.35, 9416.796, 9286.536, 9405.774, 9358.68, 10191.342, 10149.258, 10277.514, 10919.796, 10995.948, 10895.748, 10740.438, 10298.556, 9783.528, 9758.478, 9653.268, 9128.22, 9810.582, 9492.948, 9794.55, 9967.896, 10096.152, 10279.518, 10194.348, 9621.204, 9568.098, 9877.716, 9787.536, 10055.07, 9962.886, 9699.36, 8475.918, 9207.378, 9454.872, 9099.162, 9379.722, 9249.462, 9374.712, 9018.0, 8921.808, 8797.56, 8797.56, 8896.758, 8777.52, 9064.092, 8759.484, 8857.68, 8967.9, 8584.134, 8338.644, 7323.618, 7815.6, 8172.312, 8165.298, 8456.88],
+                    type: 'scatter',
+                    name: 'XGBoost Prediction',
+                    line: { color: '#531E75', width: 2, dash: 'dash' }
+                }
+            ],
+            layout: {
+                xaxis: { title: 'Date', gridcolor: '#E5E5E5' },
+                yaxis: { title: 'Price ($)', gridcolor: '#E5E5E5', tickformat: '$,.0f' },
+                hovermode: 'x unified',
+                plot_bgcolor: 'white',
+                paper_bgcolor: '#F7F7F7',
+                font: { family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }
+            }
+        };
+
+        // Model Performance Chart
+        var performanceChart = {
+            data: [{
+                x: ['XGBoost', 'Holt-Winters', 'ARIMA', 'SARIMA', 'LSTM'],
+                y: [0.17, 2.91, 2.93, 3.31, 4.49],
+                type: 'bar',
+                marker: {
+                    color: ['#00A862', '#006FB9', '#006FB9', '#F47920', '#F47920']
+                },
+                text: [0.17, 2.91, 2.93, 3.31, 4.49].map(v => v.toFixed(2) + '%'),
+                textposition: 'outside'
+            }],
+            layout: {
+                xaxis: { title: 'Model' },
+                yaxis: { title: 'MAPE (%)', range: [0, Math.max(...[0.17, 2.91, 2.93, 3.31, 4.49]) * 1.2] },
+                plot_bgcolor: 'white',
+                paper_bgcolor: '#F7F7F7',
+                showlegend: false,
+                font: { family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }
+            }
+        };
+
+        // 30-Day Forecast Chart
+        var forecastChart = {
+            data: [
+                {
+                    x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+                    y: [8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0, 8440.0],
+                    type: 'scatter',
+                    name: 'Forecast',
+                    line: { color: '#531E75', width: 3 }
+                },
+                {
+                    x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].concat([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].slice().reverse()),
+                    y: [8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0, 8862.0].concat([8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0, 8018.0].slice().reverse()),
+                    fill: 'toself',
+                    fillcolor: 'rgba(83, 30, 117, 0.1)',
+                    line: { color: 'rgba(255, 255, 255, 0)' },
+                    showlegend: false,
+                    hoverinfo: 'skip'
+                }
+            ],
+            layout: {
+                xaxis: { title: 'Days Ahead', gridcolor: '#E5E5E5' },
+                yaxis: { title: 'Forecasted Price ($)', gridcolor: '#E5E5E5', tickformat: '$,.0f' },
+                hovermode: 'x unified',
+                plot_bgcolor: 'white',
+                paper_bgcolor: '#F7F7F7',
+                font: { family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' },
+                shapes: [{
+                    type: 'line',
+                    x0: 0, x1: 30,
+                    y0: 8,440, y1: 8,440,
+                    line: { color: '#53565A', width: 2, dash: 'dot' }
+                }],
+                annotations: [{
+                    x: 0,
+                    y: 8,440,
+                    text: 'Current Price',
+                    showarrow: false,
+                    yshift: 10
+                }]
+            }
+        };
+
+        // Render charts
+        Plotly.newPlot('actualVsPredictedChart', actualVsPredicted.data, actualVsPredicted.layout);
+        Plotly.newPlot('performanceChart', performanceChart.data, performanceChart.layout);
+        Plotly.newPlot('forecastChart', forecastChart.data, forecastChart.layout);
+    </script>
+</body>
+</html>

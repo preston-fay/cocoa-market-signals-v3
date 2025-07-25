@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoa Market Signals - AI Orchestration Dashboard</title>
+    <style>
+        :root {
+            --kearney-purple: #531E75;
+            --kearney-gray-900: #53565A;
+            --kearney-gray-500: #8B8D8F;
+            --kearney-gray-200: #E5E5E5;
+            --kearney-blue: #006FB9;
+            --kearney-green: #00A862;
+            --kearney-red: #E3001A;
+            --kearney-orange: #F47920;
+            --kearney-yellow: #FFD500;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F7F7F7;
+            --text-primary: #53565A;
+            --text-secondary: #8B8D8F;
+            --border-color: #E5E5E5;
+            --card-bg: #FFFFFF;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .dashboard-header {
+            background-color: var(--bg-primary);
+            border-bottom: 2px solid var(--kearney-purple);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .dashboard-header h1 {
+            color: var(--kearney-purple);
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-header p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-change {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .positive { color: var(--kearney-green); }
+        .negative { color: var(--kearney-red); }
+        .neutral { color: var(--text-secondary); }
+
+        .chart-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chart-title {
+            color: var(--kearney-purple);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .regime-indicator {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .regime-low {
+            background-color: rgba(0, 168, 98, 0.1);
+            color: var(--kearney-green);
+            border: 1px solid var(--kearney-green);
+        }
+
+        .regime-medium {
+            background-color: rgba(244, 121, 32, 0.1);
+            color: var(--kearney-orange);
+            border: 1px solid var(--kearney-orange);
+        }
+
+        .regime-high {
+            background-color: rgba(227, 0, 26, 0.1);
+            color: var(--kearney-red);
+            border: 1px solid var(--kearney-red);
+        }
+
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .model-badge {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--kearney-purple);
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        .model-name {
+            font-weight: 600;
+            color: var(--kearney-purple);
+            margin-bottom: 0.25rem;
+        }
+
+        .model-mape {
+            color: var(--text-secondary);
+        }
+
+        .recommendations-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendations-list li {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background-color: var(--bg-secondary);
+            border-left: 4px solid var(--kearney-purple);
+            border-radius: 4px;
+        }
+
+        .signal-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .signal-value {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-right: 2rem;
+        }
+
+        .signal-details {
+            text-align: left;
+        }
+
+        .signal-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .signal-strength {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        #actualVsPredictedChart,
+        #performanceChart,
+        #forecastChart {
+            height: 400px;
+        }
+    </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <header class="dashboard-header">
+        <h1>Cocoa Market Signals - AI Orchestration</h1>
+        <p>Dynamic Model Selection with Real-Time Performance Tracking</p>
+    </header>
+
+    <div class="container">
+        <!-- Regime and Signal Indicator -->
+        <div class="signal-indicator">
+            <div class="signal-value {{ signal_class }}">{{ signal_direction }}</div>
+            <div class="signal-details">
+                <div class="signal-label">Trading Signal</div>
+                <div class="signal-strength">{{ signal_strength }}% Confidence</div>
+                <div class="regime-indicator {{ regime_class }}">
+                    {{ regime_display }} VOLATILITY
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Current Price</div>
+                <div class="metric-value">${{ current_price }}</div>
+                <div class="metric-change {{ momentum_class }}">{{ momentum_5d }}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">7-Day Forecast</div>
+                <div class="metric-value">${{ forecast_price }}</div>
+                <div class="metric-change {{ forecast_class }}">{{ forecast_change }}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Volatility</div>
+                <div class="metric-value">{{ volatility }}%</div>
+                <div class="metric-change">{{ volatility_percentile }}th percentile</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Best Model</div>
+                <div class="metric-value">XGBoost</div>
+                <div class="metric-change positive">0.17% MAPE</div>
+            </div>
+        </div>
+
+        <!-- Actual vs Predicted Chart -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2 class="chart-title">Actual vs Predicted Prices</h2>
+                <span class="metric-label">Last 90 Days</span>
+            </div>
+            <div id="actualVsPredictedChart"></div>
+        </div>
+
+        <!-- Model Performance Chart -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2 class="chart-title">Model Performance Comparison</h2>
+                <span class="metric-label">Mean Absolute Percentage Error (Lower is Better)</span>
+            </div>
+            <div id="performanceChart"></div>
+        </div>
+
+        <!-- Active Models -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2 class="chart-title">Active Models for {{ regime_display }} Volatility</h2>
+            </div>
+            <div class="model-grid">
+                {% for model in active_models %}
+                <div class="model-badge">
+                    <div class="model-name">{{ model.name }}</div>
+                    <div class="model-mape">{{ model.performance }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2 class="chart-title">AI-Powered Recommendations</h2>
+            </div>
+            <ul class="recommendations-list">
+                {% for rec in recommendations %}
+                <li>{{ rec }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- 30-Day Forecast -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2 class="chart-title">30-Day Price Forecast</h2>
+                <span class="metric-label">With 95% Confidence Intervals</span>
+            </div>
+            <div id="forecastChart"></div>
+        </div>
+    </div>
+
+    <script>
+        // Actual vs Predicted Chart
+        var actualVsPredicted = {
+            data: [
+                {
+                    x: {{ actual_dates | safe }},
+                    y: {{ actual_prices | safe }},
+                    type: 'scatter',
+                    name: 'Actual Price',
+                    line: { color: '#53565A', width: 3 }
+                },
+                {
+                    x: {{ predicted_dates | safe }},
+                    y: {{ predicted_prices | safe }},
+                    type: 'scatter',
+                    name: 'XGBoost Prediction',
+                    line: { color: '#531E75', width: 2, dash: 'dash' }
+                }
+            ],
+            layout: {
+                xaxis: { title: 'Date', gridcolor: '#E5E5E5' },
+                yaxis: { title: 'Price ($)', gridcolor: '#E5E5E5', tickformat: '$,.0f' },
+                hovermode: 'x unified',
+                plot_bgcolor: 'white',
+                paper_bgcolor: '#F7F7F7',
+                font: { family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }
+            }
+        };
+
+        // Model Performance Chart
+        var performanceChart = {
+            data: [{
+                x: {{ model_names | safe }},
+                y: {{ model_mapes | safe }},
+                type: 'bar',
+                marker: {
+                    color: {{ model_colors | safe }}
+                },
+                text: {{ model_mapes | safe }}.map(v => v.toFixed(2) + '%'),
+                textposition: 'outside'
+            }],
+            layout: {
+                xaxis: { title: 'Model' },
+                yaxis: { title: 'MAPE (%)', range: [0, Math.max(...{{ model_mapes | safe }}) * 1.2] },
+                plot_bgcolor: 'white',
+                paper_bgcolor: '#F7F7F7',
+                showlegend: false,
+                font: { family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }
+            }
+        };
+
+        // 30-Day Forecast Chart
+        var forecastChart = {
+            data: [
+                {
+                    x: {{ forecast_days | safe }},
+                    y: {{ forecast_values | safe }},
+                    type: 'scatter',
+                    name: 'Forecast',
+                    line: { color: '#531E75', width: 3 }
+                },
+                {
+                    x: {{ forecast_days | safe }}.concat({{ forecast_days | safe }}.slice().reverse()),
+                    y: {{ forecast_upper | safe }}.concat({{ forecast_lower | safe }}.slice().reverse()),
+                    fill: 'toself',
+                    fillcolor: 'rgba(83, 30, 117, 0.1)',
+                    line: { color: 'rgba(255, 255, 255, 0)' },
+                    showlegend: false,
+                    hoverinfo: 'skip'
+                }
+            ],
+            layout: {
+                xaxis: { title: 'Days Ahead', gridcolor: '#E5E5E5' },
+                yaxis: { title: 'Forecasted Price ($)', gridcolor: '#E5E5E5', tickformat: '$,.0f' },
+                hovermode: 'x unified',
+                plot_bgcolor: 'white',
+                paper_bgcolor: '#F7F7F7',
+                font: { family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' },
+                shapes: [{
+                    type: 'line',
+                    x0: 0, x1: 30,
+                    y0: {{ current_price }}, y1: {{ current_price }},
+                    line: { color: '#53565A', width: 2, dash: 'dot' }
+                }],
+                annotations: [{
+                    x: 0,
+                    y: {{ current_price }},
+                    text: 'Current Price',
+                    showarrow: false,
+                    yshift: 10
+                }]
+            }
+        };
+
+        // Render charts
+        Plotly.newPlot('actualVsPredictedChart', actualVsPredicted.data, actualVsPredicted.layout);
+        Plotly.newPlot('performanceChart', performanceChart.data, performanceChart.layout);
+        Plotly.newPlot('forecastChart', forecastChart.data, forecastChart.layout);
+    </script>
+</body>
+</html>
