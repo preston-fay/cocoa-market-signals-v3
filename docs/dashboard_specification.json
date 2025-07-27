@@ -1,0 +1,247 @@
+{
+  "title": "Zen Consensus Dashboard Specification",
+  "version": "1.0",
+  "generated": "2025-07-25T20:16:56.922063",
+  "requirements": [
+    {
+      "name": "actual_vs_predicted",
+      "features": [
+        {
+          "feature": "Line chart with actual prices",
+          "description": "Historical actual prices as primary line",
+          "priority": "CRITICAL"
+        },
+        {
+          "feature": "Prediction overlay",
+          "description": "Predictions shown as dashed lines or markers",
+          "priority": "CRITICAL"
+        },
+        {
+          "feature": "Error visualization",
+          "description": "Visual representation of prediction errors",
+          "priority": "HIGH"
+        },
+        {
+          "feature": "Confidence bands",
+          "description": "Show prediction confidence as shaded areas",
+          "priority": "MEDIUM"
+        },
+        {
+          "feature": "Accuracy metrics",
+          "description": "MAPE, directional accuracy shown for each prediction",
+          "priority": "HIGH"
+        }
+      ]
+    },
+    {
+      "name": "month_navigation",
+      "features": [
+        {
+          "feature": "Month selector dropdown/buttons",
+          "description": "Easy navigation between months",
+          "priority": "CRITICAL"
+        },
+        {
+          "feature": "Month-specific views",
+          "description": "Show data and predictions for selected month",
+          "priority": "CRITICAL"
+        },
+        {
+          "feature": "Previous/Next month buttons",
+          "description": "Quick navigation with arrow buttons",
+          "priority": "HIGH"
+        },
+        {
+          "feature": "Month performance summary",
+          "description": "KPIs specific to selected month",
+          "priority": "HIGH"
+        },
+        {
+          "feature": "Year overview with month heatmap",
+          "description": "Visual overview of all months performance",
+          "priority": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "name": "kpis",
+      "features": [
+        {
+          "kpi": "Overall Prediction Accuracy",
+          "calculation": "Average MAPE across all predictions",
+          "display": "Large number with trend arrow",
+          "priority": "CRITICAL"
+        },
+        {
+          "kpi": "Directional Accuracy",
+          "calculation": "% of times we predicted direction correctly",
+          "display": "Percentage with success rate gauge",
+          "priority": "CRITICAL"
+        },
+        {
+          "kpi": "Best Performing Model",
+          "calculation": "Model with lowest MAPE in period",
+          "display": "Model name with accuracy score",
+          "priority": "HIGH"
+        },
+        {
+          "kpi": "Signal Success Rate",
+          "calculation": "% of signals that were profitable",
+          "display": "Success rate with signal count",
+          "priority": "HIGH"
+        },
+        {
+          "kpi": "Prediction Confidence vs Accuracy",
+          "calculation": "Correlation between confidence and actual accuracy",
+          "display": "Scatter plot or correlation score",
+          "priority": "MEDIUM"
+        },
+        {
+          "kpi": "Monthly Improvement Trend",
+          "calculation": "Month-over-month accuracy improvement",
+          "display": "Trend line with percentage change",
+          "priority": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "name": "insights",
+      "features": [
+        {
+          "insight": "Prediction Error Analysis",
+          "description": "Breakdown of when/why predictions fail",
+          "components": [
+            "Error by time horizon",
+            "Error by market condition",
+            "Error patterns"
+          ],
+          "priority": "HIGH"
+        },
+        {
+          "insight": "Model Contribution Breakdown",
+          "description": "How each model contributes to consensus",
+          "components": [
+            "Model weights",
+            "Individual predictions",
+            "Disagreement metrics"
+          ],
+          "priority": "HIGH"
+        },
+        {
+          "insight": "Market Regime Detection",
+          "description": "Current market conditions and regime",
+          "components": [
+            "Volatility level",
+            "Trend strength",
+            "Regime changes"
+          ],
+          "priority": "MEDIUM"
+        },
+        {
+          "insight": "Signal Generation History",
+          "description": "Timeline of all generated signals",
+          "components": [
+            "Signal timeline",
+            "Success/failure",
+            "Profit/loss"
+          ],
+          "priority": "HIGH"
+        },
+        {
+          "insight": "Prediction Horizon Analysis",
+          "description": "Accuracy by prediction timeframe",
+          "components": [
+            "1-day accuracy",
+            "7-day accuracy",
+            "30-day accuracy"
+          ],
+          "priority": "CRITICAL"
+        }
+      ]
+    },
+    {
+      "name": "data_sources",
+      "features": [
+        {
+          "data": "Historical predictions with outcomes",
+          "source": "predictions table with actual_price filled",
+          "update": "Daily after market close",
+          "priority": "CRITICAL"
+        },
+        {
+          "data": "Real-time price data",
+          "source": "price_data table",
+          "update": "Every market day",
+          "priority": "CRITICAL"
+        },
+        {
+          "data": "Model performance metrics",
+          "source": "model_performance table",
+          "update": "After each evaluation",
+          "priority": "HIGH"
+        },
+        {
+          "data": "Signal history with outcomes",
+          "source": "signals table with outcome fields",
+          "update": "When signals resolve",
+          "priority": "HIGH"
+        },
+        {
+          "data": "Model metadata and configurations",
+          "source": "Model configuration files",
+          "update": "On model changes",
+          "priority": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "name": "user_experience",
+      "features": [
+        {
+          "feature": "Dark theme only",
+          "description": "Consistent with Kearney design standards",
+          "priority": "CRITICAL"
+        },
+        {
+          "feature": "Responsive design",
+          "description": "Works on desktop and tablet",
+          "priority": "HIGH"
+        },
+        {
+          "feature": "Loading states",
+          "description": "Show loading indicators for data fetches",
+          "priority": "MEDIUM"
+        },
+        {
+          "feature": "Interactive tooltips",
+          "description": "Detailed info on hover/click",
+          "priority": "HIGH"
+        },
+        {
+          "feature": "Export functionality",
+          "description": "Export charts and data as PNG/CSV",
+          "priority": "MEDIUM"
+        },
+        {
+          "feature": "Real-time updates",
+          "description": "Auto-refresh when new data available",
+          "priority": "LOW"
+        }
+      ]
+    }
+  ],
+  "priority_summary": {
+    "CRITICAL": 10,
+    "HIGH": 13,
+    "MEDIUM": 8,
+    "LOW": 1
+  },
+  "implementation_order": [
+    "actual_vs_predicted",
+    "month_navigation",
+    "kpis",
+    "insights",
+    "data_sources",
+    "user_experience"
+  ]
+}

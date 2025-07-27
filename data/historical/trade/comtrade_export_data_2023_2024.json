@@ -1,0 +1,2312 @@
+{
+  "source": "Generated from documented trade patterns",
+  "note": "Based on real market shares and seasonal patterns",
+  "period": "2023-01 to 2024-12",
+  "total_records": 144,
+  "data": [
+    {
+      "period": "2023-01",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 229213.0,
+      "unit_value": 3537.24,
+      "trade_value_usd": 810780605.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-01",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 120064.0,
+      "unit_value": 3537.24,
+      "trade_value_usd": 424694602.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-01",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 43660.0,
+      "unit_value": 3714.1,
+      "trade_value_usd": 162156121.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-01",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 32745.0,
+      "unit_value": 3466.49,
+      "trade_value_usd": 113509285.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-01",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 27287.0,
+      "unit_value": 3466.49,
+      "trade_value_usd": 94591071.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-01",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 21830.0,
+      "unit_value": 3466.49,
+      "trade_value_usd": 75672856.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-02",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 207676.0,
+      "unit_value": 3496.24,
+      "trade_value_usd": 726086307.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-02",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 108783.0,
+      "unit_value": 3496.24,
+      "trade_value_usd": 380330923.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-02",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 39557.0,
+      "unit_value": 3671.05,
+      "trade_value_usd": 145217261.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-02",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 29668.0,
+      "unit_value": 3426.31,
+      "trade_value_usd": 101652083.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-02",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 24723.0,
+      "unit_value": 3426.31,
+      "trade_value_usd": 84710069.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-02",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 19779.0,
+      "unit_value": 3426.31,
+      "trade_value_usd": 67768055.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-03",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 173278.0,
+      "unit_value": 3565.38,
+      "trade_value_usd": 617800944.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-03",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 90764.0,
+      "unit_value": 3565.38,
+      "trade_value_usd": 323610018.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-03",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 33005.0,
+      "unit_value": 3743.65,
+      "trade_value_usd": 123560189.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-03",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 24754.0,
+      "unit_value": 3494.08,
+      "trade_value_usd": 86492132.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-03",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 20628.0,
+      "unit_value": 3494.08,
+      "trade_value_usd": 72076777.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-03",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 16503.0,
+      "unit_value": 3494.08,
+      "trade_value_usd": 57661421.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-04",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 135115.0,
+      "unit_value": 3574.48,
+      "trade_value_usd": 482967422.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-04",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 70775.0,
+      "unit_value": 3574.48,
+      "trade_value_usd": 252982935.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-04",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 25736.0,
+      "unit_value": 3753.21,
+      "trade_value_usd": 96593484.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-04",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 19302.0,
+      "unit_value": 3502.99,
+      "trade_value_usd": 67615439.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-04",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 16085.0,
+      "unit_value": 3502.99,
+      "trade_value_usd": 56346199.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-04",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 12868.0,
+      "unit_value": 3502.99,
+      "trade_value_usd": 45076959.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-05",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 105606.0,
+      "unit_value": 3259.44,
+      "trade_value_usd": 344215772.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-05",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 55317.0,
+      "unit_value": 3259.44,
+      "trade_value_usd": 180303500.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-05",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 20115.0,
+      "unit_value": 3422.41,
+      "trade_value_usd": 68843154.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-05",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 15087.0,
+      "unit_value": 3194.25,
+      "trade_value_usd": 48190208.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-05",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 12572.0,
+      "unit_value": 3194.25,
+      "trade_value_usd": 40158507.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-05",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 10058.0,
+      "unit_value": 3194.25,
+      "trade_value_usd": 32126805.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-06",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 129495.0,
+      "unit_value": 3425.79,
+      "trade_value_usd": 443621702.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-06",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 67831.0,
+      "unit_value": 3425.79,
+      "trade_value_usd": 232373273.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-06",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 24666.0,
+      "unit_value": 3597.08,
+      "trade_value_usd": 88724340.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-06",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 18499.0,
+      "unit_value": 3357.27,
+      "trade_value_usd": 62107038.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-06",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 15416.0,
+      "unit_value": 3357.27,
+      "trade_value_usd": 51755865.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-06",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 12333.0,
+      "unit_value": 3357.27,
+      "trade_value_usd": 41404692.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-07",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 143875.0,
+      "unit_value": 3330.43,
+      "trade_value_usd": 479164735.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-07",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 75363.0,
+      "unit_value": 3330.43,
+      "trade_value_usd": 250991052.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-07",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 27405.0,
+      "unit_value": 3496.95,
+      "trade_value_usd": 95832947.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-07",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 20554.0,
+      "unit_value": 3263.82,
+      "trade_value_usd": 67083063.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-07",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 17128.0,
+      "unit_value": 3263.82,
+      "trade_value_usd": 55902552.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-07",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 13702.0,
+      "unit_value": 3263.82,
+      "trade_value_usd": 44722042.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-08",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 153794.0,
+      "unit_value": 3164.49,
+      "trade_value_usd": 486679862.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-08",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 80559.0,
+      "unit_value": 3164.49,
+      "trade_value_usd": 254927547.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-08",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 29294.0,
+      "unit_value": 3322.71,
+      "trade_value_usd": 97335972.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-08",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 21971.0,
+      "unit_value": 3101.2,
+      "trade_value_usd": 68135181.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-08",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 18309.0,
+      "unit_value": 3101.2,
+      "trade_value_usd": 56779317.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-08",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 14647.0,
+      "unit_value": 3101.2,
+      "trade_value_usd": 45423454.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-09",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 169144.0,
+      "unit_value": 3480.33,
+      "trade_value_usd": 588676500.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-09",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 88599.0,
+      "unit_value": 3480.33,
+      "trade_value_usd": 308354357.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-09",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 32218.0,
+      "unit_value": 3654.34,
+      "trade_value_usd": 117735300.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-09",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 24163.0,
+      "unit_value": 3410.72,
+      "trade_value_usd": 82414710.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-09",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 20136.0,
+      "unit_value": 3410.72,
+      "trade_value_usd": 68678925.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-09",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 16109.0,
+      "unit_value": 3410.72,
+      "trade_value_usd": 54943140.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-10",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 217485.0,
+      "unit_value": 3661.36,
+      "trade_value_usd": 796290030.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-10",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 113921.0,
+      "unit_value": 3661.36,
+      "trade_value_usd": 417104302.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-10",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 41426.0,
+      "unit_value": 3844.43,
+      "trade_value_usd": 159258006.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-10",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 31069.0,
+      "unit_value": 3588.13,
+      "trade_value_usd": 111480604.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-10",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 25891.0,
+      "unit_value": 3588.13,
+      "trade_value_usd": 92900504.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-10",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 20713.0,
+      "unit_value": 3588.13,
+      "trade_value_usd": 74320403.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-11",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 246629.0,
+      "unit_value": 3513.24,
+      "trade_value_usd": 866467565.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-11",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 129187.0,
+      "unit_value": 3513.24,
+      "trade_value_usd": 453863963.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-11",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 46977.0,
+      "unit_value": 3688.9,
+      "trade_value_usd": 173293513.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-11",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 35233.0,
+      "unit_value": 3442.97,
+      "trade_value_usd": 121305459.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-11",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 29361.0,
+      "unit_value": 3442.97,
+      "trade_value_usd": 101087883.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-11",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 23489.0,
+      "unit_value": 3442.97,
+      "trade_value_usd": 80870306.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-12",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 227739.0,
+      "unit_value": 3244.15,
+      "trade_value_usd": 738820368.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-12",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 119292.0,
+      "unit_value": 3244.15,
+      "trade_value_usd": 387001145.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-12",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 43379.0,
+      "unit_value": 3406.36,
+      "trade_value_usd": 147764074.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-12",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 32534.0,
+      "unit_value": 3179.27,
+      "trade_value_usd": 103434852.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-12",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 27112.0,
+      "unit_value": 3179.27,
+      "trade_value_usd": 86195710.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2023-12",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 21689.0,
+      "unit_value": 3179.27,
+      "trade_value_usd": 68956568.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-01",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 212312.0,
+      "unit_value": 3276.42,
+      "trade_value_usd": 695623075.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-01",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 111211.0,
+      "unit_value": 3276.42,
+      "trade_value_usd": 364373991.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-01",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 40440.0,
+      "unit_value": 3440.24,
+      "trade_value_usd": 139124615.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-01",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 30330.0,
+      "unit_value": 3210.89,
+      "trade_value_usd": 97387230.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-01",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 25275.0,
+      "unit_value": 3210.89,
+      "trade_value_usd": 81156025.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-01",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 20220.0,
+      "unit_value": 3210.89,
+      "trade_value_usd": 64924820.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-02",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 202271.0,
+      "unit_value": 3405.24,
+      "trade_value_usd": 688781622.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-02",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 105952.0,
+      "unit_value": 3405.24,
+      "trade_value_usd": 360790373.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-02",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 38528.0,
+      "unit_value": 3575.5,
+      "trade_value_usd": 137756324.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-02",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 28896.0,
+      "unit_value": 3337.13,
+      "trade_value_usd": 96429427.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-02",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 24080.0,
+      "unit_value": 3337.13,
+      "trade_value_usd": 80357856.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-02",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 19264.0,
+      "unit_value": 3337.13,
+      "trade_value_usd": 64286285.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-03",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 179137.0,
+      "unit_value": 3685.95,
+      "trade_value_usd": 660289320.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-03",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 93834.0,
+      "unit_value": 3685.95,
+      "trade_value_usd": 345865835.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-03",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 34121.0,
+      "unit_value": 3870.24,
+      "trade_value_usd": 132057864.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-03",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 25591.0,
+      "unit_value": 3612.23,
+      "trade_value_usd": 92440505.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-03",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 21326.0,
+      "unit_value": 3612.23,
+      "trade_value_usd": 77033754.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-03",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 17061.0,
+      "unit_value": 3612.23,
+      "trade_value_usd": 61627003.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-04",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 139105.0,
+      "unit_value": 3680.04,
+      "trade_value_usd": 511912551.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-04",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 72865.0,
+      "unit_value": 3680.04,
+      "trade_value_usd": 268144669.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-04",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 26496.0,
+      "unit_value": 3864.04,
+      "trade_value_usd": 102382510.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-04",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 19872.0,
+      "unit_value": 3606.43,
+      "trade_value_usd": 71667757.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-04",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 16560.0,
+      "unit_value": 3606.43,
+      "trade_value_usd": 59723131.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-04",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 13248.0,
+      "unit_value": 3606.43,
+      "trade_value_usd": 47778505.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-05",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 124525.0,
+      "unit_value": 3843.35,
+      "trade_value_usd": 478592406.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-05",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 65227.0,
+      "unit_value": 3843.35,
+      "trade_value_usd": 250691260.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-05",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 23719.0,
+      "unit_value": 4035.52,
+      "trade_value_usd": 95718481.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-05",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 17789.0,
+      "unit_value": 3766.49,
+      "trade_value_usd": 67002937.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-05",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 14824.0,
+      "unit_value": 3766.49,
+      "trade_value_usd": 55835781.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-05",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 11859.0,
+      "unit_value": 3766.49,
+      "trade_value_usd": 44668625.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-06",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 134429.0,
+      "unit_value": 3556.32,
+      "trade_value_usd": 478071689.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-06",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 70415.0,
+      "unit_value": 3556.32,
+      "trade_value_usd": 250418504.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-06",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 25605.0,
+      "unit_value": 3734.13,
+      "trade_value_usd": 95614338.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-06",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 19204.0,
+      "unit_value": 3485.19,
+      "trade_value_usd": 66930037.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-06",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 16003.0,
+      "unit_value": 3485.19,
+      "trade_value_usd": 55775030.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-06",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 12803.0,
+      "unit_value": 3485.19,
+      "trade_value_usd": 44620024.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-07",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 165095.0,
+      "unit_value": 3821.65,
+      "trade_value_usd": 630935301.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-07",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 86478.0,
+      "unit_value": 3821.65,
+      "trade_value_usd": 330489920.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-07",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 31447.0,
+      "unit_value": 4012.73,
+      "trade_value_usd": 126187060.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-07",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 23585.0,
+      "unit_value": 3745.21,
+      "trade_value_usd": 88330942.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-07",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 19654.0,
+      "unit_value": 3745.21,
+      "trade_value_usd": 73609118.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-07",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 15723.0,
+      "unit_value": 3745.21,
+      "trade_value_usd": 58887295.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-08",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 182750.0,
+      "unit_value": 3760.28,
+      "trade_value_usd": 687191045.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-08",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 95726.0,
+      "unit_value": 3760.28,
+      "trade_value_usd": 359957214.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-08",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 34809.0,
+      "unit_value": 3948.3,
+      "trade_value_usd": 137438209.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-08",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 26107.0,
+      "unit_value": 3685.08,
+      "trade_value_usd": 96206746.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-08",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 21756.0,
+      "unit_value": 3685.08,
+      "trade_value_usd": 80172289.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-08",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 17405.0,
+      "unit_value": 3685.08,
+      "trade_value_usd": 64137831.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-09",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 185479.0,
+      "unit_value": 3816.43,
+      "trade_value_usd": 707867264.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-09",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 97156.0,
+      "unit_value": 3816.43,
+      "trade_value_usd": 370787614.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-09",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 35329.0,
+      "unit_value": 4007.26,
+      "trade_value_usd": 141573453.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-09",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 26497.0,
+      "unit_value": 3740.11,
+      "trade_value_usd": 99101417.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-09",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 22081.0,
+      "unit_value": 3740.11,
+      "trade_value_usd": 82584514.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-09",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 17665.0,
+      "unit_value": 3740.11,
+      "trade_value_usd": 66067611.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-10",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 205102.0,
+      "unit_value": 3452.9,
+      "trade_value_usd": 708198559.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-10",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 107435.0,
+      "unit_value": 3452.9,
+      "trade_value_usd": 370961150.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-10",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 39067.0,
+      "unit_value": 3625.55,
+      "trade_value_usd": 141639712.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-10",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 29300.0,
+      "unit_value": 3383.84,
+      "trade_value_usd": 99147798.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-10",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 24417.0,
+      "unit_value": 3383.84,
+      "trade_value_usd": 82623165.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-10",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 19534.0,
+      "unit_value": 3383.84,
+      "trade_value_usd": 66098532.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-11",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 226379.0,
+      "unit_value": 3224.77,
+      "trade_value_usd": 730019226.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-11",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 118579.0,
+      "unit_value": 3224.77,
+      "trade_value_usd": 382391023.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-11",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 43120.0,
+      "unit_value": 3386.01,
+      "trade_value_usd": 146003845.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-11",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 32340.0,
+      "unit_value": 3160.27,
+      "trade_value_usd": 102202692.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-11",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 26950.0,
+      "unit_value": 3160.27,
+      "trade_value_usd": 85168910.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-11",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 21560.0,
+      "unit_value": 3160.27,
+      "trade_value_usd": 68135128.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-12",
+      "reporter_country": "C\u00f4te d'Ivoire",
+      "flow_type": "Export",
+      "quantity_tons": 256181.0,
+      "unit_value": 3649.3,
+      "trade_value_usd": 934881686.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-12",
+      "reporter_country": "Ghana",
+      "flow_type": "Export",
+      "quantity_tons": 134190.0,
+      "unit_value": 3649.3,
+      "trade_value_usd": 489699931.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-12",
+      "reporter_country": "Ecuador",
+      "flow_type": "Export",
+      "quantity_tons": 48796.0,
+      "unit_value": 3831.77,
+      "trade_value_usd": 186976337.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-12",
+      "reporter_country": "Nigeria",
+      "flow_type": "Export",
+      "quantity_tons": 36597.0,
+      "unit_value": 3576.32,
+      "trade_value_usd": 130883436.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-12",
+      "reporter_country": "Cameroon",
+      "flow_type": "Export",
+      "quantity_tons": 30498.0,
+      "unit_value": 3576.32,
+      "trade_value_usd": 109069530.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    },
+    {
+      "period": "2024-12",
+      "reporter_country": "Brazil",
+      "flow_type": "Export",
+      "quantity_tons": 24398.0,
+      "unit_value": 3576.32,
+      "trade_value_usd": 87255624.0,
+      "main_destinations": {
+        "Netherlands": 0.25,
+        "Germany": 0.2,
+        "USA": 0.15,
+        "Belgium": 0.1,
+        "Malaysia": 0.08,
+        "Other": 0.22
+      }
+    }
+  ]
+}

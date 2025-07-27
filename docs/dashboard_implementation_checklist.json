@@ -1,0 +1,117 @@
+[
+  {
+    "priority": "CRITICAL",
+    "item": "actual_vs_predicted: Line chart with actual prices",
+    "done": false
+  },
+  {
+    "priority": "CRITICAL",
+    "item": "actual_vs_predicted: Prediction overlay",
+    "done": false
+  },
+  {
+    "priority": "CRITICAL",
+    "item": "month_navigation: Month selector dropdown/buttons",
+    "done": false
+  },
+  {
+    "priority": "CRITICAL",
+    "item": "month_navigation: Month-specific views",
+    "done": false
+  },
+  {
+    "priority": "CRITICAL",
+    "item": "kpis: Overall Prediction Accuracy",
+    "done": false
+  },
+  {
+    "priority": "CRITICAL",
+    "item": "kpis: Directional Accuracy",
+    "done": false
+  },
+  {
+    "priority": "CRITICAL",
+    "item": "insights: Prediction Horizon Analysis",
+    "done": false
+  },
+  {
+    "priority": "CRITICAL",
+    "item": "data_sources: Historical predictions with outcomes",
+    "done": false
+  },
+  {
+    "priority": "CRITICAL",
+    "item": "data_sources: Real-time price data",
+    "done": false
+  },
+  {
+    "priority": "CRITICAL",
+    "item": "user_experience: Dark theme only",
+    "done": false
+  },
+  {
+    "priority": "HIGH",
+    "item": "actual_vs_predicted: Error visualization",
+    "done": false
+  },
+  {
+    "priority": "HIGH",
+    "item": "actual_vs_predicted: Accuracy metrics",
+    "done": false
+  },
+  {
+    "priority": "HIGH",
+    "item": "month_navigation: Previous/Next month buttons",
+    "done": false
+  },
+  {
+    "priority": "HIGH",
+    "item": "month_navigation: Month performance summary",
+    "done": false
+  },
+  {
+    "priority": "HIGH",
+    "item": "kpis: Best Performing Model",
+    "done": false
+  },
+  {
+    "priority": "HIGH",
+    "item": "kpis: Signal Success Rate",
+    "done": false
+  },
+  {
+    "priority": "HIGH",
+    "item": "insights: Prediction Error Analysis",
+    "done": false
+  },
+  {
+    "priority": "HIGH",
+    "item": "insights: Model Contribution Breakdown",
+    "done": false
+  },
+  {
+    "priority": "HIGH",
+    "item": "insights: Signal Generation History",
+    "done": false
+  },
+  {
+    "priority": "HIGH",
+    "item": "data_sources: Model performance metrics",
+    "done": false
+  },
+  {
+    "priority": "HIGH",
+    "item": "data_sources: Signal history with outcomes",
+    "done": false
+  },
+  {
+    "priority": "HIGH",
+    "item": "user_experience: Responsive design",
+    "done": false
+  },
+  {
+    "priority": "HIGH",
+    "item": "user_experience: Interactive tooltips",
+    "done": false
+  }
+]

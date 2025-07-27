@@ -4,15 +4,15 @@
     "yamoussoukro": {
       "total_days": 731,
       "temperature": {
-        "avg_mean": 26.300274348422494,
-        "avg_max": 31.793827160493823,
-        "avg_min": 22.566941015089164,
+        "avg_mean": 26.299314128943756,
+        "avg_max": 31.791083676268862,
+        "avg_min": 22.567078189300414,
         "extreme_max": 38.3,
         "extreme_min": 18.4
       },
       "rainfall": {
-        "total_mm": 2686.5,
-        "daily_avg_mm": 3.685185185185185,
+        "total_mm": 2685.6000000000004,
+        "daily_avg_mm": 3.683950617283951,
         "max_daily_mm": 49.5,
         "dry_days": 184,
         "heavy_rain_days": 0
@@ -27,15 +27,15 @@
     "kumasi": {
       "total_days": 731,
       "temperature": {
-        "avg_mean": 26.468861454046642,
-        "avg_max": 31.99259259259259,
-        "avg_min": 22.815500685871058,
+        "avg_mean": 26.466255144032925,
+        "avg_max": 31.989849108367626,
+        "avg_min": 22.814128943758572,
         "extreme_max": 38.6,
         "extreme_min": 18.6
       },
       "rainfall": {
-        "total_mm": 2786.1,
-        "daily_avg_mm": 3.821810699588477,
+        "total_mm": 2790.0,
+        "daily_avg_mm": 3.8271604938271606,
         "max_daily_mm": 68.5,
         "dry_days": 155,
         "heavy_rain_days": 1
@@ -50,15 +50,15 @@
     "san_pedro": {
       "total_days": 731,
       "temperature": {
-        "avg_mean": 26.384910836762685,
-        "avg_max": 28.924005486968454,
-        "avg_min": 24.327023319615915,
+        "avg_mean": 26.38449931412894,
+        "avg_max": 28.922770919067215,
+        "avg_min": 24.326748971193418,
         "extreme_max": 33.9,
         "extreme_min": 20.0
       },
       "rainfall": {
-        "total_mm": 2620.2,
-        "daily_avg_mm": 3.5942386831275717,
+        "total_mm": 2620.1000000000004,
+        "daily_avg_mm": 3.5941015089163244,
         "max_daily_mm": 48.6,
         "dry_days": 40,
         "heavy_rain_days": 0
@@ -73,15 +73,15 @@
     "takoradi": {
       "total_days": 731,
       "temperature": {
-        "avg_mean": 26.486145404663926,
-        "avg_max": 29.850068587105625,
-        "avg_min": 24.064471879286693,
+        "avg_mean": 26.48559670781893,
+        "avg_max": 29.848010973936894,
+        "avg_min": 24.06433470507545,
         "extreme_max": 33.7,
         "extreme_min": 20.9
       },
       "rainfall": {
-        "total_mm": 3266.7,
-        "daily_avg_mm": 4.481069958847736,
+        "total_mm": 3266.6,
+        "daily_avg_mm": 4.480932784636488,
         "max_daily_mm": 60.9,
         "dry_days": 30,
         "heavy_rain_days": 1

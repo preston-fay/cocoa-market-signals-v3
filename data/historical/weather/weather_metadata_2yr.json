@@ -8,8 +8,8 @@
   ],
   "period": "2yr",
   "date_range": {
-    "start": "2023-07-25",
-    "end": "2025-07-24"
+    "start": "2023-07-26",
+    "end": "2025-07-25"
   },
   "total_records": 2924,
   "metrics": [
@@ -19,5 +19,5 @@
     "soil moisture",
     "calculated risk indicators"
   ],
-  "last_updated": "2025-07-24T13:52:48.764091"
+  "last_updated": "2025-07-25T17:19:07.013630"
 }

@@ -1,0 +1,357 @@
+{
+  "source": "REAL news from public APIs",
+  "fetch_date": "2025-07-27T12:05:41.580986",
+  "total_articles": 50,
+  "articles": [
+    {
+      "date": "20250709T063000Z",
+      "headline": "West Africa facing 10 % drop in cocoa output in 2025 / 26 , industry sources say",
+      "url": "https://www.marketscreener.com/quote/index/S-P-GSCI-COCOA-INDEX-46869122/news/West-Africa-facing-10-drop-in-cocoa-output-in-2025-26-industry-sources-say-50464535/",
+      "source": "marketscreener.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250521T100000Z",
+      "headline": "Kakao fiyatlar\u0131nda yeni ralli : Ay ba\u015f\u0131ndan bu yana y\u00fczde 20  yi a\u015ft\u0131",
+      "url": "https://www.dunya.com/emtia/kakao-fiyatlarinda-yeni-ralli-ay-basindan-bu-yana-yuzde-20yi-asti-haberi-777397",
+      "source": "dunya.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250516T173000Z",
+      "headline": "Ghana could benefit from gold , cocoa export to support cedi - Absa report",
+      "url": "https://www.myjoyonline.com/ghana-could-benefit-from-gold-cocoa-export-to-support-cedi-absa-report/",
+      "source": "myjoyonline.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250708T170000Z",
+      "headline": "Dollar Strength Weighs on Cocoa Prices",
+      "url": "https://finance.yahoo.com/news/dollar-strength-weighs-cocoa-prices-161809651.html",
+      "source": "finance.yahoo.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250521T120000Z",
+      "headline": "Kakao fiyatlar\u0131nda yeni ralli",
+      "url": "https://www.sozcu.com.tr/kakao-fiyatlarinda-yeni-ralli-p176092",
+      "source": "sozcu.com.tr",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250525T130000Z",
+      "headline": "\u039a\u03b1\u03ba\u03ac\u03bf : \u0395\u03ba\u03c4\u03bf\u03be\u03b5\u03cd\u03c4\u03b7\u03ba\u03b5 \u03b7 \u03c4\u03b9\u03bc\u03ae \u03c4\u03bf\u03bd \u039c\u03ac\u03b9\u03bf \u2013 \u03a4\u03b1 \u03bd\u03ad\u03b1 \u03b4\u03b5\u03b4\u03bf\u03bc\u03ad\u03bd\u03b1",
+      "url": "https://www.in.gr/2025/05/25/economy/oikonomikes-eidiseis/kakao-ektokseytike-timi-ton-maio-ta-nea-dedomena/",
+      "source": "in.gr",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250521T113000Z",
+      "headline": "Kakao rallisi ba\u015flad\u0131 : Fiyatlar y\u00fckselmeye devam edecek",
+      "url": "https://www.sabah.com.tr/ekonomi/emtia-rallisi-basladi-fiyatlar-yukselmeye-devam-edecek-7356508",
+      "source": "sabah.com.tr",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250711T094500Z",
+      "headline": "\u010cokol\u00e1da v \u010cesku z\u016fstane drah\u00e1",
+      "url": "https://www.novinky.cz/clanek/ekonomika-cokolada-v-cesku-zustane-draha-40529760",
+      "source": "novinky.cz",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250727T090000Z",
+      "headline": "\u4ef7\u683c\u98d9\u6da8121 %\uff01 \u4e09\u5927\u5de8\u5934\u96c6\u4f53\u6da8\u4ef7 \uff01 ",
+      "url": "https://www.xxcb.cn/details/2q8biSYgB6885ca2d842017094e6923fd.html",
+      "source": "xxcb.cn",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250725T021500Z",
+      "headline": "\u4ef7\u683c\u98d9\u6da8121 %\uff01 \u4e09\u5927\u5de8\u5934\u96c6\u4f53\u6da8\u4ef7",
+      "url": "https://baijiahao.baidu.com/s?id=1838581157371296381",
+      "source": "baijiahao.baidu.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250725T144500Z",
+      "headline": "\u4ef7\u683c\u98d9\u6da8121 %\uff01 \u4e09\u5927\u5de8\u5934\u96c6\u4f53\u6da8\u4ef7",
+      "url": "https://baijiahao.baidu.com/s?id=1838619421076631094",
+      "source": "baijiahao.baidu.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250610T231500Z",
+      "headline": "Cacau fecha em queda de 4 % em NY com melhora do clima em \u00e1reas produtoras",
+      "url": "https://globorural.globo.com/cotacoes/noticia/2025/06/cacau-fecha-em-queda-de-4percent-em-ny-com-melhora-do-clima-em-areas-produtoras.ghtml",
+      "source": "globorural.globo.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250709T063000Z",
+      "headline": "LAfrique de lOuest devrait enregistrer une baisse de 10 % de sa production de cacao en 2025 / 26 , selon des sources du secteur",
+      "url": "https://www.zonebourse.com/cours/indice/S-P-GSCI-COCOA-INDEX-46869122/actualite/L-Afrique-de-l-Ouest-devrait-enregistrer-une-baisse-de-10-de-sa-production-de-cacao-en-2025-26-sel-50464535/",
+      "source": "zonebourse.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T231500Z",
+      "headline": "Safra de cacau 2024 / 25 deve crescer 15 %, estima ICCO",
+      "url": "https://globorural.globo.com/agricultura/cacau/noticia/2025/07/safra-de-cacau-202425-deve-crescer-15percent-estima-icco.ghtml",
+      "source": "globorural.globo.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250521T120000Z",
+      "headline": "Emtia piyasas\u0131nda kakao rallisi kendini g\u00f6stermeye ba\u015flad\u0131",
+      "url": "https://ekonomi.haber7.com/ekonomi/haber/3532226-emtia-piyasasinda-kakao-rallisi-kendini-gostermeye-basladi",
+      "source": "ekonomi.haber7.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T234500Z",
+      "headline": "Hershey plans to raise its prices as the cost of cocoa increases",
+      "url": "https://www.fox13now.com/business/company-news/hershey-plans-to-raise-its-prices-as-the-cost-of-cocoa-increases",
+      "source": "fox13now.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250715T203000Z",
+      "headline": "Cocoa Prices Fall on Weak Malaysian Demand Report",
+      "url": "https://finance.yahoo.com/news/cocoa-prices-fall-weak-malaysian-190149551.html",
+      "source": "finance.yahoo.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250612T131500Z",
+      "headline": "Pre\u00e7o do cacau se recupera na bolsa de Nova York",
+      "url": "https://globorural.globo.com/cotacoes/noticia/2025/06/preco-do-cacau-se-recupera-na-bolsa-de-nova-york.ghtml",
+      "source": "globorural.globo.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250508T141500Z",
+      "headline": "Precio del Cacao Per\u00fa Hoy 08 / 05 : Precio $9 . 000 ( Gr\u00e1fico ) ",
+      "url": "https://es.dailyforex.com/forex-technical-analysis/2025/05/cacao-peru-pronostico-08052025/228057",
+      "source": "es.dailyforex.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250507T200000Z",
+      "headline": "Pre\u00e7o do cacau sobe em NY com piora da safra no maior produtor do mundo",
+      "url": "https://globorural.globo.com/cotacoes/noticia/2025/05/preco-do-cacau-sobe-em-ny-com-piora-da-safra-no-maior-produtor-do-mundo.ghtml",
+      "source": "globorural.globo.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250716T060000Z",
+      "headline": "\u03a3\u03b5 \u03ba\u03c1\u03af\u03c3\u03b7 \u03b7 \u03c0\u03b1\u03b3\u03ba\u03cc\u03c3\u03bc\u03b9\u03b1 \u03b1\u03b3\u03bf\u03c1\u03ac \u03ba\u03b1\u03ba\u03ac\u03bf : \u00ab \u039a\u03b1\u03bc\u03c0\u03b1\u03bd\u03ac\u03ba\u03b9 \u00bb \u03b3\u03b9\u03b1 \u03b1\u03c5\u03be\u03ae\u03c3\u03b5\u03b9\u03c2 \u03c3\u03c4\u03b9\u03c2 \u03c4\u03b9\u03bc\u03ad\u03c2 \u03c4\u03b7\u03c2 \u03c3\u03bf\u03ba\u03bf\u03bb\u03ac\u03c4\u03b1\u03c2",
+      "url": "https://www.inewsgr.com/441/se-krisi-i-pagkosmia-agora-kakao-kabanaki-gia-afxiseis-stis-times-tis-sokolatas.htm",
+      "source": "inewsgr.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250703T201500Z",
+      "headline": "Caf\u00e9 registra sexta queda consecutiva em Nova York",
+      "url": "https://globorural.globo.com/cotacoes/noticia/2025/07/cafe-registra-sexta-queda-consecutiva-em-nova-york.ghtml",
+      "source": "globorural.globo.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250519T070000Z",
+      "headline": "Ghanaian farmers alter cocoa planting patterns due to climate change",
+      "url": "https://www.yahoo.com/news/ghanaian-farmers-alter-cocoa-planting-060933206.html",
+      "source": "yahoo.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250504T090000Z",
+      "headline": "How climate change is threatening your morning beverage",
+      "url": "https://www.livemint.com/industry/climate-change-coffee-tea-cocoa-prices-inflation-lower-crop-production-exports-retail-prices-raw-material-expenses-11746341824991.html",
+      "source": "livemint.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250720T053000Z",
+      "headline": "\u0397 \u03ba\u03c1\u03af\u03c3\u03b7 \u03c3\u03bf\u03ba\u03bf\u03bb\u03ac\u03c4\u03b1\u03c2 \u03c3\u03b5 \u03bd\u03ad\u03b1 \u03c6\u03ac\u03c3\u03b7",
+      "url": "https://www.in.gr/2025/07/20/economy/diethnis-oikonomia/krisi-sokolatas-se-nea-fasi/",
+      "source": "in.gr",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250520T054500Z",
+      "headline": "Ghana cocoa risks EU rejection if contaminated with heavy metals \u2013 Netherlands Ambassador",
+      "url": "http://www.businessghana.com/site/news/business/328142/Ghana%E2%80%99s-cocoa-risks-EU-rejection-if-contaminated-with-heavy-metals-%E2%80%93-Netherlands-Ambassador",
+      "source": "businessghana.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250724T050000Z",
+      "headline": "Hershey raising candy prices by double digits on high cocoa costs",
+      "url": "https://triblive.com/news/wire-stories/hershey-raising-candy-prices-by-double-digits-on-high-cocoa-costs/",
+      "source": "triblive.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250708T030000Z",
+      "headline": "\u4e2d\u56fd\u52a9\u529b\u79d1\u7279\u8fea\u74e6\u519c\u4e1a\u63d0\u8d28\u5347\u7ea7 \uff08 \u56fd\u9645\u89c6\u70b9 \uff09 -- \u56fd\u9645 -- \u4eba\u6c11\u7f51",
+      "url": "http://world.people.com.cn/n1/2025/0708/c1002-40516615.html",
+      "source": "world.people.com.cn",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T231500Z",
+      "headline": "Bad weather and disease in West Africa are making your chocolate bar 10 % more expensive at least",
+      "url": "https://fortune.com/2025/07/23/why-is-chocolate-so-expensive-africa-weather-illness-hershey-lindt/",
+      "source": "fortune.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250610T191500Z",
+      "headline": "Cacao ghan\u00e9en en crise\u00a0 : pourquoi il faut sauver une fili\u00e8re au bord du gouffre",
+      "url": "https://www.lepoint.fr/afrique/cacao-ghaneen-en-crise-pourquoi-il-faut-sauver-une-filiere-au-bord-du-gouffre-10-06-2025-2591722_3826.php",
+      "source": "lepoint.fr",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250724T221500Z",
+      "headline": "Hershey and other chocolate makers hike prices as cocoa remains near record highs",
+      "url": "https://japantoday.com/category/business/hershey-and-other-chocolate-makers-hike-prices-as-cocoa-remains-near-record-highs",
+      "source": "japantoday.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T201500Z",
+      "headline": "Hershey and other chocolate makers hike prices as cocoa remains near record highs",
+      "url": "https://www.ksat.com/business/2025/07/23/hershey-and-other-chocolate-makers-hike-prices-as-cocoa-remains-near-record-highs/",
+      "source": "ksat.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T200000Z",
+      "headline": "Hershey and other chocolate makers hike prices as cocoa remains near record highs",
+      "url": "https://www.clickondetroit.com/business/2025/07/23/hershey-and-other-chocolate-makers-hike-prices-as-cocoa-remains-near-record-highs/",
+      "source": "clickondetroit.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T200000Z",
+      "headline": "Hershey and other chocolate makers hike prices as cocoa remains near record highs",
+      "url": "https://mynorthwest.com/lifestyle/hershey-and-other-chocolate-makers-hike-prices-as-cocoa-remains-near-record-highs/4113076",
+      "source": "mynorthwest.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250724T221500Z",
+      "headline": "Hershey and other chocolate makers hike prices as cocoa remains near record highs",
+      "url": "https://www.dailyherald.com/20250724/business/hershey-and-other-chocolate-makers-hike-prices-as-cocoa-remains-near-record-highs/",
+      "source": "dailyherald.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T184500Z",
+      "headline": "Hershey and other chocolate makers hike prices as cocoa remains near record highs",
+      "url": "https://www.clickorlando.com/business/2025/07/23/hershey-and-other-chocolate-makers-hike-prices-as-cocoa-remains-near-record-highs/",
+      "source": "clickorlando.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T223000Z",
+      "headline": "Hershey and other chocolate makers hike prices as cocoa remains near record highs",
+      "url": "https://www.wfmz.com/news/ap/hershey-and-other-chocolate-makers-hike-prices-as-cocoa-remains-near-record-highs/article_8e24f113-0b0d-5106-b911-61f6294a3bb9.html",
+      "source": "wfmz.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T184500Z",
+      "headline": "Hershey raising candy prices by double digits on high cocoa costs",
+      "url": "https://www.sun-sentinel.com/2025/07/23/hershey-raising-candy-prices/",
+      "source": "sun-sentinel.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T191500Z",
+      "headline": "Hershey raising candy prices by double digits on high cocoa costs",
+      "url": "https://www.sandiegouniontribune.com/2025/07/23/hershey-raising-candy-prices/",
+      "source": "sandiegouniontribune.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T194500Z",
+      "headline": "Hershey raising candy prices by double digits on high cocoa costs",
+      "url": "https://www.bostonherald.com/2025/07/23/hershey-raising-candy-prices/",
+      "source": "bostonherald.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T184500Z",
+      "headline": "Hershey raising candy prices by double digits on high cocoa costs",
+      "url": "https://www.twincities.com/2025/07/23/hershey-raising-candy-prices/",
+      "source": "twincities.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T220000Z",
+      "headline": "Hershey to raise candy prices",
+      "url": "https://www.yahoo.com/news/articles/hershey-raise-candy-prices-190911170.html",
+      "source": "yahoo.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T184500Z",
+      "headline": "Hershey raising candy prices by double digits on high cocoa costs",
+      "url": "https://www.eastbaytimes.com/2025/07/23/hershey-raising-candy-prices/",
+      "source": "eastbaytimes.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250724T034500Z",
+      "headline": "Hershey and other chocolate makers hike prices as cocoa remains near record highs",
+      "url": "https://www.timesleader.com/news/1710858/hershey-and-other-chocolate-makers-hike-prices-as-cocoa-remains-near-record-highs",
+      "source": "timesleader.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T180000Z",
+      "headline": "Hershey raising candy prices by double digits on high cocoa costs",
+      "url": "https://www.dailycamera.com/2025/07/23/hershey-raising-candy-prices/",
+      "source": "dailycamera.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T191500Z",
+      "headline": "Hershey and other chocolate makers hike prices as cocoa remains near record highs",
+      "url": "https://www.stcatharinesstandard.ca/life/hershey-and-other-chocolate-makers-hike-prices-as-cocoa-remains-near-record-highs/article_94609fa7-4852-51fa-ad75-e0ec3bf1ab07.html",
+      "source": "stcatharinesstandard.ca",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T191500Z",
+      "headline": "Hershey and other chocolate makers hike prices as cocoa remains near record highs",
+      "url": "https://www.smdailyjournal.com/business/hershey-and-other-chocolate-makers-hike-prices-as-cocoa-remains-near-record-highs/article_0f287d3b-0950-56f7-97c3-3c2a75b4d23f.html",
+      "source": "smdailyjournal.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T184500Z",
+      "headline": "Hershey raising candy prices by double digits on high cocoa costs",
+      "url": "https://www.thetimes-tribune.com/2025/07/23/hershey-raising-candy-prices/",
+      "source": "thetimes-tribune.com",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250521T051500Z",
+      "headline": "Bougainville cocoa tops production in PNG",
+      "url": "https://www.postcourier.com.pg/bougainville-cocoa-tops-production-in-png/",
+      "source": "postcourier.com.pg",
+      "source_api": "GDELT"
+    },
+    {
+      "date": "20250723T184500Z",
+      "headline": "Hershey raising candy prices by double digits on high cocoa costs",
+      "url": "https://www.capitalgazette.com/2025/07/23/hershey-raising-candy-prices/",
+      "source": "capitalgazette.com",
+      "source_api": "GDELT"
+    }
+  ]
+}

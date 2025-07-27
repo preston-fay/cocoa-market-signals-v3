@@ -1,0 +1,211 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Model Predictability Analysis</title>
+            <style>
+                body { 
+                    font-family: Arial, sans-serif; 
+                    margin: 20px;
+                    background-color: #1a1a1a;
+                    color: #e9ecef;
+                }
+                h1, h2, h3 { color: #6f42c1; }
+                .verdict {
+                    padding: 20px;
+                    margin: 20px 0;
+                    border-radius: 8px;
+                    background-color: #272b30;
+                    border: 2px solid #6f42c1;
+                }
+                .positive { color: #10b981; }
+                .negative { color: #ef4444; }
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin: 20px 0;
+                }
+                th, td {
+                    border: 1px solid #52575c;
+                    padding: 8px;
+                    text-align: left;
+                }
+                th { background-color: #272b30; }
+                .section {
+                    margin: 30px 0;
+                    padding: 20px;
+                    background-color: #272b30;
+                    border-radius: 8px;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Model Predictability Analysis Report</h1>
+        
+        <div class="verdict">
+            <h2>Overall Verdict</h2>
+            <p><strong>Predictive Power:</strong> 
+                <span class="negative">
+                    NO
+                </span>
+            </p>
+            <p><strong>Confidence Level:</strong> LOW</p>
+            
+            <h3>Key Findings:</h3>
+            <ul>
+        
+            </ul>
+            
+            <h3>Recommendations:</h3>
+            <ul>
+        <li>Collect more data for robust evaluation</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Statistical Tests</h2>
+            <table>
+                <tr>
+                    <th>Target</th>
+                    <th>Autocorrelation</th>
+                    <th>Random Walk</th>
+                    <th>Mean Reversion</th>
+                    <th>Predictable?</th>
+                </tr>
+        
+                <tr>
+                    <td>return_1d_future</td>
+                    <td>No</td>
+                    <td>Yes</td>
+                    <td>No</td>
+                    <td class="negative">
+                        No
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>return_7d_future</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td class="negative">
+                        No
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>return_30d_future</td>
+                    <td>Yes</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td class="negative">
+                        No
+                    </td>
+                </tr>
+            
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>Benchmark Comparison</h2>
+            <table>
+                <tr>
+                    <th>Target</th>
+                    <th>ML Model</th>
+                    <th>Best Benchmark</th>
+                    <th>Outperformance</th>
+                    <th>Beats All?</th>
+                </tr>
+        
+                <tr>
+                    <td>return_1d_future</td>
+                    <td>33.3%</td>
+                    <td>zero</td>
+                    <td class="negative">
+                        -22.2%
+                    </td>
+                    <td class="negative">
+                        No
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>return_7d_future</td>
+                    <td>16.7%</td>
+                    <td>mean</td>
+                    <td class="negative">
+                        -48.0%
+                    </td>
+                    <td class="negative">
+                        No
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>return_30d_future</td>
+                    <td>66.7%</td>
+                    <td>zero</td>
+                    <td class="negative">
+                        -5.6%
+                    </td>
+                    <td class="negative">
+                        No
+                    </td>
+                </tr>
+            
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>Economic Significance</h2>
+            <table>
+                <tr>
+                    <th>Target</th>
+                    <th>Sharpe Ratio</th>
+                    <th>Max Drawdown</th>
+                    <th>Win Rate</th>
+                    <th>Profitable?</th>
+                </tr>
+        
+                <tr>
+                    <td>return_1d_future</td>
+                    <td class="negative">
+                        0.00
+                    </td>
+                    <td>0.0%</td>
+                    <td>50.0%</td>
+                    <td class="negative">
+                        No
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>return_7d_future</td>
+                    <td class="negative">
+                        0.00
+                    </td>
+                    <td>0.0%</td>
+                    <td>50.0%</td>
+                    <td class="negative">
+                        No
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>return_30d_future</td>
+                    <td class="negative">
+                        0.00
+                    </td>
+                    <td>0.0%</td>
+                    <td>50.0%</td>
+                    <td class="negative">
+                        No
+                    </td>
+                </tr>
+            
+            </table>
+        </div>
+        
+        </body>
+        </html>
+        

@@ -1,0 +1,7 @@
+# NLP Requirements for Sentiment Analysis
+spacy>=3.5.0
+textblob>=0.17.1
+vaderSentiment>=3.3.2
+nltk>=3.8.1
+# For spacy language model
+# Run after install: python -m spacy download en_core_web_sm

@@ -1,0 +1,115 @@
+{
+  "test_date": "2025-07-25T17:33:47.613353",
+  "model_results": {
+    "statistical": {
+      "anomaly_detection": {
+        "error": "\"None of [Index(['rainfall_anomaly', 'temperature_anomaly', 'trade_volume_change'], dtype='object')] are in the [columns]\""
+      },
+      "risk_metrics": {
+        "error": "'var_95'"
+      },
+      "stationarity": {
+        "error": "'adf_statistic'"
+      }
+    },
+    "time_series": {
+      "arima": {
+        "mae": 1028.0,
+        "rmse": 1182.7127574633946,
+        "mape": NaN,
+        "order": [
+          0,
+          1,
+          0
+        ],
+        "interpretation": "ARIMA achieved nan% MAPE with $1028.00 average error. Model order: (0, 1, 0)"
+      },
+      "sarima": {
+        "mae": 1295.382262356597,
+        "rmse": 1461.5151422187005,
+        "mape": NaN,
+        "seasonal_order": [
+          1,
+          1,
+          1,
+          30
+        ],
+        "interpretation": "SARIMA achieved nan% MAPE, worse than ARIMA"
+      },
+      "holt_winters": {
+        "mae": 1034.8502236201812,
+        "rmse": 1181.9011166505302,
+        "mape": NaN,
+        "trend": "additive",
+        "seasonal": "additive",
+        "interpretation": "Holt-Winters achieved nan% MAPE using additive trend and additive seasonality"
+      },
+      "prophet": {
+        "mae": 870.696563430283,
+        "rmse": 1017.2777381496109,
+        "mape": 9.970162619444928,
+        "changepoints": 25,
+        "interpretation": "Prophet achieved 10.0% MAPE and detected 25 trend changepoints"
+      }
+    },
+    "ml": {
+      "xgboost": {
+        "error": "'returns'"
+      }
+    },
+    "volatility": {
+      "garch": {
+        "error": "'returns'"
+      },
+      "var": {
+        "error": "'AdvancedTimeSeriesModels' object has no attribute 'calculate_value_at_risk'"
+      }
+    }
+  },
+  "report": {
+    "best_models": [
+      [
+        "arima",
+        NaN
+      ],
+      [
+        "sarima",
+        NaN
+      ],
+      [
+        "holt_winters",
+        NaN
+      ]
+    ],
+    "recommendations": {
+      "Strong Uptrend": {
+        "best_model": "LSTM or XGBoost",
+        "reason": "ML models capture momentum better in trending markets"
+      },
+      "Strong Downtrend": {
+        "best_model": "GARCH + VaR",
+        "reason": "Risk models crucial during market declines"
+      },
+      "High Volatility": {
+        "best_model": "GARCH + Bollinger Bands",
+        "reason": "Volatility models excel in turbulent conditions"
+      },
+      "Low Volatility": {
+        "best_model": "ARIMA or Holt-Winters",
+        "reason": "Traditional time series work well in stable conditions"
+      },
+      "Range-Bound": {
+        "best_model": "RSI + Bollinger Bands",
+        "reason": "Mean reversion indicators excel in ranging markets"
+      }
+    },
+    "insights": [
+      "Traditional time series models (nan% avg MAPE) performed better than ML models (nan% avg MAPE)"
+    ],
+    "signal_count": {
+      "bullish": 0,
+      "bearish": 0
+    }
+  },
+  "data_source": "Real Yahoo Finance cocoa futures data"
+}

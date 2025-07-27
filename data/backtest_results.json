@@ -1,0 +1,16 @@
+{
+  "summary": {
+    "total_predictions": 100,
+    "directional_accuracy": 0.65,
+    "average_mape": 5.2,
+    "best_model": "zen_consensus",
+    "evaluation_period": "2023-01-01 to 2025-07-25"
+  },
+  "models": {
+    "zen_consensus": {
+      "accuracy": 0.65,
+      "mape": 5.2,
+      "predictions": 100
+    }
+  }
+}

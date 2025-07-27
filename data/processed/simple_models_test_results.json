@@ -1,0 +1,78 @@
+{
+  "test_date": "2025-07-25T17:35:45.421301",
+  "test_type": "Simple Models Test",
+  "results": {
+    "model_results": {
+      "best_sma": {
+        "model": "SMA_30",
+        "prediction": 9815.966666666667,
+        "mae": 991.5711111111116,
+        "mape": 11.727853381251128
+      },
+      "best_ema": {
+        "model": "EMA_50",
+        "prediction": 9548.046211816782,
+        "mae": 782.8338886656398,
+        "mape": 9.283234536908758
+      },
+      "best_trend": {
+        "model": "Trend_120d",
+        "slope": -16.04857281755668,
+        "last_prediction": 8217.486066162008,
+        "mae": 532.0682731053836,
+        "mape": 5.869555704641128
+      },
+      "naive_last": {
+        "prediction": 9858.0,
+        "mae": 1028.0,
+        "mape": 12.149192389399154
+      },
+      "naive_mean": {
+        "prediction": 7504.238396624472,
+        "mae": 1356.244163150492,
+        "mape": 14.939270651793143
+      },
+      "volatility_bands": {
+        "base": 9858.0,
+        "annual_volatility": 0.5709729814858279,
+        "upper_band": 11800.069325113422,
+        "lower_band": 7915.930674886578,
+        "band_accuracy": 93.33333333333333
+      }
+    },
+    "insights": {
+      "current_state": {
+        "price": 8337.0,
+        "ma20": 8562.05,
+        "ma50": 9323.54,
+        "volatility": 64.92921152664634,
+        "vol_percentile": 60.537190082644635
+      },
+      "trends": {
+        "short": -158.6731477259935,
+        "medium": -110.46270761211605,
+        "long": 28.963241210303796
+      },
+      "signals": [
+        [
+          "BEARISH",
+          "Price < MA20 < MA50 (Death alignment)"
+        ],
+        [
+          "BEARISH",
+          "Accelerating downward momentum"
+        ]
+      ]
+    },
+    "data_stats": {
+      "total_days": 504,
+      "train_days": 474,
+      "test_days": 30,
+      "price_range": [
+        3282.0,
+        12565.0
+      ]
+    }
+  },
+  "data_source": "Yahoo Finance Cocoa Futures"
+}

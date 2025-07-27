@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoa Market Signals - Zen Consensus Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Kearney Design System Colors - ONLY these colors allowed */
+        :root {
+            --kearney-purple-primary: {{ colors.primary_purple }};
+            --kearney-purple-secondary: {{ colors.secondary_purple }};
+            --kearney-charcoal-primary: {{ colors.primary_charcoal }};
+            --kearney-charcoal-secondary: {{ colors.secondary_charcoal }};
+            --kearney-white: {{ colors.white }};
+            --kearney-gray-light: {{ colors.light_gray }};
+            --kearney-gray-medium: {{ colors.medium_gray }};
+            --kearney-gray-dark: {{ colors.dark_gray }};
+            --kearney-gray-border: {{ colors.border_gray }};
+        }
+        
+        body {
+            background-color: var(--kearney-charcoal-primary);
+            color: var(--kearney-white);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        .card-kearney {
+            background-color: var(--kearney-charcoal-secondary);
+            border: 1px solid var(--kearney-gray-border);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .text-purple-primary { color: var(--kearney-purple-primary); }
+        .text-purple-secondary { color: var(--kearney-purple-secondary); }
+        .text-gray-medium { color: var(--kearney-gray-medium); }
+        
+        .bg-purple-primary { background-color: var(--kearney-purple-primary); }
+        .bg-charcoal-secondary { background-color: var(--kearney-charcoal-secondary); }
+        
+        .border-purple { border-color: var(--kearney-purple-primary); }
+        .border-gray { border-color: var(--kearney-gray-border); }
+        
+        /* Chart.js dark theme */
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+        
+        /* Remove all non-Kearney colors */
+        .text-green-500, .text-red-500, .text-yellow-500, .text-blue-500 { 
+            color: var(--kearney-gray-medium) !important; 
+        }
+        .bg-green-500, .bg-red-500, .bg-yellow-500, .bg-blue-500 { 
+            background-color: var(--kearney-charcoal-secondary) !important; 
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="bg-charcoal-secondary border-b border-gray p-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <div>
+                <h1 class="text-2xl font-bold">Cocoa Market Signals</h1>
+                <p class="text-gray-medium">Zen Consensus Dashboard - 100% Real Predictions</p>
+            </div>
+            <div class="text-right">
+                <p class="text-sm text-gray-medium">Last Update</p>
+                <p class="text-purple-primary font-semibold">{{ last_update }}</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4">
+        <!-- Key Metrics Row -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <!-- Current Price -->
+            <div class="card-kearney">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-medium text-sm">Current Price</p>
+                        <p class="text-2xl font-bold">{{ current_price }}</p>
+                    </div>
+                    <i data-lucide="dollar-sign" class="w-8 h-8 text-purple-primary"></i>
+                </div>
+            </div>
+            
+            <!-- Forecast Price -->
+            <div class="card-kearney">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-medium text-sm">Consensus Forecast</p>
+                        <p class="text-2xl font-bold text-purple-primary">{{ forecast_price }}</p>
+                        <p class="text-sm {{ signal_class }}">{{ price_change_pct }}</p>
+                    </div>
+                    <i data-lucide="trending-up" class="w-8 h-8 text-purple-secondary"></i>
+                </div>
+            </div>
+            
+            <!-- Confidence Score -->
+            <div class="card-kearney">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-medium text-sm">Confidence</p>
+                        <p class="text-2xl font-bold">{{ confidence_score }}</p>
+                    </div>
+                    <i data-lucide="shield-check" class="w-8 h-8 text-purple-primary"></i>
+                </div>
+            </div>
+            
+            <!-- Signal -->
+            <div class="card-kearney">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-medium text-sm">Consensus Signal</p>
+                        <p class="text-2xl font-bold {{ signal_class }}">{{ signal }}</p>
+                    </div>
+                    <i data-lucide="activity" class="w-8 h-8 text-purple-secondary"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Chart - Actual vs Predicted -->
+        <div class="card-kearney mb-6">
+            <h2 class="text-xl font-bold mb-4 flex items-center">
+                <i data-lucide="line-chart" class="w-6 h-6 mr-2 text-purple-primary"></i>
+                Actual vs Predicted Prices (90 Days)
+            </h2>
+            <div class="chart-container">
+                <canvas id="priceChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Model Performance -->
+            <div class="card-kearney">
+                <h3 class="text-lg font-bold mb-4 flex items-center">
+                    <i data-lucide="bar-chart-3" class="w-5 h-5 mr-2 text-purple-primary"></i>
+                    Model Performance (90-Day Backtest)
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-medium">Prediction Accuracy (MAPE)</span>
+                        <span class="font-semibold">{{ performance.mape }}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-medium">Cumulative Return</span>
+                        <span class="font-semibold text-purple-primary">{{ performance.cumulative_return }}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-medium">Sharpe Ratio</span>
+                        <span class="font-semibold">{{ performance.sharpe_ratio }}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-medium">Average Confidence</span>
+                        <span class="font-semibold">{{ performance.avg_confidence }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Context -->
+            <div class="card-kearney">
+                <h3 class="text-lg font-bold mb-4 flex items-center">
+                    <i data-lucide="compass" class="w-5 h-5 mr-2 text-purple-primary"></i>
+                    Market Context
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-medium">5-Day Trend</span>
+                        <span class="font-semibold">{{ market_context.trend_5d }}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-medium">20-Day Trend</span>
+                        <span class="font-semibold">{{ market_context.trend_20d }}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-medium">Volatility (Annualized)</span>
+                        <span class="font-semibold">{{ market_context.volatility }}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-medium">Price Percentile</span>
+                        <span class="font-semibold">{{ market_context.price_level }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Role Contributions -->
+        <div class="card-kearney mt-6">
+            <h3 class="text-lg font-bold mb-4 flex items-center">
+                <i data-lucide="users" class="w-5 h-5 mr-2 text-purple-primary"></i>
+                Zen Consensus - Model Role Contributions
+            </h3>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-gray">
+                            <th class="text-left py-2 text-gray-medium">Role</th>
+                            <th class="text-right py-2 text-gray-medium">Prediction</th>
+                            <th class="text-right py-2 text-gray-medium">Change %</th>
+                            <th class="text-right py-2 text-gray-medium">Confidence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for role in role_contributions %}
+                        <tr class="border-b border-gray/20">
+                            <td class="py-3">{{ role.role }}</td>
+                            <td class="text-right font-semibold">{{ role.prediction }}</td>
+                            <td class="text-right">{{ role.change_pct }}</td>
+                            <td class="text-right text-purple-primary">{{ role.confidence }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Signal Summary -->
+        <div class="card-kearney mt-6">
+            <h3 class="text-lg font-bold mb-4 flex items-center">
+                <i data-lucide="zap" class="w-5 h-5 mr-2 text-purple-primary"></i>
+                Multi-Source Signal Detection
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="text-center">
+                    <p class="text-3xl font-bold">{{ signals.total }}</p>
+                    <p class="text-gray-medium text-sm">Total Signals</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-3xl font-bold text-purple-primary">{{ signals.bullish }}</p>
+                    <p class="text-gray-medium text-sm">Bullish</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-3xl font-bold text-gray-medium">{{ signals.bearish }}</p>
+                    <p class="text-gray-medium text-sm">Bearish</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-3xl font-bold text-purple-secondary">{{ signals.quality }}</p>
+                    <p class="text-gray-medium text-sm">Signal Quality</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="card-kearney mt-6">
+            <h3 class="text-lg font-bold mb-4 flex items-center">
+                <i data-lucide="lightbulb" class="w-5 h-5 mr-2 text-purple-primary"></i>
+                AI Recommendations
+            </h3>
+            <div class="space-y-2">
+                {% for rec in recommendations %}
+                <div class="flex items-start">
+                    <span class="mr-2">{{ rec.icon }}</span>
+                    <span>{{ rec.text }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Refresh Button -->
+        <div class="mt-6 text-center">
+            <button 
+                hx-get="/api/refresh" 
+                hx-trigger="click"
+                hx-on="htmx:afterRequest: location.reload()"
+                class="bg-purple-primary text-white px-6 py-3 rounded-lg hover:bg-purple-secondary transition-colors duration-200 font-semibold">
+                <i data-lucide="refresh-cw" class="w-4 h-4 inline mr-2"></i>
+                Refresh Predictions
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // Initialize Feather icons
+        lucide.createIcons();
+        
+        // Chart configuration following Kearney standards
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ chart_data.dates | tojson }},
+                datasets: [{
+                    label: 'Actual Price',
+                    data: {{ chart_data.actual_prices | tojson }},
+                    borderColor: '{{ colors.white }}',
+                    backgroundColor: '{{ colors.white }}20',
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    tension: 0.1
+                }, {
+                    label: 'Predicted Price',
+                    data: {{ chart_data.predicted_prices | tojson }},
+                    borderColor: '{{ colors.primary_purple }}',
+                    backgroundColor: '{{ colors.primary_purple }}20',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    pointRadius: 0,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '{{ colors.white }}',
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: '{{ colors.secondary_charcoal }}',
+                        titleColor: '{{ colors.white }}',
+                        bodyColor: '{{ colors.light_gray }}',
+                        borderColor: '{{ colors.border_gray }}',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': $' + context.parsed.y.toFixed(0);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: '{{ colors.border_gray }}40',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '{{ colors.medium_gray }}',
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '{{ colors.border_gray }}40',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '{{ colors.medium_gray }}',
+                            callback: function(value) {
+                                return '$' + value.toFixed(0);
+                            }
+                        }
+                    }
+                },
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false
+                }
+            }
+        });
+    </script>
+</body>
+</html>

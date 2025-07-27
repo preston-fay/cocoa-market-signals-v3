@@ -1,0 +1,63 @@
+{
+  "test_date": "2025-07-25T17:54:30.525198",
+  "summary": {
+    "total_tests": 6,
+    "passed": 4,
+    "failed": 2,
+    "success_rate": 0.6666666666666666
+  },
+  "detailed_results": {
+    "individual_models": {
+      "trend_follower": {
+        "success": true,
+        "models_run": 3,
+        "models_successful": 3,
+        "has_confidence": false,
+        "has_reasoning": false
+      },
+      "mean_reverter": {
+        "success": true,
+        "models_run": 3,
+        "models_successful": 3,
+        "has_confidence": false,
+        "has_reasoning": false
+      },
+      "momentum_trader": {
+        "success": true,
+        "models_run": 3,
+        "models_successful": 3,
+        "has_confidence": false,
+        "has_reasoning": false
+      }
+    },
+    "consensus": {
+      "success": true,
+      "consensus_price": 8279.667339842377,
+      "confidence": 0.24505562380139123,
+      "signal": "sell",
+      "signal_valid": false
+    },
+    "database_prediction": {
+      "success": true,
+      "prediction_id": 8
+    },
+    "signal_generation": {
+      "success": true,
+      "signals_generated": 4,
+      "signals_saved": 0
+    },
+    "performance_tracking": {
+      "success": false,
+      "error": "(sqlite3.IntegrityError) NOT NULL constraint failed: model_performance.rmse\n[SQL: INSERT INTO model_performance (evaluation_date, period_start, period_end, period_days, model_name, model_version, model_type, predictions_made, predictions_evaluated, mae, mape, rmse, directional_accuracy, sharpe_ratio, max_drawdown, cumulative_return, avg_confidence, confidence_calibration, accuracy_1d, accuracy_7d, accuracy_30d, accuracy_low_vol, accuracy_med_vol, accuracy_high_vol, signals_generated, signal_accuracy, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]\n[parameters: ('2025-07-25', '2025-03-05', '2025-07-16', 93, 'zen_consensus', None, 'ensemble', 1, 1, 197.02374810217043, 2.3632451493603264, None, 1.0, None, None, None, 0.0, None, None, None, None, None, None, None, None, None, '2025-07-25 21:54:30.522694')]\n(Background on this error at: https://sqlalche.me/e/20/gkpj)"
+    },
+    "multi_horizon": {
+      "success": true,
+      "horizons_tested": [
+        1,
+        7,
+        30
+      ],
+      "confidence_logical": "True"
+    }
+  }
+}

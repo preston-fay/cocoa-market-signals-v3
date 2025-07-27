@@ -1,0 +1,25 @@
+# Additional requirements for comprehensive data collection
+# Add these to your existing requirements.txt
+
+# For news collection
+aiohttp>=3.8.0
+beautifulsoup4>=4.11.0
+lxml>=4.9.0
+
+# For PDF parsing (ICCO reports)
+PyPDF2>=3.0.0
+tabula-py>=2.5.0
+java-jdk  # Required for tabula
+
+# For enhanced data processing
+pandas>=1.5.0
+numpy>=1.24.0
+
+# For async operations
+asyncio>=3.4.3
+
+# Existing requirements should include:
+# sqlmodel
+# fastapi
+# requests
+# python-dateutil

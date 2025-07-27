@@ -1269,6 +1269,213 @@ class AdvancedTimeSeriesModels:
         rsi = 100 - (100 / (1 + rs))
         return rsi
     
+    # =========================
+    # NEW ADVANCED MODELS
+    # =========================
+    
+    def fit_slope_of_slopes(self, df: pd.DataFrame, window_sizes: List[int] = [5, 10, 20, 30]) -> Dict:
+        """
+        Slope of Slopes model - analyzes trends of trends
+        Captures acceleration/deceleration in price movements
+        """
+        print("\n" + "="*60)
+        print("FITTING SLOPE OF SLOPES MODEL")
+        print("="*60)
+        
+        price_series = df['price']
+        results = {}
+        
+        # Calculate slopes at different time scales
+        slopes = {}
+        for window in window_sizes:
+            # First-order slopes (trend)
+            slope_series = pd.Series(index=price_series.index, dtype=float)
+            
+            for i in range(window, len(price_series)):
+                y = price_series.iloc[i-window:i].values
+                x = np.arange(window)
+                
+                if len(y) == window and not np.isnan(y).any():
+                    slope, _, _, _, _ = stats.linregress(x, y)
+                    slope_series.iloc[i] = slope
+            
+            slopes[f'slope_{window}'] = slope_series
+            
+            # Second-order slopes (trend of trend)
+            slope_of_slope = pd.Series(index=price_series.index, dtype=float)
+            
+            for i in range(window, len(slope_series)):
+                if not slope_series.iloc[i-window:i].isna().any():
+                    y = slope_series.iloc[i-window:i].values
+                    x = np.arange(window)
+                    slope2, _, _, _, _ = stats.linregress(x, y)
+                    slope_of_slope.iloc[i] = slope2
+            
+            results[f'slope_of_slope_{window}'] = slope_of_slope
+        
+        # Detect trend changes
+        trend_changes = []
+        for window in window_sizes:
+            sos = results[f'slope_of_slope_{window}']
+            # Trend change when slope of slope changes sign
+            sign_changes = np.sign(sos).diff().abs() > 1
+            change_dates = sos.index[sign_changes]
+            for date in change_dates:
+                if not pd.isna(sos[date]):
+                    trend_changes.append({
+                        'date': date,
+                        'window': window,
+                        'slope_of_slope': sos[date]
+                    })
+        
+        print(f"\nSlope of Slopes Results:")
+        print(f"  Window sizes: {window_sizes}")
+        print(f"  Trend changes detected: {len(trend_changes)}")
+        
+        # Current trend status
+        for window in window_sizes:
+            current_sos = results[f'slope_of_slope_{window}'].dropna().iloc[-1] if not results[f'slope_of_slope_{window}'].dropna().empty else 0
+            trend = "accelerating up" if current_sos > 0 else "accelerating down"
+            print(f"  {window}-day trend: {trend} (SoS: {current_sos:.4f})")
+        
+        self.results['slope_of_slopes'] = {
+            'slopes': slopes,
+            'slope_of_slopes': results,
+            'trend_changes': trend_changes,
+            'window_sizes': window_sizes
+        }
+        
+        return self.results['slope_of_slopes']
+    
+    def fit_tsmamba(self, df: pd.DataFrame, state_dim: int = 16, seq_len: int = 30) -> Dict:
+        """
+        Simplified TSMamba - State Space Model for Time Series
+        Uses selective state updates based on input relevance
+        """
+        print("\n" + "="*60)
+        print("FITTING TSMAMBA MODEL")
+        print("="*60)
+        
+        # Prepare data
+        features = ['price', 'rainfall_anomaly', 'temperature_anomaly', 
+                   'trade_volume_change', 'export_concentration']
+        available_features = [f for f in features if f in df.columns]
+        
+        data = df[available_features].dropna()
+        
+        # Scale data
+        scaler = StandardScaler()
+        scaled_data = scaler.fit_transform(data)
+        
+        # Create sequences
+        sequences = []
+        targets = []
+        for i in range(seq_len, len(scaled_data) - 1):
+            sequences.append(scaled_data[i-seq_len:i])
+            targets.append(scaled_data[i, 0])  # Next price
+        
+        X = np.array(sequences)
+        y = np.array(targets)
+        
+        # Simple state space model (simplified Mamba)
+        n_features = len(available_features)
+        
+        # Initialize state space matrices
+        A = np.random.randn(state_dim, state_dim) * 0.1  # State transition
+        B = np.random.randn(state_dim, n_features) * 0.1  # Input matrix
+        C = np.random.randn(1, state_dim) * 0.1  # Output matrix
+        
+        # Make A slightly stable
+        eigenvalues = np.linalg.eigvals(A)
+        if np.max(np.abs(eigenvalues)) > 0.95:
+            A = A * 0.9 / np.max(np.abs(eigenvalues))
+        
+        # Simplified training loop
+        learning_rate = 0.001
+        n_epochs = 50
+        best_loss = float('inf')
+        
+        for epoch in range(n_epochs):
+            total_loss = 0
+            predictions = []
+            
+            for i in range(len(X)):
+                # Initialize state
+                state = np.zeros(state_dim)
+                
+                # Process sequence
+                for t in range(seq_len):
+                    # Selective scan (simplified)
+                    input_gate = 1 / (1 + np.exp(-X[i, t, :].sum()))  # Sigmoid gate
+                    
+                    # State update with gating
+                    state = input_gate * (A @ state + B @ X[i, t, :]) + (1 - input_gate) * state
+                
+                # Output prediction
+                pred = C @ state
+                predictions.append(pred.squeeze())
+                
+                # Loss
+                loss = (pred.squeeze() - y[i]) ** 2
+                total_loss += loss
+            
+            avg_loss = total_loss / len(X)
+            
+            if avg_loss < best_loss:
+                best_loss = avg_loss
+                best_params = (A.copy(), B.copy(), C.copy())
+            
+            # Random perturbation for optimization (simplified)
+            A += np.random.randn(*A.shape) * learning_rate
+            B += np.random.randn(*B.shape) * learning_rate
+            C += np.random.randn(*C.shape) * learning_rate
+            
+            # Maintain stability
+            eigenvalues = np.linalg.eigvals(A)
+            if np.max(np.abs(eigenvalues)) > 0.95:
+                A = A * 0.9 / np.max(np.abs(eigenvalues))
+        
+        # Evaluate on last portion
+        test_start = int(0.8 * len(predictions))
+        test_pred = np.array(predictions[test_start:])
+        test_actual = y[test_start:]
+        
+        # Inverse transform to get actual prices
+        test_pred_price = scaler.inverse_transform(
+            np.column_stack([test_pred] + [np.zeros(len(test_pred))] * (n_features - 1))
+        )[:, 0]
+        test_actual_price = scaler.inverse_transform(
+            np.column_stack([test_actual] + [np.zeros(len(test_actual))] * (n_features - 1))
+        )[:, 0]
+        
+        rmse = np.sqrt(np.mean((test_pred_price - test_actual_price) ** 2))
+        mape = np.mean(np.abs((test_pred_price - test_actual_price) / test_actual_price)) * 100
+        
+        print(f"\nTSMamba Results:")
+        print(f"  State dimension: {state_dim}")
+        print(f"  Sequence length: {seq_len}")
+        print(f"  Best training loss: {best_loss:.4f}")
+        print(f"  Test RMSE: ${rmse:.2f}")
+        print(f"  Test MAPE: {mape:.2f}%")
+        
+        self.models['tsmamba'] = {
+            'A': best_params[0],
+            'B': best_params[1],
+            'C': best_params[2],
+            'scaler': scaler,
+            'state_dim': state_dim,
+            'seq_len': seq_len
+        }
+        
+        self.results['tsmamba'] = {
+            'test_rmse': rmse,
+            'test_mape': mape,
+            'predictions': test_pred_price,
+            'actual': test_actual_price
+        }
+        
+        return self.results['tsmamba']
+    
     def run_all_models(self, df: pd.DataFrame) -> Dict:
         """Run all time series models and return comprehensive results"""
         print("\n" + "="*80)
@@ -1376,6 +1583,17 @@ class AdvancedTimeSeriesModels:
                 all_results['topic_modeling'] = self.perform_topic_modeling(df)
             except Exception as e:
                 print(f"Topic modeling failed: {str(e)}")
+        
+        # NEW ADVANCED MODELS
+        try:
+            all_results['slope_of_slopes'] = self.fit_slope_of_slopes(df)
+        except Exception as e:
+            print(f"Slope of Slopes failed: {str(e)}")
+            
+        try:
+            all_results['tsmamba'] = self.fit_tsmamba(df)
+        except Exception as e:
+            print(f"TSMamba failed: {str(e)}")
         
         print("\n" + "="*80)
         print("ALL MODELS COMPLETED")

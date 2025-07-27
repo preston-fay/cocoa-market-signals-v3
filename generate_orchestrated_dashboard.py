@@ -23,7 +23,12 @@ print("="*80)
 
 # Load data
 print("\nLoading data...")
-df = pd.read_csv("data/processed/unified_real_data.csv")
+import sqlite3
+db_path = "data/cocoa_signals.db"  # Update to your actual DB path if different
+conn = sqlite3.connect(db_path)
+query = "SELECT * FROM unified_real_data"  # Update to your actual table name if different
+df = pd.read_sql(query, conn)
+conn.close()
 df['date'] = pd.to_datetime(df['date'], utc=True).dt.tz_localize(None)
 df.set_index('date', inplace=True)
 
@@ -94,42 +99,58 @@ else:
     template_data['predicted_dates'] = template_data['actual_dates']
     template_data['predicted_prices'] = [p * 1.002 for p in template_data['actual_prices']]
 
-# 2. Model performance
-model_performance = {
-    'XGBoost': 0.17,
-    'Holt-Winters': 2.91,
-    'ARIMA': 2.93,
-    'SARIMA': 3.31,
-    'LSTM': 4.49
-}
+# 2. Model performance (dynamic)
+model_names = []
+model_mapes = []
+model_colors = []
+fallback_model_performance = False
+for model in results['models_used']['forecast']:
+    perf = results['forecasts'].get(model, {})
+    mape = perf.get('mape', None)
+    if mape is not None:
+        model_names.append(model.upper())
+        model_mapes.append(round(mape, 2))
+        model_colors.append(
+            '#00A862' if mape < 1 else '#006FB9' if mape < 3 else '#F47920' if mape < 5 else '#E3001A'
+        )
+    else:
+        # Fallback: mark as synthetic
+        model_names.append(model.upper())
+        model_mapes.append('N/A')
+        model_colors.append('#CCCCCC')
+        fallback_model_performance = True
+template_data['model_names'] = model_names
+template_data['model_mapes'] = model_mapes
+template_data['model_colors'] = model_colors
+template_data['fallback_model_performance'] = fallback_model_performance
 
-template_data['model_names'] = list(model_performance.keys())
-template_data['model_mapes'] = list(model_performance.values())
-template_data['model_colors'] = [
-    '#00A862' if mape < 1 else '#006FB9' if mape < 3 else '#F47920' if mape < 5 else '#E3001A'
-    for mape in model_performance.values()
-]
-
-# 3. Forecast chart
+# 3. Forecast chart (use real model forecast if available)
 forecast_days = list(range(1, 31))
-if signals['price_forecast']:
-    # Simple linear interpolation to forecast
-    daily_change = (signals['price_forecast'] - current_price) / 7
-    forecast_values = [current_price + daily_change * d for d in forecast_days]
-    
-    # Add some volatility-based uncertainty
+fallback_forecast = False
+if 'forecast_30d' in signals and signals['forecast_30d']:
+    # Use actual model forecast for next 30 days
+    forecast_values = signals['forecast_30d']
     volatility_factor = regime_info['volatility'] / 100
     forecast_upper = [v * (1 + 0.02 * volatility_factor * np.sqrt(d)) for d, v in enumerate(forecast_values, 1)]
     forecast_lower = [v * (1 - 0.02 * volatility_factor * np.sqrt(d)) for d, v in enumerate(forecast_values, 1)]
 else:
-    forecast_values = [current_price] * 30
-    forecast_upper = [current_price * 1.05] * 30
-    forecast_lower = [current_price * 0.95] * 30
-
+    # Fallback: use linear interpolation or static value
+    fallback_forecast = True
+    if signals['price_forecast']:
+        daily_change = (signals['price_forecast'] - current_price) / 7
+        forecast_values = [current_price + daily_change * d for d in forecast_days]
+        volatility_factor = regime_info['volatility'] / 100
+        forecast_upper = [v * (1 + 0.02 * volatility_factor * np.sqrt(d)) for d, v in enumerate(forecast_values, 1)]
+        forecast_lower = [v * (1 - 0.02 * volatility_factor * np.sqrt(d)) for d, v in enumerate(forecast_values, 1)]
+    else:
+        forecast_values = [current_price] * 30
+        forecast_upper = [current_price * 1.05] * 30
+        forecast_lower = [current_price * 0.95] * 30
 template_data['forecast_days'] = forecast_days
 template_data['forecast_values'] = forecast_values
 template_data['forecast_upper'] = forecast_upper
 template_data['forecast_lower'] = forecast_lower
+template_data['fallback_forecast'] = fallback_forecast
 
 # Add active model count and best model flag
 template_data['active_model_count'] = len(results['models_used']['forecast'])

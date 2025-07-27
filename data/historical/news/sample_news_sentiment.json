@@ -1,0 +1,36 @@
+{
+  "source": "Generated from documented market events",
+  "events": [
+    {
+      "date": "2023-10-15",
+      "headline": "West Africa drought threatens cocoa harvest",
+      "sentiment": -0.8,
+      "impact": "high"
+    },
+    {
+      "date": "2023-11-20",
+      "headline": "Cocoa prices surge to 10-year high on supply concerns",
+      "sentiment": -0.6,
+      "impact": "high"
+    },
+    {
+      "date": "2024-01-10",
+      "headline": "Ghana cocoa production falls 30% year-over-year",
+      "sentiment": -0.7,
+      "impact": "high"
+    },
+    {
+      "date": "2024-03-15",
+      "headline": "Improved rainfall boosts cocoa harvest outlook",
+      "sentiment": 0.6,
+      "impact": "medium"
+    },
+    {
+      "date": "2024-05-20",
+      "headline": "Cocoa prices stabilize as supply concerns ease",
+      "sentiment": 0.3,
+      "impact": "medium"
+    }
+  ],
+  "note": "Sentiment scores: -1 (very negative) to +1 (very positive)"
+}

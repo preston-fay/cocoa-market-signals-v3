@@ -1,0 +1,62 @@
+{
+  "test_date": "2025-07-25T15:11:34.802150",
+  "summary": {
+    "total_signals": 5,
+    "bullish_signals": 1,
+    "bearish_signals": 2,
+    "neutral_signals": 2,
+    "composite_strength": 2,
+    "signal_quality": "low"
+  },
+  "signal_counts": {
+    "price": 1,
+    "volume": 2,
+    "weather": 1,
+    "technical": 1
+  },
+  "all_signals": {
+    "price": [
+      {
+        "type": "price_level",
+        "signal": "near_52w_high",
+        "value": 1.0,
+        "description": "Price near 52-week high ($8440)"
+      }
+    ],
+    "volume": [
+      {
+        "type": "volume_anomaly",
+        "signal": "volume_surge",
+        "value": 1.6029479672142726,
+        "description": "Volume surge: 1.6x average"
+      },
+      {
+        "type": "volume_trend",
+        "signal": "increasing_volume",
+        "value": 13.48504546682056,
+        "description": "Volume increasing: 1349% over 5 days"
+      }
+    ],
+    "weather": [
+      {
+        "type": "weather_anomaly",
+        "signal": "drought",
+        "value": -1.6453851328491842,
+        "description": "Drought conditions (Z-score: -1.65)"
+      }
+    ],
+    "technical": [
+      {
+        "type": "technical",
+        "signal": "overbought",
+        "value": 100.0,
+        "description": "RSI overbought: 100"
+      }
+    ]
+  },
+  "recommendations": [
+    "\u23f8\ufe0f Mixed signals - Wait for clarity",
+    "\ud83c\udf26\ufe0f Weather patterns affecting production regions",
+    "\ud83d\udcca Unusual trading volume detected"
+  ]
+}
