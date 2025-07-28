@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Real Dashboard - Showing ACTUAL model results
-100% Kearney compliant, 100% real data
+Comprehensive Dashboard - Combines interactive timeline with methodology and performance analysis
 """
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
@@ -9,10 +8,9 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import json
-import pandas as pd
-from datetime import datetime
+import uvicorn
 
-app = FastAPI(title="Cocoa Market Signals - Real Results")
+app = FastAPI(title="Cocoa Market Signals - Comprehensive Analysis")
 app.mount("/static", StaticFiles(directory="."), name="static")
 
 # Add CORS middleware
@@ -27,14 +25,14 @@ app.add_middleware(
 # Templates
 templates = Jinja2Templates(directory="templates")
 
-# Load real dashboard data
+# Load dashboard data
 with open('data/processed/real_dashboard_data.json', 'r') as f:
     dashboard_data = json.load(f)
 
 @app.get("/", response_class=HTMLResponse)
-async def dashboard(request: Request):
-    """Main dashboard showing real results"""
-    return templates.TemplateResponse("dashboard_working.html", {
+async def comprehensive_dashboard(request: Request):
+    """Comprehensive dashboard with all features"""
+    return templates.TemplateResponse("dashboard_comprehensive.html", {
         "request": request,
         "data": dashboard_data
     })
@@ -43,7 +41,7 @@ async def dashboard(request: Request):
 async def get_predictions():
     """Get model predictions"""
     return {
-        "predictions": dashboard_data['predictions'],  # ALL predictions
+        "predictions": dashboard_data['predictions'],
         "summary": dashboard_data['model_performance']
     }
 
@@ -51,7 +49,7 @@ async def get_predictions():
 async def get_events():
     """Get significant market events"""
     return {
-        "events": dashboard_data['significant_events'],  # ALL events
+        "events": dashboard_data['significant_events'],
         "total": len(dashboard_data['significant_events'])
     }
 
@@ -70,13 +68,6 @@ async def get_data_file(filename: str):
     """Serve data files"""
     file_path = f"data/processed/{filename}"
     return FileResponse(file_path)
-
-@app.get("/timeline", response_class=HTMLResponse)
-async def timeline_dashboard(request: Request):
-    """Interactive timeline dashboard"""
-    return templates.TemplateResponse("timeline_fixed_final.html", {
-        "request": request
-    })
 
 @app.get("/api/all-prices")
 async def get_all_prices():
@@ -110,14 +101,15 @@ async def get_all_prices():
     return {"prices": prices}
 
 if __name__ == "__main__":
-    import uvicorn
     print("\n" + "="*60)
-    print("🚀 LAUNCHING REAL RESULTS DASHBOARD")
+    print("🚀 LAUNCHING COMPREHENSIVE DASHBOARD")
     print("="*60)
-    print("\nModel Performance:")
-    for model, metrics in dashboard_data['model_performance']['all_models'].items():
-        print(f"  {model}: {metrics['accuracy']:.1%} accuracy")
-    print(f"\nDashboard URL: http://localhost:8001")
+    print("\nFeatures:")
+    print("  ✓ Interactive Timeline with clickable events")
+    print("  ✓ Methodology & Data Sources")
+    print("  ✓ Model Performance Analysis")
+    print("  ✓ Real-time predictions")
+    print(f"\nDashboard URL: http://localhost:8002")
     print("="*60 + "\n")
     
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=8002)

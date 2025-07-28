@@ -49,6 +49,9 @@ temp/
 *.db
 *.sqlite
 *.sqlite3
+# But keep our real data
+!data/cocoa_market_signals_real.db
+!data/processed/*.json
 
 # Reports
 reports/*.pdf

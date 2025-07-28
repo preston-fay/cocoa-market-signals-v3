@@ -1,0 +1,3311 @@
+[
+  {
+    "date": "2024-02-08",
+    "price_change": 0.07301293900184842,
+    "price": 5805.0,
+    "previous_price": 5410.0,
+    "volume": 37991,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-02-08",
+        "location": "Lagos",
+        "temp_anomaly": -3.3500000000000014,
+        "rainfall_anomaly": -5.0,
+        "temperature": 26.65,
+        "rainfall": 0.0
+      },
+      {
+        "date": "2024-02-07",
+        "location": "Lagos",
+        "temp_anomaly": -3.1499999999999986,
+        "rainfall_anomaly": -5.0,
+        "temperature": 26.85,
+        "rainfall": 0.0
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-02",
+        "trade_value": 2542555358.86,
+        "volume_kg": 745803980.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.4\u00b0C",
+    "verified_return": 0.07301293900184842,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-02-23",
+    "price_change": 0.06370562489868699,
+    "price": 6562.0,
+    "previous_price": 6169.0,
+    "volume": 83,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-02-22",
+        "location": "Douala",
+        "temp_anomaly": -2.1000000000000014,
+        "rainfall_anomaly": 13.5,
+        "temperature": 27.9,
+        "rainfall": 18.5
+      },
+      {
+        "date": "2024-02-20",
+        "location": "Abidjan",
+        "temp_anomaly": -2.1000000000000014,
+        "rainfall_anomaly": 17.4,
+        "temperature": 27.9,
+        "rainfall": 22.4
+      },
+      {
+        "date": "2024-02-20",
+        "location": "Lagos",
+        "temp_anomaly": -1.5499999999999972,
+        "rainfall_anomaly": 15.600000000000001,
+        "temperature": 28.450000000000003,
+        "rainfall": 20.6
+      },
+      {
+        "date": "2024-02-20",
+        "location": "San Pedro",
+        "temp_anomaly": -2.75,
+        "rainfall_anomaly": 13.100000000000001,
+        "temperature": 27.25,
+        "rainfall": 18.1
+      },
+      {
+        "date": "2024-02-19",
+        "location": "Kumasi",
+        "temp_anomaly": 0.0,
+        "rainfall_anomaly": 13.5,
+        "temperature": 30.0,
+        "rainfall": 18.5
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-02",
+        "trade_value": 2542555358.86,
+        "volume_kg": 745803980.0
+      }
+    ],
+    "primary_trigger": "mixed",
+    "trigger_description": "Multiple factors",
+    "verified_return": 0.06370562489868699,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-02-28",
+    "price_change": -0.05551443375277572,
+    "price": 6380.0,
+    "previous_price": 6755.0,
+    "volume": 7,
+    "news_triggers": [
+      {
+        "date": "2024-02-28",
+        "title": "The price of cocoa is soaring , and Easter Eggs will be very expensive",
+        "description": null,
+        "source": "irishdentist.ie",
+        "sentiment": -0.65
+      },
+      {
+        "date": "2024-02-27",
+        "title": "Deforestation - free supply chains : The Ivory Coast path to sustainable cocoa",
+        "description": null,
+        "source": "euronews.com",
+        "sentiment": 0.4
+      },
+      {
+        "date": "2024-02-27",
+        "title": "Cocoa prices jump to fresh record on persistent supply fears",
+        "description": null,
+        "source": "ghanaweb.com",
+        "sentiment": 0.3
+      },
+      {
+        "date": "2024-02-27",
+        "title": "I will do right with cocoa farmers \u2013 Akufo - Addo \u2013 ",
+        "description": null,
+        "source": "ghanamma.com",
+        "sentiment": 0.2857142857142857
+      },
+      {
+        "date": "2024-02-28",
+        "title": "Cocoa bean prices record high at ICE market data",
+        "description": null,
+        "source": "tass.com",
+        "sentiment": 0.16
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-02-22",
+        "location": "Douala",
+        "temp_anomaly": -2.1000000000000014,
+        "rainfall_anomaly": 13.5,
+        "temperature": 27.9,
+        "rainfall": 18.5
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-02",
+        "trade_value": 2542555358.86,
+        "volume_kg": 745803980.0
+      }
+    ],
+    "primary_trigger": "news",
+    "trigger_description": "The price of cocoa is soaring , and Easter Eggs will be very expensive",
+    "verified_return": -0.05551443375277572,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-03-12",
+    "price_change": 0.09810342475098922,
+    "price": 8048.0,
+    "previous_price": 7329.0,
+    "volume": 8,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-03-08",
+        "location": "San Pedro",
+        "temp_anomaly": -3.200000000000003,
+        "rainfall_anomaly": -5.0,
+        "temperature": 26.799999999999997,
+        "rainfall": 0.0
+      },
+      {
+        "date": "2024-03-07",
+        "location": "San Pedro",
+        "temp_anomaly": -3.1999999999999993,
+        "rainfall_anomaly": -0.20000000000000018,
+        "temperature": 26.8,
+        "rainfall": 4.8
+      },
+      {
+        "date": "2024-03-06",
+        "location": "Douala",
+        "temp_anomaly": -2.1000000000000014,
+        "rainfall_anomaly": 14.2,
+        "temperature": 27.9,
+        "rainfall": 19.2
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-03",
+        "trade_value": 2437379420.18,
+        "volume_kg": 660504600.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.2\u00b0C",
+    "verified_return": 0.09810342475098922,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-03-14",
+    "price_change": -0.07829225790390838,
+    "price": 7405.0,
+    "previous_price": 8034.0,
+    "volume": 29410,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-03-08",
+        "location": "San Pedro",
+        "temp_anomaly": -3.200000000000003,
+        "rainfall_anomaly": -5.0,
+        "temperature": 26.799999999999997,
+        "rainfall": 0.0
+      },
+      {
+        "date": "2024-03-07",
+        "location": "San Pedro",
+        "temp_anomaly": -3.1999999999999993,
+        "rainfall_anomaly": -0.20000000000000018,
+        "temperature": 26.8,
+        "rainfall": 4.8
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-03",
+        "trade_value": 2437379420.18,
+        "volume_kg": 660504600.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.2\u00b0C",
+    "verified_return": -0.07829225790390838,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-03-15",
+    "price_change": 0.08278190411883862,
+    "price": 8018.0,
+    "previous_price": 7405.0,
+    "volume": 25580,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-03-08",
+        "location": "San Pedro",
+        "temp_anomaly": -3.200000000000003,
+        "rainfall_anomaly": -5.0,
+        "temperature": 26.799999999999997,
+        "rainfall": 0.0
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-03",
+        "trade_value": 2437379420.18,
+        "volume_kg": 660504600.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.2\u00b0C",
+    "verified_return": 0.08278190411883862,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-04-12",
+    "price_change": 0.05919213342331052,
+    "price": 10987.0,
+    "previous_price": 10373.0,
+    "volume": 6464,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-04-12",
+        "location": "Douala",
+        "temp_anomaly": -2.0500000000000007,
+        "rainfall_anomaly": 23.3,
+        "temperature": 27.95,
+        "rainfall": 28.3
+      },
+      {
+        "date": "2024-04-11",
+        "location": "Abidjan",
+        "temp_anomaly": -3.6499999999999986,
+        "rainfall_anomaly": 12.100000000000001,
+        "temperature": 26.35,
+        "rainfall": 17.1
+      },
+      {
+        "date": "2024-04-11",
+        "location": "Kumasi",
+        "temp_anomaly": -3.6499999999999986,
+        "rainfall_anomaly": 6.800000000000001,
+        "temperature": 26.35,
+        "rainfall": 11.8
+      },
+      {
+        "date": "2024-04-10",
+        "location": "Abidjan",
+        "temp_anomaly": -1.8999999999999986,
+        "rainfall_anomaly": 16.3,
+        "temperature": 28.1,
+        "rainfall": 21.3
+      },
+      {
+        "date": "2024-04-10",
+        "location": "Douala",
+        "temp_anomaly": -3.1000000000000014,
+        "rainfall_anomaly": 19.3,
+        "temperature": 26.9,
+        "rainfall": 24.3
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-04",
+        "trade_value": 1889664238.94,
+        "volume_kg": 512899880.0
+      }
+    ],
+    "primary_trigger": "mixed",
+    "trigger_description": "Multiple factors",
+    "verified_return": 0.05919213342331052,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-04-16",
+    "price_change": -0.06890282701572584,
+    "price": 10243.0,
+    "previous_price": 11001.0,
+    "volume": 4386,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-04-16",
+        "location": "Douala",
+        "temp_anomaly": -2.5,
+        "rainfall_anomaly": 22.1,
+        "temperature": 27.5,
+        "rainfall": 27.1
+      },
+      {
+        "date": "2024-04-15",
+        "location": "Kumasi",
+        "temp_anomaly": -1.1499999999999986,
+        "rainfall_anomaly": 15.600000000000001,
+        "temperature": 28.85,
+        "rainfall": 20.6
+      },
+      {
+        "date": "2024-04-13",
+        "location": "Douala",
+        "temp_anomaly": -2.1000000000000014,
+        "rainfall_anomaly": 18.1,
+        "temperature": 27.9,
+        "rainfall": 23.1
+      },
+      {
+        "date": "2024-04-12",
+        "location": "Douala",
+        "temp_anomaly": -2.0500000000000007,
+        "rainfall_anomaly": 23.3,
+        "temperature": 27.95,
+        "rainfall": 28.3
+      },
+      {
+        "date": "2024-04-11",
+        "location": "Abidjan",
+        "temp_anomaly": -3.6499999999999986,
+        "rainfall_anomaly": 12.100000000000001,
+        "temperature": 26.35,
+        "rainfall": 17.1
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-04",
+        "trade_value": 1889664238.94,
+        "volume_kg": 512899880.0
+      }
+    ],
+    "primary_trigger": "mixed",
+    "trigger_description": "Multiple factors",
+    "verified_return": -0.06890282701572584,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-04-18",
+    "price_change": 0.09390715667311413,
+    "price": 11311.0,
+    "previous_price": 10340.0,
+    "volume": 5542,
+    "news_triggers": [
+      {
+        "date": "2024-04-19",
+        "title": "Cocoa prices hit all-time high above $11,000 per ton",
+        "description": "Cocoa futures surged to record levels on supply shortage fears",
+        "source": "Reuters",
+        "sentiment": 0.08
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-04-16",
+        "location": "Douala",
+        "temp_anomaly": -2.5,
+        "rainfall_anomaly": 22.1,
+        "temperature": 27.5,
+        "rainfall": 27.1
+      },
+      {
+        "date": "2024-04-15",
+        "location": "Kumasi",
+        "temp_anomaly": -1.1499999999999986,
+        "rainfall_anomaly": 15.600000000000001,
+        "temperature": 28.85,
+        "rainfall": 20.6
+      },
+      {
+        "date": "2024-04-13",
+        "location": "Douala",
+        "temp_anomaly": -2.1000000000000014,
+        "rainfall_anomaly": 18.1,
+        "temperature": 27.9,
+        "rainfall": 23.1
+      },
+      {
+        "date": "2024-04-12",
+        "location": "Douala",
+        "temp_anomaly": -2.0500000000000007,
+        "rainfall_anomaly": 23.3,
+        "temperature": 27.95,
+        "rainfall": 28.3
+      },
+      {
+        "date": "2024-04-11",
+        "location": "Abidjan",
+        "temp_anomaly": -3.6499999999999986,
+        "rainfall_anomaly": 12.100000000000001,
+        "temperature": 26.35,
+        "rainfall": 17.1
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-04",
+        "trade_value": 1889664238.94,
+        "volume_kg": 512899880.0
+      }
+    ],
+    "primary_trigger": "mixed",
+    "trigger_description": "Multiple factors",
+    "verified_return": 0.09390715667311413,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-04-19",
+    "price_change": 0.050128193793652194,
+    "price": 11878.0,
+    "previous_price": 11311.0,
+    "volume": 2808,
+    "news_triggers": [
+      {
+        "date": "2024-04-19",
+        "title": "Cocoa prices hit all-time high above $11,000 per ton",
+        "description": "Cocoa futures surged to record levels on supply shortage fears",
+        "source": "Reuters",
+        "sentiment": 0.08
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-04-16",
+        "location": "Douala",
+        "temp_anomaly": -2.5,
+        "rainfall_anomaly": 22.1,
+        "temperature": 27.5,
+        "rainfall": 27.1
+      },
+      {
+        "date": "2024-04-15",
+        "location": "Kumasi",
+        "temp_anomaly": -1.1499999999999986,
+        "rainfall_anomaly": 15.600000000000001,
+        "temperature": 28.85,
+        "rainfall": 20.6
+      },
+      {
+        "date": "2024-04-13",
+        "location": "Douala",
+        "temp_anomaly": -2.1000000000000014,
+        "rainfall_anomaly": 18.1,
+        "temperature": 27.9,
+        "rainfall": 23.1
+      },
+      {
+        "date": "2024-04-12",
+        "location": "Douala",
+        "temp_anomaly": -2.0500000000000007,
+        "rainfall_anomaly": 23.3,
+        "temperature": 27.95,
+        "rainfall": 28.3
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-04",
+        "trade_value": 1889664238.94,
+        "volume_kg": 512899880.0
+      }
+    ],
+    "primary_trigger": "mixed",
+    "trigger_description": "Multiple factors",
+    "verified_return": 0.050128193793652194,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-04-23",
+    "price_change": -0.05212251477700161,
+    "price": 10584.0,
+    "previous_price": 11166.0,
+    "volume": 3530,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-04-16",
+        "location": "Douala",
+        "temp_anomaly": -2.5,
+        "rainfall_anomaly": 22.1,
+        "temperature": 27.5,
+        "rainfall": 27.1
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-04",
+        "trade_value": 1889664238.94,
+        "volume_kg": 512899880.0
+      }
+    ],
+    "primary_trigger": "mixed",
+    "trigger_description": "Multiple factors",
+    "verified_return": -0.05212251477700161,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-05-01",
+    "price_change": -0.09375308398302576,
+    "price": 9183.0,
+    "previous_price": 10133.0,
+    "volume": 15,
+    "news_triggers": [
+      {
+        "date": "2024-04-30",
+        "title": "Bitter truth : What is the devastating virus that threatens the world chocolate supply ? ",
+        "description": null,
+        "source": "firstpost.com",
+        "sentiment": -0.55
+      },
+      {
+        "date": "2024-04-29",
+        "title": " \u00bf Cu\u00e1ntas unidades se producen al d\u00eda de la golosina de chocolate m\u00e1s popular de Colombia ? | EL UNIVERSAL",
+        "description": null,
+        "source": "eluniversal.com.co",
+        "sentiment": 0.3
+      },
+      {
+        "date": "2024-05-02",
+        "title": "And finally \u2026 hot chocolate",
+        "description": null,
+        "source": "scottishlegal.com",
+        "sentiment": 0.25
+      },
+      {
+        "date": "2024-04-30",
+        "title": "Cocoa Farmers Earn More in KitKat Program , But Fall Far Short of Living Income",
+        "description": null,
+        "source": "swissinfo.ch",
+        "sentiment": 0.19999999999999998
+      },
+      {
+        "date": "2024-04-30",
+        "title": "Cocoa Farmers Earn More in KitKat Program , But Fall Far Short of Living Income",
+        "description": null,
+        "source": "bloomberg.com",
+        "sentiment": 0.19999999999999998
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-05-01",
+        "location": "Douala",
+        "temp_anomaly": -1.4500000000000028,
+        "rainfall_anomaly": 13.600000000000001,
+        "temperature": 28.549999999999997,
+        "rainfall": 18.6
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-05",
+        "trade_value": 1766666892.2,
+        "volume_kg": 459138540.0
+      }
+    ],
+    "primary_trigger": "news",
+    "trigger_description": "Bitter truth : What is the devastating virus that threatens the world chocolate supply ? ",
+    "verified_return": -0.09375308398302576,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-05-02",
+    "price_change": -0.07622781226178808,
+    "price": 8483.0,
+    "previous_price": 9183.0,
+    "volume": 22,
+    "news_triggers": [
+      {
+        "date": "2024-04-30",
+        "title": "Bitter truth : What is the devastating virus that threatens the world chocolate supply ? ",
+        "description": null,
+        "source": "firstpost.com",
+        "sentiment": -0.55
+      },
+      {
+        "date": "2024-05-03",
+        "title": "cameroun :: Tchad Mahamat D\u00e9by le pr\u00e9sident de transition tchadien grand favori de l  \u00e9lection pr\u00e9sidentielle du 6 mai :: ",
+        "description": null,
+        "source": "cameroun24.net",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2024-05-03",
+        "title": "Community engagement event highlights successes in tackling forced and child labour at Atiwa East District",
+        "description": null,
+        "source": "ghanaweb.com",
+        "sentiment": -0.30000000000000004
+      },
+      {
+        "date": "2024-04-29",
+        "title": " \u00bf Cu\u00e1ntas unidades se producen al d\u00eda de la golosina de chocolate m\u00e1s popular de Colombia ? | EL UNIVERSAL",
+        "description": null,
+        "source": "eluniversal.com.co",
+        "sentiment": 0.3
+      },
+      {
+        "date": "2024-05-02",
+        "title": "And finally \u2026 hot chocolate",
+        "description": null,
+        "source": "scottishlegal.com",
+        "sentiment": 0.25
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-05-02",
+        "location": "Kumasi",
+        "temp_anomaly": -3.0500000000000007,
+        "rainfall_anomaly": -4.3,
+        "temperature": 26.95,
+        "rainfall": 0.7
+      },
+      {
+        "date": "2024-05-01",
+        "location": "Douala",
+        "temp_anomaly": -1.4500000000000028,
+        "rainfall_anomaly": 13.600000000000001,
+        "temperature": 28.549999999999997,
+        "rainfall": 18.6
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-05",
+        "trade_value": 1766666892.2,
+        "volume_kg": 459138540.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.1\u00b0C",
+    "verified_return": -0.07622781226178808,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-05-07",
+    "price_change": 0.11923929529809824,
+    "price": 9593.0,
+    "previous_price": 8571.0,
+    "volume": 0,
+    "news_triggers": [
+      {
+        "date": "2024-05-05",
+        "title": "Nuevo boom del cacao : 3 estrategias para que empresarios y microempresarios ecuatorianos fortalezcan su competitividad a nivel internacional",
+        "description": null,
+        "source": "ppelverdadero.com.ec",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2024-05-04",
+        "title": "Cocoa for EU grown inside deforested land in top source countries , report says",
+        "description": null,
+        "source": "theeastafrican.co.ke",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2024-05-04",
+        "title": "Cameroon : chocolate - makers squeezed by high cocoa prices",
+        "description": null,
+        "source": "africanews.com",
+        "sentiment": 0.16
+      },
+      {
+        "date": "2024-05-05",
+        "title": "Cocoa Prices Close Sharply Lower as Cocoa Buyers Delay Purchases",
+        "description": null,
+        "source": "theglobeandmail.com",
+        "sentiment": -0.125
+      },
+      {
+        "date": "2024-05-06",
+        "title": "Meet  Dark Borneo  - First Ever KitKat Made With Cocoa Beans From Sabah And Sarawak ! ",
+        "description": null,
+        "source": "therakyatpost.com",
+        "sentiment": 0.08125
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-05-03",
+        "location": "Douala",
+        "temp_anomaly": -3.200000000000003,
+        "rainfall_anomaly": 8.3,
+        "temperature": 26.799999999999997,
+        "rainfall": 13.3
+      },
+      {
+        "date": "2024-05-02",
+        "location": "Kumasi",
+        "temp_anomaly": -3.0500000000000007,
+        "rainfall_anomaly": -4.3,
+        "temperature": 26.95,
+        "rainfall": 0.7
+      },
+      {
+        "date": "2024-05-01",
+        "location": "Douala",
+        "temp_anomaly": -1.4500000000000028,
+        "rainfall_anomaly": 13.600000000000001,
+        "temperature": 28.549999999999997,
+        "rainfall": 18.6
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-05",
+        "trade_value": 1766666892.2,
+        "volume_kg": 459138540.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.2\u00b0C",
+    "verified_return": 0.11923929529809824,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-05-14",
+    "price_change": 0.07387409498097926,
+    "price": 8751.0,
+    "previous_price": 8149.0,
+    "volume": 1,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-05-14",
+        "location": "San Pedro",
+        "temp_anomaly": -3.3500000000000014,
+        "rainfall_anomaly": 6.0,
+        "temperature": 26.65,
+        "rainfall": 11.0
+      },
+      {
+        "date": "2024-05-11",
+        "location": "Kumasi",
+        "temp_anomaly": -1.1499999999999986,
+        "rainfall_anomaly": 12.5,
+        "temperature": 28.85,
+        "rainfall": 17.5
+      },
+      {
+        "date": "2024-05-08",
+        "location": "Douala",
+        "temp_anomaly": -3.1499999999999986,
+        "rainfall_anomaly": -2.1,
+        "temperature": 26.85,
+        "rainfall": 2.9
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-05",
+        "trade_value": 1766666892.2,
+        "volume_kg": 459138540.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.4\u00b0C",
+    "verified_return": 0.07387409498097926,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-05-16",
+    "price_change": -0.18453562761967793,
+    "price": 7393.0,
+    "previous_price": 9066.0,
+    "volume": 11580,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-05-16",
+        "location": "Abidjan",
+        "temp_anomaly": -3.5,
+        "rainfall_anomaly": 1.5999999999999996,
+        "temperature": 26.5,
+        "rainfall": 6.6
+      },
+      {
+        "date": "2024-05-16",
+        "location": "San Pedro",
+        "temp_anomaly": -4.050000000000001,
+        "rainfall_anomaly": 20.8,
+        "temperature": 25.95,
+        "rainfall": 25.8
+      },
+      {
+        "date": "2024-05-14",
+        "location": "San Pedro",
+        "temp_anomaly": -3.3500000000000014,
+        "rainfall_anomaly": 6.0,
+        "temperature": 26.65,
+        "rainfall": 11.0
+      },
+      {
+        "date": "2024-05-11",
+        "location": "Kumasi",
+        "temp_anomaly": -1.1499999999999986,
+        "rainfall_anomaly": 12.5,
+        "temperature": 28.85,
+        "rainfall": 17.5
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-05",
+        "trade_value": 1766666892.2,
+        "volume_kg": 459138540.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.5\u00b0C",
+    "verified_return": -0.18453562761967793,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-05-23",
+    "price_change": 0.07603503184713375,
+    "price": 8109.0,
+    "previous_price": 7536.0,
+    "volume": 14084,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-05-23",
+        "location": "San Pedro",
+        "temp_anomaly": -3.8500000000000014,
+        "rainfall_anomaly": -0.2999999999999998,
+        "temperature": 26.15,
+        "rainfall": 4.7
+      },
+      {
+        "date": "2024-05-22",
+        "location": "Douala",
+        "temp_anomaly": -3.6499999999999986,
+        "rainfall_anomaly": 10.7,
+        "temperature": 26.35,
+        "rainfall": 15.7
+      },
+      {
+        "date": "2024-05-18",
+        "location": "Douala",
+        "temp_anomaly": -2.25,
+        "rainfall_anomaly": 13.8,
+        "temperature": 27.75,
+        "rainfall": 18.8
+      },
+      {
+        "date": "2024-05-17",
+        "location": "Abidjan",
+        "temp_anomaly": -3.5,
+        "rainfall_anomaly": 2.5999999999999996,
+        "temperature": 26.5,
+        "rainfall": 7.6
+      },
+      {
+        "date": "2024-05-17",
+        "location": "Kumasi",
+        "temp_anomaly": -3.6499999999999986,
+        "rainfall_anomaly": -4.4,
+        "temperature": 26.35,
+        "rainfall": 0.6
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-05",
+        "trade_value": 1766666892.2,
+        "volume_kg": 459138540.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.9\u00b0C",
+    "verified_return": 0.07603503184713375,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-05-29",
+    "price_change": 0.060250569476082004,
+    "price": 9309.0,
+    "previous_price": 8780.0,
+    "volume": 14757,
+    "news_triggers": [
+      {
+        "date": "2024-05-30",
+        "title": "COCOBOD moves to stop farmers from selling cocoa farms to illegal miners \u2013 ",
+        "description": null,
+        "source": "ghanamma.com",
+        "sentiment": -0.5
+      },
+      {
+        "date": "2024-05-30",
+        "title": "COCOBOD moves to stop farmers from selling cocoa farms to illegal miners",
+        "description": null,
+        "source": "ghanaweb.com",
+        "sentiment": -0.5
+      },
+      {
+        "date": "2024-05-29",
+        "title": "COCOBOD moves to stop farmers from selling cocoa farms to illegal miners",
+        "description": null,
+        "source": "myjoyonline.com",
+        "sentiment": -0.5
+      },
+      {
+        "date": "2024-05-29",
+        "title": "Cocoa investors request major chocolate companies pay farmers more",
+        "description": null,
+        "source": "foodnavigator.com",
+        "sentiment": 0.28125
+      },
+      {
+        "date": "2024-05-29",
+        "title": "Cocoa investors request major chocolate companies pay farmers more",
+        "description": null,
+        "source": "foodnavigator-asia.com",
+        "sentiment": 0.28125
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-05-28",
+        "location": "Kumasi",
+        "temp_anomaly": -3.0500000000000007,
+        "rainfall_anomaly": -4.7,
+        "temperature": 26.95,
+        "rainfall": 0.3
+      },
+      {
+        "date": "2024-05-27",
+        "location": "Abidjan",
+        "temp_anomaly": -3.8000000000000007,
+        "rainfall_anomaly": -3.6,
+        "temperature": 26.2,
+        "rainfall": 1.4
+      },
+      {
+        "date": "2024-05-27",
+        "location": "Kumasi",
+        "temp_anomaly": -3.5,
+        "rainfall_anomaly": -4.5,
+        "temperature": 26.5,
+        "rainfall": 0.5
+      },
+      {
+        "date": "2024-05-27",
+        "location": "San Pedro",
+        "temp_anomaly": -3.25,
+        "rainfall_anomaly": -2.5,
+        "temperature": 26.75,
+        "rainfall": 2.5
+      },
+      {
+        "date": "2024-05-26",
+        "location": "Abidjan",
+        "temp_anomaly": -5.449999999999999,
+        "rainfall_anomaly": 19.2,
+        "temperature": 24.55,
+        "rainfall": 24.2
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-05",
+        "trade_value": 1766666892.2,
+        "volume_kg": 459138540.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.1\u00b0C",
+    "verified_return": 0.060250569476082004,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-06-12",
+    "price_change": 0.06347124117053482,
+    "price": 10539.0,
+    "previous_price": 9910.0,
+    "volume": 7296,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-06-12",
+        "location": "Abidjan",
+        "temp_anomaly": -3.450000000000003,
+        "rainfall_anomaly": -3.7,
+        "temperature": 26.549999999999997,
+        "rainfall": 1.3
+      },
+      {
+        "date": "2024-06-12",
+        "location": "Kumasi",
+        "temp_anomaly": -3.5500000000000007,
+        "rainfall_anomaly": -1.9,
+        "temperature": 26.45,
+        "rainfall": 3.1
+      },
+      {
+        "date": "2024-06-12",
+        "location": "Lagos",
+        "temp_anomaly": -3.75,
+        "rainfall_anomaly": -2.2,
+        "temperature": 26.25,
+        "rainfall": 2.8
+      },
+      {
+        "date": "2024-06-12",
+        "location": "Douala",
+        "temp_anomaly": -3.1499999999999986,
+        "rainfall_anomaly": -4.4,
+        "temperature": 26.85,
+        "rainfall": 0.6
+      },
+      {
+        "date": "2024-06-12",
+        "location": "San Pedro",
+        "temp_anomaly": -3.25,
+        "rainfall_anomaly": -4.1,
+        "temperature": 26.75,
+        "rainfall": 0.9
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-06",
+        "trade_value": 1764744727.16,
+        "volume_kg": 495657020.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.5\u00b0C",
+    "verified_return": 0.06347124117053482,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-06-21",
+    "price_change": -0.06282558866430506,
+    "price": 8995.0,
+    "previous_price": 9598.0,
+    "volume": 1568,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-06-21",
+        "location": "Abidjan",
+        "temp_anomaly": -5.300000000000001,
+        "rainfall_anomaly": 8.9,
+        "temperature": 24.7,
+        "rainfall": 13.9
+      },
+      {
+        "date": "2024-06-21",
+        "location": "Kumasi",
+        "temp_anomaly": -4.149999999999999,
+        "rainfall_anomaly": -2.1,
+        "temperature": 25.85,
+        "rainfall": 2.9
+      },
+      {
+        "date": "2024-06-21",
+        "location": "Lagos",
+        "temp_anomaly": -3.1999999999999993,
+        "rainfall_anomaly": 12.399999999999999,
+        "temperature": 26.8,
+        "rainfall": 17.4
+      },
+      {
+        "date": "2024-06-21",
+        "location": "Douala",
+        "temp_anomaly": -4.200000000000003,
+        "rainfall_anomaly": 3.8000000000000007,
+        "temperature": 25.799999999999997,
+        "rainfall": 8.8
+      },
+      {
+        "date": "2024-06-21",
+        "location": "San Pedro",
+        "temp_anomaly": -4.850000000000001,
+        "rainfall_anomaly": 2.0999999999999996,
+        "temperature": 25.15,
+        "rainfall": 7.1
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-06",
+        "trade_value": 1764744727.16,
+        "volume_kg": 495657020.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -5.3\u00b0C",
+    "verified_return": -0.06282558866430506,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-06-27",
+    "price_change": -0.05130178273695011,
+    "price": 7397.0,
+    "previous_price": 7797.0,
+    "volume": 9,
+    "news_triggers": [
+      {
+        "date": "2024-06-28",
+        "title": "Do You Need to Worry About Heavy Metals in Dark Chocolate ? ",
+        "description": null,
+        "source": "health.com",
+        "sentiment": -0.175
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-06-27",
+        "location": "Abidjan",
+        "temp_anomaly": -3.549999999999997,
+        "rainfall_anomaly": 2.0,
+        "temperature": 26.450000000000003,
+        "rainfall": 7.0
+      },
+      {
+        "date": "2024-06-27",
+        "location": "Kumasi",
+        "temp_anomaly": -3.3999999999999986,
+        "rainfall_anomaly": 5.300000000000001,
+        "temperature": 26.6,
+        "rainfall": 10.3
+      },
+      {
+        "date": "2024-06-27",
+        "location": "Lagos",
+        "temp_anomaly": -3.25,
+        "rainfall_anomaly": -3.0,
+        "temperature": 26.75,
+        "rainfall": 2.0
+      },
+      {
+        "date": "2024-06-27",
+        "location": "Douala",
+        "temp_anomaly": -3.5500000000000007,
+        "rainfall_anomaly": -2.7,
+        "temperature": 26.45,
+        "rainfall": 2.3
+      },
+      {
+        "date": "2024-06-27",
+        "location": "San Pedro",
+        "temp_anomaly": -4.149999999999999,
+        "rainfall_anomaly": -2.8,
+        "temperature": 25.85,
+        "rainfall": 2.2
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-06",
+        "trade_value": 1764744727.16,
+        "volume_kg": 495657020.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.5\u00b0C",
+    "verified_return": -0.05130178273695011,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-07-02",
+    "price_change": 0.0572633297062024,
+    "price": 7773.0,
+    "previous_price": 7352.0,
+    "volume": 412,
+    "news_triggers": [
+      {
+        "date": "2024-06-29",
+        "title": "Assin Fosu : Robbers bolt with GH\u00a2100 , 000 , laptops , mobile phones after stabbing Cocoa District Officer",
+        "description": null,
+        "source": "modernghana.com",
+        "sentiment": -0.6
+      },
+      {
+        "date": "2024-07-02",
+        "title": "ABOCFA Cooperative CEO wins Ghana  Most Outstanding Personality  in Fair Trade & Organic Agriculture",
+        "description": null,
+        "source": "myjoyonline.com",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2024-07-01",
+        "title": "Nana Kwabena Asante Adjudged Ghana Most Outstanding Personality In Cocoa Production",
+        "description": null,
+        "source": "peacefmonline.com",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2024-07-01",
+        "title": "Good weather helps cocoa ahead of Ivory Coast main crop , farmers say",
+        "description": null,
+        "source": "marketscreener.com",
+        "sentiment": 0.4333333333333333
+      },
+      {
+        "date": "2024-07-02",
+        "title": "La tonne de cacao perd pr\u00e8s de 30 % en une semaine sans une explication unique - Chronique des mati\u00e8res premi\u00e8res",
+        "description": null,
+        "source": "rfi.fr",
+        "sentiment": 0.375
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-07-02",
+        "location": "Abidjan",
+        "temp_anomaly": -4.100000000000001,
+        "rainfall_anomaly": -3.6,
+        "temperature": 25.9,
+        "rainfall": 1.4
+      },
+      {
+        "date": "2024-07-02",
+        "location": "Kumasi",
+        "temp_anomaly": -4.200000000000003,
+        "rainfall_anomaly": -2.1,
+        "temperature": 25.799999999999997,
+        "rainfall": 2.9
+      },
+      {
+        "date": "2024-07-02",
+        "location": "Lagos",
+        "temp_anomaly": -3.8500000000000014,
+        "rainfall_anomaly": 9.5,
+        "temperature": 26.15,
+        "rainfall": 14.5
+      },
+      {
+        "date": "2024-07-02",
+        "location": "Douala",
+        "temp_anomaly": -4.699999999999999,
+        "rainfall_anomaly": 8.0,
+        "temperature": 25.3,
+        "rainfall": 13.0
+      },
+      {
+        "date": "2024-07-02",
+        "location": "San Pedro",
+        "temp_anomaly": -4.600000000000001,
+        "rainfall_anomaly": -2.7,
+        "temperature": 25.4,
+        "rainfall": 2.3
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-07",
+        "trade_value": 2329022552.08,
+        "volume_kg": 608727960.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -4.1\u00b0C",
+    "verified_return": 0.0572633297062024,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-07-17",
+    "price_change": -0.06694711538461538,
+    "price": 7763.0,
+    "previous_price": 8320.0,
+    "volume": 10306,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-07-17",
+        "location": "Abidjan",
+        "temp_anomaly": -4.600000000000001,
+        "rainfall_anomaly": -2.4,
+        "temperature": 25.4,
+        "rainfall": 2.6
+      },
+      {
+        "date": "2024-07-17",
+        "location": "Kumasi",
+        "temp_anomaly": -4.149999999999999,
+        "rainfall_anomaly": -4.1,
+        "temperature": 25.85,
+        "rainfall": 0.9
+      },
+      {
+        "date": "2024-07-17",
+        "location": "Lagos",
+        "temp_anomaly": -3.6499999999999986,
+        "rainfall_anomaly": -4.5,
+        "temperature": 26.35,
+        "rainfall": 0.5
+      },
+      {
+        "date": "2024-07-17",
+        "location": "Douala",
+        "temp_anomaly": -4.850000000000001,
+        "rainfall_anomaly": -2.1,
+        "temperature": 25.15,
+        "rainfall": 2.9
+      },
+      {
+        "date": "2024-07-17",
+        "location": "San Pedro",
+        "temp_anomaly": -5.0,
+        "rainfall_anomaly": -1.0,
+        "temperature": 25.0,
+        "rainfall": 4.0
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-07",
+        "trade_value": 2329022552.08,
+        "volume_kg": 608727960.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -4.6\u00b0C",
+    "verified_return": -0.06694711538461538,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-07-25",
+    "price_change": -0.05129451805032211,
+    "price": 7805.0,
+    "previous_price": 8227.0,
+    "volume": 8448,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-07-25",
+        "location": "Abidjan",
+        "temp_anomaly": -5.549999999999997,
+        "rainfall_anomaly": -2.8,
+        "temperature": 24.450000000000003,
+        "rainfall": 2.2
+      },
+      {
+        "date": "2024-07-25",
+        "location": "Kumasi",
+        "temp_anomaly": -4.799999999999997,
+        "rainfall_anomaly": -4.3,
+        "temperature": 25.200000000000003,
+        "rainfall": 0.7
+      },
+      {
+        "date": "2024-07-25",
+        "location": "Lagos",
+        "temp_anomaly": -3.9499999999999993,
+        "rainfall_anomaly": -4.9,
+        "temperature": 26.05,
+        "rainfall": 0.1
+      },
+      {
+        "date": "2024-07-25",
+        "location": "Douala",
+        "temp_anomaly": -4.350000000000001,
+        "rainfall_anomaly": -2.5,
+        "temperature": 25.65,
+        "rainfall": 2.5
+      },
+      {
+        "date": "2024-07-25",
+        "location": "San Pedro",
+        "temp_anomaly": -5.299999999999997,
+        "rainfall_anomaly": -2.8,
+        "temperature": 24.700000000000003,
+        "rainfall": 2.2
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-07",
+        "trade_value": 2329022552.08,
+        "volume_kg": 608727960.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -5.5\u00b0C",
+    "verified_return": -0.05129451805032211,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-07-30",
+    "price_change": 0.05443234836702955,
+    "price": 8136.0,
+    "previous_price": 7716.0,
+    "volume": 11585,
+    "news_triggers": [
+      {
+        "date": "2024-07-31",
+        "title": "Study finds many cocoa products contaminated",
+        "description": null,
+        "source": "eurekalert.org",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2024-07-31",
+        "title": "Study Finds Many Cocoa Products Contaminated by He",
+        "description": null,
+        "source": "d.newswise.com",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2024-07-31",
+        "title": "Study Finds Many Cocoa Products Contaminated by He",
+        "description": null,
+        "source": "d.newswise.com",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2024-07-31",
+        "title": "Cocoa grind data show good demand even with high prices",
+        "description": null,
+        "source": "foodbusinessnews.net",
+        "sentiment": 0.43
+      },
+      {
+        "date": "2024-07-31",
+        "title": "Are There Heavy Metals in Your Chocolate ? ",
+        "description": null,
+        "source": "lebanondemocrat.com",
+        "sentiment": -0.2
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-07-30",
+        "location": "Abidjan",
+        "temp_anomaly": -5.199999999999999,
+        "rainfall_anomaly": -3.5,
+        "temperature": 24.8,
+        "rainfall": 1.5
+      },
+      {
+        "date": "2024-07-30",
+        "location": "Kumasi",
+        "temp_anomaly": -5.25,
+        "rainfall_anomaly": -4.3,
+        "temperature": 24.75,
+        "rainfall": 0.7
+      },
+      {
+        "date": "2024-07-30",
+        "location": "Lagos",
+        "temp_anomaly": -3.9499999999999993,
+        "rainfall_anomaly": -3.4,
+        "temperature": 26.05,
+        "rainfall": 1.6
+      },
+      {
+        "date": "2024-07-30",
+        "location": "Douala",
+        "temp_anomaly": -6.0,
+        "rainfall_anomaly": 23.5,
+        "temperature": 24.0,
+        "rainfall": 28.5
+      },
+      {
+        "date": "2024-07-30",
+        "location": "San Pedro",
+        "temp_anomaly": -5.149999999999999,
+        "rainfall_anomaly": -1.0,
+        "temperature": 24.85,
+        "rainfall": 4.0
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-07",
+        "trade_value": 2329022552.08,
+        "volume_kg": 608727960.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -5.2\u00b0C",
+    "verified_return": 0.05443234836702955,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-08-01",
+    "price_change": -0.06549678695007415,
+    "price": 7562.0,
+    "previous_price": 8092.0,
+    "volume": 12323,
+    "news_triggers": [
+      {
+        "date": "2024-08-02",
+        "title": "Top 10 des Pays Producteurs de Cacao en 2024 : Un Aper\u00e7u des G\u00e9ants du Chocolat",
+        "description": null,
+        "source": "letempsdz.com",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2024-07-31",
+        "title": "Study finds many cocoa products contaminated",
+        "description": null,
+        "source": "eurekalert.org",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2024-07-31",
+        "title": "Study Finds Many Cocoa Products Contaminated by He",
+        "description": null,
+        "source": "d.newswise.com",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2024-07-31",
+        "title": "Study Finds Many Cocoa Products Contaminated by He",
+        "description": null,
+        "source": "d.newswise.com",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2024-07-31",
+        "title": "Cocoa grind data show good demand even with high prices",
+        "description": null,
+        "source": "foodbusinessnews.net",
+        "sentiment": 0.43
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-08-01",
+        "location": "Abidjan",
+        "temp_anomaly": -5.600000000000001,
+        "rainfall_anomaly": -0.7000000000000002,
+        "temperature": 24.4,
+        "rainfall": 4.3
+      },
+      {
+        "date": "2024-08-01",
+        "location": "Kumasi",
+        "temp_anomaly": -5.0,
+        "rainfall_anomaly": -3.6,
+        "temperature": 25.0,
+        "rainfall": 1.4
+      },
+      {
+        "date": "2024-08-01",
+        "location": "Lagos",
+        "temp_anomaly": -4.350000000000001,
+        "rainfall_anomaly": -4.0,
+        "temperature": 25.65,
+        "rainfall": 1.0
+      },
+      {
+        "date": "2024-08-01",
+        "location": "Douala",
+        "temp_anomaly": -4.899999999999999,
+        "rainfall_anomaly": -3.9,
+        "temperature": 25.1,
+        "rainfall": 1.1
+      },
+      {
+        "date": "2024-08-01",
+        "location": "San Pedro",
+        "temp_anomaly": -6.200000000000003,
+        "rainfall_anomaly": 3.5,
+        "temperature": 23.799999999999997,
+        "rainfall": 8.5
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-08",
+        "trade_value": 2536683934.52,
+        "volume_kg": 673824340.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -5.6\u00b0C",
+    "verified_return": -0.06549678695007415,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-08-09",
+    "price_change": 0.11249694301785278,
+    "price": 9098.0,
+    "previous_price": 8178.0,
+    "volume": 8871,
+    "news_triggers": [
+      {
+        "date": "2024-08-06",
+        "title": "Weak Chocolate Demand Weighs on Cocoa Prices - The Globe and Mail",
+        "description": null,
+        "source": "theglobeandmail.com",
+        "sentiment": -0.375
+      },
+      {
+        "date": "2024-08-07",
+        "title": "Cocoa prices to head higher by end - 2024 amid record deficit",
+        "description": null,
+        "source": "marketscreener.com",
+        "sentiment": 0.25
+      },
+      {
+        "date": "2024-08-07",
+        "title": "Cocoa Prices Surge on Lower Global Production and Tight Supplies",
+        "description": null,
+        "source": "theglobeandmail.com",
+        "sentiment": -0.08928571428571429
+      },
+      {
+        "date": "2024-08-06",
+        "title": "Local cocoa production surges with high global price \u2013 The National",
+        "description": null,
+        "source": "thenational.com.pg",
+        "sentiment": 0.05333333333333334
+      },
+      {
+        "date": "2024-08-07",
+        "title": "Cocoa Processing Company records $9 . 5m loss in first half of 2024 \u2013 ",
+        "description": null,
+        "source": "ghanamma.com",
+        "sentiment": 0.04166666666666667
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-08-09",
+        "location": "Abidjan",
+        "temp_anomaly": -5.700000000000003,
+        "rainfall_anomaly": -2.1,
+        "temperature": 24.299999999999997,
+        "rainfall": 2.9
+      },
+      {
+        "date": "2024-08-09",
+        "location": "Kumasi",
+        "temp_anomaly": -4.75,
+        "rainfall_anomaly": -4.4,
+        "temperature": 25.25,
+        "rainfall": 0.6
+      },
+      {
+        "date": "2024-08-09",
+        "location": "Lagos",
+        "temp_anomaly": -3.9499999999999993,
+        "rainfall_anomaly": -4.7,
+        "temperature": 26.05,
+        "rainfall": 0.3
+      },
+      {
+        "date": "2024-08-09",
+        "location": "Douala",
+        "temp_anomaly": -4.799999999999997,
+        "rainfall_anomaly": -4.4,
+        "temperature": 25.200000000000003,
+        "rainfall": 0.6
+      },
+      {
+        "date": "2024-08-09",
+        "location": "San Pedro",
+        "temp_anomaly": -5.199999999999999,
+        "rainfall_anomaly": -2.3,
+        "temperature": 24.8,
+        "rainfall": 2.7
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-08",
+        "trade_value": 2536683934.52,
+        "volume_kg": 673824340.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -5.7\u00b0C",
+    "verified_return": 0.11249694301785278,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-10-01",
+    "price_change": -0.08844858844858845,
+    "price": 7039.0,
+    "previous_price": 7722.0,
+    "volume": 16564,
+    "news_triggers": [
+      {
+        "date": "2024-09-30",
+        "title": "Gold , crude oil raise Ghana trade surplus to US$2 . 78 billion",
+        "description": null,
+        "source": "ghanaweb.com",
+        "sentiment": -0.7
+      },
+      {
+        "date": "2024-10-02",
+        "title": "C\u00f4te dIvoire and Ghana strengthen collaboration on fair cocoa prices , sustainable farming",
+        "description": null,
+        "source": "myjoyonline.com",
+        "sentiment": 0.7
+      },
+      {
+        "date": "2024-10-01",
+        "title": "Ghana : Adjusting Cocoa Price Important for Curtailing Smuggling - Karen Kwarteng",
+        "description": null,
+        "source": "allafrica.com",
+        "sentiment": 0.4
+      },
+      {
+        "date": "2024-10-02",
+        "title": "Bougainville chocolate fest hailed as a success",
+        "description": null,
+        "source": "thenational.com.pg",
+        "sentiment": 0.3
+      },
+      {
+        "date": "2024-09-30",
+        "title": "Chocolate prices increasing :  Cocoa crisi to push chocolate prices even higher",
+        "description": null,
+        "source": "9news.com.au",
+        "sentiment": 0.25
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-10-01",
+        "location": "Abidjan",
+        "temp_anomaly": -4.600000000000001,
+        "rainfall_anomaly": 1.0999999999999996,
+        "temperature": 25.4,
+        "rainfall": 6.1
+      },
+      {
+        "date": "2024-10-01",
+        "location": "Kumasi",
+        "temp_anomaly": -5.949999999999999,
+        "rainfall_anomaly": 18.5,
+        "temperature": 24.05,
+        "rainfall": 23.5
+      },
+      {
+        "date": "2024-10-01",
+        "location": "Lagos",
+        "temp_anomaly": -3.3999999999999986,
+        "rainfall_anomaly": -4.4,
+        "temperature": 26.6,
+        "rainfall": 0.6
+      },
+      {
+        "date": "2024-10-01",
+        "location": "Douala",
+        "temp_anomaly": -4.350000000000001,
+        "rainfall_anomaly": 9.3,
+        "temperature": 25.65,
+        "rainfall": 14.3
+      },
+      {
+        "date": "2024-10-01",
+        "location": "San Pedro",
+        "temp_anomaly": -4.950000000000003,
+        "rainfall_anomaly": -2.4,
+        "temperature": 25.049999999999997,
+        "rainfall": 2.6
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-10",
+        "trade_value": 2614230670.48,
+        "volume_kg": 756241900.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -4.6\u00b0C",
+    "verified_return": -0.08844858844858845,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-10-29",
+    "price_change": 0.050599971085730805,
+    "price": 7267.0,
+    "previous_price": 6917.0,
+    "volume": 9564,
+    "news_triggers": [
+      {
+        "date": "2024-10-30",
+        "title": "Cocoa Prices Have More Than Doubled | The Motley Fool",
+        "description": null,
+        "source": "fool.com",
+        "sentiment": 0.55
+      },
+      {
+        "date": "2024-10-29",
+        "title": "Why youre seeing scary - high chocolate candy prices this Halloween",
+        "description": null,
+        "source": "ideastream.org",
+        "sentiment": -0.16999999999999998
+      },
+      {
+        "date": "2024-10-29",
+        "title": "Why youre seeing scary - high chocolate candy prices this Halloween",
+        "description": null,
+        "source": "mtpr.org",
+        "sentiment": -0.16999999999999998
+      },
+      {
+        "date": "2024-10-29",
+        "title": "Why youre seeing scary - high chocolate candy prices this Halloween",
+        "description": null,
+        "source": "wclk.com",
+        "sentiment": -0.16999999999999998
+      },
+      {
+        "date": "2024-10-29",
+        "title": "Why youre seeing scary - high chocolate candy prices this Halloween",
+        "description": null,
+        "source": "mprnews.org",
+        "sentiment": -0.16999999999999998
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-10-29",
+        "location": "Abidjan",
+        "temp_anomaly": -4.0,
+        "rainfall_anomaly": 4.699999999999999,
+        "temperature": 26.0,
+        "rainfall": 9.7
+      },
+      {
+        "date": "2024-10-29",
+        "location": "Kumasi",
+        "temp_anomaly": -4.25,
+        "rainfall_anomaly": -1.5,
+        "temperature": 25.75,
+        "rainfall": 3.5
+      },
+      {
+        "date": "2024-10-29",
+        "location": "Lagos",
+        "temp_anomaly": -3.049999999999997,
+        "rainfall_anomaly": 0.09999999999999964,
+        "temperature": 26.950000000000003,
+        "rainfall": 5.1
+      },
+      {
+        "date": "2024-10-29",
+        "location": "Douala",
+        "temp_anomaly": -3.450000000000003,
+        "rainfall_anomaly": 17.0,
+        "temperature": 26.549999999999997,
+        "rainfall": 22.0
+      },
+      {
+        "date": "2024-10-29",
+        "location": "San Pedro",
+        "temp_anomaly": -4.700000000000003,
+        "rainfall_anomaly": -3.9,
+        "temperature": 25.299999999999997,
+        "rainfall": 1.1
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-10",
+        "trade_value": 2614230670.48,
+        "volume_kg": 756241900.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -4.0\u00b0C",
+    "verified_return": 0.050599971085730805,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-11-07",
+    "price_change": 0.06296938186019642,
+    "price": 7360.0,
+    "previous_price": 6924.0,
+    "volume": 7951,
+    "news_triggers": [
+      {
+        "date": "2024-11-05",
+        "title": "Choosing the best Cocoa Powder for baking",
+        "description": null,
+        "source": "searchlight.vc",
+        "sentiment": 1.0
+      },
+      {
+        "date": "2024-11-04",
+        "title": "Ghana cocoa sector recorded unprecedented one million tonnes in 2021 / 2022 crop season - Aidoo",
+        "description": null,
+        "source": "ghanabusinessnews.com",
+        "sentiment": 0.6
+      },
+      {
+        "date": "2024-11-08",
+        "title": "You Might Be Using the Wrong Cocoa Powder",
+        "description": null,
+        "source": "aol.com",
+        "sentiment": -0.5
+      },
+      {
+        "date": "2024-11-05",
+        "title": "Ghana overlooked cocoa farmers : The key to a fair and sustainable cocoa industry",
+        "description": null,
+        "source": "ghanamma.com",
+        "sentiment": 0.35
+      },
+      {
+        "date": "2024-11-05",
+        "title": "Ghana overlooked cocoa farmers : The key to a fair and sustainable cocoa industry",
+        "description": null,
+        "source": "myjoyonline.com",
+        "sentiment": 0.35
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2024-11-07",
+        "location": "Abidjan",
+        "temp_anomaly": -3.5500000000000007,
+        "rainfall_anomaly": 2.7,
+        "temperature": 26.45,
+        "rainfall": 7.7
+      },
+      {
+        "date": "2024-11-07",
+        "location": "Douala",
+        "temp_anomaly": -5.199999999999999,
+        "rainfall_anomaly": 27.0,
+        "temperature": 24.8,
+        "rainfall": 32.0
+      },
+      {
+        "date": "2024-11-07",
+        "location": "San Pedro",
+        "temp_anomaly": -3.8500000000000014,
+        "rainfall_anomaly": 0.2999999999999998,
+        "temperature": 26.15,
+        "rainfall": 5.3
+      },
+      {
+        "date": "2024-11-06",
+        "location": "Abidjan",
+        "temp_anomaly": -3.799999999999997,
+        "rainfall_anomaly": -1.6,
+        "temperature": 26.200000000000003,
+        "rainfall": 3.4
+      },
+      {
+        "date": "2024-11-06",
+        "location": "Kumasi",
+        "temp_anomaly": -3.6499999999999986,
+        "rainfall_anomaly": -4.9,
+        "temperature": 26.35,
+        "rainfall": 0.1
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-11",
+        "trade_value": 2694779066.7200003,
+        "volume_kg": 834691840.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.6\u00b0C",
+    "verified_return": 0.06296938186019642,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-11-12",
+    "price_change": 0.07796656618251575,
+    "price": 7867.0,
+    "previous_price": 7298.0,
+    "volume": 5305,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-11-12",
+        "location": "Abidjan",
+        "temp_anomaly": -3.3000000000000007,
+        "rainfall_anomaly": 4.9,
+        "temperature": 26.7,
+        "rainfall": 9.9
+      },
+      {
+        "date": "2024-11-12",
+        "location": "Douala",
+        "temp_anomaly": -3.1000000000000014,
+        "rainfall_anomaly": 4.699999999999999,
+        "temperature": 26.9,
+        "rainfall": 9.7
+      },
+      {
+        "date": "2024-11-12",
+        "location": "San Pedro",
+        "temp_anomaly": -3.25,
+        "rainfall_anomaly": -3.9,
+        "temperature": 26.75,
+        "rainfall": 1.1
+      },
+      {
+        "date": "2024-11-11",
+        "location": "Abidjan",
+        "temp_anomaly": -3.25,
+        "rainfall_anomaly": -1.2999999999999998,
+        "temperature": 26.75,
+        "rainfall": 3.7
+      },
+      {
+        "date": "2024-11-11",
+        "location": "Kumasi",
+        "temp_anomaly": -3.049999999999997,
+        "rainfall_anomaly": -4.8,
+        "temperature": 26.950000000000003,
+        "rainfall": 0.2
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-11",
+        "trade_value": 2694779066.7200003,
+        "volume_kg": 834691840.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.3\u00b0C",
+    "verified_return": 0.07796656618251575,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-11-14",
+    "price_change": 0.0640695822614235,
+    "price": 8686.0,
+    "previous_price": 8163.0,
+    "volume": 4125,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-11-14",
+        "location": "Abidjan",
+        "temp_anomaly": -3.75,
+        "rainfall_anomaly": 4.6,
+        "temperature": 26.25,
+        "rainfall": 9.6
+      },
+      {
+        "date": "2024-11-14",
+        "location": "San Pedro",
+        "temp_anomaly": -4.149999999999999,
+        "rainfall_anomaly": 1.5,
+        "temperature": 25.85,
+        "rainfall": 6.5
+      },
+      {
+        "date": "2024-11-13",
+        "location": "San Pedro",
+        "temp_anomaly": -3.1999999999999993,
+        "rainfall_anomaly": -3.9,
+        "temperature": 26.8,
+        "rainfall": 1.1
+      },
+      {
+        "date": "2024-11-12",
+        "location": "Abidjan",
+        "temp_anomaly": -3.3000000000000007,
+        "rainfall_anomaly": 4.9,
+        "temperature": 26.7,
+        "rainfall": 9.9
+      },
+      {
+        "date": "2024-11-12",
+        "location": "Douala",
+        "temp_anomaly": -3.1000000000000014,
+        "rainfall_anomaly": 4.699999999999999,
+        "temperature": 26.9,
+        "rainfall": 9.7
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-11",
+        "trade_value": 2694779066.7200003,
+        "volume_kg": 834691840.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.8\u00b0C",
+    "verified_return": 0.0640695822614235,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-11-22",
+    "price_change": 0.05302402651201325,
+    "price": 8897.0,
+    "previous_price": 8449.0,
+    "volume": 321,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-11-22",
+        "location": "San Pedro",
+        "temp_anomaly": -3.299999999999997,
+        "rainfall_anomaly": -3.8,
+        "temperature": 26.700000000000003,
+        "rainfall": 1.2
+      },
+      {
+        "date": "2024-11-21",
+        "location": "San Pedro",
+        "temp_anomaly": -3.1499999999999986,
+        "rainfall_anomaly": -4.1,
+        "temperature": 26.85,
+        "rainfall": 0.9
+      },
+      {
+        "date": "2024-11-20",
+        "location": "Abidjan",
+        "temp_anomaly": -3.3999999999999986,
+        "rainfall_anomaly": -3.0,
+        "temperature": 26.6,
+        "rainfall": 2.0
+      },
+      {
+        "date": "2024-11-20",
+        "location": "San Pedro",
+        "temp_anomaly": -3.75,
+        "rainfall_anomaly": -5.0,
+        "temperature": 26.25,
+        "rainfall": 0.0
+      },
+      {
+        "date": "2024-11-19",
+        "location": "Abidjan",
+        "temp_anomaly": -4.25,
+        "rainfall_anomaly": 4.4,
+        "temperature": 25.75,
+        "rainfall": 9.4
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-11",
+        "trade_value": 2694779066.7200003,
+        "volume_kg": 834691840.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.3\u00b0C",
+    "verified_return": 0.05302402651201325,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-12-18",
+    "price_change": 0.06799830004249893,
+    "price": 12565.0,
+    "previous_price": 11765.0,
+    "volume": 17589,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2024-12-13",
+        "location": "San Pedro",
+        "temp_anomaly": -3.4499999999999993,
+        "rainfall_anomaly": -3.2,
+        "temperature": 26.55,
+        "rainfall": 1.8
+      },
+      {
+        "date": "2024-12-12",
+        "location": "San Pedro",
+        "temp_anomaly": -3.3500000000000014,
+        "rainfall_anomaly": -3.7,
+        "temperature": 26.65,
+        "rainfall": 1.3
+      }
+    ],
+    "trade_triggers": [
+      {
+        "period": "2024-12",
+        "trade_value": 3451004448.32,
+        "volume_kg": 944574800.0
+      }
+    ],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.4\u00b0C",
+    "verified_return": 0.06799830004249893,
+    "has_price_data": true
+  },
+  {
+    "date": "2024-12-27",
+    "price_change": -0.08188990659290832,
+    "price": 10124.0,
+    "previous_price": 11027.0,
+    "volume": 13447,
+    "news_triggers": [
+      {
+        "date": "2024-12-28",
+        "title": "Cocoa dominates 2024 as the top commodity winner",
+        "description": null,
+        "source": "ghanaweb.com",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2024-12-28",
+        "title": "Chocolatiers hit by rising cocoa prices",
+        "description": null,
+        "source": "ghanaweb.com",
+        "sentiment": 0.0
+      },
+      {
+        "date": "2024-12-28",
+        "title": "Gourman : C\u00e1rdenas Chocolate , producto manabita premiado en los \u00faltimos a\u00f1os | Columnistas | Entretenimiento",
+        "description": null,
+        "source": "eluniverso.com",
+        "sentiment": 0.0
+      }
+    ],
+    "weather_triggers": [],
+    "trade_triggers": [
+      {
+        "period": "2024-12",
+        "trade_value": 3451004448.32,
+        "volume_kg": 944574800.0
+      }
+    ],
+    "primary_trigger": "mixed",
+    "trigger_description": "Multiple factors",
+    "verified_return": -0.08188990659290832,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-01-08",
+    "price_change": -0.06752899197145405,
+    "price": 10453.0,
+    "previous_price": 11210.0,
+    "volume": 10690,
+    "news_triggers": [
+      {
+        "date": "2025-01-06",
+        "title": "Cocoa Sweet Victory : Beating Bitcoin To The Top In 2024 | Brunei No . 1 News Website",
+        "description": null,
+        "source": "brudirect.com",
+        "sentiment": 0.425
+      },
+      {
+        "date": "2025-01-07",
+        "title": "Poor quality cocoa a risk",
+        "description": null,
+        "source": "postcourier.com.pg",
+        "sentiment": -0.4
+      },
+      {
+        "date": "2025-01-09",
+        "title": "Panic Hedge ? Hershey Reportedly Asks CFTC Approval To Buy Huge Cocoa Pile On NY Exchange",
+        "description": null,
+        "source": "zerohedge.com",
+        "sentiment": 0.39999999999999997
+      },
+      {
+        "date": "2025-01-06",
+        "title": "A Harte Appetite : Black Cocoa",
+        "description": null,
+        "source": "krcu.org",
+        "sentiment": -0.16666666666666666
+      },
+      {
+        "date": "2025-01-07",
+        "title": "Milkboy Chocolate Flavors Satisfy Cravings for the New and the Old Favorites",
+        "description": null,
+        "source": "independent.com",
+        "sentiment": 0.11818181818181818
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2025-01-08",
+        "location": "San Pedro",
+        "temp_anomaly": -3.5,
+        "rainfall_anomaly": 6.5,
+        "temperature": 26.5,
+        "rainfall": 11.5
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.5\u00b0C",
+    "verified_return": -0.06752899197145405,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-01-17",
+    "price_change": 0.06389259188725957,
+    "price": 11173.0,
+    "previous_price": 10502.0,
+    "volume": 9122,
+    "news_triggers": [],
+    "weather_triggers": [],
+    "trade_triggers": [],
+    "primary_trigger": "mixed",
+    "trigger_description": "Multiple factors",
+    "verified_return": 0.06389259188725957,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-02-21",
+    "price_change": -0.11325062034739454,
+    "price": 8934.0,
+    "previous_price": 10075.0,
+    "volume": 1259,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2025-02-21",
+        "location": "Kumasi",
+        "temp_anomaly": -1.6499999999999986,
+        "rainfall_anomaly": 11.2,
+        "temperature": 28.35,
+        "rainfall": 16.2
+      },
+      {
+        "date": "2025-02-21",
+        "location": "San Pedro",
+        "temp_anomaly": -3.1499999999999986,
+        "rainfall_anomaly": 3.5999999999999996,
+        "temperature": 26.85,
+        "rainfall": 8.6
+      },
+      {
+        "date": "2025-02-14",
+        "location": "San Pedro",
+        "temp_anomaly": -3.3500000000000014,
+        "rainfall_anomaly": -2.7,
+        "temperature": 26.65,
+        "rainfall": 2.3
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "technical",
+    "trigger_description": "Large price movement: -11.3%",
+    "verified_return": -0.11325062034739454,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-04-02",
+    "price_change": 0.09673474379356732,
+    "price": 8968.0,
+    "previous_price": 8177.0,
+    "volume": 12783,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2025-04-02",
+        "location": "Lagos",
+        "temp_anomaly": -2.5,
+        "rainfall_anomaly": 13.899999999999999,
+        "temperature": 27.5,
+        "rainfall": 18.9
+      },
+      {
+        "date": "2025-04-02",
+        "location": "Douala",
+        "temp_anomaly": -3.5,
+        "rainfall_anomaly": 22.4,
+        "temperature": 26.5,
+        "rainfall": 27.4
+      },
+      {
+        "date": "2025-03-31",
+        "location": "Douala",
+        "temp_anomaly": -4.0,
+        "rainfall_anomaly": 6.800000000000001,
+        "temperature": 26.0,
+        "rainfall": 11.8
+      },
+      {
+        "date": "2025-03-30",
+        "location": "Kumasi",
+        "temp_anomaly": -3.1999999999999993,
+        "rainfall_anomaly": -4.5,
+        "temperature": 26.8,
+        "rainfall": 0.5
+      },
+      {
+        "date": "2025-03-30",
+        "location": "Lagos",
+        "temp_anomaly": -0.8500000000000014,
+        "rainfall_anomaly": 13.600000000000001,
+        "temperature": 29.15,
+        "rainfall": 18.6
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "mixed",
+    "trigger_description": "Multiple factors",
+    "verified_return": 0.09673474379356732,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-04-04",
+    "price_change": -0.08384458077709611,
+    "price": 8512.0,
+    "previous_price": 9291.0,
+    "volume": 23975,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2025-04-03",
+        "location": "Abidjan",
+        "temp_anomaly": -3.25,
+        "rainfall_anomaly": 9.3,
+        "temperature": 26.75,
+        "rainfall": 14.3
+      },
+      {
+        "date": "2025-04-03",
+        "location": "San Pedro",
+        "temp_anomaly": -3.4499999999999993,
+        "rainfall_anomaly": 6.9,
+        "temperature": 26.55,
+        "rainfall": 11.9
+      },
+      {
+        "date": "2025-04-02",
+        "location": "Lagos",
+        "temp_anomaly": -2.5,
+        "rainfall_anomaly": 13.899999999999999,
+        "temperature": 27.5,
+        "rainfall": 18.9
+      },
+      {
+        "date": "2025-04-02",
+        "location": "Douala",
+        "temp_anomaly": -3.5,
+        "rainfall_anomaly": 22.4,
+        "temperature": 26.5,
+        "rainfall": 27.4
+      },
+      {
+        "date": "2025-03-31",
+        "location": "Douala",
+        "temp_anomaly": -4.0,
+        "rainfall_anomaly": 6.800000000000001,
+        "temperature": 26.0,
+        "rainfall": 11.8
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.2\u00b0C",
+    "verified_return": -0.08384458077709611,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-04-09",
+    "price_change": 0.08923275306254029,
+    "price": 8447.0,
+    "previous_price": 7755.0,
+    "volume": 5668,
+    "news_triggers": [
+      {
+        "date": "2025-04-10",
+        "title": "Here why Easter chocolate is so expensive this year",
+        "description": null,
+        "source": "insideottawavalley.com",
+        "sentiment": -0.5
+      },
+      {
+        "date": "2025-04-10",
+        "title": "Here why Easter chocolate is so expensive this year",
+        "description": null,
+        "source": "northbaynipissing.com",
+        "sentiment": -0.5
+      },
+      {
+        "date": "2025-04-10",
+        "title": "Here why Easter chocolate is so expensive this year",
+        "description": null,
+        "source": "parrysound.com",
+        "sentiment": -0.5
+      },
+      {
+        "date": "2025-04-10",
+        "title": "Here why Easter chocolate is so expensive this year",
+        "description": null,
+        "source": "theifp.ca",
+        "sentiment": -0.5
+      },
+      {
+        "date": "2025-04-10",
+        "title": "Here why Easter chocolate is so expensive this year",
+        "description": null,
+        "source": "durhamregion.com",
+        "sentiment": -0.5
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2025-04-09",
+        "location": "Lagos",
+        "temp_anomaly": -2.3999999999999986,
+        "rainfall_anomaly": 20.7,
+        "temperature": 27.6,
+        "rainfall": 25.7
+      },
+      {
+        "date": "2025-04-08",
+        "location": "Douala",
+        "temp_anomaly": -3.1499999999999986,
+        "rainfall_anomaly": 3.8000000000000007,
+        "temperature": 26.85,
+        "rainfall": 8.8
+      },
+      {
+        "date": "2025-04-05",
+        "location": "Douala",
+        "temp_anomaly": -3.1000000000000014,
+        "rainfall_anomaly": 5.5,
+        "temperature": 26.9,
+        "rainfall": 10.5
+      },
+      {
+        "date": "2025-04-03",
+        "location": "Abidjan",
+        "temp_anomaly": -3.25,
+        "rainfall_anomaly": 9.3,
+        "temperature": 26.75,
+        "rainfall": 14.3
+      },
+      {
+        "date": "2025-04-03",
+        "location": "San Pedro",
+        "temp_anomaly": -3.4499999999999993,
+        "rainfall_anomaly": 6.9,
+        "temperature": 26.55,
+        "rainfall": 11.9
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "mixed",
+    "trigger_description": "Multiple factors",
+    "verified_return": 0.08923275306254029,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-04-11",
+    "price_change": 0.05229970326409496,
+    "price": 8511.0,
+    "previous_price": 8088.0,
+    "volume": 3610,
+    "news_triggers": [
+      {
+        "date": "2025-04-11",
+        "title": "Here why Easter chocolate is so expensive this year",
+        "description": null,
+        "source": "wellandtribune.ca",
+        "sentiment": -0.5
+      },
+      {
+        "date": "2025-04-11",
+        "title": "Here why Easter chocolate is so expensive this year",
+        "description": null,
+        "source": "niagarafallsreview.ca",
+        "sentiment": -0.5
+      },
+      {
+        "date": "2025-04-11",
+        "title": "Here why Easter chocolate is so expensive this year",
+        "description": null,
+        "source": "stcatharinesstandard.ca",
+        "sentiment": -0.5
+      },
+      {
+        "date": "2025-04-10",
+        "title": "Here why Easter chocolate is so expensive this year",
+        "description": null,
+        "source": "insideottawavalley.com",
+        "sentiment": -0.5
+      },
+      {
+        "date": "2025-04-10",
+        "title": "Here why Easter chocolate is so expensive this year",
+        "description": null,
+        "source": "northbaynipissing.com",
+        "sentiment": -0.5
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2025-04-11",
+        "location": "Abidjan",
+        "temp_anomaly": -3.049999999999997,
+        "rainfall_anomaly": 2.2,
+        "temperature": 26.950000000000003,
+        "rainfall": 7.2
+      },
+      {
+        "date": "2025-04-11",
+        "location": "Lagos",
+        "temp_anomaly": -2.4499999999999993,
+        "rainfall_anomaly": 20.4,
+        "temperature": 27.55,
+        "rainfall": 25.4
+      },
+      {
+        "date": "2025-04-10",
+        "location": "Douala",
+        "temp_anomaly": -3.8000000000000007,
+        "rainfall_anomaly": 25.2,
+        "temperature": 26.2,
+        "rainfall": 30.2
+      },
+      {
+        "date": "2025-04-09",
+        "location": "Lagos",
+        "temp_anomaly": -2.3999999999999986,
+        "rainfall_anomaly": 20.7,
+        "temperature": 27.6,
+        "rainfall": 25.7
+      },
+      {
+        "date": "2025-04-08",
+        "location": "Douala",
+        "temp_anomaly": -3.1499999999999986,
+        "rainfall_anomaly": 3.8000000000000007,
+        "temperature": 26.85,
+        "rainfall": 8.8
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.0\u00b0C",
+    "verified_return": 0.05229970326409496,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-04-22",
+    "price_change": 0.056753688989784334,
+    "price": 9310.0,
+    "previous_price": 8810.0,
+    "volume": 2216,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2025-04-22",
+        "location": "Douala",
+        "temp_anomaly": -2.8999999999999986,
+        "rainfall_anomaly": 20.5,
+        "temperature": 27.1,
+        "rainfall": 25.5
+      },
+      {
+        "date": "2025-04-21",
+        "location": "Douala",
+        "temp_anomaly": -1.4500000000000028,
+        "rainfall_anomaly": 26.8,
+        "temperature": 28.549999999999997,
+        "rainfall": 31.8
+      },
+      {
+        "date": "2025-04-16",
+        "location": "Douala",
+        "temp_anomaly": -3.4499999999999993,
+        "rainfall_anomaly": 6.0,
+        "temperature": 26.55,
+        "rainfall": 11.0
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "mixed",
+    "trigger_description": "Multiple factors",
+    "verified_return": 0.056753688989784334,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-05-13",
+    "price_change": 0.08897216274089936,
+    "price": 10171.0,
+    "previous_price": 9340.0,
+    "volume": 1,
+    "news_triggers": [
+      {
+        "date": "2025-05-13",
+        "title": "Arborele de cacao \u2013 Povestea fascinant\u0103 a copacului care d\u0103 na\u0219tere ciocolatei",
+        "description": null,
+        "source": "bzi.ro",
+        "sentiment": 0.0
+      },
+      {
+        "date": "2025-05-13",
+        "title": "This snack company is trying to change the way you think about chocolate",
+        "description": null,
+        "source": "grist.org",
+        "sentiment": 0.0
+      },
+      {
+        "date": "2025-05-12",
+        "title": "Nestl\u00e9 , ICI and Beyond Beans commission school buildings in cocoa growing communities",
+        "description": null,
+        "source": "myjoyonline.com",
+        "sentiment": 0.0
+      },
+      {
+        "date": "2025-05-10",
+        "title": "Italian Government to provide grant to Support Cocoa Sector",
+        "description": null,
+        "source": "businessghana.com",
+        "sentiment": 0.0
+      },
+      {
+        "date": "2025-05-10",
+        "title": "Youths flock to cocoa farming as price surges",
+        "description": null,
+        "source": "tribuneonlineng.com",
+        "sentiment": 0.0
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2025-05-10",
+        "location": "Douala",
+        "temp_anomaly": -3.1499999999999986,
+        "rainfall_anomaly": 1.5999999999999996,
+        "temperature": 26.85,
+        "rainfall": 6.6
+      },
+      {
+        "date": "2025-05-09",
+        "location": "Douala",
+        "temp_anomaly": -4.350000000000001,
+        "rainfall_anomaly": 21.8,
+        "temperature": 25.65,
+        "rainfall": 26.8
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.1\u00b0C",
+    "verified_return": 0.08897216274089936,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-05-16",
+    "price_change": 0.06249390660037048,
+    "price": 10898.0,
+    "previous_price": 10257.0,
+    "volume": 13430,
+    "news_triggers": [
+      {
+        "date": "2025-05-13",
+        "title": "Arborele de cacao \u2013 Povestea fascinant\u0103 a copacului care d\u0103 na\u0219tere ciocolatei",
+        "description": null,
+        "source": "bzi.ro",
+        "sentiment": 0.0
+      },
+      {
+        "date": "2025-05-13",
+        "title": "This snack company is trying to change the way you think about chocolate",
+        "description": null,
+        "source": "grist.org",
+        "sentiment": 0.0
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2025-05-15",
+        "location": "Douala",
+        "temp_anomaly": -2.8999999999999986,
+        "rainfall_anomaly": 29.700000000000003,
+        "temperature": 27.1,
+        "rainfall": 34.7
+      },
+      {
+        "date": "2025-05-14",
+        "location": "San Pedro",
+        "temp_anomaly": -3.299999999999997,
+        "rainfall_anomaly": 8.8,
+        "temperature": 26.700000000000003,
+        "rainfall": 13.8
+      },
+      {
+        "date": "2025-05-10",
+        "location": "Douala",
+        "temp_anomaly": -3.1499999999999986,
+        "rainfall_anomaly": 1.5999999999999996,
+        "temperature": 26.85,
+        "rainfall": 6.6
+      },
+      {
+        "date": "2025-05-09",
+        "location": "Douala",
+        "temp_anomaly": -4.350000000000001,
+        "rainfall_anomaly": 21.8,
+        "temperature": 25.65,
+        "rainfall": 26.8
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "mixed",
+    "trigger_description": "Multiple factors",
+    "verified_return": 0.06249390660037048,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-05-23",
+    "price_change": -0.050009729519361744,
+    "price": 9764.0,
+    "previous_price": 10278.0,
+    "volume": 0,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2025-05-23",
+        "location": "Abidjan",
+        "temp_anomaly": -4.300000000000001,
+        "rainfall_anomaly": -1.7000000000000002,
+        "temperature": 25.7,
+        "rainfall": 3.3
+      },
+      {
+        "date": "2025-05-23",
+        "location": "Kumasi",
+        "temp_anomaly": -3.3000000000000007,
+        "rainfall_anomaly": 6.699999999999999,
+        "temperature": 26.7,
+        "rainfall": 11.7
+      },
+      {
+        "date": "2025-05-23",
+        "location": "Douala",
+        "temp_anomaly": -3.6999999999999993,
+        "rainfall_anomaly": 6.1,
+        "temperature": 26.3,
+        "rainfall": 11.1
+      },
+      {
+        "date": "2025-05-23",
+        "location": "San Pedro",
+        "temp_anomaly": -4.350000000000001,
+        "rainfall_anomaly": 8.3,
+        "temperature": 25.65,
+        "rainfall": 13.3
+      },
+      {
+        "date": "2025-05-22",
+        "location": "Abidjan",
+        "temp_anomaly": -4.149999999999999,
+        "rainfall_anomaly": 7.4,
+        "temperature": 25.85,
+        "rainfall": 12.4
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -4.3\u00b0C",
+    "verified_return": -0.050009729519361744,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-05-29",
+    "price_change": -0.05439069960556363,
+    "price": 9110.0,
+    "previous_price": 9634.0,
+    "volume": 11098,
+    "news_triggers": [
+      {
+        "date": "2025-05-28",
+        "title": "Maintaining fiscal discipline remains top priority \u2013 Mahama",
+        "description": null,
+        "source": "thebftonline.com",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2025-05-28",
+        "title": "Exports to Germany increase by 50 % first quarter",
+        "description": null,
+        "source": "graphic.com.gh",
+        "sentiment": 0.25
+      },
+      {
+        "date": "2025-05-28",
+        "title": "Ghana economic rebound real , but reforms must continue \u2013 Bank of Ghana",
+        "description": null,
+        "source": "myjoyonline.com",
+        "sentiment": 0.2
+      },
+      {
+        "date": "2025-05-28",
+        "title": "How export - ready SMEs can drive Africa trade growth under AfCFTA",
+        "description": null,
+        "source": "ghanaweb.com",
+        "sentiment": 0.2
+      },
+      {
+        "date": "2025-05-28",
+        "title": "Surge in cedi currency eases Ghana foreign debt burden",
+        "description": null,
+        "source": "marketscreener.com",
+        "sentiment": -0.125
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2025-05-29",
+        "location": "Abidjan",
+        "temp_anomaly": -3.0500000000000007,
+        "rainfall_anomaly": -0.40000000000000036,
+        "temperature": 26.95,
+        "rainfall": 4.6
+      },
+      {
+        "date": "2025-05-29",
+        "location": "Lagos",
+        "temp_anomaly": -3.6000000000000014,
+        "rainfall_anomaly": 12.899999999999999,
+        "temperature": 26.4,
+        "rainfall": 17.9
+      },
+      {
+        "date": "2025-05-29",
+        "location": "Douala",
+        "temp_anomaly": -3.75,
+        "rainfall_anomaly": 32.7,
+        "temperature": 26.25,
+        "rainfall": 37.7
+      },
+      {
+        "date": "2025-05-29",
+        "location": "San Pedro",
+        "temp_anomaly": -4.100000000000001,
+        "rainfall_anomaly": 2.8,
+        "temperature": 25.9,
+        "rainfall": 7.8
+      },
+      {
+        "date": "2025-05-28",
+        "location": "San Pedro",
+        "temp_anomaly": -3.450000000000003,
+        "rainfall_anomaly": -1.7999999999999998,
+        "temperature": 26.549999999999997,
+        "rainfall": 3.2
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.1\u00b0C",
+    "verified_return": -0.05439069960556363,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-05-30",
+    "price_change": 0.0747530186608123,
+    "price": 9791.0,
+    "previous_price": 9110.0,
+    "volume": 8704,
+    "news_triggers": [
+      {
+        "date": "2025-05-28",
+        "title": "Maintaining fiscal discipline remains top priority \u2013 Mahama",
+        "description": null,
+        "source": "thebftonline.com",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2025-05-28",
+        "title": "Exports to Germany increase by 50 % first quarter",
+        "description": null,
+        "source": "graphic.com.gh",
+        "sentiment": 0.25
+      },
+      {
+        "date": "2025-05-28",
+        "title": "Ghana economic rebound real , but reforms must continue \u2013 Bank of Ghana",
+        "description": null,
+        "source": "myjoyonline.com",
+        "sentiment": 0.2
+      },
+      {
+        "date": "2025-05-28",
+        "title": "How export - ready SMEs can drive Africa trade growth under AfCFTA",
+        "description": null,
+        "source": "ghanaweb.com",
+        "sentiment": 0.2
+      },
+      {
+        "date": "2025-05-28",
+        "title": "Surge in cedi currency eases Ghana foreign debt burden",
+        "description": null,
+        "source": "marketscreener.com",
+        "sentiment": -0.125
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2025-05-30",
+        "location": "Abidjan",
+        "temp_anomaly": -3.450000000000003,
+        "rainfall_anomaly": 0.0,
+        "temperature": 26.549999999999997,
+        "rainfall": 5.0
+      },
+      {
+        "date": "2025-05-30",
+        "location": "Kumasi",
+        "temp_anomaly": -3.299999999999997,
+        "rainfall_anomaly": 0.2999999999999998,
+        "temperature": 26.700000000000003,
+        "rainfall": 5.3
+      },
+      {
+        "date": "2025-05-30",
+        "location": "San Pedro",
+        "temp_anomaly": -3.6999999999999993,
+        "rainfall_anomaly": 3.1999999999999993,
+        "temperature": 26.3,
+        "rainfall": 8.2
+      },
+      {
+        "date": "2025-05-29",
+        "location": "Abidjan",
+        "temp_anomaly": -3.0500000000000007,
+        "rainfall_anomaly": -0.40000000000000036,
+        "temperature": 26.95,
+        "rainfall": 4.6
+      },
+      {
+        "date": "2025-05-29",
+        "location": "Lagos",
+        "temp_anomaly": -3.6000000000000014,
+        "rainfall_anomaly": 12.899999999999999,
+        "temperature": 26.4,
+        "rainfall": 17.9
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -3.5\u00b0C",
+    "verified_return": 0.0747530186608123,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-06-10",
+    "price_change": -0.05622174169451543,
+    "price": 9602.0,
+    "previous_price": 10174.0,
+    "volume": 10584,
+    "news_triggers": [
+      {
+        "date": "2025-06-09",
+        "title": "Sustaining the cedi gains ; how gold and cocoa remain Ghana best bet",
+        "description": null,
+        "source": "ghanamma.com",
+        "sentiment": 1.0
+      },
+      {
+        "date": "2025-06-09",
+        "title": "Ivory Coast farmers hope for more rain , sunshine to boost cocoa crop growth",
+        "description": null,
+        "source": "marketscreener.com",
+        "sentiment": 0.5
+      },
+      {
+        "date": "2025-06-09",
+        "title": "  Our indigenous cocoa buyers may go extinct  - Cocobod CEO warns of LBC collapse",
+        "description": null,
+        "source": "myjoyonline.com",
+        "sentiment": -0.4
+      },
+      {
+        "date": "2025-06-10",
+        "title": "Can we tell the difference between Black Thunder and Black Thunder Excellent chocolate bars ? ",
+        "description": null,
+        "source": "japantoday.com",
+        "sentiment": 0.22222222222222224
+      },
+      {
+        "date": "2025-06-07",
+        "title": "Youve been pronouncing Tony chocolate wrong this whole time",
+        "description": null,
+        "source": "walesonline.co.uk",
+        "sentiment": -0.15
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2025-06-10",
+        "location": "Abidjan",
+        "temp_anomaly": -4.700000000000003,
+        "rainfall_anomaly": 7.300000000000001,
+        "temperature": 25.299999999999997,
+        "rainfall": 12.3
+      },
+      {
+        "date": "2025-06-10",
+        "location": "San Pedro",
+        "temp_anomaly": -4.449999999999999,
+        "rainfall_anomaly": 15.600000000000001,
+        "temperature": 25.55,
+        "rainfall": 20.6
+      },
+      {
+        "date": "2025-06-09",
+        "location": "Lagos",
+        "temp_anomaly": -2.5,
+        "rainfall_anomaly": 12.8,
+        "temperature": 27.5,
+        "rainfall": 17.8
+      },
+      {
+        "date": "2025-06-09",
+        "location": "San Pedro",
+        "temp_anomaly": -4.0,
+        "rainfall_anomaly": 2.9000000000000004,
+        "temperature": 26.0,
+        "rainfall": 7.9
+      },
+      {
+        "date": "2025-06-08",
+        "location": "Abidjan",
+        "temp_anomaly": -3.6499999999999986,
+        "rainfall_anomaly": -1.0,
+        "temperature": 26.35,
+        "rainfall": 4.0
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -4.7\u00b0C",
+    "verified_return": -0.05622174169451543,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-07-17",
+    "price_change": -0.12172554674357125,
+    "price": 7309.0,
+    "previous_price": 8322.0,
+    "volume": 17601,
+    "news_triggers": [
+      {
+        "date": "2025-07-14",
+        "title": "Chocolate y alergias alimentarias : el dilema de un placer que puede enfermar",
+        "description": null,
+        "source": "radioagricultura.cl",
+        "sentiment": 0.0
+      },
+      {
+        "date": "2025-07-14",
+        "title": "Cacao - caf\u00e9 : le Cameroun \u00e9value sa pr\u00e9paration \u00e0 lentr\u00e9e en vigueur du R\u00e8glement europ\u00e9en sur la d\u00e9forestation",
+        "description": null,
+        "source": "investiraucameroun.com",
+        "sentiment": 0.0
+      }
+    ],
+    "weather_triggers": [
+      {
+        "date": "2025-07-17",
+        "location": "Abidjan",
+        "temp_anomaly": -5.25,
+        "rainfall_anomaly": -4.2,
+        "temperature": 24.75,
+        "rainfall": 0.8
+      },
+      {
+        "date": "2025-07-17",
+        "location": "Kumasi",
+        "temp_anomaly": -4.600000000000001,
+        "rainfall_anomaly": -2.7,
+        "temperature": 25.4,
+        "rainfall": 2.3
+      },
+      {
+        "date": "2025-07-17",
+        "location": "Lagos",
+        "temp_anomaly": -4.199999999999999,
+        "rainfall_anomaly": -2.2,
+        "temperature": 25.8,
+        "rainfall": 2.8
+      },
+      {
+        "date": "2025-07-17",
+        "location": "Douala",
+        "temp_anomaly": -5.149999999999999,
+        "rainfall_anomaly": -0.09999999999999964,
+        "temperature": 24.85,
+        "rainfall": 4.9
+      },
+      {
+        "date": "2025-07-17",
+        "location": "San Pedro",
+        "temp_anomaly": -4.899999999999999,
+        "rainfall_anomaly": -3.2,
+        "temperature": 25.1,
+        "rainfall": 1.8
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -5.2\u00b0C",
+    "verified_return": -0.12172554674357125,
+    "has_price_data": true
+  },
+  {
+    "date": "2025-07-18",
+    "price_change": 0.06717745245587632,
+    "price": 7800.0,
+    "previous_price": 7309.0,
+    "volume": 11035,
+    "news_triggers": [],
+    "weather_triggers": [
+      {
+        "date": "2025-07-18",
+        "location": "Abidjan",
+        "temp_anomaly": -5.149999999999999,
+        "rainfall_anomaly": -2.4,
+        "temperature": 24.85,
+        "rainfall": 2.6
+      },
+      {
+        "date": "2025-07-18",
+        "location": "Kumasi",
+        "temp_anomaly": -4.75,
+        "rainfall_anomaly": -4.2,
+        "temperature": 25.25,
+        "rainfall": 0.8
+      },
+      {
+        "date": "2025-07-18",
+        "location": "Lagos",
+        "temp_anomaly": -3.950000000000003,
+        "rainfall_anomaly": -4.8,
+        "temperature": 26.049999999999997,
+        "rainfall": 0.2
+      },
+      {
+        "date": "2025-07-18",
+        "location": "Douala",
+        "temp_anomaly": -4.300000000000001,
+        "rainfall_anomaly": -3.3,
+        "temperature": 25.7,
+        "rainfall": 1.7
+      },
+      {
+        "date": "2025-07-18",
+        "location": "San Pedro",
+        "temp_anomaly": -5.199999999999999,
+        "rainfall_anomaly": -2.1,
+        "temperature": 24.8,
+        "rainfall": 2.9
+      }
+    ],
+    "trade_triggers": [],
+    "primary_trigger": "weather",
+    "trigger_description": "Temperature anomaly: -5.1\u00b0C",
+    "verified_return": 0.06717745245587632,
+    "has_price_data": true
+  }
+]
