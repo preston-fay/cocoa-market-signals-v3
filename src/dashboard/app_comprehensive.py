@@ -101,6 +101,8 @@ async def get_all_prices():
     return {"prices": prices}
 
 if __name__ == "__main__":
+    import os
+    
     print("\n" + "="*60)
     print("🚀 LAUNCHING COMPREHENSIVE DASHBOARD")
     print("="*60)
@@ -109,7 +111,10 @@ if __name__ == "__main__":
     print("  ✓ Methodology & Data Sources")
     print("  ✓ Model Performance Analysis")
     print("  ✓ Real-time predictions")
-    print(f"\nDashboard URL: http://localhost:8002")
+    
+    # Use PORT from environment or default to 8002
+    port = int(os.environ.get("PORT", 8002))
+    print(f"\nDashboard URL: http://localhost:{port}")
     print("="*60 + "\n")
     
-    uvicorn.run(app, host="0.0.0.0", port=8002)
+    uvicorn.run(app, host="0.0.0.0", port=port)
