@@ -37,7 +37,7 @@ security = HTTPBasic()
 
 # Get credentials from environment or use defaults
 USERNAME = os.environ.get("DASHBOARD_USERNAME", "cocoa")
-PASSWORD = os.environ.get("DASHBOARD_PASSWORD", "signals2024")
+PASSWORD = os.environ.get("DASHBOARD_PASSWORD", "signals2025")
 
 def verify_credentials(credentials: HTTPBasicCredentials = Depends(security)):
     """Verify username and password"""

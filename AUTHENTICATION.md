@@ -5,7 +5,7 @@ The Cocoa Market Signals dashboard is protected with basic authentication.
 ## Default Credentials
 
 - **Username**: `cocoa`
-- **Password**: `signals2024`
+- **Password**: `signals2025`
 
 ## Setting Custom Credentials
 
