@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chart Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+</head>
+<body style="background: black; color: white;">
+    <div style="width: 1200px; height: 500px; margin: 50px auto;">
+        <canvas id="testChart"></canvas>
+    </div>
+    
+    <script>
+        // Test with actual data
+        fetch('http://localhost:8001/api/predictions')
+            .then(response => response.json())
+            .then(data => {
+                const predictions = data.predictions;
+                console.log('Loaded', predictions.length, 'predictions');
+                
+                const ctx = document.getElementById('testChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: predictions.map(p => p.date),
+                        datasets: [{
+                            label: 'Actual',
+                            data: predictions.map(p => p.actual_return * 100),
+                            borderColor: '#FFFFFF',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            pointRadius: 0
+                        }, {
+                            label: 'Predicted',
+                            data: predictions.map(p => p.xgb_prediction * 100),
+                            borderColor: '#6f42c1',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: {
+                                    parser: 'YYYY-MM-DD',
+                                    displayFormats: {
+                                        month: 'MMM YYYY'
+                                    }
+                                },
+                                grid: { display: false }
+                            },
+                            y: {
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

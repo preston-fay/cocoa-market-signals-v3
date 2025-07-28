@@ -1,0 +1,62 @@
+[
+  {
+    "date": "2024-12-30T00:00:00",
+    "title": "Hershey raising candy prices by double digits on high cocoa costs",
+    "sentiment": 0.08,
+    "source": "twincities.com"
+  },
+  {
+    "date": "2024-12-28T00:00:00",
+    "title": "World Chocolate Day : The EU is celebrating with sky - high prices",
+    "sentiment": 0.16,
+    "source": "euronews.com"
+  },
+  {
+    "date": "2024-12-27T00:00:00",
+    "title": "Sustaining the cedi gains ; how gold and cocoa remain Ghana best bet",
+    "sentiment": 1.0,
+    "source": "ghanamma.com"
+  },
+  {
+    "date": "2024-12-26T00:00:00",
+    "title": "Hershey and other chocolate makers hike prices as cocoa remains near record highs",
+    "sentiment": -0.012499999999999997,
+    "source": "coastreporter.net"
+  },
+  {
+    "date": "2024-12-23T00:00:00",
+    "title": "Hershey raising candy prices by double digits on high cocoa costs",
+    "sentiment": 0.08,
+    "source": "triblive.com"
+  },
+  {
+    "date": "2024-12-21T00:00:00",
+    "title": "Non - oil exports in Q1 2025 stood at $1 . 791bn - NEPC - Blueprint Newspapers Limited",
+    "sentiment": -0.07142857142857142,
+    "source": "blueprint.ng"
+  },
+  {
+    "date": "2024-12-21T00:00:00",
+    "title": "Candy prices : Hershey and other chocolate makers hike prices",
+    "sentiment": -0.125,
+    "source": "bnnbloomberg.ca"
+  },
+  {
+    "date": "2024-12-19T00:00:00",
+    "title": "Hershey raising candy prices by double digits on high cocoa costs",
+    "sentiment": 0.08,
+    "source": "triblive.com"
+  },
+  {
+    "date": "2024-12-16T00:00:00",
+    "title": "Hershey raising candy prices by double digits on high cocoa costs",
+    "sentiment": 0.08,
+    "source": "redbluffdailynews.com"
+  },
+  {
+    "date": "2024-12-15T00:00:00",
+    "title": "Trump sweeping tariff pause ENDS next week ... here the everyday goods set to skyrocket in price",
+    "sentiment": -0.1,
+    "source": "dailymail.co.uk"
+  }
+]

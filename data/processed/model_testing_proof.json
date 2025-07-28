@@ -1,0 +1,102 @@
+{
+  "start_time": "2025-07-28T06:55:03.847685",
+  "models_tested": {
+    "Random Forest": {
+      "rmse": 0.059853815389443885,
+      "mae": 0.04413529458833069,
+      "r2": 0.5475987603327419,
+      "direction_accuracy": 0.7872340425531915,
+      "predictions_made": 94,
+      "first_5_predictions": [
+        0.020730780102263556,
+        -0.005646018974030446,
+        0.025335523867439994,
+        0.038421474200998375,
+        0.013663386875755877
+      ]
+    },
+    "XGBoost": {
+      "rmse": 0.06325165805278683,
+      "mae": 0.04516716478726373,
+      "r2": 0.4947760435047688,
+      "direction_accuracy": 0.7978723404255319,
+      "predictions_made": 94,
+      "first_5_predictions": [
+        0.026915287598967552,
+        0.008100047707557678,
+        0.029408754780888557,
+        0.027544772252440453,
+        0.008866989053785801
+      ]
+    },
+    "LSTM": {
+      "rmse": 0.06032122572404323,
+      "mae": 0.047510795148855985,
+      "r2": 0.5405053889798035,
+      "direction_accuracy": 0.776595744680851,
+      "predictions_made": 94,
+      "first_5_predictions": [
+        -0.02115417644381523,
+        0.02826659567654133,
+        0.01188686490058899,
+        0.023315703496336937,
+        0.0182819664478302
+      ]
+    },
+    "VAR": {
+      "rmse": 0.07407276046031652,
+      "mae": 0.056706203697441636,
+      "r2": -0.05581156674922294,
+      "direction_accuracy": 0.5,
+      "predictions_made": 96,
+      "first_5_predictions": [
+        0.0,
+        0.013488990595405414,
+        0.005413698757252108,
+        0.0062413329413542155,
+        0.0012327324015493555
+      ]
+    },
+    "Prophet": {
+      "rmse": 0.09739573240985189,
+      "mae": 0.07449807585526508,
+      "r2": -0.19789833797919187,
+      "direction_accuracy": 0.5,
+      "predictions_made": 94,
+      "first_5_predictions": [
+        -0.06074130242513881,
+        -0.018367261203330248,
+        -0.007288982849444067,
+        0.019519393611460146,
+        0.01617989409389583
+      ]
+    },
+    "TSMamba": {
+      "rmse": 0.08063899101745906,
+      "mae": 0.06453145346205467,
+      "r2": 0.17883529024776923,
+      "direction_accuracy": 0.648936170212766,
+      "predictions_made": 94,
+      "first_5_predictions": [
+        0.02412953603892943,
+        0.05885378087311985,
+        0.06637246190899922,
+        0.012185499213724867,
+        0.03201027010175274
+      ]
+    }
+  },
+  "errors": {
+    "ARIMA": "Can only compare identically-labeled Series objects",
+    "TimeGPT": "Could not infer the frequency of the time column. This could be due to inconsistent intervals. Please check your data for missing, duplicated or irregular timestamps"
+  },
+  "data_info": {
+    "total_samples": 501,
+    "clean_samples": 468,
+    "train_size": 374,
+    "test_size": 94
+  },
+  "end_time": "2025-07-28T06:55:09.814976",
+  "total_models_attempted": 8,
+  "successful_models": 6
+}

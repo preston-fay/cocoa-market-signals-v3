@@ -1,0 +1,1182 @@
+{
+  "generated_at": "2025-07-28T07:16:50.861653",
+  "data_summary": {
+    "total_predictions": 100,
+    "date_range": {
+      "start": "2023-07-31",
+      "end": "2025-07-17"
+    },
+    "data_sources": {
+      "price_records": 502,
+      "weather_records": 6520,
+      "news_articles": 1769,
+      "trade_records": 865
+    }
+  },
+  "model_performance": {
+    "best_model": "XGBoost",
+    "metrics": {
+      "direction_accuracy": 0.798,
+      "rmse": 0.0633,
+      "r2": 0.495,
+      "samples_tested": 94
+    },
+    "all_models": {
+      "XGBoost": {
+        "accuracy": 0.798,
+        "r2": 0.495
+      },
+      "Random Forest": {
+        "accuracy": 0.787,
+        "r2": 0.548
+      },
+      "LSTM": {
+        "accuracy": 0.777,
+        "r2": 0.541
+      },
+      "TSMamba": {
+        "accuracy": 0.649,
+        "r2": 0.179
+      },
+      "VAR": {
+        "accuracy": 0.5,
+        "r2": -0.056
+      },
+      "Prophet": {
+        "accuracy": 0.5,
+        "r2": -0.198
+      }
+    }
+  },
+  "feature_importance": {
+    "Price/Technical": 0.52,
+    "Weather": 0.29,
+    "Trade/Export": 0.14,
+    "Sentiment/News": 0.05
+  },
+  "predictions": [
+    {
+      "date": "2025-05-23T00:00:00",
+      "actual_return": -0.0297009422367882,
+      "xgb_prediction": -0.042463917,
+      "ensemble_prediction": -0.0435027623621037,
+      "direction_correct": true,
+      "price": 9764.0
+    },
+    {
+      "date": "2023-11-10T00:00:00",
+      "actual_return": 0.0230518667000751,
+      "xgb_prediction": 0.009364169,
+      "ensemble_prediction": 0.0087821127906257,
+      "direction_correct": true,
+      "price": 3991.0
+    },
+    {
+      "date": "2024-07-01T00:00:00",
+      "actual_return": 0.0912676822633296,
+      "xgb_prediction": 0.035834517,
+      "ensemble_prediction": 0.0223553955759119,
+      "direction_correct": true,
+      "price": 7352.0
+    },
+    {
+      "date": "2024-04-10T00:00:00",
+      "actual_return": -0.0068197099221977,
+      "xgb_prediction": 0.042966858,
+      "ensemble_prediction": 0.0459696111695488,
+      "direction_correct": false,
+      "price": 10411.0
+    },
+    {
+      "date": "2024-07-10T00:00:00",
+      "actual_return": -0.0529461998292057,
+      "xgb_prediction": -0.020158399,
+      "ensemble_prediction": -0.0203107603668156,
+      "direction_correct": true,
+      "price": 8197.0
+    },
+    {
+      "date": "2025-04-04T00:00:00",
+      "actual_return": -0.0001174812030074,
+      "xgb_prediction": -0.010773789,
+      "ensemble_prediction": -0.0027202544905592,
+      "direction_correct": true,
+      "price": 8512.0
+    },
+    {
+      "date": "2024-03-12T00:00:00",
+      "actual_return": -0.0026093439363816,
+      "xgb_prediction": 0.07157682,
+      "ensemble_prediction": 0.0751746297642109,
+      "direction_correct": false,
+      "price": 8048.0
+    },
+    {
+      "date": "2023-10-17T00:00:00",
+      "actual_return": 0.0258596973865199,
+      "xgb_prediction": 0.021142136,
+      "ensemble_prediction": 0.0211765968978589,
+      "direction_correct": true,
+      "price": 3635.0
+    },
+    {
+      "date": "2024-11-06T00:00:00",
+      "actual_return": 0.1789428076256498,
+      "xgb_prediction": 0.04024483,
+      "ensemble_prediction": 0.0346948471913766,
+      "direction_correct": true,
+      "price": 6924.0
+    },
+    {
+      "date": "2023-08-11T00:00:00",
+      "actual_return": 0.0209281164695176,
+      "xgb_prediction": -0.0114988,
+      "ensemble_prediction": -0.0099971269652424,
+      "direction_correct": false,
+      "price": 3297.0
+    },
+    {
+      "date": "2023-12-27T00:00:00",
+      "actual_return": -0.0046728971962616,
+      "xgb_prediction": 0.011677997,
+      "ensemble_prediction": 0.0211528478994815,
+      "direction_correct": false,
+      "price": 4280.0
+    },
+    {
+      "date": "2025-01-17T00:00:00",
+      "actual_return": 0.0178107938780989,
+      "xgb_prediction": 0.024680227,
+      "ensemble_prediction": 0.0306095282436887,
+      "direction_correct": true,
+      "price": 11173.0
+    },
+    {
+      "date": "2025-03-10T00:00:00",
+      "actual_return": -0.0545959656963401,
+      "xgb_prediction": -0.058075238,
+      "ensemble_prediction": -0.0491790879280578,
+      "direction_correct": true,
+      "price": 8279.0
+    },
+    {
+      "date": "2024-05-03T00:00:00",
+      "actual_return": 0.1609641387419165,
+      "xgb_prediction": -0.013254255,
+      "ensemble_prediction": -0.024530666302937,
+      "direction_correct": false,
+      "price": 8505.0
+    },
+    {
+      "date": "2023-12-21T00:00:00",
+      "actual_return": -0.021455223880597,
+      "xgb_prediction": 0.005891341,
+      "ensemble_prediction": 0.0114852377885496,
+      "direction_correct": false,
+      "price": 4288.0
+    },
+    {
+      "date": "2024-08-22T00:00:00",
+      "actual_return": -0.0091856744762101,
+      "xgb_prediction": 0.010462509,
+      "ensemble_prediction": 0.0045972229698778,
+      "direction_correct": false,
+      "price": 9689.0
+    },
+    {
+      "date": "2025-05-15T00:00:00",
+      "actual_return": 0.0020473822755191,
+      "xgb_prediction": -0.041360743,
+      "ensemble_prediction": -0.0512837772468106,
+      "direction_correct": false,
+      "price": 10257.0
+    },
+    {
+      "date": "2023-09-12T00:00:00",
+      "actual_return": -0.0344644750795334,
+      "xgb_prediction": 0.0013930313,
+      "ensemble_prediction": 0.0051800155495137,
+      "direction_correct": false,
+      "price": 3772.0
+    },
+    {
+      "date": "2024-02-14T00:00:00",
+      "actual_return": 0.0369810052109598,
+      "xgb_prediction": 0.07825282,
+      "ensemble_prediction": 0.0765469550623312,
+      "direction_correct": true,
+      "price": 5949.0
+    },
+    {
+      "date": "2025-07-07T00:00:00",
+      "actual_return": 0.0079963959905395,
+      "xgb_prediction": 0.004624607,
+      "ensemble_prediction": 0.0046664689175417,
+      "direction_correct": true,
+      "price": 8879.0
+    },
+    {
+      "date": "2024-08-19T00:00:00",
+      "actual_return": 0.0770740215850867,
+      "xgb_prediction": 0.040995695,
+      "ensemble_prediction": 0.0324746633367136,
+      "direction_correct": true,
+      "price": 9173.0
+    },
+    {
+      "date": "2025-01-21T00:00:00",
+      "actual_return": -0.0160048447097499,
+      "xgb_prediction": -0.024650458,
+      "ensemble_prediction": -0.0129265513945809,
+      "direction_correct": true,
+      "price": 11559.0
+    },
+    {
+      "date": "2025-07-11T00:00:00",
+      "actual_return": -0.1176470588235294,
+      "xgb_prediction": -0.04025831,
+      "ensemble_prediction": -0.0283081540318514,
+      "direction_correct": true,
+      "price": 8840.0
+    },
+    {
+      "date": "2023-11-09T00:00:00",
+      "actual_return": 0.0139275766016713,
+      "xgb_prediction": 0.0034264573,
+      "ensemble_prediction": 0.0069135923328621,
+      "direction_correct": true,
+      "price": 3949.0
+    },
+    {
+      "date": "2023-10-27T00:00:00",
+      "actual_return": 0.0119418483904465,
+      "xgb_prediction": 0.03494156,
+      "ensemble_prediction": 0.035661513111862,
+      "direction_correct": true,
+      "price": 3852.0
+    },
+    {
+      "date": "2023-12-11T00:00:00",
+      "actual_return": -0.0183865777982072,
+      "xgb_prediction": -0.010237181,
+      "ensemble_prediction": -0.0074932861000322,
+      "direction_correct": true,
+      "price": 4351.0
+    },
+    {
+      "date": "2025-01-15T00:00:00",
+      "actual_return": 0.0675538305147398,
+      "xgb_prediction": 0.018850839,
+      "ensemble_prediction": 0.0226770427453215,
+      "direction_correct": true,
+      "price": 10821.0
+    },
+    {
+      "date": "2025-06-26T00:00:00",
+      "actual_return": -0.0620660185877577,
+      "xgb_prediction": -0.026560055,
+      "ensemble_prediction": -0.0161992647663118,
+      "direction_correct": true,
+      "price": 9361.0
+    },
+    {
+      "date": "2023-11-16T00:00:00",
+      "actual_return": 0.0536963036963036,
+      "xgb_prediction": 0.042235024,
+      "ensemble_prediction": 0.0302860170732415,
+      "direction_correct": true,
+      "price": 4004.0
+    },
+    {
+      "date": "2023-11-03T00:00:00",
+      "actual_return": 0.0238583889173935,
+      "xgb_prediction": 0.030015746,
+      "ensemble_prediction": 0.0161840765251878,
+      "direction_correct": true,
+      "price": 3898.0
+    },
+    {
+      "date": "2025-04-29T00:00:00",
+      "actual_return": 0.0031707850426416,
+      "xgb_prediction": 0.014071404,
+      "ensemble_prediction": 0.0135840095643809,
+      "direction_correct": true,
+      "price": 9146.0
+    },
+    {
+      "date": "2023-11-15T00:00:00",
+      "actual_return": 0.0594059405940594,
+      "xgb_prediction": 0.042497218,
+      "ensemble_prediction": 0.0373455205136544,
+      "direction_correct": true,
+      "price": 3939.0
+    },
+    {
+      "date": "2024-02-20T00:00:00",
+      "actual_return": 0.1260210035005835,
+      "xgb_prediction": 0.06367581,
+      "ensemble_prediction": 0.0606598006470922,
+      "direction_correct": true,
+      "price": 5999.0
+    },
+    {
+      "date": "2023-08-02T00:00:00",
+      "actual_return": -0.0682201010668164,
+      "xgb_prediction": -0.058325686,
+      "ensemble_prediction": -0.0456600293033708,
+      "direction_correct": true,
+      "price": 3562.0
+    },
+    {
+      "date": "2024-11-20T00:00:00",
+      "actual_return": 0.0604316546762588,
+      "xgb_prediction": 0.0794646,
+      "ensemble_prediction": 0.065388467692542,
+      "direction_correct": true,
+      "price": 8340.0
+    },
+    {
+      "date": "2023-11-20T00:00:00",
+      "actual_return": 0.0832920178482894,
+      "xgb_prediction": 0.049232543,
+      "ensemble_prediction": 0.0439122209081769,
+      "direction_correct": true,
+      "price": 4034.0
+    },
+    {
+      "date": "2024-05-29T00:00:00",
+      "actual_return": 0.0106348694811473,
+      "xgb_prediction": 0.067858756,
+      "ensemble_prediction": 0.0935527127969567,
+      "direction_correct": true,
+      "price": 9309.0
+    },
+    {
+      "date": "2024-04-19T00:00:00",
+      "actual_return": -0.0967334568109109,
+      "xgb_prediction": 0.039023742,
+      "ensemble_prediction": 0.0155241189263584,
+      "direction_correct": false,
+      "price": 11878.0
+    },
+    {
+      "date": "2024-10-28T00:00:00",
+      "actual_return": 0.0594188231892438,
+      "xgb_prediction": 0.07880745,
+      "ensemble_prediction": 0.0643212316039125,
+      "direction_correct": true,
+      "price": 6917.0
+    },
+    {
+      "date": "2024-09-18T00:00:00",
+      "actual_return": 0.0180445354491938,
+      "xgb_prediction": 0.0122965565,
+      "ensemble_prediction": 0.005058046227498,
+      "direction_correct": true,
+      "price": 7814.0
+    },
+    {
+      "date": "2024-05-08T00:00:00",
+      "actual_return": -0.0572943745450764,
+      "xgb_prediction": -0.15303501,
+      "ensemble_prediction": -0.1371865125532225,
+      "direction_correct": true,
+      "price": 9617.0
+    },
+    {
+      "date": "2025-04-24T00:00:00",
+      "actual_return": -0.0445107017357043,
+      "xgb_prediction": 0.050086424,
+      "ensemble_prediction": 0.0400581624626138,
+      "direction_correct": false,
+      "price": 9391.0
+    },
+    {
+      "date": "2023-09-15T00:00:00",
+      "actual_return": -0.0465797178599947,
+      "xgb_prediction": -0.055092443,
+      "ensemble_prediction": -0.0374069552452555,
+      "direction_correct": true,
+      "price": 3757.0
+    },
+    {
+      "date": "2025-07-17T00:00:00",
+      "actual_return": 0.1115063620194281,
+      "xgb_prediction": 0.0508677,
+      "ensemble_prediction": 0.0347080968154733,
+      "direction_correct": true,
+      "price": 7309.0
+    },
+    {
+      "date": "2023-07-31T00:00:00",
+      "actual_return": -0.020293122886133,
+      "xgb_prediction": -0.05449759,
+      "ensemble_prediction": -0.0413307859741053,
+      "direction_correct": true,
+      "price": 3548.0
+    },
+    {
+      "date": "2023-08-15T00:00:00",
+      "actual_return": -0.0032934131736527,
+      "xgb_prediction": 0.03397242,
+      "ensemble_prediction": 0.0293482637376144,
+      "direction_correct": false,
+      "price": 3340.0
+    },
+    {
+      "date": "2024-11-21T00:00:00",
+      "actual_return": 0.0912534027695586,
+      "xgb_prediction": 0.06046153,
+      "ensemble_prediction": 0.0492183106348591,
+      "direction_correct": true,
+      "price": 8449.0
+    },
+    {
+      "date": "2024-04-08T00:00:00",
+      "actual_return": 0.1117736230419403,
+      "xgb_prediction": 0.0708445,
+      "ensemble_prediction": 0.0629693062770527,
+      "direction_correct": true,
+      "price": 9895.0
+    },
+    {
+      "date": "2023-11-28T00:00:00",
+      "actual_return": -0.0375286041189931,
+      "xgb_prediction": 0.006775287,
+      "ensemble_prediction": 0.0011042246586536,
+      "direction_correct": false,
+      "price": 4370.0
+    },
+    {
+      "date": "2024-12-23T00:00:00",
+      "actual_return": -0.0060446109313808,
+      "xgb_prediction": 0.0006168446,
+      "ensemble_prediction": 0.0111988398124317,
+      "direction_correct": false,
+      "price": 11746.0
+    },
+    {
+      "date": "2025-04-17T00:00:00",
+      "actual_return": 0.1538553496712491,
+      "xgb_prediction": 0.00073394773,
+      "ensemble_prediction": 0.0078669760242073,
+      "direction_correct": true,
+      "price": 8365.0
+    },
+    {
+      "date": "2025-05-08T00:00:00",
+      "actual_return": 0.1067112645662493,
+      "xgb_prediction": 0.0011850508,
+      "ensemble_prediction": 0.0016264512328499,
+      "direction_correct": true,
+      "price": 9268.0
+    },
+    {
+      "date": "2025-02-13T00:00:00",
+      "actual_return": -0.1393892688565648,
+      "xgb_prediction": -0.07584208,
+      "ensemble_prediction": -0.0688857584040392,
+      "direction_correct": true,
+      "price": 10381.0
+    },
+    {
+      "date": "2024-01-17T00:00:00",
+      "actual_return": 0.0757643884892085,
+      "xgb_prediction": 0.032568198,
+      "ensemble_prediction": 0.0303869657195071,
+      "direction_correct": true,
+      "price": 4448.0
+    },
+    {
+      "date": "2023-08-24T00:00:00",
+      "actual_return": 0.071067499256616,
+      "xgb_prediction": 0.06402193,
+      "ensemble_prediction": 0.0473345184778046,
+      "direction_correct": true,
+      "price": 3363.0
+    },
+    {
+      "date": "2025-04-02T00:00:00",
+      "actual_return": -0.0580954504906333,
+      "xgb_prediction": -0.03328382,
+      "ensemble_prediction": -0.0301791640520272,
+      "direction_correct": true,
+      "price": 8968.0
+    },
+    {
+      "date": "2025-03-12T00:00:00",
+      "actual_return": -0.0101170160897123,
+      "xgb_prediction": -0.052277282,
+      "ensemble_prediction": -0.0427923680888473,
+      "direction_correct": true,
+      "price": 8204.0
+    },
+    {
+      "date": "2025-07-14T00:00:00",
+      "actual_return": -0.0887150837988827,
+      "xgb_prediction": -0.039375007,
+      "ensemble_prediction": -0.0285566036747884,
+      "direction_correct": true,
+      "price": 8950.0
+    },
+    {
+      "date": "2024-10-07T00:00:00",
+      "actual_return": 0.1023451071221772,
+      "xgb_prediction": 0.028734526,
+      "ensemble_prediction": 0.022796734820118,
+      "direction_correct": true,
+      "price": 6908.0
+    },
+    {
+      "date": "2024-06-11T00:00:00",
+      "actual_return": 0.0028254288597375,
+      "xgb_prediction": -0.08179971,
+      "ensemble_prediction": -0.0803212213824016,
+      "direction_correct": false,
+      "price": 9910.0
+    },
+    {
+      "date": "2025-04-14T00:00:00",
+      "actual_return": 0.1288953558869892,
+      "xgb_prediction": 0.02692122,
+      "ensemble_prediction": 0.0224294851360251,
+      "direction_correct": true,
+      "price": 8247.0
+    },
+    {
+      "date": "2023-09-25T00:00:00",
+      "actual_return": 0.0017162471395881,
+      "xgb_prediction": -0.002689523,
+      "ensemble_prediction": -0.0037368869659385,
+      "direction_correct": false,
+      "price": 3496.0
+    },
+    {
+      "date": "2025-05-09T00:00:00",
+      "actual_return": 0.160967295195483,
+      "xgb_prediction": 0.0039525917,
+      "ensemble_prediction": -0.0083486351306225,
+      "direction_correct": true,
+      "price": 9387.0
+    },
+    {
+      "date": "2024-05-20T00:00:00",
+      "actual_return": 0.2167405764966741,
+      "xgb_prediction": 0.1170669,
+      "ensemble_prediction": 0.13075934895757,
+      "direction_correct": true,
+      "price": 7216.0
+    },
+    {
+      "date": "2024-09-05T00:00:00",
+      "actual_return": 0.0449732676381171,
+      "xgb_prediction": 0.0058752145,
+      "ensemble_prediction": 0.005439754638482,
+      "direction_correct": true,
+      "price": 9539.0
+    },
+    {
+      "date": "2024-03-08T00:00:00",
+      "actual_return": 0.1459196798627984,
+      "xgb_prediction": 0.08136255,
+      "ensemble_prediction": 0.0832318846011045,
+      "direction_correct": true,
+      "price": 6997.0
+    },
+    {
+      "date": "2024-12-17T00:00:00",
+      "actual_return": 0.0073948151296217,
+      "xgb_prediction": -0.007994892,
+      "ensemble_prediction": 0.0005302116484077,
+      "direction_correct": false,
+      "price": 11765.0
+    },
+    {
+      "date": "2023-11-07T00:00:00",
+      "actual_return": 0.0162245686325006,
+      "xgb_prediction": -0.0037705852,
+      "ensemble_prediction": -0.000535847539996,
+      "direction_correct": false,
+      "price": 3883.0
+    },
+    {
+      "date": "2024-09-03T00:00:00",
+      "actual_return": -0.000931387767774,
+      "xgb_prediction": 0.0021874858,
+      "ensemble_prediction": 0.0040500383422175,
+      "direction_correct": false,
+      "price": 9663.0
+    },
+    {
+      "date": "2024-07-25T00:00:00",
+      "actual_return": -0.0311338885329917,
+      "xgb_prediction": 0.038759172,
+      "ensemble_prediction": 0.0284177541450884,
+      "direction_correct": false,
+      "price": 7805.0
+    },
+    {
+      "date": "2025-07-08T00:00:00",
+      "actual_return": -0.0220319634703196,
+      "xgb_prediction": -0.013587835,
+      "ensemble_prediction": -0.0121277291298688,
+      "direction_correct": true,
+      "price": 8760.0
+    },
+    {
+      "date": "2024-02-07T00:00:00",
+      "actual_return": 0.099630314232902,
+      "xgb_prediction": 0.06688629,
+      "ensemble_prediction": 0.0429886197755207,
+      "direction_correct": true,
+      "price": 5410.0
+    },
+    {
+      "date": "2023-12-06T00:00:00",
+      "actual_return": 0.0363121905211034,
+      "xgb_prediction": 0.028969817,
+      "ensemble_prediction": 0.0150546695714906,
+      "direction_correct": true,
+      "price": 4241.0
+    },
+    {
+      "date": "2023-11-06T00:00:00",
+      "actual_return": 0.0350025549310168,
+      "xgb_prediction": -0.020428829,
+      "ensemble_prediction": -0.0137989492888683,
+      "direction_correct": false,
+      "price": 3914.0
+    },
+    {
+      "date": "2025-07-10T00:00:00",
+      "actual_return": -0.1639212994738046,
+      "xgb_prediction": -0.007119205,
+      "ensemble_prediction": -0.0084787100086896,
+      "direction_correct": true,
+      "price": 8742.0
+    },
+    {
+      "date": "2025-03-06T00:00:00",
+      "actual_return": -0.000622200099552,
+      "xgb_prediction": 0.027425667,
+      "ensemble_prediction": 0.0185525545194211,
+      "direction_correct": false,
+      "price": 8036.0
+    },
+    {
+      "date": "2024-07-22T00:00:00",
+      "actual_return": -0.0812098118599666,
+      "xgb_prediction": 0.032793887,
+      "ensemble_prediction": 0.0264787272271281,
+      "direction_correct": false,
+      "price": 8398.0
+    },
+    {
+      "date": "2023-11-17T00:00:00",
+      "actual_return": 0.0433504775900073,
+      "xgb_prediction": 0.01567381,
+      "ensemble_prediction": 0.0112149667240696,
+      "direction_correct": true,
+      "price": 4083.0
+    },
+    {
+      "date": "2023-11-24T00:00:00",
+      "actual_return": 0.0424271154301967,
+      "xgb_prediction": -0.0059711616,
+      "ensemble_prediction": -0.001900058160623,
+      "direction_correct": false,
+      "price": 4219.0
+    },
+    {
+      "date": "2025-05-29T00:00:00",
+      "actual_return": 0.1060373216245884,
+      "xgb_prediction": -0.0028775923,
+      "ensemble_prediction": -0.0038265250464524,
+      "direction_correct": false,
+      "price": 9110.0
+    },
+    {
+      "date": "2025-05-14T00:00:00",
+      "actual_return": 0.0582485931483858,
+      "xgb_prediction": -0.025945656,
+      "ensemble_prediction": -0.0318719467111752,
+      "direction_correct": false,
+      "price": 10129.0
+    },
+    {
+      "date": "2025-06-30T00:00:00",
+      "actual_return": -0.0509833262077811,
+      "xgb_prediction": -0.054269586,
+      "ensemble_prediction": -0.038546514110096,
+      "direction_correct": true,
+      "price": 9356.0
+    },
+    {
+      "date": "2024-02-06T00:00:00",
+      "actual_return": 0.1496168582375479,
+      "xgb_prediction": 0.074589,
+      "ensemble_prediction": 0.0587346117394131,
+      "direction_correct": true,
+      "price": 5220.0
+    },
+    {
+      "date": "2024-10-17T00:00:00",
+      "actual_return": -0.1306138206151074,
+      "xgb_prediction": -0.069945835,
+      "ensemble_prediction": -0.0553304969423244,
+      "direction_correct": true,
+      "price": 7771.0
+    },
+    {
+      "date": "2024-10-09T00:00:00",
+      "actual_return": 0.0563188681811999,
+      "xgb_prediction": -0.0103995325,
+      "ensemble_prediction": -0.0094494634113961,
+      "direction_correct": false,
+      "price": 7351.0
+    },
+    {
+      "date": "2024-01-26T00:00:00",
+      "actual_return": 0.0721318493150684,
+      "xgb_prediction": 0.043388724,
+      "ensemble_prediction": 0.038810876974655,
+      "direction_correct": true,
+      "price": 4672.0
+    },
+    {
+      "date": "2024-12-05T00:00:00",
+      "actual_return": 0.10924543946932,
+      "xgb_prediction": 0.0870429,
+      "ensemble_prediction": 0.0845689514700255,
+      "direction_correct": true,
+      "price": 9648.0
+    },
+    {
+      "date": "2025-04-10T00:00:00",
+      "actual_return": 0.0342482690405538,
+      "xgb_prediction": 0.094174735,
+      "ensemble_prediction": 0.0677517538380214,
+      "direction_correct": true,
+      "price": 8088.0
+    },
+    {
+      "date": "2024-01-30T00:00:00",
+      "actual_return": 0.0863683662851195,
+      "xgb_prediction": 0.084178366,
+      "ensemble_prediction": 0.069839728075504,
+      "direction_correct": true,
+      "price": 4805.0
+    },
+    {
+      "date": "2024-09-24T00:00:00",
+      "actual_return": -0.1052497775517986,
+      "xgb_prediction": -0.055529222,
+      "ensemble_prediction": -0.0389531447981386,
+      "direction_correct": true,
+      "price": 7867.0
+    },
+    {
+      "date": "2025-02-04T00:00:00",
+      "actual_return": -0.0716576560065976,
+      "xgb_prediction": -0.00815343,
+      "ensemble_prediction": 0.0076584570422689,
+      "direction_correct": true,
+      "price": 10913.0
+    },
+    {
+      "date": "2023-11-30T00:00:00",
+      "actual_return": -0.0301675977653631,
+      "xgb_prediction": -0.012778462,
+      "ensemble_prediction": -0.0062132927787893,
+      "direction_correct": true,
+      "price": 4475.0
+    },
+    {
+      "date": "2023-11-14T00:00:00",
+      "actual_return": 0.0712113532691331,
+      "xgb_prediction": 0.0015349991,
+      "ensemble_prediction": 0.0082669876890496,
+      "direction_correct": true,
+      "price": 3946.0
+    },
+    {
+      "date": "2025-04-22T00:00:00",
+      "actual_return": -0.0176154672395273,
+      "xgb_prediction": 0.019938782,
+      "ensemble_prediction": 0.0121069478317929,
+      "direction_correct": false,
+      "price": 9310.0
+    },
+    {
+      "date": "2023-08-21T00:00:00",
+      "actual_return": 0.0259314456035768,
+      "xgb_prediction": 0.029993037,
+      "ensemble_prediction": 0.0261601084065839,
+      "direction_correct": true,
+      "price": 3355.0
+    },
+    {
+      "date": "2024-07-24T00:00:00",
+      "actual_return": -0.0164093837364774,
+      "xgb_prediction": -0.02687792,
+      "ensemble_prediction": -0.0089124967555947,
+      "direction_correct": true,
+      "price": 8227.0
+    },
+    {
+      "date": "2025-02-05T00:00:00",
+      "actual_return": -0.0483165303404984,
+      "xgb_prediction": 0.020792156,
+      "ensemble_prediction": 0.0157152426044162,
+      "direction_correct": false,
+      "price": 10514.0
+    },
+    {
+      "date": "2023-08-25T00:00:00",
+      "actual_return": 0.0419825072886297,
+      "xgb_prediction": 0.034917947,
+      "ensemble_prediction": 0.0256427681125303,
+      "direction_correct": true,
+      "price": 3430.0
+    },
+    {
+      "date": "2024-11-05T00:00:00",
+      "actual_return": 0.0849537994759344,
+      "xgb_prediction": 0.048136957,
+      "ensemble_prediction": 0.0358279594777315,
+      "direction_correct": true,
+      "price": 7251.0
+    },
+    {
+      "date": "2025-07-02T00:00:00",
+      "actual_return": 0.0159478885893979,
+      "xgb_prediction": -0.032881416,
+      "ensemble_prediction": -0.0220588488201167,
+      "direction_correct": false,
+      "price": 8904.0
+    }
+  ],
+  "significant_events": [
+    {
+      "date": "2024-07-01T00:00:00",
+      "return": 0.0912676822633296,
+      "prediction": 0.035834517,
+      "type": "bullish",
+      "magnitude": 0.0912676822633296
+    },
+    {
+      "date": "2024-07-10T00:00:00",
+      "return": -0.0529461998292057,
+      "prediction": -0.020158399,
+      "type": "bearish",
+      "magnitude": 0.0529461998292057
+    },
+    {
+      "date": "2024-11-06T00:00:00",
+      "return": 0.1789428076256498,
+      "prediction": 0.04024483,
+      "type": "bullish",
+      "magnitude": 0.1789428076256498
+    },
+    {
+      "date": "2025-03-10T00:00:00",
+      "return": -0.0545959656963401,
+      "prediction": -0.058075238,
+      "type": "bearish",
+      "magnitude": 0.0545959656963401
+    },
+    {
+      "date": "2024-08-19T00:00:00",
+      "return": 0.0770740215850867,
+      "prediction": 0.040995695,
+      "type": "bullish",
+      "magnitude": 0.0770740215850867
+    },
+    {
+      "date": "2025-07-11T00:00:00",
+      "return": -0.1176470588235294,
+      "prediction": -0.04025831,
+      "type": "bearish",
+      "magnitude": 0.1176470588235294,
+      "news_context": {
+        "avg_sentiment": 0.03446969696969697,
+        "article_count": 36,
+        "sample_headline": "Chocolate y alergias alimentarias : el dilema de un placer que puede enfermar"
+      }
+    },
+    {
+      "date": "2025-01-15T00:00:00",
+      "return": 0.0675538305147398,
+      "prediction": 0.018850839,
+      "type": "bullish",
+      "magnitude": 0.0675538305147398
+    },
+    {
+      "date": "2025-06-26T00:00:00",
+      "return": -0.0620660185877577,
+      "prediction": -0.026560055,
+      "type": "bearish",
+      "magnitude": 0.0620660185877577
+    },
+    {
+      "date": "2023-11-16T00:00:00",
+      "return": 0.0536963036963036,
+      "prediction": 0.042235024,
+      "type": "bullish",
+      "magnitude": 0.0536963036963036
+    },
+    {
+      "date": "2023-11-15T00:00:00",
+      "return": 0.0594059405940594,
+      "prediction": 0.042497218,
+      "type": "bullish",
+      "magnitude": 0.0594059405940594
+    },
+    {
+      "date": "2024-02-20T00:00:00",
+      "return": 0.1260210035005835,
+      "prediction": 0.06367581,
+      "type": "bullish",
+      "magnitude": 0.1260210035005835
+    },
+    {
+      "date": "2023-08-02T00:00:00",
+      "return": -0.0682201010668164,
+      "prediction": -0.058325686,
+      "type": "bearish",
+      "magnitude": 0.0682201010668164
+    },
+    {
+      "date": "2024-11-20T00:00:00",
+      "return": 0.0604316546762588,
+      "prediction": 0.0794646,
+      "type": "bullish",
+      "magnitude": 0.0604316546762588
+    },
+    {
+      "date": "2023-11-20T00:00:00",
+      "return": 0.0832920178482894,
+      "prediction": 0.049232543,
+      "type": "bullish",
+      "magnitude": 0.0832920178482894
+    },
+    {
+      "date": "2024-10-28T00:00:00",
+      "return": 0.0594188231892438,
+      "prediction": 0.07880745,
+      "type": "bullish",
+      "magnitude": 0.0594188231892438
+    },
+    {
+      "date": "2024-05-08T00:00:00",
+      "return": -0.0572943745450764,
+      "prediction": -0.15303501,
+      "type": "bearish",
+      "magnitude": 0.0572943745450764
+    },
+    {
+      "date": "2025-07-17T00:00:00",
+      "return": 0.1115063620194281,
+      "prediction": 0.0508677,
+      "type": "bullish",
+      "magnitude": 0.1115063620194281,
+      "news_context": {
+        "avg_sentiment": 0.0,
+        "article_count": 2,
+        "sample_headline": "Chocolate y alergias alimentarias : el dilema de un placer que puede enfermar"
+      }
+    },
+    {
+      "date": "2024-11-21T00:00:00",
+      "return": 0.0912534027695586,
+      "prediction": 0.06046153,
+      "type": "bullish",
+      "magnitude": 0.0912534027695586
+    },
+    {
+      "date": "2024-04-08T00:00:00",
+      "return": 0.1117736230419403,
+      "prediction": 0.0708445,
+      "type": "bullish",
+      "magnitude": 0.1117736230419403
+    },
+    {
+      "date": "2025-04-17T00:00:00",
+      "return": 0.1538553496712491,
+      "prediction": 0.00073394773,
+      "type": "bullish",
+      "magnitude": 0.1538553496712491
+    },
+    {
+      "date": "2025-05-08T00:00:00",
+      "return": 0.1067112645662493,
+      "prediction": 0.0011850508,
+      "type": "bullish",
+      "magnitude": 0.1067112645662493
+    },
+    {
+      "date": "2025-02-13T00:00:00",
+      "return": -0.1393892688565648,
+      "prediction": -0.07584208,
+      "type": "bearish",
+      "magnitude": 0.1393892688565648
+    },
+    {
+      "date": "2024-01-17T00:00:00",
+      "return": 0.0757643884892085,
+      "prediction": 0.032568198,
+      "type": "bullish",
+      "magnitude": 0.0757643884892085
+    },
+    {
+      "date": "2023-08-24T00:00:00",
+      "return": 0.071067499256616,
+      "prediction": 0.06402193,
+      "type": "bullish",
+      "magnitude": 0.071067499256616
+    },
+    {
+      "date": "2025-04-02T00:00:00",
+      "return": -0.0580954504906333,
+      "prediction": -0.03328382,
+      "type": "bearish",
+      "magnitude": 0.0580954504906333
+    },
+    {
+      "date": "2025-07-14T00:00:00",
+      "return": -0.0887150837988827,
+      "prediction": -0.039375007,
+      "type": "bearish",
+      "magnitude": 0.0887150837988827,
+      "news_context": {
+        "avg_sentiment": 0.06805555555555555,
+        "article_count": 9,
+        "sample_headline": "Chocolate y alergias alimentarias : el dilema de un placer que puede enfermar"
+      }
+    },
+    {
+      "date": "2024-10-07T00:00:00",
+      "return": 0.1023451071221772,
+      "prediction": 0.028734526,
+      "type": "bullish",
+      "magnitude": 0.1023451071221772
+    },
+    {
+      "date": "2025-04-14T00:00:00",
+      "return": 0.1288953558869892,
+      "prediction": 0.02692122,
+      "type": "bullish",
+      "magnitude": 0.1288953558869892
+    },
+    {
+      "date": "2025-05-09T00:00:00",
+      "return": 0.160967295195483,
+      "prediction": 0.0039525917,
+      "type": "bullish",
+      "magnitude": 0.160967295195483
+    },
+    {
+      "date": "2024-05-20T00:00:00",
+      "return": 0.2167405764966741,
+      "prediction": 0.1170669,
+      "type": "bullish",
+      "magnitude": 0.2167405764966741
+    },
+    {
+      "date": "2024-03-08T00:00:00",
+      "return": 0.1459196798627984,
+      "prediction": 0.08136255,
+      "type": "bullish",
+      "magnitude": 0.1459196798627984
+    },
+    {
+      "date": "2024-02-07T00:00:00",
+      "return": 0.099630314232902,
+      "prediction": 0.06688629,
+      "type": "bullish",
+      "magnitude": 0.099630314232902
+    },
+    {
+      "date": "2025-07-10T00:00:00",
+      "return": -0.1639212994738046,
+      "prediction": -0.007119205,
+      "type": "bearish",
+      "magnitude": 0.1639212994738046,
+      "news_context": {
+        "avg_sentiment": 0.028803030303030303,
+        "article_count": 44,
+        "sample_headline": "Process and Control Today"
+      }
+    },
+    {
+      "date": "2025-06-30T00:00:00",
+      "return": -0.0509833262077811,
+      "prediction": -0.054269586,
+      "type": "bearish",
+      "magnitude": 0.0509833262077811
+    },
+    {
+      "date": "2024-02-06T00:00:00",
+      "return": 0.1496168582375479,
+      "prediction": 0.074589,
+      "type": "bullish",
+      "magnitude": 0.1496168582375479
+    },
+    {
+      "date": "2024-10-17T00:00:00",
+      "return": -0.1306138206151074,
+      "prediction": -0.069945835,
+      "type": "bearish",
+      "magnitude": 0.1306138206151074
+    },
+    {
+      "date": "2024-01-26T00:00:00",
+      "return": 0.0721318493150684,
+      "prediction": 0.043388724,
+      "type": "bullish",
+      "magnitude": 0.0721318493150684
+    },
+    {
+      "date": "2024-12-05T00:00:00",
+      "return": 0.10924543946932,
+      "prediction": 0.0870429,
+      "type": "bullish",
+      "magnitude": 0.10924543946932
+    },
+    {
+      "date": "2024-01-30T00:00:00",
+      "return": 0.0863683662851195,
+      "prediction": 0.084178366,
+      "type": "bullish",
+      "magnitude": 0.0863683662851195
+    },
+    {
+      "date": "2024-09-24T00:00:00",
+      "return": -0.1052497775517986,
+      "prediction": -0.055529222,
+      "type": "bearish",
+      "magnitude": 0.1052497775517986
+    },
+    {
+      "date": "2025-02-04T00:00:00",
+      "return": -0.0716576560065976,
+      "prediction": -0.00815343,
+      "type": "bearish",
+      "magnitude": 0.0716576560065976
+    },
+    {
+      "date": "2023-11-14T00:00:00",
+      "return": 0.0712113532691331,
+      "prediction": 0.0015349991,
+      "type": "bullish",
+      "magnitude": 0.0712113532691331
+    },
+    {
+      "date": "2024-11-05T00:00:00",
+      "return": 0.0849537994759344,
+      "prediction": 0.048136957,
+      "type": "bullish",
+      "magnitude": 0.0849537994759344
+    }
+  ]
+}

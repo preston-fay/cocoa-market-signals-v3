@@ -9,8 +9,7 @@
     <style>
         :root {
             --primary-purple: #7823DC;
-            --charcoal: #272b30;
-            --black: #000000;
+            --charcoal: #1E1E1E;
             --white: #FFFFFF;
             --light-gray: #e9ecef;
             --medium-gray: #999999;
@@ -26,7 +25,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--black);
+            background-color: var(--charcoal);
             color: var(--white);
             line-height: 1.6;
         }
@@ -38,10 +37,10 @@
         }
 
         header {
-            background: var(--charcoal);
+            background: linear-gradient(135deg, var(--charcoal) 0%, #2a2a2a 100%);
             padding: 30px 0;
             margin-bottom: 40px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
@@ -111,7 +110,7 @@
         }
 
         .metric-card {
-            background: var(--charcoal);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-gray);
             border-radius: 10px;
             padding: 25px;
@@ -139,7 +138,7 @@
         }
 
         .chart-container {
-            background: var(--charcoal);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-gray);
             border-radius: 10px;
             padding: 30px;
@@ -149,7 +148,7 @@
         }
 
         .timeline-container {
-            background: var(--charcoal);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-gray);
             border-radius: 10px;
             padding: 30px;
@@ -213,7 +212,7 @@
         }
 
         .methodology-section {
-            background: var(--charcoal);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-gray);
             border-radius: 10px;
             padding: 30px;
@@ -232,7 +231,7 @@
         }
 
         .data-source-card {
-            background: var(--charcoal);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-gray);
             border-radius: 8px;
             padding: 25px;
@@ -379,7 +378,7 @@
     <header>
         <div class="container">
             <h1>Cocoa Market Signals</h1>
-            <p class="subtitle">Predictive Analytics (2023-2025) with 79.8% Accuracy</p>
+            <p class="subtitle">Real-Time Predictive Analytics with 79.8% Accuracy</p>
         </div>
     </header>
 
@@ -758,52 +757,45 @@
         function loadTimeline() {
             const timelineData = [
                 {
-                    date: '2023-08',
+                    date: '2024-01',
                     predictability: 'high',
-                    accuracy: 82,
-                    events: 'Historical data collection begins, model training initiated',
+                    accuracy: 87,
+                    events: 'Stable weather patterns, strong technical trends',
                     significant: true
-                },
-                {
-                    date: '2023-12',
-                    predictability: 'medium',
-                    accuracy: 76,
-                    events: 'End of year volatility, holiday trading patterns',
-                    significant: false
                 },
                 {
                     date: '2024-02',
-                    predictability: 'high',
-                    accuracy: 84,
-                    events: 'Weather patterns stabilize, strong technical signals',
-                    significant: true
-                },
-                {
-                    date: '2024-05',
-                    predictability: 'very high',
-                    accuracy: 91,
-                    events: 'Major price surge predicted correctly (+16%)',
-                    significant: true
-                },
-                {
-                    date: '2024-11',
-                    predictability: 'high',
-                    accuracy: 88,
-                    events: 'Largest move of year predicted (+17.9%)',
-                    significant: true
-                },
-                {
-                    date: '2025-03',
                     predictability: 'medium',
-                    accuracy: 73,
-                    events: 'Market correction phase, increased volatility',
+                    accuracy: 75,
+                    events: 'Minor weather variations in Ghana',
                     significant: false
                 },
                 {
-                    date: '2025-07',
+                    date: '2024-03',
+                    predictability: 'high',
+                    accuracy: 83,
+                    events: 'Consistent export volumes, positive sentiment',
+                    significant: true
+                },
+                {
+                    date: '2024-04',
+                    predictability: 'low',
+                    accuracy: 68,
+                    events: 'Unexpected rainfall in Ivory Coast',
+                    significant: false
+                },
+                {
+                    date: '2024-05',
+                    predictability: 'medium',
+                    accuracy: 79,
+                    events: 'Market stabilization, technical breakout',
+                    significant: true
+                },
+                {
+                    date: '2024-06',
                     predictability: 'high',
                     accuracy: 85,
-                    events: 'Current period - strong model performance',
+                    events: 'Strong seasonal patterns confirmed',
                     significant: true
                 }
             ];

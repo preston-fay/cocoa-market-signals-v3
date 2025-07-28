@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Console Test</title>
+</head>
+<body>
+    <h1>Testing Dashboard - Check Browser Console</h1>
+    <iframe id="dashboard" src="http://localhost:8001" width="100%" height="800" style="border: 2px solid #6f42c1;"></iframe>
+    
+    <script>
+        // Try to capture any errors from the iframe
+        window.addEventListener('message', function(e) {
+            console.log('Message from iframe:', e.data);
+        });
+        
+        setTimeout(() => {
+            console.log('Dashboard iframe loaded');
+            // Try to access the iframe content
+            try {
+                const iframe = document.getElementById('dashboard');
+                console.log('Iframe src:', iframe.src);
+            } catch(e) {
+                console.error('Error accessing iframe:', e);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>

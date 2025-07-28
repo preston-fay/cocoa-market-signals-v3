@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WORKING CHART - NO BULLSHIT</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background: #000; color: #fff; padding: 20px; font-family: monospace; }
+        #info { background: #272b30; padding: 20px; margin-bottom: 20px; }
+        #chartDiv { height: 500px; background: #000; border: 2px solid #6f42c1; padding: 20px; }
+        .error { color: red; font-weight: bold; }
+        .success { color: #6f42c1; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>ACTUAL VS PREDICTED - WORKING VERSION</h1>
+    
+    <div id="info">
+        <p>This uses the EXACT data from the dashboard API</p>
+        <p>Status: <span id="status">Initializing...</span></p>
+        <p>API Response: <span id="apiStatus">Waiting...</span></p>
+        <p>Data Points: <span id="dataCount">0</span></p>
+    </div>
+    
+    <div id="chartDiv">
+        <canvas id="chart"></canvas>
+    </div>
+    
+    <script>
+        // DIRECTLY EMBEDDED DATA - NO FETCH NEEDED
+        const API_DATA = {"predictions":[{"date":"2025-05-23T00:00:00","actual_return":-0.0297009422367882,"xgb_prediction":-0.042463917},{"date":"2023-11-10T00:00:00","actual_return":0.0230518667000751,"xgb_prediction":0.009364169},{"date":"2024-07-01T00:00:00","actual_return":0.0912676822633296,"xgb_prediction":0.035834517},{"date":"2024-04-10T00:00:00","actual_return":-0.0068197099221977,"xgb_prediction":0.042966858},{"date":"2024-07-10T00:00:00","actual_return":-0.0529461998292057,"xgb_prediction":-0.020158399},{"date":"2025-04-04T00:00:00","actual_return":-0.0001174812030074,"xgb_prediction":-0.010773789},{"date":"2024-03-12T00:00:00","actual_return":-0.0026093439363816,"xgb_prediction":0.07157682},{"date":"2023-10-17T00:00:00","actual_return":0.0258596973865199,"xgb_prediction":0.021142136},{"date":"2024-11-06T00:00:00","actual_return":0.1789428076256498,"xgb_prediction":0.04024483},{"date":"2023-08-11T00:00:00","actual_return":0.0209281164695176,"xgb_prediction":-0.0114988},{"date":"2023-12-27T00:00:00","actual_return":-0.0046728971962616,"xgb_prediction":0.011677997},{"date":"2025-01-17T00:00:00","actual_return":0.0178107938780989,"xgb_prediction":0.024680227},{"date":"2025-03-10T00:00:00","actual_return":-0.0545959656963401,"xgb_prediction":-0.058075238},{"date":"2024-05-03T00:00:00","actual_return":0.1609641387419165,"xgb_prediction":-0.013254255},{"date":"2023-12-21T00:00:00","actual_return":-0.021455223880597,"xgb_prediction":0.005891341},{"date":"2024-08-22T00:00:00","actual_return":-0.0091856744762101,"xgb_prediction":0.010462509},{"date":"2025-05-15T00:00:00","actual_return":0.0020473822755191,"xgb_prediction":-0.041360743},{"date":"2023-09-12T00:00:00","actual_return":-0.0344644750795334,"xgb_prediction":0.0013930313},{"date":"2024-02-14T00:00:00","actual_return":0.0369810052109598,"xgb_prediction":0.07825282},{"date":"2025-07-07T00:00:00","actual_return":0.0079963959905395,"xgb_prediction":0.004624607}]};
+        
+        document.getElementById('status').textContent = 'Using embedded data...';
+        document.getElementById('apiStatus').innerHTML = '<span class="success">Data embedded - no API needed</span>';
+        
+        // Use first 20 points for clarity
+        const predictions = API_DATA.predictions.slice(0, 20);
+        document.getElementById('dataCount').textContent = predictions.length;
+        
+        // Sort by date
+        predictions.sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        // Create chart
+        const ctx = document.getElementById('chart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: predictions.map(p => p.date.split('T')[0]),
+                datasets: [{
+                    label: 'Actual Returns %',
+                    data: predictions.map(p => p.actual_return * 100),
+                    borderColor: '#FFFFFF',
+                    borderWidth: 3,
+                    tension: 0
+                }, {
+                    label: 'XGBoost Predictions %',
+                    data: predictions.map(p => p.xgb_prediction * 100),
+                    borderColor: '#6f42c1',
+                    borderWidth: 3,
+                    tension: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#999' }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { 
+                            color: '#999',
+                            callback: value => value + '%'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#fff', font: { size: 14 } }
+                    }
+                }
+            }
+        });
+        
+        document.getElementById('status').innerHTML = '<span class="success">Chart created successfully!</span>';
+        
+        // Also try to fetch from API
+        fetch('http://localhost:8001/api/predictions')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('apiStatus').innerHTML = '<span class="success">API also works! Got ' + data.predictions.length + ' predictions</span>';
+            })
+            .catch(e => {
+                document.getElementById('apiStatus').innerHTML = '<span class="error">API error but chart still works with embedded data</span>';
+            });
+    </script>
+</body>
+</html>

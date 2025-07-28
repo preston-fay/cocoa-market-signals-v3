@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify Dashboard Data</title>
+    <style>
+        body { font-family: monospace; background: #000; color: #fff; padding: 20px; }
+        pre { background: #272b30; padding: 20px; border-radius: 5px; overflow: auto; }
+        h2 { color: #6f42c1; }
+        .section { margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+    <h1>Verify Dashboard Data Yourself</h1>
+    
+    <div class="section">
+        <h2>1. Check Raw Predictions CSV</h2>
+        <pre>head -20 data/processed/model_predictions_comparison.csv</pre>
+        <p>This shows the actual predictions vs real returns</p>
+    </div>
+    
+    <div class="section">
+        <h2>2. Check Database Price Records</h2>
+        <pre>sqlite3 data/cocoa_market_signals_real.db "SELECT date, close FROM price_data ORDER BY date DESC LIMIT 10"</pre>
+        <p>This shows the most recent price data</p>
+    </div>
+    
+    <div class="section">
+        <h2>3. Check Timeline Data (Chronological)</h2>
+        <pre>cat data/processed/real_timeline_data.json | jq '.[0:5]'</pre>
+        <p>This shows the first 5 months in chronological order</p>
+    </div>
+    
+    <div class="section">
+        <h2>4. Check Model Testing Results</h2>
+        <pre>cat data/processed/model_testing_proof.json | jq '.models_tested | keys'</pre>
+        <p>This shows which models were actually tested</p>
+    </div>
+    
+    <div class="section">
+        <h2>5. Verify XGBoost Accuracy</h2>
+        <pre>cat data/processed/model_testing_proof.json | jq '.models_tested."XGBoost".direction_accuracy'</pre>
+        <p>This shows the real 79.8% accuracy claim</p>
+    </div>
+    
+    <div class="section">
+        <h2>6. Check News Article Count</h2>
+        <pre>sqlite3 data/cocoa_market_signals_real.db "SELECT COUNT(*) FROM news_articles"</pre>
+        <p>This shows we have 1,769 real news articles</p>
+    </div>
+    
+    <div class="section">
+        <h2>7. Check Date Range</h2>
+        <pre>sqlite3 data/cocoa_market_signals_real.db "SELECT MIN(date), MAX(date) FROM price_data"</pre>
+        <p>This shows the 2023-07-28 to 2025-07-25 date range</p>
+    </div>
+    
+    <div class="section">
+        <h2>Dashboard URL: <a href="http://localhost:8001" style="color: #6f42c1;">http://localhost:8001</a></h2>
+    </div>
+</body>
+</html>

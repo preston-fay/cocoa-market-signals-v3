@@ -1,0 +1,227 @@
+[
+  {
+    "date": "2023-07",
+    "predictability": "high",
+    "accuracy": 100,
+    "events": "90 news articles, volatility: nan",
+    "significant": false,
+    "prediction_count": 1,
+    "news_count": 90
+  },
+  {
+    "date": "2023-08",
+    "predictability": "low",
+    "accuracy": 67,
+    "events": "+7.1% move on 2023-08-24",
+    "significant": true,
+    "prediction_count": 6,
+    "news_count": 37
+  },
+  {
+    "date": "2023-09",
+    "predictability": "low",
+    "accuracy": 33,
+    "events": "-4.7% move on 2023-09-15",
+    "significant": true,
+    "prediction_count": 3,
+    "news_count": 47
+  },
+  {
+    "date": "2023-10",
+    "predictability": "high",
+    "accuracy": 100,
+    "events": "28 news articles, volatility: 0.010",
+    "significant": false,
+    "prediction_count": 2,
+    "news_count": 28
+  },
+  {
+    "date": "2023-11",
+    "predictability": "low",
+    "accuracy": 69,
+    "events": "+8.3% move on 2023-11-20",
+    "significant": true,
+    "prediction_count": 13,
+    "news_count": 50
+  },
+  {
+    "date": "2023-12",
+    "predictability": "low",
+    "accuracy": 50,
+    "events": "+3.6% move on 2023-12-06",
+    "significant": true,
+    "prediction_count": 4,
+    "news_count": 64
+  },
+  {
+    "date": "2024-01",
+    "predictability": "high",
+    "accuracy": 100,
+    "events": "+8.6% move on 2024-01-30",
+    "significant": true,
+    "prediction_count": 3,
+    "news_count": 54
+  },
+  {
+    "date": "2024-02",
+    "predictability": "high",
+    "accuracy": 100,
+    "events": "+15.0% move on 2024-02-06",
+    "significant": true,
+    "prediction_count": 4,
+    "news_count": 72
+  },
+  {
+    "date": "2024-03",
+    "predictability": "low",
+    "accuracy": 50,
+    "events": "+14.6% move on 2024-03-08",
+    "significant": true,
+    "prediction_count": 2,
+    "news_count": 69
+  },
+  {
+    "date": "2024-04",
+    "predictability": "low",
+    "accuracy": 33,
+    "events": "+11.2% move on 2024-04-08",
+    "significant": true,
+    "prediction_count": 3,
+    "news_count": 136
+  },
+  {
+    "date": "2024-05",
+    "predictability": "medium",
+    "accuracy": 75,
+    "events": "+21.7% move on 2024-05-20",
+    "significant": true,
+    "prediction_count": 4,
+    "news_count": 60
+  },
+  {
+    "date": "2024-06",
+    "predictability": "low",
+    "accuracy": 0,
+    "events": "64 news articles, volatility: nan",
+    "significant": false,
+    "prediction_count": 1,
+    "news_count": 64
+  },
+  {
+    "date": "2024-07",
+    "predictability": "low",
+    "accuracy": 60,
+    "events": "+9.1% move on 2024-07-01",
+    "significant": true,
+    "prediction_count": 5,
+    "news_count": 120
+  },
+  {
+    "date": "2024-08",
+    "predictability": "low",
+    "accuracy": 50,
+    "events": "+7.7% move on 2024-08-19",
+    "significant": true,
+    "prediction_count": 2,
+    "news_count": 85
+  },
+  {
+    "date": "2024-09",
+    "predictability": "medium",
+    "accuracy": 75,
+    "events": "-10.5% move on 2024-09-24",
+    "significant": true,
+    "prediction_count": 4,
+    "news_count": 72
+  },
+  {
+    "date": "2024-10",
+    "predictability": "medium",
+    "accuracy": 75,
+    "events": "-13.1% move on 2024-10-17",
+    "significant": true,
+    "prediction_count": 4,
+    "news_count": 110
+  },
+  {
+    "date": "2024-11",
+    "predictability": "high",
+    "accuracy": 100,
+    "events": "+17.9% move on 2024-11-06",
+    "significant": true,
+    "prediction_count": 4,
+    "news_count": 39
+  },
+  {
+    "date": "2024-12",
+    "predictability": "low",
+    "accuracy": 33,
+    "events": "+10.9% move on 2024-12-05",
+    "significant": true,
+    "prediction_count": 3,
+    "news_count": 54
+  },
+  {
+    "date": "2025-01",
+    "predictability": "high",
+    "accuracy": 100,
+    "events": "+6.8% move on 2025-01-15",
+    "significant": true,
+    "prediction_count": 3,
+    "news_count": 33
+  },
+  {
+    "date": "2025-02",
+    "predictability": "low",
+    "accuracy": 67,
+    "events": "-13.9% move on 2025-02-13",
+    "significant": true,
+    "prediction_count": 3,
+    "news_count": 48
+  },
+  {
+    "date": "2025-03",
+    "predictability": "low",
+    "accuracy": 67,
+    "events": "-5.5% move on 2025-03-10",
+    "significant": true,
+    "prediction_count": 3,
+    "news_count": 63
+  },
+  {
+    "date": "2025-04",
+    "predictability": "medium",
+    "accuracy": 75,
+    "events": "+15.4% move on 2025-04-17",
+    "significant": true,
+    "prediction_count": 8,
+    "news_count": 58
+  },
+  {
+    "date": "2025-05",
+    "predictability": "low",
+    "accuracy": 50,
+    "events": "+16.1% move on 2025-05-09",
+    "significant": true,
+    "prediction_count": 6,
+    "news_count": 66
+  },
+  {
+    "date": "2025-06",
+    "predictability": "high",
+    "accuracy": 100,
+    "events": "-6.2% move on 2025-06-26",
+    "significant": true,
+    "prediction_count": 2,
+    "news_count": 55
+  },
+  {
+    "date": "2025-07",
+    "predictability": "high",
+    "accuracy": 86,
+    "events": "-16.4% move on 2025-07-10",
+    "significant": true,
+    "prediction_count": 7,
+    "news_count": 195
+  }
+]

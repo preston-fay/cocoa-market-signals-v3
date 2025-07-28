@@ -1,0 +1,58 @@
+{
+  "success": true,
+  "tests_passed": 6,
+  "tests_failed": 0,
+  "success_rate": 100.0,
+  "test_results": [
+    {
+      "endpoint": "/",
+      "description": "Main dashboard page",
+      "success": true,
+      "message": "HTML loaded successfully"
+    },
+    {
+      "endpoint": "/api/signals",
+      "description": "Signals API",
+      "success": true,
+      "message": "Endpoint working correctly"
+    },
+    {
+      "endpoint": "/api/predictions",
+      "description": "Predictions API",
+      "success": true,
+      "message": "Endpoint working correctly"
+    },
+    {
+      "endpoint": "/api/methodology",
+      "description": "Methodology API",
+      "success": true,
+      "message": "Endpoint working correctly"
+    },
+    {
+      "endpoint": "/api/data-sources",
+      "description": "Data sources API",
+      "success": true,
+      "message": "Endpoint working correctly"
+    },
+    {
+      "endpoint": "/api/performance-metrics",
+      "description": "Performance metrics API",
+      "success": true,
+      "message": "Endpoint working correctly"
+    }
+  ],
+  "data_validation": {
+    "signals": {
+      "has_data": true,
+      "signal_count": 20,
+      "has_summary": true,
+      "accuracy_large_moves": 92.3
+    },
+    "predictions": {
+      "has_dates": true,
+      "data_points": 123,
+      "has_actuals": true,
+      "has_predictions": true
+    }
+  }
+}
