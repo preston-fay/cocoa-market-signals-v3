@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cocoa Market Signals - Timeline</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #chart {
+            background: #000;
+            border: 1px solid #272b30;
+            padding: 20px;
+        }
+        .info {
+            background: #272b30;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cocoa Market Signals - Interactive Timeline</h1>
+    <div class="info">
+        <p id="status">Loading data...</p>
+    </div>
+    <div id="chart">
+        <canvas id="myChart" height="100"></canvas>
+    </div>
+    <div class="info">
+        <h3>Click on purple dots to see event details</h3>
+        <div id="eventDetails"></div>
+    </div>
+
+    <script>
+        let chart = null;
+        let allData = null;
+
+        async function loadData() {
+            try {
+                // Load the complete timeline data
+                const response = await fetch('/data/processed/timeline_data_complete.json');
+                allData = await response.json();
+                
+                // Show date ranges
+                const eventDates = allData.events.map(e => e.date).sort();
+                const firstEvent = eventDates[0];
+                const lastEvent = eventDates[eventDates.length - 1];
+                
+                document.getElementById('status').innerHTML = 
+                    `Loaded ${allData.prices.length} prices (${allData.prices[0].date} to ${allData.prices[allData.prices.length-1].date})<br>` +
+                    `${allData.events.length} significant events (${firstEvent} to ${lastEvent})<br>` +
+                    `<strong>Note:</strong> No >5% daily moves occurred before Feb 2024 in this dataset`;
+                
+                createChart();
+            } catch (error) {
+                document.getElementById('status').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        function createChart() {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            
+            // Line data - daily returns
+            const lineData = {
+                labels: allData.prices.map(p => p.date),
+                datasets: [{
+                    label: 'Daily Returns %',
+                    data: allData.prices.map(p => p.return),
+                    borderColor: 'white',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false
+                }]
+            };
+
+            // Add events as a second dataset
+            const eventDataset = {
+                label: 'Events',
+                data: allData.events.map(e => {
+                    // Find the matching price index for proper positioning
+                    const priceIndex = allData.prices.findIndex(p => p.date === e.date);
+                    return {
+                        x: e.date,
+                        y: e.price_change * 100,
+                        event: e,
+                        priceIndex: priceIndex
+                    };
+                }),
+                backgroundColor: '#6f42c1',
+                borderColor: '#6f42c1',
+                pointRadius: 8,
+                pointHoverRadius: 10,
+                showLine: false,
+                type: 'scatter'
+            };
+
+            lineData.datasets.push(eventDataset);
+
+            // Create chart
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: lineData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    onClick: (event, elements) => {
+                        if (elements.length > 0 && elements[0].datasetIndex === 1) {
+                            const index = elements[0].index;
+                            const clickedPoint = eventDataset.data[index];
+                            showEventDetails(clickedPoint.event);
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'category',
+                            grid: { display: false, color: '#272b30' },
+                            ticks: { 
+                                color: '#999',
+                                maxTicksLimit: 12,
+                                callback: function(value, index) {
+                                    // Show only monthly labels
+                                    const date = this.getLabelForValue(value);
+                                    if (index % 20 === 0) {
+                                        return date.substring(0, 7); // YYYY-MM
+                                    }
+                                    return '';
+                                }
+                            }
+                        },
+                        y: {
+                            grid: { display: false, color: '#272b30' },
+                            ticks: { 
+                                color: '#999',
+                                callback: value => value + '%'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Return %',
+                                color: '#999'
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    // For events, show the actual event date
+                                    if (tooltipItems[0].datasetIndex === 1) {
+                                        const event = tooltipItems[0].raw.event;
+                                        return event.date;
+                                    }
+                                    // For price line, show the date from x-axis
+                                    return tooltipItems[0].label;
+                                },
+                                label: function(context) {
+                                    if (context.datasetIndex === 1) {
+                                        const event = context.raw.event;
+                                        return [
+                                            `Change: ${(event.price_change * 100).toFixed(1)}%`,
+                                            `Trigger: ${event.primary_trigger}`
+                                        ];
+                                    }
+                                    return `Return: ${context.parsed.y.toFixed(2)}%`;
+                                }
+                            }
+                        },
+                        legend: {
+                            labels: { color: '#fff' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function showEventDetails(event) {
+            const details = document.getElementById('eventDetails');
+            details.innerHTML = `
+                <h4>Event: ${event.date}</h4>
+                <p><strong>Price Change:</strong> ${(event.price_change * 100).toFixed(1)}%</p>
+                <p><strong>Primary Trigger:</strong> ${event.primary_trigger}</p>
+                <p><strong>Description:</strong> ${event.trigger_description}</p>
+                <p><strong>Price:</strong> $${event.previous_price.toFixed(2)} → $${event.price.toFixed(2)}</p>
+                ${event.weather_triggers.length > 0 ? 
+                    `<p><strong>Weather:</strong> ${event.weather_triggers.length} anomalies detected</p>` : ''}
+                ${event.news_triggers.length > 0 ? 
+                    `<p><strong>News:</strong> ${event.news_triggers.length} articles</p>` : ''}
+            `;
+        }
+
+        // Load data when page loads
+        loadData();
+    </script>
+</body>
+</html>

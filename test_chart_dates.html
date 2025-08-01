@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chart.js Date Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="test" width="800" height="400"></canvas>
+    <div id="output"></div>
+    <script>
+        // Simple test data
+        const dates = ['2024-02-06', '2024-02-07', '2024-02-08', '2024-02-09', '2024-02-10'];
+        const values = [1, 2, 3, 4, 5];
+        
+        // Event at index 2 (Feb 8)
+        const eventPoint = {
+            x: 2,  // Index 2 should be Feb 8
+            y: 10,
+            actualDate: '2024-02-08'
+        };
+        
+        new Chart(document.getElementById('test'), {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: 'Line',
+                    data: values,
+                    borderColor: 'blue'
+                }, {
+                    label: 'Event',
+                    data: [eventPoint],
+                    type: 'scatter',
+                    backgroundColor: 'red',
+                    pointRadius: 10,
+                    parsing: false
+                }]
+            },
+            options: {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            afterTitle: function(context) {
+                                if (context[0].datasetIndex === 1) {
+                                    const point = context[0].raw;
+                                    return [
+                                        `Raw x value: ${point.x}`,
+                                        `Actual date: ${point.actualDate}`,
+                                        `Label at index: ${dates[point.x]}`
+                                    ];
+                                }
+                                return [];
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        document.getElementById('output').innerHTML = `
+            <p>Dates array: ${dates.join(', ')}</p>
+            <p>Event should be at index 2 = ${dates[2]}</p>
+        `;
+    </script>
+</body>
+</html>

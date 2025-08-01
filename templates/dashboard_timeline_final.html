@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoa Market Signals - Interactive Timeline</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 30px 0 20px 0;
+            color: #6f42c1;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #FFFFFF;
+        }
+
+        .subtitle {
+            color: #999999;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .chart-container {
+            background: #000000;
+            border: 1px solid #272b30;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            height: 600px;
+            position: relative;
+        }
+
+        .timeline-container {
+            background: #272b30;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 40px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .event-item {
+            background: #000000;
+            border: 1px solid #52575c;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .event-item:hover {
+            border-color: #6f42c1;
+            transform: translateX(5px);
+        }
+
+        .event-item.selected {
+            border-color: #6f42c1;
+            background: #1a1a1a;
+        }
+
+        .event-date {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #6f42c1;
+        }
+
+        .event-change {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 5px 0;
+        }
+
+        .positive {
+            color: #6f42c1;
+        }
+
+        .negative {
+            color: #999999;
+        }
+
+        .event-trigger {
+            color: #999999;
+            font-size: 0.9rem;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: #000000;
+            border: 2px solid #6f42c1;
+            border-radius: 10px;
+            margin: 50px auto;
+            padding: 30px;
+            max-width: 800px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999999;
+        }
+
+        .close-btn:hover {
+            color: #FFFFFF;
+        }
+
+        .detail-section {
+            background: #272b30;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .trigger-item {
+            background: #000000;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #52575c;
+        }
+
+        .trigger-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .trigger-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: #6f42c1;
+            color: #FFFFFF;
+        }
+
+        .price-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .price-item {
+            text-align: center;
+        }
+
+        .price-label {
+            color: #999999;
+            font-size: 0.9rem;
+        }
+
+        .price-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6f42c1;
+        }
+
+        #status {
+            background: #272b30;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .filter-buttons {
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            background: #272b30;
+            border: 1px solid #52575c;
+            color: #999999;
+            padding: 8px 20px;
+            margin-right: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: #6f42c1;
+            color: #FFFFFF;
+        }
+
+        .filter-btn.active {
+            background: #6f42c1;
+            color: #FFFFFF;
+            border-color: #6f42c1;
+        }
+
+        .debug-info {
+            background: #272b30;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cocoa Market Signals - Interactive Timeline</h1>
+        <p class="subtitle">Click on any event to explore the data that triggered the signal</p>
+
+        <div id="status">Loading event data...</div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterEvents('all')">All Events (51)</button>
+            <button class="filter-btn" onclick="filterEvents('weather')">Weather Triggered (36)</button>
+            <button class="filter-btn" onclick="filterEvents('news')">News Triggered (2)</button>
+            <button class="filter-btn" onclick="filterEvents('technical')">Technical (1)</button>
+            <button class="filter-btn" onclick="filterEvents('mixed')">Mixed Signals (12)</button>
+        </div>
+
+        <h2>Price Movement Timeline</h2>
+        <div class="chart-container">
+            <canvas id="timelineChart"></canvas>
+        </div>
+
+        <div class="debug-info" id="debugInfo"></div>
+
+        <h2>Significant Events (Click to Explore)</h2>
+        <div class="timeline-container" id="eventsList">
+            <!-- Events will be populated here -->
+        </div>
+    </div>
+
+    <!-- Event Details Modal -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modalContent">
+                <!-- Details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let timelineData = null;
+        let chartInstance = null;
+        let currentFilter = 'all';
+        let selectedEventIndex = null;
+
+        // Chart.js defaults
+        Chart.defaults.color = '#999999';
+        Chart.defaults.borderColor = '#272b30';
+
+        async function loadTimeline() {
+            const statusEl = document.getElementById('status');
+            const debugEl = document.getElementById('debugInfo');
+            
+            try {
+                // Load complete timeline data
+                const response = await fetch('/data/processed/timeline_data_complete.json');
+                timelineData = await response.json();
+                
+                statusEl.textContent = `Loaded ${timelineData.events.length} events and ${timelineData.prices.length} price records`;
+                
+                // Debug info
+                const eventDates = timelineData.events.map(e => e.date);
+                const priceDates = timelineData.prices.map(p => p.date);
+                const matchingDates = eventDates.filter(d => priceDates.includes(d));
+                
+                debugEl.innerHTML = `
+                    Events: ${timelineData.events.length} | 
+                    Prices: ${timelineData.prices.length} | 
+                    Matching dates: ${matchingDates.length} | 
+                    Date range: ${priceDates[0]} to ${priceDates[priceDates.length - 1]}
+                `;
+                
+                // Create timeline chart
+                createTimelineChart();
+                
+                // Display events list
+                displayEventsList(timelineData.events);
+                
+            } catch (error) {
+                statusEl.innerHTML = `<span style="color: #ff0000;">Error: ${error.message}</span>`;
+                console.error('Error loading data:', error);
+            }
+        }
+
+        function createTimelineChart() {
+            const ctx = document.getElementById('timelineChart').getContext('2d');
+            
+            // Prepare line chart data
+            const lineData = timelineData.prices.map(p => ({
+                x: p.date,
+                y: p.return
+            }));
+            
+            // Prepare event scatter data - use the exact dates and returns from our data
+            const eventData = timelineData.events.map(e => ({
+                x: e.date,
+                y: (e.verified_return || e.price_change) * 100,
+                originalEvent: e
+            }));
+            
+            console.log('Sample event data:', eventData.slice(0, 5));
+            
+            // Destroy existing chart
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'Daily Returns (%)',
+                        data: lineData,
+                        borderColor: '#FFFFFF',
+                        backgroundColor: 'transparent',
+                        borderWidth: 1,
+                        pointRadius: 0,
+                        tension: 0,
+                        parsing: {
+                            xAxisKey: 'x',
+                            yAxisKey: 'y'
+                        }
+                    }, {
+                        label: 'Significant Events',
+                        data: eventData,
+                        borderColor: '#6f42c1',
+                        backgroundColor: '#6f42c1',
+                        pointRadius: 8,
+                        pointHoverRadius: 12,
+                        showLine: false,
+                        type: 'scatter',
+                        parsing: {
+                            xAxisKey: 'x',
+                            yAxisKey: 'y'
+                        }
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    onClick: (event, elements) => {
+                        if (elements && elements.length > 0) {
+                            const element = elements[0];
+                            if (element.datasetIndex === 1) { // Events dataset
+                                const clickedData = eventData[element.index];
+                                const eventIndex = timelineData.events.findIndex(
+                                    e => e.date === clickedData.originalEvent.date
+                                );
+                                showEventDetails(eventIndex);
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Click on purple dots to explore event triggers',
+                            color: '#FFFFFF',
+                            font: { size: 16 }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: { color: '#FFFFFF' }
+                        },
+                        tooltip: {
+                            backgroundColor: '#272b30',
+                            callbacks: {
+                                label: function(context) {
+                                    if (context.dataset.label === 'Significant Events') {
+                                        const event = context.raw.originalEvent;
+                                        return [
+                                            `Date: ${formatDate(event.date)}`,
+                                            `Change: ${(event.price_change * 100).toFixed(1)}%`,
+                                            `Trigger: ${event.primary_trigger}`,
+                                            'Click for details'
+                                        ];
+                                    }
+                                    return `${context.dataset.label}: ${context.parsed.y.toFixed(2)}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                parser: 'yyyy-MM-dd',
+                                unit: 'month',
+                                displayFormats: { 
+                                    month: 'MMM yy' 
+                                }
+                            },
+                            grid: { display: false },
+                            ticks: { color: '#999999' }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Return (%)',
+                                color: '#999999'
+                            },
+                            grid: { display: false },
+                            ticks: { 
+                                color: '#999999',
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function displayEventsList(events) {
+            const container = document.getElementById('eventsList');
+            const filteredEvents = currentFilter === 'all' ? 
+                events : events.filter(e => e.primary_trigger === currentFilter);
+            
+            container.innerHTML = filteredEvents.map((event, index) => {
+                const originalIndex = events.indexOf(event);
+                const changeClass = event.price_change > 0 ? 'positive' : 'negative';
+                const changeSign = event.price_change > 0 ? '+' : '';
+                
+                return `
+                    <div class="event-item ${selectedEventIndex === originalIndex ? 'selected' : ''}" 
+                         onclick="showEventDetails(${originalIndex})">
+                        <div class="event-date">${formatDate(event.date)}</div>
+                        <div class="event-change ${changeClass}">
+                            ${changeSign}${(event.price_change * 100).toFixed(1)}%
+                        </div>
+                        <div class="event-trigger">
+                            <strong>Primary trigger:</strong> ${event.primary_trigger}
+                        </div>
+                        <div class="event-trigger">
+                            ${event.trigger_description}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function showEventDetails(index) {
+            selectedEventIndex = index;
+            const event = timelineData.events[index];
+            const modal = document.getElementById('eventModal');
+            const content = document.getElementById('modalContent');
+            
+            // Update selected state in list
+            displayEventsList(timelineData.events);
+            
+            // Build modal content
+            let html = `
+                <h2>Event Details: ${formatDate(event.date)}</h2>
+                
+                <div class="detail-section">
+                    <h3>Price Movement</h3>
+                    <div class="price-info">
+                        <div class="price-item">
+                            <div class="price-label">Previous Price</div>
+                            <div class="price-value">$${event.previous_price.toFixed(2)}</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="price-label">New Price</div>
+                            <div class="price-value">$${event.price.toFixed(2)}</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="price-label">Change</div>
+                            <div class="price-value ${event.price_change > 0 ? 'positive' : 'negative'}">
+                                ${event.price_change > 0 ? '+' : ''}${(event.price_change * 100).toFixed(1)}%
+                            </div>
+                        </div>
+                        <div class="price-item">
+                            <div class="price-label">Volume</div>
+                            <div class="price-value">${event.volume.toLocaleString()}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Weather triggers
+            if (event.weather_triggers && event.weather_triggers.length > 0) {
+                html += `
+                    <div class="detail-section">
+                        <h3>Weather Anomalies</h3>
+                        ${event.weather_triggers.map(w => `
+                            <div class="trigger-item">
+                                <div class="trigger-header">
+                                    <strong>${w.location}</strong>
+                                    <span class="trigger-badge">Weather</span>
+                                </div>
+                                <div>Date: ${formatDate(w.date)}</div>
+                                <div>Temperature: ${w.temperature.toFixed(1)}°C 
+                                    (${w.temp_anomaly > 0 ? '+' : ''}${w.temp_anomaly.toFixed(1)}°C anomaly)</div>
+                                <div>Rainfall: ${w.rainfall.toFixed(1)}mm 
+                                    (${w.rainfall_anomaly > 0 ? '+' : ''}${w.rainfall_anomaly.toFixed(1)}mm anomaly)</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            // News triggers
+            if (event.news_triggers && event.news_triggers.length > 0) {
+                html += `
+                    <div class="detail-section">
+                        <h3>News Articles</h3>
+                        ${event.news_triggers.map(n => `
+                            <div class="trigger-item">
+                                <div class="trigger-header">
+                                    <strong>${n.title}</strong>
+                                    <span class="trigger-badge">News</span>
+                                </div>
+                                <div style="color: #999999; margin: 10px 0;">
+                                    ${n.description || 'No description available'}
+                                </div>
+                                <div style="font-size: 0.9rem;">
+                                    <span style="color: #999999;">Source:</span> ${n.source} | 
+                                    <span style="color: #999999;">Date:</span> ${formatDate(n.date)} | 
+                                    <span style="color: #999999;">Sentiment:</span> 
+                                    <span style="color: ${n.sentiment < 0 ? '#999999' : '#6f42c1'}">
+                                        ${n.sentiment.toFixed(2)}
+                                    </span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            // Trade data
+            if (event.trade_triggers && event.trade_triggers.length > 0) {
+                html += `
+                    <div class="detail-section">
+                        <h3>Trade Data</h3>
+                        ${event.trade_triggers.map(t => `
+                            <div class="trigger-item">
+                                <div class="trigger-header">
+                                    <strong>Export Data: ${t.period}</strong>
+                                    <span class="trigger-badge">Trade</span>
+                                </div>
+                                <div>Trade Value: $${(t.trade_value / 1000000).toFixed(1)}M USD</div>
+                                <div>Volume: ${(t.volume_kg / 1000000).toFixed(1)}M kg</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            content.innerHTML = html;
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('eventModal').style.display = 'none';
+        }
+
+        function filterEvents(filterType) {
+            currentFilter = filterType;
+            
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Add active class to clicked button
+            document.querySelector(`.filter-btn[onclick*="${filterType}"]`).classList.add('active');
+            
+            // Update events list
+            displayEventsList(timelineData.events);
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('eventModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Load data on page ready
+        document.addEventListener('DOMContentLoaded', loadTimeline);
+    </script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cocoa Market Signals - Interactive Timeline</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            color: #6f42c1;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #999;
+            margin-bottom: 30px;
+        }
+        .status-bar {
+            background: #272b30;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .filter-btn {
+            background: #52575c;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .filter-btn:hover {
+            background: #6f42c1;
+        }
+        .filter-btn.active {
+            background: #6f42c1;
+        }
+        #chart-container {
+            background: #1a1a1a;
+            border: 1px solid #272b30;
+            padding: 20px;
+            border-radius: 8px;
+            height: 500px;
+            position: relative;
+        }
+        .event-details {
+            background: #272b30;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            min-height: 120px;
+        }
+        .event-details h3 {
+            color: #6f42c1;
+            margin-top: 0;
+        }
+        .detail-row {
+            display: flex;
+            margin: 10px 0;
+        }
+        .detail-label {
+            color: #999;
+            width: 120px;
+        }
+        .detail-value {
+            color: #fff;
+        }
+        .hover-tooltip {
+            position: absolute;
+            background: rgba(39, 43, 48, 0.95);
+            border: 1px solid #6f42c1;
+            padding: 10px;
+            border-radius: 4px;
+            pointer-events: none;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cocoa Market Signals - Interactive Timeline</h1>
+    <p class="subtitle">Click on any event to explore the data that triggered the signal</p>
+    
+    <div class="status-bar">
+        <span id="status">Loading data...</span>
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterEvents('all')">All Events (51)</button>
+            <button class="filter-btn" onclick="filterEvents('weather')">Weather Triggered (36)</button>
+            <button class="filter-btn" onclick="filterEvents('news')">News Triggered (2)</button>
+            <button class="filter-btn" onclick="filterEvents('technical')">Technical (1)</button>
+            <button class="filter-btn" onclick="filterEvents('mixed')">Mixed Signals (12)</button>
+        </div>
+    </div>
+    
+    <div id="chart-container">
+        <canvas id="myChart"></canvas>
+        <div class="hover-tooltip" id="hoverTooltip"></div>
+    </div>
+    
+    <div class="event-details">
+        <h3>Event Details</h3>
+        <div id="eventDetails">Click on purple dots to explore event triggers</div>
+    </div>
+
+    <script>
+        let chart = null;
+        let allEvents = [];
+        let allPrices = [];
+        let eventMap = new Map();
+        let currentFilter = 'all';
+
+        async function loadData() {
+            try {
+                const [pricesRes, eventsRes] = await Promise.all([
+                    fetch('/api/all-prices'),
+                    fetch('/data/processed/detailed_events.json')
+                ]);
+                
+                const pricesData = await pricesRes.json();
+                const eventsData = await eventsRes.json();
+                
+                allPrices = pricesData.prices;
+                allEvents = eventsData.events;
+                
+                // Create event map for quick lookup
+                allEvents.forEach(event => {
+                    eventMap.set(event.date, event);
+                });
+                
+                document.getElementById('status').textContent = 
+                    `Loaded ${allEvents.length} significant events (all shown on chart)`;
+                
+                createChart();
+            } catch (error) {
+                document.getElementById('status').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        function createChart() {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            
+            // Prepare line data with proper date parsing
+            const lineData = allPrices.map(p => ({
+                x: new Date(p.date),
+                y: p.return * 100
+            }));
+            
+            // Prepare scatter data for events
+            const eventData = allEvents.map(event => ({
+                x: new Date(event.date + 'T00:00:00'),
+                y: event.price_change * 100,
+                event: event  // Store the full event data
+            }));
+            
+            const config = {
+                type: 'line',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Daily Returns (%)',
+                            data: lineData,
+                            borderColor: '#999',
+                            borderWidth: 1,
+                            pointRadius: 0,
+                            tension: 0
+                        },
+                        {
+                            label: 'Significant Events',
+                            data: eventData,
+                            type: 'scatter',
+                            backgroundColor: '#6f42c1',
+                            borderColor: '#6f42c1',
+                            pointRadius: 8,
+                            pointHoverRadius: 10
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'point',
+                        intersect: false
+                    },
+                    onHover: (event, activeElements) => {
+                        const tooltip = document.getElementById('hoverTooltip');
+                        if (activeElements.length > 0 && activeElements[0].datasetIndex === 1) {
+                            const element = activeElements[0];
+                            const dataPoint = eventData[element.index];
+                            const event = dataPoint.event;
+                            
+                            // Format date properly
+                            const date = new Date(event.date + 'T00:00:00');
+                            const dateStr = date.toLocaleDateString('en-US', { 
+                                month: 'short', 
+                                day: 'numeric', 
+                                year: 'numeric' 
+                            });
+                            
+                            tooltip.innerHTML = `
+                                <strong>${dateStr}</strong><br>
+                                Change: ${(event.price_change * 100).toFixed(1)}%<br>
+                                Trigger: ${event.primary_trigger}
+                            `;
+                            
+                            // Position tooltip
+                            const canvasRect = ctx.canvas.getBoundingClientRect();
+                            const x = canvasRect.left + element.element.x + 10;
+                            const y = canvasRect.top + element.element.y - 40;
+                            
+                            tooltip.style.left = x + 'px';
+                            tooltip.style.top = y + 'px';
+                            tooltip.style.display = 'block';
+                            
+                            ctx.canvas.style.cursor = 'pointer';
+                        } else {
+                            tooltip.style.display = 'none';
+                            ctx.canvas.style.cursor = 'default';
+                        }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0 && elements[0].datasetIndex === 1) {
+                            const dataPoint = eventData[elements[0].index];
+                            showEventDetails(dataPoint.event);
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'month',
+                                displayFormats: {
+                                    month: 'MMM yy'
+                                }
+                            },
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#999',
+                                maxTicksLimit: 12
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#999',
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Return (%)',
+                                color: '#999'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                color: '#999',
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            enabled: false  // Disable default tooltips completely
+                        }
+                    }
+                }
+            };
+            
+            if (chart) {
+                chart.destroy();
+            }
+            chart = new Chart(ctx, config);
+        }
+
+        function showEventDetails(event) {
+            const date = new Date(event.date + 'T00:00:00');
+            const dateStr = date.toLocaleDateString('en-US', { 
+                weekday: 'long',
+                month: 'long', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+            
+            let detailsHtml = `
+                <div class="detail-row">
+                    <span class="detail-label">Date:</span>
+                    <span class="detail-value">${dateStr}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Price Change:</span>
+                    <span class="detail-value">${(event.price_change * 100).toFixed(1)}% ($${event.previous_price.toFixed(2)} → $${event.price.toFixed(2)})</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Primary Trigger:</span>
+                    <span class="detail-value">${event.primary_trigger}</span>
+                </div>
+            `;
+            
+            if (event.weather_data) {
+                detailsHtml += `
+                    <div class="detail-row">
+                        <span class="detail-label">Weather:</span>
+                        <span class="detail-value">${event.weather_data.description}</span>
+                    </div>
+                `;
+            }
+            
+            if (event.news_data && event.news_data.length > 0) {
+                detailsHtml += `
+                    <div class="detail-row">
+                        <span class="detail-label">News:</span>
+                        <span class="detail-value">${event.news_data[0].title}</span>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('eventDetails').innerHTML = detailsHtml;
+        }
+
+        function filterEvents(type) {
+            currentFilter = type;
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // For now, just highlight the filter - full filtering would update the chart
+            document.getElementById('status').textContent = 
+                `Showing ${type === 'all' ? 'all' : type} events`;
+        }
+
+        // Load data on page load
+        loadData();
+    </script>
+</body>
+</html>

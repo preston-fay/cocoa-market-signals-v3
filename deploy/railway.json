@@ -1,0 +1,10 @@
+{
+  "name": "Cocoa Market Signals Dashboard",
+  "description": "Real-time cocoa market analysis with ML predictions",
+  "repository": "https://github.com/yourusername/cocoa-market-signals-v3",
+  "envVars": {
+    "PORT": "8002"
+  },
+  "buildCommand": "pip install -r requirements.txt",
+  "startCommand": "python src/dashboard/app_comprehensive.py"
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cocoa Market Signals - Timeline</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #chart {
+            background: #000;
+            border: 1px solid #272b30;
+            padding: 20px;
+            height: 500px;
+        }
+        .info {
+            background: #272b30;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        #debug {
+            background: #1a1a1a;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cocoa Market Signals - Timeline (DEBUGGED)</h1>
+    <div class="info">
+        <p id="status">Loading data...</p>
+    </div>
+    <div id="chart">
+        <canvas id="myChart"></canvas>
+    </div>
+    <div class="info">
+        <h3>Event Details</h3>
+        <div id="eventDetails">Hover over or click a purple dot</div>
+        <div id="debug"></div>
+    </div>
+
+    <script>
+        let allEvents = [];
+        let allPrices = [];
+        let chartInstance = null;
+
+        async function loadData() {
+            try {
+                const response = await fetch('/data/processed/timeline_data_complete.json');
+                const data = await response.json();
+                allEvents = data.events;
+                allPrices = data.prices;
+                
+                document.getElementById('status').textContent = 
+                    `Loaded ${allPrices.length} prices and ${allEvents.length} events`;
+                
+                // Debug first few events
+                const debug = document.getElementById('debug');
+                debug.innerHTML = '<strong>First 5 events:</strong><br>';
+                allEvents.slice(0, 5).forEach((e, i) => {
+                    const priceIdx = allPrices.findIndex(p => p.date === e.date);
+                    debug.innerHTML += `${i}: ${e.date} (price index: ${priceIdx})<br>`;
+                });
+                
+                createChart();
+            } catch (error) {
+                document.getElementById('status').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        function createChart() {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            
+            // Map events to scatter points with EXPLICIT date storage
+            const eventPoints = allEvents.map((event, eventIndex) => {
+                const priceIndex = allPrices.findIndex(p => p.date === event.date);
+                return {
+                    x: priceIndex,  // x is the index in the price array
+                    y: event.price_change * 100,
+                    // Store ALL the data we need
+                    eventDate: event.date,
+                    eventIndex: eventIndex,
+                    fullEvent: event
+                };
+            }).filter(p => p.x >= 0);  // Only keep events with matching price dates
+
+            console.log('Event points:', eventPoints.slice(0, 5));
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: allPrices.map(p => p.date),
+                    datasets: [
+                        {
+                            label: 'Daily Returns %',
+                            data: allPrices.map(p => p.return),
+                            borderColor: 'white',
+                            borderWidth: 1,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Events',
+                            data: eventPoints,
+                            backgroundColor: '#6f42c1',
+                            borderColor: '#6f42c1',
+                            pointRadius: 8,
+                            showLine: false,
+                            type: 'scatter',
+                            parsing: false  // We're providing x,y directly
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    onHover: (event, activeElements) => {
+                        if (activeElements.length > 0 && activeElements[0].datasetIndex === 1) {
+                            const point = eventPoints[activeElements[0].index];
+                            document.getElementById('eventDetails').innerHTML = 
+                                `<strong>HOVER - Date:</strong> ${point.eventDate}<br>` +
+                                `<strong>Change:</strong> ${point.fullEvent.price_change * 100}%`;
+                        }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0 && elements[0].datasetIndex === 1) {
+                            const point = eventPoints[elements[0].index];
+                            showDetails(point.fullEvent);
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { 
+                                color: '#999',
+                                maxTicksLimit: 12,
+                                callback: function(value, index) {
+                                    if (index % 30 === 0) {
+                                        return this.getLabelForValue(value).substring(0, 7);
+                                    }
+                                    return '';
+                                }
+                            }
+                        },
+                        y: {
+                            grid: { display: false },
+                            ticks: { color: '#999' }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            enabled: false  // Disable default tooltip, use onHover instead
+                        }
+                    }
+                }
+            });
+        }
+
+        function showDetails(event) {
+            document.getElementById('eventDetails').innerHTML = `
+                <strong>CLICK - Date:</strong> ${event.date}<br>
+                <strong>Change:</strong> ${(event.price_change * 100).toFixed(1)}%<br>
+                <strong>Trigger:</strong> ${event.primary_trigger}<br>
+                <strong>Price:</strong> $${event.previous_price.toFixed(2)} → $${event.price.toFixed(2)}
+            `;
+        }
+
+        loadData();
+    </script>
+</body>
+</html>

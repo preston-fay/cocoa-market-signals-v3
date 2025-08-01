@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cocoa Market Signals - Timeline</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #chart {
+            background: #000;
+            border: 1px solid #272b30;
+            padding: 20px;
+            height: 500px;
+        }
+        .info {
+            background: #272b30;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cocoa Market Signals - Interactive Timeline</h1>
+    <div class="info">
+        <p id="status">Loading data...</p>
+    </div>
+    <div id="chart">
+        <canvas id="myChart"></canvas>
+    </div>
+    <div class="info">
+        <h3>Event Details</h3>
+        <div id="eventDetails">Click on a purple dot to see details</div>
+    </div>
+
+    <script>
+        let allEvents = [];
+        let allPrices = [];
+
+        async function loadData() {
+            try {
+                const response = await fetch('/data/processed/timeline_data_complete.json');
+                const data = await response.json();
+                allEvents = data.events;
+                allPrices = data.prices;
+                
+                document.getElementById('status').textContent = 
+                    `Loaded ${allPrices.length} prices and ${allEvents.length} events`;
+                
+                createChart();
+            } catch (error) {
+                document.getElementById('status').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        function createChart() {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            
+            // Create chart with simple index-based x-axis
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: allPrices.map(p => p.date),
+                    datasets: [
+                        {
+                            label: 'Daily Returns %',
+                            data: allPrices.map(p => p.return),
+                            borderColor: 'white',
+                            borderWidth: 1,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Events',
+                            data: allEvents.map(event => {
+                                // Find the index where this event belongs
+                                const idx = allPrices.findIndex(p => p.date === event.date);
+                                return {
+                                    x: idx,
+                                    y: event.price_change * 100,
+                                    event: event  // Store the ENTIRE event object
+                                };
+                            }).filter(p => p.x >= 0),  // Only keep events with matching dates
+                            backgroundColor: '#6f42c1',
+                            borderColor: '#6f42c1',
+                            pointRadius: 8,
+                            showLine: false,
+                            type: 'scatter',
+                            parsing: false  // Tell Chart.js we're providing x,y directly
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    onClick: (event, elements) => {
+                        if (elements.length > 0 && elements[0].datasetIndex === 1) {
+                            const clickedPoint = elements[0].element.$context.raw;
+                            showDetails(clickedPoint.event);
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { 
+                                color: '#999',
+                                maxTicksLimit: 12,
+                                callback: function(value, index) {
+                                    if (index % 30 === 0) {
+                                        return this.getLabelForValue(value).substring(0, 7);
+                                    }
+                                    return '';
+                                }
+                            }
+                        },
+                        y: {
+                            grid: { display: false },
+                            ticks: { color: '#999' }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    // Get the event from the raw data
+                                    if (context[0].datasetIndex === 1) {
+                                        const event = context[0].raw.event;
+                                        return `Date: ${event.date}`;  // SAME date as modal
+                                    }
+                                    return context[0].label;
+                                },
+                                label: function(context) {
+                                    if (context.datasetIndex === 1) {
+                                        const event = context.raw.event;
+                                        return `Change: ${(event.price_change * 100).toFixed(1)}%`;
+                                    }
+                                    return `Return: ${context.parsed.y.toFixed(2)}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function showDetails(event) {
+            // Using EXACT same event object as tooltip
+            document.getElementById('eventDetails').innerHTML = `
+                <p><strong>Date:</strong> ${event.date}</p>
+                <p><strong>Change:</strong> ${(event.price_change * 100).toFixed(1)}%</p>
+                <p><strong>Trigger:</strong> ${event.primary_trigger}</p>
+                <p><strong>Price:</strong> $${event.previous_price.toFixed(2)} → $${event.price.toFixed(2)}</p>
+            `;
+        }
+
+        loadData();
+    </script>
+</body>
+</html>
